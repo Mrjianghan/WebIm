@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    height: 100%;
+    width: 100%;
+}
+body {
+    min-height: 600px;
+    font-family:  "Helvetica Neue","Helvetica","Hiragino Sans GB","Microsoft YaHei","Arial",sans-serif;
+    background-image: url(../imgs/adelaidehills.jpg);
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+p {
+    
+    height: 200px;
+    width: 100px;
+}
