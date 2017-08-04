@@ -192,7 +192,10 @@ body {
 	height: 50px;
     line-height: 50px;
     float: left;
+    font-size: 20px;
+    font-weight: bold;
     margin-left: 10px;
+    color: #2e7806;
 }
 .floor1 .fa-bars {
     display: block;
