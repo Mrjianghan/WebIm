@@ -442,12 +442,15 @@ body {
 
 .matchtab3 {
 	width: 100%;
+    display: none;
 }
 .matchtab2 {
 	width: 100%;
+    display: none;
 }
 .matchtab1 {
 	width: 100%;
+    display: none;
 }
 
 
