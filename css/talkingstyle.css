@@ -6,16 +6,492 @@ html,body {
     height: 100%;
     width: 100%;
 }
+ul,li {
+    list-style-type: none;
+}
 body {
     min-height: 600px;
-    font-family:  "Helvetica Neue","Helvetica","Hiragino Sans GB","Microsoft YaHei","Arial",sans-serif;
+    font-family:  Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
     background-image: url(../imgs/adelaidehills.jpg);
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }
-p {
+.containers {
+    width: 380px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    margin-left: -190px;
+    height: auto;
+    border-radius: 5px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    -webkit-box-shadow: 0 0 4px 3px #b0b2b8;
+    box-shadow: 0 0 4px 3px #b0b2b8;
+    z-index: 50;
     
-    height: 200px;
+    display: none;
+    
+}
+.containers h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#username {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #b0b2b8;
+    border-radius: 3px;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#psw {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #b0b2b8;
+    border-radius: 3px;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.nickname {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #b0b2b8;
+    border-radius: 3px;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+}
+.third {
+    display: none;
+}
+.submit {
+    display: block;
+    width: 80%;
+    border-radius: 3px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-size: 18px;
+    font-family: 'Microsoft Yahei';
+    background-color: dodgerblue;
+    border: none;
+    color: #fff;
+}
+.submit:hover {
+    background-color: #067ff5;
+}
+.containers h4 {
+    font-weight: normal;
+    margin-left: 40px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.containers h4 a {
+    text-decoration: none;
+    color: dodgerblue;
+}
+.containers input {
+    height: 35px;
+}          
+.containers h1 {
+    text-align: center;
+    font-weight: normal;
+}
+.hide {
+    display: none;
+}       
+.clearfix {
+    clear: both;
+}
+/*以上为登录页面*/
+
+
+
+
+/*以下为聊天界面*/
+@media all and (max-width:1440px){
+   .containermain {
+        height: 100%;
+        min-height: 600px;
+        width: 1000px;
+        background-color: #fff;
+        margin: 0 auto;
+        -webkit-box-shadow: 0px 0px 4px 5px #b0b2b8;
+        box-shadow: 0px 0px 3px 3px #b0b2b8;
+        border-radius: 10px;
+    } 
+}
+
+@media all and (min-width:1441px) {
+    .containermain {
+	    height: 700px;
+        width: 1000px;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        margin-left: -500px;
+        top: 50%;
+        margin-top: -350px;
+        -webkit-box-shadow: 0px 0px 4px 5px #b0b2b8;
+        box-shadow: 0px 0px 3px 3px #b0b2b8;
+        border-radius: 10px;
+    }
+}
+
+
+.main-left {
+	float: left;
+    width: 35%;
+    height: 100%;
+    background-color: #e3f6e4;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.userdatas {
+	width: 100%;
+    height: 30%;
+    background-color: transparent;
+    padding-top: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.datacenter {
+    margin: 0 auto;
+    width: 80%;
+    height: 90%;
+}
+
+.floor1 {
+    height: 30%;
+    width: 100%;
+    position: relative;
+    
+}
+.userimg {
+	display: block;
+    width: 50px;
+    border-radius: 10px;
+    float: left;
+    cursor: pointer;
+}
+.username {
+	height: 50px;
+    line-height: 50px;
+    float: left;
+    margin-left: 10px;
+}
+.floor1 .fa-bars {
+    display: block;
+    float: right;
+    font-size: 22px;
+    margin-top: 13px;
+    color: #2e7806;
+    cursor: pointer;
+}
+
+.floor1 .fa-bars:hover {
+    color: #012504;
+}
+
+.infoslidemenu {
+    height: 300px;
+    width: 200px;
+    position: absolute;
+    background-color: #fff;
+    z-index: 40;
+    border-radius: 10px;
+    display: none;
+}
+
+.infoslidemenu img {
+	width: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.infodata {
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.inforight {
+    float: right;
+}
+
+.infoleft {
+    float: left;
+    height: 31px;
+    line-height: 31px;
+}
+
+.infodataup {
+    font-size: 20px;
+}
+
+.infodatabottom {
+    margin-top: 10px;
+}
+
+.infodataup .fa-male {
+    color: #067ff5;
+}
+
+.infodataup .fa-comment-o {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+.slidedownmenu {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 6px;
+    width: 200px;
+    height: auto;
+    left: 80px;
+    top: 40px;
+    z-index: 10;
+    display: none;
+}
+
+
+.slidedownmenu li {
+    border-bottom: 1px solid #c6dbc7;
+    text-align: center;
+    height: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    letter-spacing: 5px;
+    line-height: 30px;
+}
+
+.slidedownmenu li:hover {
+    color: #74b278;
+}
+
+
+
+
+
+
+
+.floor2 {
+    background-color: #fff;
+    height: 20%;
+    border-radius: 8px;
+    margin-top: 10%;
+    position: relative;
+}
+
+.floor2 button {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    height: 100%;
+    outline: none;
+    cursor: pointer;
+}
+
+.floor2 .fa-search {
+    font-size: 23px;
+    margin-left: 10px;
+    color: #3f3f4f;
+}
+
+.floor2 input {
+    height: 100%;
+    border: none;
+    position: absolute;
+    top: 0;
+    line-height: 28px;
+    font-size: 16px;
+    width: 85%;
+    padding-left: 10px;
+    outline: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+#tab1 {
+    padding: 0;
+    margin: 0;
+}
+#tab2 {
+    padding: 0;
+    margin: 0;
+}
+#tab3 {
+    padding: 0;
+    margin: 0;
+}
+.floor3 {
+    height: auto;
+    margin-top: 10%;
+}
+.icons {
+    float: left;
+    width: 33.3%;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.iconcenter {
+    border-left: 1px solid #2e7806;
+    border-right: 1px solid #2e7806;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.floor3 .fa {
+    color: #2e7806;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.floor3 .fa:hover {
+    color: #012504;
+}
+
+.fa.greenactive {
+    color: #012504;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lists {
+	width: 100%;
+    height: 70%;
+    border-top: 1px solid #5db52d;
+}
+
+
+/*以上聊天左边*/
+
+.main-right {
+	float: left;
+    width: 65%;
+    height: 100%;
+    background-color: #f8fbec;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.receivemessage {
+	height: 75%;
+    width: 100%;
+}
+
+.matchtab3 {
+	width: 100%;
+}
+.matchtab2 {
+	width: 100%;
+}
+.matchtab1 {
+	width: 100%;
+}
+
+
+
+
+
+/*以上聊天右边*/
+
+
+
+
+/*发送消息块*/
+.sendmessage {
+	height: 25%;
+    width: 100%;
+    border-top: 1px solid #b2b7b2;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.sendicons {
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+.sendicons li {
+	float: left;
+    margin-left: 20px;
+}
+.sendicons .fa {
+	font-size: 22px;
+    cursor: pointer;
+}
+.writein {
+    height: 50%;
+    width: 95%;
+    margin-left: 2.5%;
+    resize: none;
+    border: none;
+    background-color: #f8fbec;
+    outline: none;
+    font-size: 16px;
+}
+.send {
+    cursor: pointer;
     width: 100px;
+    height: 30px;
+    float: right;
+    margin-right: 20px;
+    border: 1px solid #b2b7b2;
+    border-radius: 5px;
+    background-color: #f8fbec;
 }
