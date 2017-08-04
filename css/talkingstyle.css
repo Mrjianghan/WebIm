@@ -3,15 +3,15 @@
     padding: 0;
 }
 html,body {
-    height: 100%;
+    height: 99.9%;
     width: 100%;
 }
 ul,li {
     list-style-type: none;
 }
 body {
-    min-height: 600px;
-    font-family:  Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    min-height: 500px;
+    font-family:  'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
     background-image: url(../imgs/adelaidehills.jpg);
     background-position: 100%;
     background-repeat: no-repeat;
@@ -32,7 +32,7 @@ body {
     box-shadow: 0 0 4px 3px #b0b2b8;
     z-index: 50;
     
-    display: none;
+    display: block;
     
 }
 .containers h2 {
@@ -121,13 +121,14 @@ body {
 @media all and (max-width:1440px){
    .containermain {
         height: 100%;
-        min-height: 600px;
+        min-height: 500px;
         width: 1000px;
         background-color: #fff;
         margin: 0 auto;
         -webkit-box-shadow: 0px 0px 4px 5px #b0b2b8;
         box-shadow: 0px 0px 3px 3px #b0b2b8;
         border-radius: 10px;
+       display: none;
     } 
 }
 
@@ -144,6 +145,7 @@ body {
         -webkit-box-shadow: 0px 0px 4px 5px #b0b2b8;
         box-shadow: 0px 0px 3px 3px #b0b2b8;
         border-radius: 10px;
+        display: none;
     }
 }
 
@@ -170,6 +172,7 @@ body {
     margin: 0 auto;
     width: 80%;
     height: 90%;
+    position: relative;
 }
 
 .floor1 {
@@ -338,8 +341,10 @@ body {
     margin: 0;
 }
 .floor3 {
-    height: auto;
-    margin-top: 10%;
+    height: 22px;
+    width: 100%;
+    position: absolute;
+    top: 85%;
 }
 .icons {
     float: left;

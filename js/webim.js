@@ -14,6 +14,9 @@ conn.listen({
         console.log("%c [opened] 连接已成功建立", "color: green");
         $('.containermain').css({display:'block'});
         $('.containers').css({display:'none'});
+        $('.matchtab1').css({display:'block'});
+        $('.matchtab2').css({display:'none'});
+        $('.matchtab3').css({display:'none'});
     },
     onOnline: function() {
         console.log("本机网络连接成功"); //本机网络连接成功
