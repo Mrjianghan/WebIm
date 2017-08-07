@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    height: 99.9%;
+    width: 100%;
+}
+body {
+    font-family:  'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
+    background-image: url(../imgs/adelaidehills.jpg);
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 600px;
+}
+.clearfix {
+	clear: both;
+}
+.subbody {
+	position: relative;
+    min-height: 600px;
+    width: 100%;
+}
+.floatright {
+    color: #fff;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+.floatright div:first-child{
+	margin-bottom: 10px;
+}
+.floatright div:hover {
+    color: #bfe3ae;
+}
+.floatright a {
+    color: #fff;
+    text-decoration: none;
+}
+.register {
+	height: 360px;
+    width: 380px;
+    background-color: #fff;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -190px;
+    margin-top: -180px;
+}
