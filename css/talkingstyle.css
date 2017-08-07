@@ -382,16 +382,188 @@ body {
 
 
 
+.chatcontainer {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #2e7806;
+    padding-left: 20px;
+}
 
+.chatcontainer img {
+    width: 15%;
+    display: block;
+    float: left;
+    border-radius: 5px;
+}
+.onlyname {
+    height: 47px;
+    width: auto;
+    line-height: 47px;
+    float: left;
+    margin-left: 20px;
+}
+.onlyfriendcontainer {
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #2e7806;
+}
+.listsactive {
+    background-color: #9ddda0;
+}
+.onlyfriendcontainer img {
+    width: 15%;
+    display: block;
+    float: left;
+    border-radius: 5px;
+}
+.onlygroupcontainer {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #2e7806;
+    padding-left: 20px;
+}
+.onlygroupcontainer img {
+    width: 15%;
+    display: block;
+    float: left;
+    border-radius: 5px;
+}
+.firstscreen {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20%;
+}
 
+.headername {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    font-size: 20px;
+    line-height: 51.5px;
+    text-align: center;
+    left: 50%;
+    margin-left: -25%;
+}
+.receiveheader {
+    height: 50px;
+    width: 90%;
+    position: relative;
+    left: 5%;
+    border-bottom: 1px solid #b2b7b2;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.receiveheader .fa-cog {
+	height: 50px;
+    font-size: 25px;
+    display: block;
+    float: right;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.justtowatch {
+    width: 200px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 100px;
+    background-color: #f8fbec;
+}
 
+.justtowatch button {
+    width: 100%;
+    height: 40px;
+    background-color: #5edf65;
+    border: 1px solid #5edf65;
+    border-radius: 5px;
+}
 
+.justtowatch img {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+}
 
+.groupcontainer {
+    height: 80px;
+    border-bottom: 1px solid #2e7806;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+.groupinfo {
+    height: 60px;
+    width: 90%;
+    position: absolute;
+    top: 10px;
+    left: 5%;
+}
+.groupinfo-left {
+    float: left;
+    width: 20%;
+    height: 100%;
+}
 
+.groupinfo-right {
+    float: left;
+    width: 80%;
+    height: 100%;
+}
 
-
-
-
+.groupinfo-left img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+.groupifrightcontainer {
+    width: 95%;
+    height: 100%;
+    margin-left: 5%;
+}
+.grouptop {
+    height: 30px;
+    line-height: 30px;
+}
+.grouptopleft {
+    float: left;
+    font-size: 15px;
+    color: #872f04;
+}
+.grouptopright {
+    float: right;
+    font-size: 14px;
+    color: #B29200;
+}
+.groupbottom {
+    height: 30px;
+    line-height: 30px;
+}
+.groupbottomleft {
+    float: left;
+    width: 190px;
+    color: #B20084;
+    font-size: 12px;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.groupbottomright {
+    float: right;
+}
+.lists .fa-bell-slash {
+    color: #067ff5;
+}
 
 
 
@@ -487,7 +659,7 @@ body {
     cursor: pointer;
 }
 .writein {
-    height: 50%;
+    height: 45%;
     width: 95%;
     margin-left: 2.5%;
     resize: none;

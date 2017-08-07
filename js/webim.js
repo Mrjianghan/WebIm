@@ -15,6 +15,12 @@ conn.listen({
         $('.containermain').css({display:'block'});
         $('.containers').css({display:'none'});
         $('.matchtab1').css({display:'block'});
+        $('.sendmessage').css({display:'none'});
+        var str = '<img class="firstscreen" src="imgs/u13.jpg">';
+        $('.matchtab1 .placesholder').html(str);
+        $('.matchtab1  .getmessage').css({display:'none'});
+        $('.matchtab3').css({display:'none'});
+        $('.matchtab2').css({display:'none'});
     },
     onOnline: function() {
         console.log("本机网络连接成功"); //本机网络连接成功
@@ -222,11 +228,22 @@ $(function() {
 
 /*点击显示.关闭*/
 
+/*退出登录*/
+
+$('.slidedownmenu li:last-child').on('click',function(){
+    conn.close();
+    $('.containermain').css({display:'none'});
+    $('.containers').css({display:'block'});
+});
+
+
+/*退出登录*/
+
+
 $('.userimg').on('click',function( event ){
+    event.stopPropagation();
     $('.slidedownmenu').css({display:'none'});
     $('.slideinfo').css({display:'none'});
-    $('.headername .fa').attr('class','fa fa-caret-down');
-    event.stopPropagation();
     var offX = event.offsetX;
     var offY = event.offsetY;
     console.log( offX );
@@ -241,11 +258,12 @@ $('.userimg').on('click',function( event ){
 
 //点击头像弹出
 
+
+
+
 var flag = 2;       //点击汉堡包图标消失或显示
-$('.fa-bars').on('click',function( event ){
+$('.floor1 .fa-bars').on('click',function( event ){
     $('.infoslidemenu').css({display:'none'});
-    $('.slideinfo').css({display:'none'});
-    $('.headername .fa').attr('class','fa fa-caret-down');
     event.stopPropagation();
     if ( flag == 2 ){
         $('.slidedownmenu').css({display:'block'});
@@ -254,8 +272,227 @@ $('.fa-bars').on('click',function( event ){
         $('.slidedownmenu').css({display:'none'});
         flag = 2;
     };
-    $(document).on('click',function(){
+    $(window).on('click',function(){
         $('.slidedownmenu').css({display:'none'});
         flag = 2;
     });
 });                 //点击汉堡包图标消失或显示
+
+
+
+
+//切换tab
+$('.floor3 a').on('click',function( event ){
+    event.preventDefault();
+    let that = $(this);
+    let track = that.attr('href');
+    let str1 = track.slice(1);
+    that.find('.fa').addClass('greenactive');
+    that.siblings().find('.fa').removeClass('greenactive');
+    $('#' + str1).css({display:'block'});
+    $('#' + str1).siblings().css({display:'none'});
+    $('.main-right .match' + str1).css({display:'block'});
+    $('.main-right .match' + str1).siblings().css({display:'none'});
+});
+
+
+//切换tab
+
+
+
+
+
+
+//获取聊天室列表
+//获取聊天室
+var listRooms = function() {
+        var option = {
+            apiUrl: 'https://a1.easemob.com',
+            pagenum: 1, // 页数
+            pagesize: 20, // 每页个数
+            success: function(list) {
+                //console.log(list);
+                var i = 0;
+                var str = '';
+                for (i in list.data) {
+                    let name2 = list.data[i].name; 
+                    //console.log(name2);
+                    let ids = list.data[i].id;
+                    //console.log(ids);
+                    str = str + '<div id="'+ name2 +'" class="chatcontainer"><img class='+ ids +' src="imgs/group-1.jpg"><div class="onlyname">'+ name2 +'</div><div class="clearfix"></div></div>';
+                };
+                $('.chatrooms').html(str);
+            },
+            error: function() {
+                console.log('List chat room error');
+            }
+        };
+        conn.getChatRooms(option);
+};
+//获取聊天室 
+
+
+//获取聊天室列表
+
+
+// 获取好友列表
+var getRoasters3 = function () {
+    var option = {
+        success: function (roster) {
+            var str3 = '';
+            
+            var o;
+            
+            var l = roster.length;
+            
+            for ( o = 0; o < l; o++ ) {
+                
+                var names = roster[o].name;
+                
+                if ( names != 'undefined' ){
+                    
+                    //console.log(names);
+                    
+                    str3 = str3 + '<div id="'+ names +'" class="onlyfriendcontainer"><img src="imgs/zhaoyun-1.jpg"><div class="onlyname">' + names + '</div><div class="clearfix"></div></div>';
+                    
+                    
+                    
+                    
+                };
+            }     //for 循环
+            
+            $('.friends').html(str3);
+            
+        }//success
+        
+    };//option
+    
+    conn.getRoster(option);
+    
+};
+
+
+
+
+
+
+// 获取好友列表
+
+
+//获取已加入的群组
+var listGroups2 = function () {
+        var option = {
+            success: function (rooms) {
+                //console.log(rooms);
+                var str5 = '';
+                for ( var i in rooms ){
+                    
+                    var groupnames = rooms[i].name;
+                    
+                    str5 = str5 + '<div id="'+ groupnames +'" class="onlygroupcontainer"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
+                }
+                $('.groups').html( str5 );
+                
+            },
+            error: function () {
+                console.log('List chat rooms error');
+            }
+        };
+        conn.listRooms(option);
+    
+    
+};
+//获取已加入的群组
+
+$('.icons3').on('click',function(){
+    listGroups2();
+    getRoasters3();
+    var str = '<img class="firstscreen" src="imgs/u13.jpg">';
+    $('.matchtab3 .placesholder').html(str);
+    $('.matchtab3  .getmessage').css({display:'none'});
+});
+
+
+
+//切换加载
+
+$('.iconcenter').on('click',function(){
+    listRooms();
+    var str = '<img class="firstscreen" src="imgs/u13.jpg">';
+    $('.matchtab2 .placesholder').html(str);
+    $('.matchtab2  .getmessage').css({display:'none'});
+    $('.matchtab2 .placesholder').css({display:'block'});
+});
+//切换加载
+
+$('.icons1').on('click',function(){
+    var str = '<img class="firstscreen" src="imgs/u13.jpg">';
+    $('.matchtab1 .placesholder').html(str);
+    $('.matchtab1  .getmessage').css({display:'none'});
+    $('.sendmessage').css({display:'none'});
+});
+
+
+
+$('.lists').on('click', '.chatcontainer',function(){
+    var that5 = $(this);
+    that5.addClass('listsactive');
+    that5.siblings().removeClass('listsactive');
+    $('.matchtab2 .placesholder').css({display:'none'});
+    $('.matchtab2 .getmessage').css({display:'block'});
+    var idvalue = $(that5)[0].id;
+    
+    console.log(that5);
+    
+    //console.log(that5[0].firstChild.className);
+    var ids = that5[0].firstChild.className;
+    
+    /*var str = '';
+    
+    str = str + '详细信息' + '<span></span>';
+    
+    $('.headername').html(str);*/
+    
+    
+    var idvalue = $(that5)[0].id;
+    $('.matchtab2 .receiveheader').css({display:'none'});
+    
+    var str2 = '';
+    
+    str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"><div id="'+ idvalue +'" class="justname">'+ idvalue +'</div><button class="joinchatroom" id ="'+ ids +'" type="button">加入此聊天室</button></div>';
+    
+    $('.chatroomcontainer').html( str2 );
+});
+
+$('.receivemessage').on('click','.joinchatroom',function(){
+    var that3 = this;
+    //console.log(that3);
+    
+    var ids = $(that3).attr('id');
+    //console.log( typeof( ids ) );
+    //console.log( $(that3).siblings('.justname').attr('id') );
+    var getname = $(that3).siblings('.justname').attr('id');
+    var joinRoom = function() {
+        // 加入聊天室
+        conn.joinChatRoom({
+            roomId: ids 
+            // 聊天室id,
+        });
+    };
+    //加入聊天室
+    joinRoom();
+    var nstr = getname +'<span></span>';
+    $('.headername').html(nstr);
+    $('.sendmessage').css({display:'block'});
+    $('.chatroomcontainer').html('');
+    $('.send').attr('id',ids);
+    $('.chatroomcontainer').attr('id',ids);
+    $('.receiveheader').css({display:'block'});
+    
+    var str2 = '' ;
+    str2 = str2 + '<div id="'+ getname +'" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + getname + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+    
+    $('.allchatmessages').append(str2);
+    
+});
+
