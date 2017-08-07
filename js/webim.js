@@ -405,11 +405,13 @@ var listGroups2 = function () {
 //获取已加入的群组
 
 $('.icons3').on('click',function(){
-    listGroups2();
-    getRoasters3();
-    var str = '<img class="firstscreen" src="imgs/u13.jpg">';
-    $('.matchtab3 .placesholder').html(str);
-    $('.matchtab3  .getmessage').css({display:'none'});
+    if ( $('.groups').html()===''||$('.friends').html()==='' ){
+        listGroups2();
+        getRoasters3();
+        var str = '<img class="firstscreen" src="imgs/u13.jpg">';
+        $('.matchtab3 .placesholder').html(str);
+        $('.matchtab3  .getmessage').css({display:'none'});
+    };
 });
 
 
@@ -417,11 +419,15 @@ $('.icons3').on('click',function(){
 //切换加载
 
 $('.iconcenter').on('click',function(){
-    listRooms();
-    var str = '<img class="firstscreen" src="imgs/u13.jpg">';
-    $('.matchtab2 .placesholder').html(str);
-    $('.matchtab2  .getmessage').css({display:'none'});
-    $('.matchtab2 .placesholder').css({display:'block'});
+    if ( $('.chatrooms').html()==='' ){
+        listRooms();
+        var str = '<img class="firstscreen" src="imgs/u13.jpg">';
+        $('.matchtab2 .placesholder').html(str);
+        $('.matchtab2  .getmessage').css({display:'none'});
+        $('.matchtab2 .placesholder').css({display:'block'});
+    }
+    
+    
 });
 //切换加载
 
@@ -431,6 +437,8 @@ $('.icons1').on('click',function(){
     $('.matchtab1  .getmessage').css({display:'none'});
     $('.sendmessage').css({display:'none'});
 });
+
+
 
 
 
@@ -464,6 +472,13 @@ $('.lists').on('click', '.chatcontainer',function(){
     $('.chatroomcontainer').html( str2 );
 });
 
+
+
+
+
+
+
+
 $('.receivemessage').on('click','.joinchatroom',function(){
     var that3 = this;
     //console.log(that3);
@@ -492,7 +507,72 @@ $('.receivemessage').on('click','.joinchatroom',function(){
     var str2 = '' ;
     str2 = str2 + '<div id="'+ getname +'" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + getname + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
     
-    $('.allchatmessages').append(str2);
+    $('.allchatmessages').prepend(str2);
     
 });
+
+
+
+//点击锯齿
+var target1 = 2;
+$('.matchtab1').on('click','.fa-cog',function( event ){
+    event.stopPropagation();
+    if( target1 == 2 ){
+       
+        target1 = 3;
+        $('.matchtab1 .slideinfo').slideDown(300);
+    }else if ( target1 == 3 ){
+       
+        $('.matchtab1 .slideinfo').slideUp(300);
+        target1 = 2;
+    }
+});
+$(window).on('click',function(){
+        $('.matchtab1 .slideinfo').slideUp(500);
+        target1 = 2;
+});
+
+var target2 = 2;
+$('.matchtab2').on('click','.fa-cog',function( event ){
+    event.stopPropagation();
+    if( target1 == 2 ){
+       
+        target1 = 3;
+        $('.matchtab2 .slideinfo').slideDown(300);
+    }else if ( target1 == 3 ){
+       
+        $('.matchtab2 .slideinfo').slideUp(300);
+        target1 = 2;
+    }
+});
+$(window).on('click',function(){
+        $('.matchtab2 .slideinfo').slideUp(500);
+        target1 = 2;
+});
+
+var target3 = 2;
+$('.matchtab3').on('click','.fa-cog',function( event ){
+    event.stopPropagation();
+    if( target1 == 2 ){
+       
+        target1 = 3;
+        $('.matchtab3 .slideinfo').slideDown(300);
+    }else if ( target1 == 3 ){
+       
+        $('.matchtab3 .slideinfo').slideUp(300);
+        target1 = 2;
+    }
+});
+$(window).on('click',function(){
+        $('.matchtab3 .slideinfo').slideUp(300);
+        target1 = 2;
+});
+//点击锯齿
+
+
+
+
+
+
+
 
