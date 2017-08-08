@@ -138,6 +138,7 @@ body {
     text-align: center;
     color: #fff;
     margin-bottom: 10px;
+    outline: none;
 }
 .checkcode {
 	height: 35px;
@@ -168,4 +169,80 @@ body {
 .tab2in {
     width: 300px;
     margin: 0 auto;
+}
+.tab2in img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.doubleswitch {
+	width: 140px;
+    height: 30px;
+    margin: 0 auto;
+}
+.doubleswitch a {
+	font-size: 9px;
+    color: #000;
+    text-decoration: none;
+}
+.doubleswitch a:hover {
+    color: #2a7110;
+}
+.lefta {
+	width: 70px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    border-right: 1px solid #a1a1a1;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.righta {
+	width: 70px;
+    height: 30px;
+    float: right;
+    text-align: center;
+    line-height: 30px;
+}
+
+.centera {
+	text-align: center;
+    margin-top: 18px;
+}
+.centera a {
+    font-size: 14px;
+    color: #000;
+    text-decoration: none; 
+}
+.centera a:hover {
+    color: #2a7110;
+}
+.please {
+	text-align: center;
+    margin-top: 20px;
+}
+.popout {
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(88,105,82,0.5);
+    z-index: 10;
+    display: none;
+}
+.alertinfo {
+	background-color: #fff;
+    height: 200px;
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -100px;
+    line-height: 200px;
+    text-align: center;
+    border-radius: 10px;
+    color: #fc0404;
 }
