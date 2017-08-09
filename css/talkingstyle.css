@@ -128,7 +128,8 @@ body {
         -webkit-box-shadow: 0px 0px 4px 5px #b0b2b8;
         box-shadow: 0px 0px 3px 3px #b0b2b8;
         border-radius: 10px;
-       display: none;
+        display: none;
+       position: relative;
     } 
 }
 
@@ -146,6 +147,7 @@ body {
         box-shadow: 0px 0px 3px 3px #b0b2b8;
         border-radius: 10px;
         display: none;
+        position: relative;
     }
 }
 
@@ -610,6 +612,21 @@ body {
 }
 
 
+.groupinner {
+    width: 100%;
+    height: auto;
+}
+.groupself {
+	height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    color: #787878;
+    font-size: 14px;
+    border-bottom: 1px solid #5db52d;
+}
+
+
+
 /*以上聊天左边*/
 
 .main-right {
@@ -622,6 +639,139 @@ body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+/*弹出层*/
+.transparent {
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(51,67,45,0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    display: none;
+}
+
+.getlistspop {
+    position: absolute;
+    width: 360px;
+    height: 550px;
+    left: 50%;
+    top: 50%;
+    margin-left: -180px;
+    margin-top: -275px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.pophead {
+	width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #e7f8fe;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    
+}
+.pophead .fa-times {
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    font-size: 20px;
+    color: #aeaeae;
+    cursor: pointer;
+}
+.selector {
+	width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #d7d7d7;
+    border-top: 1px solid #d7d7d7;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.selector a {
+	text-decoration: none;
+    color: #000;
+}
+.contab1 {
+	height: 40px;
+    width: 50%;
+    float: left;
+}
+.contab2 {
+	height: 40px;
+    width: 50%;
+    float: right;
+}
+.goleft {
+	height: 100%;
+    float: left;
+    width: 70%;
+    text-align: center;
+    line-height: 40px;
+}
+.goright {
+	height: 100%;
+    float: right;
+    width: 70%;
+    text-align: center;
+    line-height: 40px;
+}
+#tabswitch1 {
+    height: 500px;
+    width: 100%;
+}
+#tabswitch2 {
+    height: 420px;
+    width: 100%;
+    display: none;
+    border-bottom: 1px solid #d7d7d7;
+}
+.switch1inner {
+	width: 100%;
+    height: 380px;
+    border-bottom: 1px solid #d7d7d7;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.switch2inner {
+	width: 100%;
+    height: 420px;
+}
+.confirm1 {
+	width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #d7d7d7;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid #d7d7d7;
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*弹出层*/
+
 .receivemessage {
 	height: 75%;
     width: 100%;
@@ -631,6 +781,9 @@ body {
 	width: 100%;
     display: none;
 }
+
+
+
 .matchtab2 {
 	width: 100%;
     display: none;
@@ -640,7 +793,35 @@ body {
     display: none;
 }
 
+.justtowatch {
+    width: 200px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 100px;
+    background-color: #f8fbec;
+}
 
+.justtowatch button {
+    width: 100%;
+    height: 40px;
+    background-color: #5edf65;
+    border: 1px solid #5edf65;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: 0;
+}
+
+.justtowatch img {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.justname {
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
 
 
 

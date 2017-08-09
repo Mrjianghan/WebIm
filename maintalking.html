@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/jquery.scrollbar.css">
         <link rel="stylesheet" href="css/talkingstyle.css">
+        <link rel="stylesheet" href="css/sortstyle.css">
         <style>
             .scrollbar-macosx {
                 overflow: auto;
@@ -33,6 +34,44 @@
                 <h4 class="h2 hide">已有账号,<a class="a2" href="javascript:;">登录</a></h4>
         </div>
         <div class="containermain">
+            
+            <div class="transparent">
+                <div class="getlistspop">
+                    <div class="pophead">发起聊天
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div class="selector">
+                        <div class="contab1">
+                            <a href="#tabswitch1">
+                                <div class="goright">选择好友
+                                </div>
+                                <div class="clearfix"></div>
+                            </a> 
+                        </div>
+                        <div class="contab2">
+                            <a href="#tabswitch2">
+                                <div class="goleft">选择群聊
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="tabswitchcontainer">
+                        <div id="tabswitch1">
+                            <div class="switch1inner scrollbar-macosx">
+                            </div>
+                            <button disabled class="confirm1">确定</button>
+                        </div>
+                        <div id="tabswitch2">
+                            <div class="switch2inner scrollbar-macosx">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="main-left">
                 <div class="userdatas">
                     <div class="datacenter">
@@ -85,8 +124,14 @@
                         <div class="chatrooms"></div>
                     </div>
                     <div id="tab3">
-                        <div class="groups"></div>
-                        <div class="friends"></div>
+                        <div class="groups">
+                            <div class="groupself">群组</div>
+                            <div class="groupinner"></div>
+                        </div>
+                        <div class="friends">
+                            <div id="letter"></div>
+                            <div class="sort_box"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,11 +201,9 @@
                         
                         <div class="getmessage">
                             <div class="receiveheader">
-                                <div class="headername">
-                                    <!--momoclo1<span></span><i class="fa fa-caret-down"></i>-->
-                                </div>
+                                <div class="headername">详细信息</div>
 
-                                <i class="fa fa-cog"></i>
+                                <!--<i class="fa fa-cog"></i>-->
                                 <div class="clearfix"></div>
                             </div><!--receiveheader-->
                             <div class="personalcontainer">
@@ -264,5 +307,7 @@
         </script>
         <script src="js/emoji.js"></script>
         <script src="js/webim.js"></script>
+        <script src="js/jquery.charfirst.pinyin.js"></script>
+        <!--<script src="js/sort.js"></script>-->
     </body>
 </html>

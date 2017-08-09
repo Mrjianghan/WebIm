@@ -21,6 +21,10 @@ conn.listen({
         $('.matchtab1  .getmessage').css({display:'none'});
         $('.matchtab3').css({display:'none'});
         $('.matchtab2').css({display:'none'});
+        $('#tab1').css({display:'block'});
+        $('#tab2').css({display:'none'});
+        $('#tab3').css({display:'none'});
+        
     },
     onOnline: function() {
         console.log("本机网络连接成功"); //本机网络连接成功
@@ -28,7 +32,7 @@ conn.listen({
     }, //本机网络掉线                  
 
     onError: function(message) {
-        console.log(message);
+        //console.log(message);
         console.log("%c 失败回调", 'color:red');
 
     }, //失败回调
@@ -353,15 +357,279 @@ var getRoasters3 = function () {
                     
                     //console.log(names);
                     
-                    str3 = str3 + '<div id="'+ names +'" class="onlyfriendcontainer"><img src="imgs/zhaoyun-1.jpg"><div class="onlyname">' + names + '</div><div class="clearfix"></div></div>';
-                    
-                    
-                    
+                    /*str3 = str3 + '<div id="'+ names +'" class="onlyfriendcontainer"><img src="imgs/zhaoyun-1.jpg"><div class="onlyname">' + names + '</div><div class="clearfix"></div></div>';*/
+                    str3 = str3 + '<div id = "'+ names +'" class="sort_list"><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
                     
                 };
             }     //for 循环
             
-            $('.friends').html(str3);
+            $('.friends .sort_box').html(str3);
+            
+            
+            
+            
+            function makePy(str) {
+                if (typeof (str) != "string")
+                    throw new Error(-1, "函数makePy需要字符串类型参数!");
+                var arrResult = new Array(); //保存中间结果的数组  
+                for (var i = 0, len = str.length; i < len; i++) {
+                    //获得unicode码  
+                    var ch = str.charAt(i);
+                    //检查该unicode码是否在处理范围之内,在则返回该码对映汉字的拼音首字母,不在则调用其它函数处理  
+                    arrResult.push(checkCh(ch));
+                }
+                //处理arrResult,返回所有可能的拼音首字母串数组  
+                return mkRslt(arrResult);
+}
+
+            function checkCh(ch) {
+                var uni = ch.charCodeAt(0);
+                //如果不在汉字处理范围之内,返回原字符,也可以调用自己的处理函数  
+                if (uni > 40869 || uni < 19968)
+                    return ch; //dealWithOthers(ch);  
+                //检查是否是多音字,是按多音字处理,不是就直接在strChineseFirstPY字符串中找对应的首字母  
+                return (oMultiDiff[uni] ? oMultiDiff[uni] : (strChineseFirstPY.charAt(uni - 19968)));
+            }
+
+            function mkRslt(arr) {
+                var arrRslt = [""];
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    var str = arr[i];
+                    var strlen = str.length;
+                    if (strlen == 1) {
+                        for (var k = 0; k < arrRslt.length; k++) {
+                            arrRslt[k] += str;
+                        }
+                    } else {
+                        var tmpArr = arrRslt.slice(0);
+                        arrRslt = [];
+                        for (k = 0; k < strlen; k++) {
+                            //复制一个相同的arrRslt  
+                            var tmp = tmpArr.slice(0);
+                            //把当前字符str[k]添加到每个元素末尾  
+                            for (var j = 0; j < tmp.length; j++) {
+                                tmp[j] += str.charAt(k);
+                            }
+                            //把复制并修改后的数组连接到arrRslt上  
+                            arrRslt = arrRslt.concat(tmp);
+                        }
+                    }
+                }
+                return arrRslt;
+            }
+            
+            
+            
+
+            
+            
+            
+            
+            $(function(){
+                    var Initials=$('.initials');
+                    var LetterBox=$('#letter');
+                    Initials.find('ul').append('<li>A</li><li>B</li><li>C</li><li>D</li><li>E</li><li>F</li><li>G</li><li>H</li><li>I</li><li>J</li><li>K</li><li>L</li><li>M</li><li>N</li><li>O</li><li>P</li><li>Q</li><li>R</li><li>S</li><li>T</li><li>U</li><li>V</li><li>W</li><li>X</li><li>Y</li><li>Z</li><li>#</li>');
+                    initials();
+
+                    $(".initials ul li").click(function(){
+                        var _this=$(this);
+                        var LetterHtml=_this.html();
+                        LetterBox.html(LetterHtml).fadeIn();
+
+                        Initials.css('background','rgba(145,145,145,0.6)');
+
+                        setTimeout(function(){
+                            Initials.css('background','rgba(145,145,145,0)');
+                            LetterBox.fadeOut();
+                        },1000);
+
+                        var _index = _this.index()
+                        if(_index==0){
+                            $('html,body').animate({scrollTop: '0px'}, 300);//点击第一个滚到顶部
+                        }else if(_index==27){
+                            var DefaultTop=$('#default').position().top;
+                            $('html,body').animate({scrollTop: DefaultTop+'px'}, 300);//点击最后一个滚到#号
+                        }else{
+                            var letter = _this.text();
+                            if($('#'+letter).length>0){
+                                var LetterTop = $('#'+letter).position().top;
+                                $('html,body').animate({scrollTop: LetterTop-45+'px'}, 300);
+                            }
+                        }
+                    })
+
+                    var windowHeight=$(window).height();
+                    var InitHeight=windowHeight-45;
+                    Initials.height(InitHeight);
+                    var LiHeight=InitHeight/28;
+                    Initials.find('li').height(LiHeight);
+            })
+
+            function initials() {//公众号排序
+                var SortList=$(".sort_list");
+                var SortBox=$(".sort_box");
+                SortList.sort(asc_sort).appendTo('.sort_box');//按首字母排序
+                function asc_sort(a, b) {
+                    return makePy($(b).find('.num_name').text().charAt(0))[0].toUpperCase() < makePy($(a).find('.num_name').text().charAt(0))[0].toUpperCase() ? 1 : -1;
+                }
+
+                var initials = [];
+                var num=0;
+                SortList.each(function(i) {
+                    var initial = makePy($(this).find('.num_name').text().charAt(0))[0].toUpperCase();
+                    if(initial>='A'&&initial<='Z'){
+                        if (initials.indexOf(initial) === -1)
+                            initials.push(initial);
+                    }else{
+                        num++;
+                    }
+
+                });
+
+                $.each(initials, function(index, value) {//添加首字母标签
+                    SortBox.append('<div class="sort_letter" id="'+ value +'">' + value + '</div>');
+                });
+                if(num!=0){SortBox.append('<div class="sort_letter" id="default">#</div>');}
+
+                for (var i =0;i<SortList.length;i++) {//插入到对应的首字母后面
+                    var letter=makePy(SortList.eq(i).find('.num_name').text().charAt(0))[0].toUpperCase();
+                    switch(letter){
+                        case "A":
+                            $('#A').after(SortList.eq(i));
+                            break;
+                        case "B":
+                            $('#B').after(SortList.eq(i));
+                            break;
+                        case "C":
+                            $('#C').after(SortList.eq(i));
+                            break;
+                        case "D":
+                            $('#D').after(SortList.eq(i));
+                            break;
+                        case "E":
+                            $('#E').after(SortList.eq(i));
+                            break;
+                        case "F":
+                            $('#F').after(SortList.eq(i));
+                            break;
+                        case "G":
+                            $('#G').after(SortList.eq(i));
+                            break;
+                        case "H":
+                            $('#H').after(SortList.eq(i));
+                            break;
+                        case "I":
+                            $('#I').after(SortList.eq(i));
+                            break;
+                        case "J":
+                            $('#J').after(SortList.eq(i));
+                            break;
+                        case "K":
+                            $('#K').after(SortList.eq(i));
+                            break;
+                        case "L":
+                            $('#L').after(SortList.eq(i));
+                            break;
+                        case "M":
+                            $('#M').after(SortList.eq(i));
+                            break;
+                        case "O":
+                            $('#O').after(SortList.eq(i));
+                            break;
+                        case "P":
+                            $('#P').after(SortList.eq(i));
+                            break;
+                        case "Q":
+                            $('#Q').after(SortList.eq(i));
+                            break;
+                        case "R":
+                            $('#R').after(SortList.eq(i));
+                            break;
+                        case "S":
+                            $('#S').after(SortList.eq(i));
+                            break;
+                        case "T":
+                            $('#T').after(SortList.eq(i));
+                            break;
+                        case "U":
+                            $('#U').after(SortList.eq(i));
+                            break;
+                        case "V":
+                            $('#V').after(SortList.eq(i));
+                            break;
+                        case "W":
+                            $('#W').after(SortList.eq(i));
+                            break;
+                        case "X":
+                            $('#X').after(SortList.eq(i));
+                            break;
+                        case "Y":
+                            $('#Y').after(SortList.eq(i));
+                            break;
+                        case "Z":
+                            $('#Z').after(SortList.eq(i));
+                            break;
+                        default:
+                            $('#default').after(SortList.eq(i));
+                            break;
+                    }
+                };
+            }
+    
+    
+    
+    
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
         }//success
         
@@ -391,7 +659,20 @@ var listGroups2 = function () {
                     
                     str5 = str5 + '<div id="'+ groupnames +'" class="onlygroupcontainer"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
                 }
-                $('.groups').html( str5 );
+                $('.groups .groupinner').html( str5 );
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
             },
             error: function () {
@@ -405,12 +686,13 @@ var listGroups2 = function () {
 //获取已加入的群组
 
 $('.icons3').on('click',function(){
-    if ( $('.groups').html()===''||$('.friends').html()==='' ){
+    if ( $('.groups .sort_box').html()===''||$('.friends .sort_box').html()==='' ){
         listGroups2();
         getRoasters3();
         var str = '<img class="firstscreen" src="imgs/u13.jpg">';
         $('.matchtab3 .placesholder').html(str);
         $('.matchtab3  .getmessage').css({display:'none'});
+        $('.sendmessage').css({display:'none'});
     };
 });
 
@@ -437,6 +719,63 @@ $('.icons1').on('click',function(){
     $('.matchtab1  .getmessage').css({display:'none'});
     $('.sendmessage').css({display:'none'});
 });
+
+
+
+$('.lists').on('click','.sort_list',function(){
+    var that2 = this;
+    console.log(that2);
+    console.log($(that2).attr('id'));
+    var ids = $(that2).attr('id');
+    $(that2).addClass('listsactive');
+    $(that2).siblings().removeClass('listsactive'); $(that2).parents('.friends').siblings().find('.onlygroupcontainer').removeClass('listsactive');
+    $('.matchtab3 .placesholder').css({display:'none'});
+    $('.matchtab3 .getmessage').css({display:'block'});
+    
+    
+    var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">'+ ids +'</div><button id ="'+ids+'"  type="button">发消息</button></div>';
+    
+    $('.matchtab3 .chatroomcontainer').html(str2);
+    
+});
+
+$('.matchtab3').on('click','button',function(){
+    console.log(this);
+    var that4 = this;
+    var ids = $(that4).attr('id');
+    $('.matchtab3').css({display:'none'});
+    $('.matchtab1').css({display:'block'});
+    $('#tab1').css({display:'block'});
+    $('#tab3').css({display:'none'});
+    
+    $('.icons .fa-commenting').addClass('greenactive');
+    $('.floor3 .fa-users').removeClass('greenactive');
+    $('.matchtab1 .placesholder').css({display:'none'});
+    $('.matchtab1 .getmessage').css({display:'block'});
+    $('.sendmessage').css({display:'block'});
+    $('.matchtab1 .headername').html(ids);
+});
+
+
+
+$('.lists').on('click','.onlygroupcontainer',function(){
+    var that3 = this;
+    console.log(that3);
+    var ids = $(that3).attr('id');
+    $(that3).addClass('listsactive');
+    $(that3).siblings().removeClass('listsactive'); $(that3).parents('.groups').siblings().find('.sort_list').removeClass('listsactive');
+    var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">'+ ids +'</div><button id ="'+ids+'"  type="button">发消息</button></div>';
+    
+    $('.matchtab3 .chatroomcontainer').html(str2);
+    $('.matchtab3 .placesholder').css({display:'none'});
+    $('.matchtab3 .getmessage').css({display:'block'});
+});
+
+
+
+
+
+
 
 
 
@@ -570,7 +909,13 @@ $(window).on('click',function(){
 //点击锯齿
 
 
-
+$('.selector a').on('click',function(){
+    var that = this;
+    var an = $(that).attr('href');
+    console.log(an);
+    $(an).css({display:'block'});
+    $(an).siblings().css({display:'none'});
+});
 
 
 
