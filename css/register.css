@@ -37,7 +37,6 @@ body {
 .floatright a {
     color: #fff;
     text-decoration: none;
-    
 }
 .register {
 	height: 360px;
@@ -50,55 +49,48 @@ body {
     margin-left: -190px;
     margin-top: -180px;
 }
-
-.switch {
+.title {
+	background-color: #e7f8fe;
     height: 60px;
     width: 100%;
-}
-.switch a {
-	display: block;
-    text-decoration: none;
-    float: left;
-    width: 190px;
-    height: 60px;
-    border-bottom: 1px solid #a1a1a1;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     line-height: 60px;
     text-align: center;
-    border-bottom-color: #a1a1a1;
-    color: #197714;
+    position: relative;
 }
 
-.scan a{
-    border-left: 1px solid #a1a1a1;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.fa-times {
+	position: absolute;
+    right: 17px;
+    top: 17px;
+    font-size: 24px;
+    color: #aeaeae;
+    cursor: pointer;
 }
-.white{
-    border-bottom-color: #fff !important;
+.reg1container {
+	width: 280px;
+    height: 200px;
+    margin-left: 50px;
+    margin-top: 50px;
 }
-#tab1 {
-    height: 300px;
+.reg1container a {
+	width: 100%;
+    height: 40px;
+    display: block;
+    background-color: #a1a1a1;
+    border: 1px solid #a1a1a1;
+    border-radius: 5px;
+    color: #fff;
+    outline: 0;
+    text-decoration: none;
+    line-height: 40px;
+    text-align: center;
+}
+
+[name='phonenumber'] {
     width: 100%;
-    padding-top: 40px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-#tab2 {
-    height: 300px;
-    width: 100%;
-    display: none;
-}
-.tab1in {
-    margin-top: 40px;
-    width: 300px;
-    margin: 0 auto;
-    height: 240px;
-}
-.tab1in input[name='phonenumber'] {
-    height: 35px;
-    width: 100%;
+    height: 40px;
     border-radius: 5px;
     border: 1px solid #a1a1a1;
     padding-left: 10px;
@@ -106,52 +98,33 @@ body {
     box-sizing: border-box;
     margin-bottom: 15px;
 }
-.tab1in input[name='check'] {
-    height: 35px;
+
+[name="passnumber"] {
     width: 50%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #a1a1a1;
     padding-left: 10px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #a1a1a1;
+    margin-bottom: 15px;
 }
-.tab1in input[type='password'] {
-    height: 35px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #a1a1a1;
-    width: 100%;
-    padding-left: 10px;
-    margin-bottom: 20px;
-}
-.tab1in  button {
+.mixpart {
 	width: 100%;
     height: 40px;
-    background-color: #a1a1a1;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid #a1a1a1;
-    border-radius: 5px;
-    font-size: 16px;
-    letter-spacing: 8px;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 10px;
-    outline: none;
 }
-.checkcode {
-	height: 35px;
+.rightpart {
+	height: 40px;
     width: 50%;
     float: right;
     margin-bottom: 15px;
 }
-.checkcode img  {
-	height: 35px;
+.rightpart img  {
+	height: 40px;
     width: 60%;
 }
 .changecode {
-	height: 35px;
+	height: 40px;
     width: 40%;
     margin: 0;
     display: inline-block;
@@ -165,62 +138,39 @@ body {
     box-sizing: border-box;
     padding-left: 5px;
     padding-right: 5px;
+    padding-top: 3px;
 }
-.tab2in {
-    width: 300px;
-    margin: 0 auto;
-}
-.tab2in img {
-    display: block;
-    margin: 0 auto;
-    margin-top: 30px;
-}
-.doubleswitch {
-	width: 140px;
-    height: 30px;
-    margin: 0 auto;
-}
-.doubleswitch a {
-	font-size: 9px;
-    color: #000;
-    text-decoration: none;
-}
-.doubleswitch a:hover {
-    color: #2a7110;
-}
-.lefta {
-	width: 70px;
-    height: 30px;
-    float: left;
-    text-align: center;
-    line-height: 30px;
-    border-right: 1px solid #a1a1a1;
+.leftbig {
+	height: 40px;
+    width: 100%;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
-.righta {
-	width: 70px;
-    height: 30px;
-    float: right;
-    text-align: center;
-    line-height: 30px;
+.phonecode {
+	height: 40px;
+    width: 70%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #a1a1a1;
+    padding-left: 10px;
 }
 
-.centera {
-	text-align: center;
-    margin-top: 18px;
-}
-.centera a {
-    font-size: 14px;
-    color: #000;
-    text-decoration: none; 
-}
-.centera a:hover {
-    color: #2a7110;
-}
-.please {
-	text-align: center;
-    margin-top: 20px;
+
+button.getphone {
+	height: 40px;
+    width: 27%;
+    float: right;
+    border-radius: 5px;
+    background-color: #aeaeae;
+    line-height: 40px;
+    font-size: 10px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #a1a1a1;
+    outline: 0;
 }
 .popout {
 	position: fixed;
