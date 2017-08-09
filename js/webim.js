@@ -754,6 +754,13 @@ $('.matchtab3').on('click','button',function(){
     $('.matchtab1 .getmessage').css({display:'block'});
     $('.sendmessage').css({display:'block'});
     $('.matchtab1 .headername').html(ids);
+    
+    var str2 = '' ;
+    str2 = str2 + '<div id="'+ ids +'" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+    
+    $('.allchatmessages').prepend(str2);
+    $('#'+ids).siblings().removeClass('listsactive');
+    
 });
 
 
