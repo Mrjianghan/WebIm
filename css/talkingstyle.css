@@ -641,6 +641,37 @@ body {
 
 
 
+
+.listscontronller {
+	height: 80px;
+    position: absolute;
+    width: 120px;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 90;
+    display: none;
+}
+.contronller {
+	height: 40px;
+    line-height: 40px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    font-size: 12px;
+}
+.contronller:hover {
+    background-color: #f1f1f1;
+    
+}
+.controlup {
+    border-bottom: 1px solid #f1f1f1;
+}
+
 /*以上聊天左边*/
 
 .main-right {

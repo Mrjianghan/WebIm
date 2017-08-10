@@ -646,10 +646,10 @@ var listGroups2 = function () {
                 //console.log(rooms);
                 var str5 = '';
                 for ( var i in rooms ){
-                    
+                    //console.log(rooms[i].roomId);
                     var groupnames = rooms[i].name;
-                    
-                    str5 = str5 + '<div id="'+ groupnames +'" class="onlygroupcontainer"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
+                    var groupnumber = rooms[i].roomId;
+                    str5 = str5 + '<div data-id="'+ groupnumber +'" id="'+ groupnames +'" class="onlygroupcontainer"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
                 }
                 $('.groups .groupinner').html( str5 );
                 
@@ -730,6 +730,7 @@ $('.matchtab3').on('click','button',function(){
     console.log(this);
     var that4 = this;
     var ids = $(that4).attr('id');
+    var cid = $(that4).attr('data-bid');
     $('.matchtab3').css({display:'none'});
     $('.matchtab1').css({display:'block'});
     $('#tab1').css({display:'block'});
@@ -742,11 +743,36 @@ $('.matchtab3').on('click','button',function(){
     $('.sendmessage').css({display:'block'});
     $('.matchtab1 .headername').html(ids);
     
+    
+    
+    
+    
+    
+    
+    if( $('.allchatmessages [data-nid="'+ cid +'"]').length < 1 ){
+        
+    //判断是否有重复
+        
+    console.log($('.allchatmessages [data-nid="'+ cid +'"]').length );    
+    
     var str2 = '' ;
-    str2 = str2 + '<div id="'+ ids +'" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+    str2 = str2 + '<div data-nid="' +cid+ '" id="'+ ids +'" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
     
     $('.allchatmessages').prepend(str2);
-    $('#'+ids).siblings().removeClass('listsactive');
+        
+    //$('#'+ids).siblings().removeClass('listsactive');
+    
+    $('[data-nid="'+ cid +'"]').siblings().removeClass('listsactive');
+    
+    
+    }else {
+        $('.allchatmessages [data-nid="'+ cid +'"]').remove();
+        var str3 = '';
+        str3 = str3 + '<div data-nid="' +cid+ '" id="'+ ids +'" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+        $('.allchatmessages').prepend(str3);
+        
+        $('[data-nid="'+ cid +'"]').siblings().removeClass('listsactive');
+    }
     
 });
 
@@ -756,9 +782,10 @@ $('.lists').on('click','.onlygroupcontainer',function(){
     var that3 = this;
     console.log(that3);
     var ids = $(that3).attr('id');
+    var bid= $(that3).attr('data-id');
     $(that3).addClass('listsactive');
     $(that3).siblings().removeClass('listsactive'); $(that3).parents('.groups').siblings().find('.sort_list').removeClass('listsactive');
-    var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">'+ ids +'</div><button id ="'+ids+'"  type="button">发消息</button></div>';
+    var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">'+ ids +'</div><button data-bid="'+ bid +'" id ="'+ids+'"  type="button">发消息</button></div>';
     $('.matchtab3 .chatroomcontainer').html(str2);
     $('.matchtab3 .placesholder').css({display:'none'});
     $('.matchtab3 .getmessage').css({display:'block'});
@@ -782,26 +809,22 @@ $('.lists').on('click', '.chatcontainer',function(){
     $('.matchtab2 .getmessage').css({display:'block'});
     
     
-    //需要判断是否有对话框
-    $('.sendmessage').css({display:'none'});
-    //需要判断是否有对话框
-    
-    
     var idvalue = $(that5)[0].id;
     
-    console.log(that5);
+    //console.log(that5);
     
-    //console.log(that5[0].firstChild.className);
     var ids = that5[0].firstChild.className;
+    console.log(idvalue);
     
-    /*var str = '';
+    $('.matchtab2 .getmessage').attr('data-id',idvalue);
     
-    str = str + '详细信息' + '<span></span>';
+    //$('[data-id='+ idvalue +']').css({display:'block'});
     
-    $('.headername').html(str);*/
+    //if( idvalue !== $('.matchtab2 .headername').attr('id') ){
+       
     
     
-    var idvalue = $(that5)[0].id;
+    
     $('.matchtab2 .receiveheader').css({display:'none'});
     
     var str2 = '';
@@ -809,6 +832,30 @@ $('.lists').on('click', '.chatcontainer',function(){
     str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"><div id="'+ idvalue +'" class="justname">'+ idvalue +'</div><button class="joinchatroom" id ="'+ ids +'" type="button">加入此聊天室</button></div>';
     
     $('.matchtab2 .chatroomcontainer').html( str2 );
+    
+    
+    
+    
+    
+    //需要判断是否有对话框
+    
+    $('.sendmessage').css({display:'none'});
+    
+    
+    //需要判断是否有对话框
+    
+    
+    
+    
+    
+    
+    /*}else {
+        $('[data-id='+ idvalue +']').css({display:'block'});
+    }*/
+    
+    
+        
+        
 });
 
 
@@ -837,6 +884,7 @@ $('.receivemessage').on('click','.joinchatroom',function(){
     joinRoom();
     var nstr = getname +'<span></span>';
     $('.matchtab2 .headername').html(nstr);
+    $('.matchtab2 .headername').attr('id',getname);
     $('.sendmessage').css({display:'block'});
     $('.matchtab2 .chatroomcontainer').html('');
     $('.send').attr('id',ids);
@@ -851,7 +899,7 @@ $('.receivemessage').on('click','.joinchatroom',function(){
 
 
 
-$('.lists').on('click', '.groupcontainer',function(){
+$('.lists').on('click', '.groupcontainer',function(event){
     var that4 = this;
     $(that4).addClass('listsactive');
     $(that4).siblings().removeClass('listsactive');
@@ -859,9 +907,62 @@ $('.lists').on('click', '.groupcontainer',function(){
     
 });
 
+$('.lists').on('contextmenu', '.groupcontainer',function(event){
+    var that5 = this;
+    console.log($(that5).attr('data-nid'));
+    var target = $(that5).attr('data-nid');
+    
+    console.log(event);
+    event.preventDefault();
+    $(that5).addClass('listsactive');
+    $(that5).siblings().removeClass('listsactive');
+    $('.listscontronller').css({display:'block'});
+    var tx = event.clientX - 160;
+    var ty = event.clientY;
+    $('.listscontronller').attr('id', target);
+    $('.listscontronller').css({ top:ty });
+    $('.listscontronller').css({ left:tx });
+});
 
 
 
+//删除置顶按钮
+
+ 
+
+$('.listscontronller .contronller:first-child').on('click',function(){
+   
+    
+    
+    $('.listscontronller').css({display:'none'});
+    var up1 = this;
+    console.log( $(up1).parent().attr('id') );
+    var bridge1 = $(up1).parent().attr('id'); 
+    
+    
+    
+    $('[data-nid="'+ bridge1 +'"]').prependTo('.allchatmessages');
+});
+
+$('.listscontronller .contronller:nth-child(2)').on('click',function(){
+   
+    
+    
+    $('.listscontronller').css({display:'none'});
+    
+    var up2 = this;
+    console.log( $(up2).parent().attr('id') );
+    var bridge2 = $(up2).parent().attr('id'); 
+    $('[data-nid="'+ bridge2 +'"]').remove();
+    
+});
+
+
+
+
+
+
+//删除置顶按钮
 
 //点击锯齿
 var target1 = 2;
