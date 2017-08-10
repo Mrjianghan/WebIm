@@ -50,6 +50,12 @@ body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+.show {
+    display: block !important;
+}
+.hide {
+    display: none !important;
+}
 #psw {
     display: block;
     width: 80%;
@@ -402,10 +408,13 @@ body {
 }
 .onlyname {
     height: 47px;
-    width: auto;
+    width: 70%;
     line-height: 47px;
     float: left;
     margin-left: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .onlyfriendcontainer {
     width: 100%;
@@ -456,6 +465,9 @@ body {
     text-align: center;
     left: 50%;
     margin-left: -25%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .receiveheader {
     height: 50px;
@@ -540,6 +552,10 @@ body {
     float: left;
     font-size: 15px;
     color: #872f04;
+    white-space: nowrap;
+    width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .grouptopright {
     float: right;

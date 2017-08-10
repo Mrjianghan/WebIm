@@ -267,8 +267,8 @@ $('.userimg').on('click',function( event ){
 
 var flag = 2;       //点击汉堡包图标消失或显示
 $('.floor1 .fa-bars').on('click',function( event ){
-    $('.infoslidemenu').css({display:'none'});
     event.stopPropagation();
+    $('.infoslidemenu').css({display:'none'});
     if ( flag == 2 ){
         $('.slidedownmenu').css({display:'block'});
         flag = 3;
@@ -344,22 +344,14 @@ var getRoasters3 = function () {
     var option = {
         success: function (roster) {
             var str3 = '';
-            
             var o;
-            
             var l = roster.length;
-            
             for ( o = 0; o < l; o++ ) {
-                
                 var names = roster[o].name;
-                
                 if ( names != 'undefined' ){
-                    
                     //console.log(names);
-                    
                     /*str3 = str3 + '<div id="'+ names +'" class="onlyfriendcontainer"><img src="imgs/zhaoyun-1.jpg"><div class="onlyname">' + names + '</div><div class="clearfix"></div></div>';*/
                     str3 = str3 + '<div id = "'+ names +'" class="sort_list"><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
-                    
                 };
             }     //for 循环
             
@@ -662,16 +654,7 @@ var listGroups2 = function () {
                 $('.groups .groupinner').html( str5 );
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+               
                 
                 
             },
@@ -693,6 +676,8 @@ $('.icons3').on('click',function(){
         $('.matchtab3 .placesholder').html(str);
         $('.matchtab3  .getmessage').css({display:'none'});
         $('.sendmessage').css({display:'none'});
+    }else{
+        $('.sendmessage').css({display:'none'});
     };
 });
 
@@ -707,6 +692,8 @@ $('.iconcenter').on('click',function(){
         $('.matchtab2 .placesholder').html(str);
         $('.matchtab2  .getmessage').css({display:'none'});
         $('.matchtab2 .placesholder').css({display:'block'});
+    }else{
+        /*$('.sendmessage').css({display:'none'});*/
     }
     
     
@@ -772,7 +759,6 @@ $('.lists').on('click','.onlygroupcontainer',function(){
     $(that3).addClass('listsactive');
     $(that3).siblings().removeClass('listsactive'); $(that3).parents('.groups').siblings().find('.sort_list').removeClass('listsactive');
     var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">'+ ids +'</div><button id ="'+ids+'"  type="button">发消息</button></div>';
-    
     $('.matchtab3 .chatroomcontainer').html(str2);
     $('.matchtab3 .placesholder').css({display:'none'});
     $('.matchtab3 .getmessage').css({display:'block'});
@@ -794,6 +780,13 @@ $('.lists').on('click', '.chatcontainer',function(){
     that5.siblings().removeClass('listsactive');
     $('.matchtab2 .placesholder').css({display:'none'});
     $('.matchtab2 .getmessage').css({display:'block'});
+    
+    
+    //需要判断是否有对话框
+    $('.sendmessage').css({display:'none'});
+    //需要判断是否有对话框
+    
+    
     var idvalue = $(that5)[0].id;
     
     console.log(that5);
@@ -815,7 +808,7 @@ $('.lists').on('click', '.chatcontainer',function(){
     
     str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"><div id="'+ idvalue +'" class="justname">'+ idvalue +'</div><button class="joinchatroom" id ="'+ ids +'" type="button">加入此聊天室</button></div>';
     
-    $('.chatroomcontainer').html( str2 );
+    $('.matchtab2 .chatroomcontainer').html( str2 );
 });
 
 
@@ -843,19 +836,30 @@ $('.receivemessage').on('click','.joinchatroom',function(){
     //加入聊天室
     joinRoom();
     var nstr = getname +'<span></span>';
-    $('.headername').html(nstr);
+    $('.matchtab2 .headername').html(nstr);
     $('.sendmessage').css({display:'block'});
-    $('.chatroomcontainer').html('');
+    $('.matchtab2 .chatroomcontainer').html('');
     $('.send').attr('id',ids);
-    $('.chatroomcontainer').attr('id',ids);
+    $('.matchtab2 .chatroomcontainer').attr('id',ids);
     $('.receiveheader').css({display:'block'});
-    
     var str2 = '' ;
     str2 = str2 + '<div id="'+ getname +'" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + getname + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
     
     $('.allchatmessages').prepend(str2);
     
 });
+
+
+
+$('.lists').on('click', '.groupcontainer',function(){
+    var that4 = this;
+    $(that4).addClass('listsactive');
+    $(that4).siblings().removeClass('listsactive');
+    
+    
+});
+
+
 
 
 
