@@ -449,11 +449,18 @@ body {
     float: left;
     border-radius: 5px;
 }
+.placesholder {
+	width: 100%;
+    height: 70%;
+    padding-top: 20%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 .firstscreen {
     display: block;
     width: 200px;
     margin: 0 auto;
-    margin-top: 20%;
+    
 }
 
 .headername {
@@ -594,7 +601,7 @@ body {
     box-sizing: border-box;
     z-index: 30;
     display: none;
-    top: 52.5px;
+    top: 52px;
 }
 
 
@@ -683,6 +690,10 @@ body {
     border-top-right-radius: 10px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.getmessage {
+	overflow: hidden;
 }
 
 /*弹出层*/
@@ -823,6 +834,7 @@ body {
 .matchtab3 {
 	width: 100%;
     display: none;
+    height: 100%;
 }
 
 
@@ -830,10 +842,12 @@ body {
 .matchtab2 {
 	width: 100%;
     display: none;
+    height: 100%;
 }
 .matchtab1 {
 	width: 100%;
     display: none;
+    height: 100%;
 }
 
 .justtowatch {
@@ -865,6 +879,127 @@ body {
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+
+.specialcontainerouter {
+    height: 95%;
+    width: 100%;
+}
+
+.specialcontainerinner {
+    height: 100%;
+    width: 100%;
+}
+
+.personalcontainer {
+    width: 100%;
+    height: 70%;
+}
+.chatroomcontainer {
+    width: 100%;
+    height: auto;
+    background-color: #f8fbec;
+}
+
+.matchtab2 .receiveheader {
+	display: none;
+}
+.matchtab2 .personalcontainer {
+	display: none;
+}
+.specialinfo1 {
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+待修改
+.messagecontainer {
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.messageleft {
+    float: left;
+}
+
+.headpic1 {
+    width: 50px;
+    height: 80px;
+    float: left;
+}
+
+.headpic1 img {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.infocontainer {
+    float: left;
+    margin-left: 10px;
+    max-width: 70%;
+}
+
+.messagecontent {
+    position: relative;
+    border: 1px solid #a4dfa4;
+    margin-top: 5px;
+    padding: 14px;
+    border-radius: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #a4dfa4;
+    min-height: 50px;
+}
+
+.messagecontent:after {
+    content: '';
+    position: absolute;
+    border-bottom: 12px solid transparent;
+    border-top: 12px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid #a4dfa4;
+    left: -17px;
+    top: 12px;
+    z-index: 20;
+}
+
+
+待修改
+*/
+
+
+
+
 
 
 
