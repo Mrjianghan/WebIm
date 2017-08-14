@@ -21,7 +21,7 @@ conn.listen({
         $('.matchtab1').css({
             display: 'block'
         });
-        $('.sendmessage').css({
+        $('.send').css({
             display: 'none'
         });
         var str = '<img class="firstscreen" src="imgs/u13.png">';
@@ -69,26 +69,26 @@ conn.listen({
             console.log(msg_to);
             //console.log(delay);
             //console.log(gettype);
-            
-            if( $('.specialcontainerouter #'+msg_to ).css('display') ==='block' ){
+
+            if ($('.specialcontainerouter #' + msg_to).css('display') === 'block') {
                 //alert('hi');
-                
-                
-                var str1 = '';
-                
-                
-                $('.specialcontainerouter #' + msg_to+' .chatroomcontainer').append(str1);
-                
-               
+
+
+                /*var str1 = '<div class="messagecontainer"><div class="messageleft"><div class="headpic1"><img src="imgs/dsad-1.jpg"></div><div class="infocontainer"><div class="nickname1">' + msg_from + '</div><div class="messagecontent">' + textcontent + '</div></div><div class="clearfix"></div></div><div class="clearfix"></div></div>';
+
+
+                $('.specialcontainerouter #' + msg_to + ' .chatroomcontainer').append(str1);*/
+
+
             }
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
         }
 
 
@@ -772,9 +772,7 @@ $('.iconcenter').on('click', function () {
         $('.matchtab2  .getmessage').css({
             display: 'none'
         });
-        $('.matchtab2 .placesholder').css({
-            display: 'block'
-        });
+
     } else {
         /*$('.sendmessage').css({display:'none'});*/
     }
@@ -911,88 +909,104 @@ $('.lists').on('click', '.onlygroupcontainer', function () {
 
 
 $('.lists').on('click', '.chatcontainer', function () {
-    
-    
-    
     var that5 = $(this);
     that5.addClass('listsactive');
     that5.siblings().removeClass('listsactive');
-
     var idvalue = $(that5)[0].id;
-    console.log(that5);
-
+    //console.log(that5);
     var ids = that5[0].firstChild.className;
-    console.log(idvalue);
-    console.log(ids);
+    //console.log(idvalue);
+    //console.log(ids);
+    
+    $('.send').attr('id',ids);
+    
     $('.matchtab2 .placesholder').css({
         display: 'none'
     });
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    var str1 = '<div id="' + ids + '" class="specialcontainerinner"><div class="getmessage"><div class="receiveheader"><div class="headername"></div><i class="fa fa-cog"></i><div class="clearfix"></div></div><div class="personalcontainer"><div class="messagecontents scrollbar-macosx"><div class="chatroomcontainer"></div></div></div><div class="specialinfo1"></div></div></div>';
-
-    var str2 = '';
-
-    str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"><div id="' + idvalue + '" class="justname">' + idvalue + '</div><button class="joinchatroom" data-id="' + idvalue + '" id ="' + ids + '" type="button">加入此聊天室</button></div>';
 
 
-    //只有一个时
-    if ($('.specialcontainerouter #' + ids).length < 1) {
+    var str1 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"><div id="' + idvalue + '" class="justname">' + idvalue + '</div><button class="joinchatroom" data-id="' + idvalue + '" id ="' + ids + '" type="button">加入此聊天室</button></div>';
 
-        $('.specialcontainerouter').prepend(str1);
-        $('.specialcontainerouter #' + ids).siblings().css({
+
+
+    var str2 = '<div data-id="' + idvalue + '" id="' + ids + '" class="receiveheader"><div class="headername">' + idvalue + '</div><i class="fa fa-cog"></i><div class="clearfix"></div></div>';
+
+
+
+
+    var str3 = '<div id="' + ids + '" class="everychatroom"><div class="chatroominfo"></div><div class="mainmessagecontainer1"></div></div>';
+
+
+    if ($('.exists #' + ids + '.everychatroom').length < 1) {
+        //第一次点击
+        $('.matchtab2 .exists.scroll-content').append(str3);
+
+        $('#' + ids + '.everychatroom').css({
+            display: 'block'
+        });
+
+        $('#' + ids + '.everychatroom').siblings().css({
             display: 'none'
         });
-        $('#' + ids + ' .specialinfo1').html(str2);
-        $('.sendmessage').css({
+
+        $('.matchtab2 #' + ids + ' .chatroominfo').html(str1);
+
+        $('#' + ids + ' .mainmessagecontainer1').css({
             display: 'none'
         });
+
+        //$('.send').attr('id',ids);
+
+        console.log($('#' + ids + ' .chatroominfo'));
+
+        console.log($('.mainmessagecontainer1').css('display'));
+
+
 
     } else {
-        //重复点击时
+
+        //第二次点击
+        //$('.send').attr('id',ids);
+
+        $('#' + ids + '.everychatroom').css({
+            display: 'block'
+        });
+
+        $('#' + ids + '.everychatroom').siblings().css({
+            display: 'none'
+        });
+
+        console.log($('#' + ids + '.everychatroom' + ' .mainmessagecontainer1').css('display'));
 
 
-        if ($('.specialcontainerouter #' + ids + ' .specialinfo1').css('display') == 'none') {
-            //没有会话框的时候
-            $('.specialcontainerouter #' + ids).css({
+        if ($('#' + ids + '.everychatroom' + ' .mainmessagecontainer1').css('display') == 'block') {
+            //发起了会话
+
+
+            $('#' + ids + '.receiveheader').css({
                 display: 'block'
             });
-            $('.specialcontainerouter #' + ids).siblings().css({
-                display: 'none'
-            });
-
             $('.sendmessage').css({
                 display: 'block'
             });
+            $('#' + ids + '.receiveheader').siblings().css({
+                display: 'none'
+            });
+
         } else {
-            //已经有了会话框的时候
-            $('.specialcontainerouter #' + ids).css({
-                display: 'block'
-            });
-            $('.specialcontainerouter #' + ids).siblings().css({
-                display: 'none'
-            });
+            //未发起会话
 
-            $('.specialcontainerouter  #' + ids + '  .receiveheader').css({
+            $('.sendmessage').css({
                 display: 'none'
             });
-            $('.sendmessage').css({
+            $('.receiveheader').css({
                 display: 'none'
             });
         }
+
+
     }
 
 
@@ -1003,66 +1017,81 @@ $('.lists').on('click', '.chatcontainer', function () {
 
 
 
+    //标题的长度
+
+    if ($('.matchtab2 .headers #' + ids).length < 1) {
+        //第一次点击
+        $('.matchtab2 .headers').prepend(str2);
+
+
+
+    }
+    /*else {
+            //第二次点击
+            /*$('#'+ids).css({display:'block'});
+            $('#'+ids).siblings().css({display:'none'});
+            
+            
+            
+            
+            if ( $('#'+ids+' .chatroominfo').css('display')=='none' ){
+                //如果发起了会话
+                
+            }else {
+                $('.receiveheader').css({display:'none'});
+                $('.sendmessage').css({display:'none'});
+            }
+            
+            
+        }*/
+
+
+
+
+
+
+
+
+
 });
-
-
-
-
-
-
 
 
 $('.receivemessage').on('click', '.joinchatroom', function () {
     var that3 = this;
-    //console.log(that3);
 
     var ids = $(that3).attr('id');
-    //console.log( typeof( ids ) );
-    //console.log( $(that3).siblings('.justname').attr('id') );
+    var name = $(that3).attr('data-id');
+    console.log(ids);
+    console.log(name);
 
-    var getname = $(that3).siblings('.justname').attr('id');
 
-    var joinRoom = function () {
-        // 加入聊天室
-        conn.joinChatRoom({
-            roomId: ids
-            // 聊天室id,
-        });
-    };
-    //加入聊天室
-
-    joinRoom();
-
-    $(that3).parents('.specialinfo1').css({
+    $('#' + ids + '.receiveheader').css({
+        display: 'block'
+    });
+    $('#' + ids + '.receiveheader').siblings().css({
         display: 'none'
     });
-    console.log($(that3).parents('.specialinfo1'));
-    var nstr = getname + '<span></span>';
-
-    $('#' + ids + ' .headername').html(nstr);
-
-    $('#' + ids + ' .headername').attr('id', getname);
 
     $('.sendmessage').css({
         display: 'block'
     });
-    /*$('.matchtab2 .chatroomcontainer').html('');
-    
-    $('.matchtab2 .chatroomcontainer').attr('id',ids);*/
-    $('#' + ids + ' .receiveheader').css({
-        display: 'block'
-    });
-    $('#' + ids + ' .personalcontainer').css({
-        display: 'block'
-    });
-    var str2 = '';
-    str2 = str2 + '<div data-nid="' + ids + '" id="' + getname + '" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + getname + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
 
-    $('.allchatmessages').prepend(str2);
+    $(that3).parents('.chatroominfo').css({
+        'display': 'none'
+    });
     $('.send').attr('id', ids);
-    $('#tab1 [data-nid="' + ids + '"]').addClass('listsactive');
-    $('#tab1 [data-nid="' + ids + '"]').siblings().removeClass('listsactive');
+
+    $('#' + ids + '.everychatroom' + ' .mainmessagecontainer1').css({
+        'display': 'block'
+    });
+
 });
+
+
+
+
+
+
 
 
 
