@@ -135,7 +135,7 @@ body {
         box-shadow: 0px 0px 3px 3px #b0b2b8;
         border-radius: 10px;
         display: none;
-       position: relative;
+        position: relative;
     } 
 }
 
@@ -841,6 +841,121 @@ body {
 
 /*弹出层*/
 
+
+
+
+
+/*弹出层1*/
+
+
+
+.transparent1 {
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(51,67,45,0.5);
+    height: 100%;
+    max-width: 100%;
+    z-index: 20;
+    display: none;
+}
+.getlistspop1 {
+    position: absolute;
+    width: 360px;
+    height: 550px;
+    left: 50%;
+    top: 50%;
+    margin-left: -180px;
+    margin-top: -275px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.pophead1 {
+	width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #e7f8fe;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+.pophead1 .fa-times {
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    font-size: 20px;
+    color: #aeaeae;
+    cursor: pointer;
+}
+.contab3 {
+	height: 60px;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #d7d7d7;
+    border-top: 1px solid #d7d7d7;
+}
+.contab3 .fa-search{
+	font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.contab3 input {
+    height: 25px;
+    width: 280px;
+    position: absolute;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.transferselect {
+	height: 370px;
+    width: 100%;
+    border-bottom: 1px solid #d7d7d7;
+}
+.confirm2 {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #d7d7d7;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid #d7d7d7;
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*弹出层1*/
+
+
+
+
+
 .receivemessage {
 	height: 75%;
     width: 100%;
@@ -943,76 +1058,120 @@ body {
 .mainmessagecontainer1 {
     width: 100%;
     height: 100%;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-待修改
-.messagecontainer {
-    padding: 5px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.messageleft {
-    float: left;
-}
-
-.headpic1 {
-    width: 50px;
-    height: 80px;
-    float: left;
-}
-
-.headpic1 img {
-    display: block;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.infocontainer {
-    float: left;
-    margin-left: 10px;
-    max-width: 70%;
-}
-
-.messagecontent {
     position: relative;
-    border: 1px solid #a4dfa4;
-    margin-top: 5px;
-    padding: 14px;
-    border-radius: 10px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background-color: #a4dfa4;
-    min-height: 50px;
 }
 
-.messagecontent:after {
+
+
+
+
+
+
+
+
+
+
+
+
+/*待修改*/
+.messagecontainer {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    position: relative;
+}
+.leftpic {
+    width: 50px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    margin-right: 15px;
+}
+.nickname1 {
+    width: 85%;
+    float: left;
+}
+.messagecontent1 {
+    margin-top: 10px;
+	float: left;
+    background-color: #a4dfa4;
+    padding-left: 15px;
+    padding-right: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #a4dfa4;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 65%;
+    word-wrap: break-word;
+}
+.messagecontent1:after {
     content: '';
     position: absolute;
-    border-bottom: 12px solid transparent;
-    border-top: 12px solid transparent;
-    border-left: 8px solid transparent;
-    border-right: 8px solid #a4dfa4;
-    left: -17px;
-    top: 12px;
-    z-index: 20;
+    left: -16px;
+    top: 17px;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-right-color: #a4dfa4;
+}
+
+.clearmessages {
+    height: 40px;
+    width: 100px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fff;
+    position: absolute;
+    cursor: pointer;
+    display: none;
+    
+    border: 1px solid #b2b7b2;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 160;
+}
+.messagecontrol {
+	height: 100px;
+    width: 50px;
+    position: fixed;
+    background-color: #f7fdff;
+    border-radius: 10px;
+    display: none;
+    z-index: 201;
+}
+.message1 {
+	text-align: center;
+    height: 33.3%;
+    width: 100%;
+    line-height: 33.3px;
+    cursor: pointer;
 }
 
 
-待修改
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1066,5 +1225,5 @@ body {
     border: 1px solid #b2b7b2;
     border-radius: 5px;
     background-color: #f8fbec;
-    display: none;
+    
 }

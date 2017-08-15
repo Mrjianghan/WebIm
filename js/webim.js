@@ -21,7 +21,7 @@ conn.listen({
         $('.matchtab1').css({
             display: 'block'
         });
-        $('.send').css({
+        $('.sendmessage').css({
             display: 'none'
         });
         var str = '<img class="firstscreen" src="imgs/u13.png">';
@@ -63,6 +63,7 @@ conn.listen({
         var msg_from = message.from;
         var textcontent = message.data;
         var delay = message.delay;
+        console.log(message);
 
         if (gettype == 'chatroom') {
             console.log(msg_from);
@@ -70,14 +71,14 @@ conn.listen({
             //console.log(delay);
             //console.log(gettype);
 
-            if ($('.specialcontainerouter #' + msg_to).css('display') === 'block') {
-                //alert('hi');
+            if ($('#' + msg_to + '.everychatroom  .mainmessagecontainer1').css('display') === 'block') {
+                
 
 
-                /*var str1 = '<div class="messagecontainer"><div class="messageleft"><div class="headpic1"><img src="imgs/dsad-1.jpg"></div><div class="infocontainer"><div class="nickname1">' + msg_from + '</div><div class="messagecontent">' + textcontent + '</div></div><div class="clearfix"></div></div><div class="clearfix"></div></div>';
+                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1">复制</div><div class="message1">转发</div><div class="message1">删除</div></div></div></div>';
 
 
-                $('.specialcontainerouter #' + msg_to + ' .chatroomcontainer').append(str1);*/
+                $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
 
 
             }
@@ -191,6 +192,8 @@ rtcCall = new WebIM.WebRTC.Call({
         }
     }
 });
+
+
 
 /* 登录注册功能，退出登录.实际上已废弃  */
 var wrapper1 = function () {
@@ -902,6 +905,90 @@ $('.lists').on('click', '.onlygroupcontainer', function () {
 
 
 
+//清屏聊天信息
+
+
+$('.matchtab2').on('contextmenu','.mainmessagecontainer1',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var that3 = this;
+    var idd= $(that3).parents('.everychatroom').attr('id');
+    
+    var x = event.clientX-150;
+    var y = event.clientY;
+    console.log(event);
+    $('.clearmessages').css({display:'block'});
+    $('.clearmessages').css({left:x});
+    $('.clearmessages').css({top:y});
+    $('.clearmessages').attr('id',idd);
+    
+    $(window).on('click',function(){
+        $('.clearmessages').css({display:'none'});
+    });
+    
+});
+
+$('.clearmessages').on('click',function(){
+    console.log( $(this).attr('id') );
+    var idnumber =  $(this).attr('id');
+    $('#'+idnumber+'.everychatroom  .messagecontainer').remove();
+})
+
+
+//清屏聊天信息
+
+
+
+
+
+//处理聊天消息
+
+$('.matchtab2').on('click','.messagecontent',function(event){
+    console.log(event);
+    event.stopPropagation();
+    console.log(this);
+    
+    //console.log($(this).html());
+    $(this).parents('.messagecontainer').find('.messagecontrol').css({display:'block'});
+    
+    $(this).parents('.messagecontainer').siblings().find('.messagecontrol').css({display:'none'});
+    
+    
+    
+    var x = event.screenX+50;
+    var y = event.screenY-100;
+    
+    $(this).parents('.messagecontainer').find('.messagecontrol').css({left:x});
+    $(this).parents('.messagecontainer').find('.messagecontrol').css({top:y});
+    $(window).on('click',function(){
+        $('.messagecontrol').css({display:'none'});
+    });
+    
+    
+});
+
+
+//删除消息
+$('.matchtab2').on('click','.message1:last-child',function(){
+    console.log( $(this).parents('.messagecontainer') );
+    $(this).parents('.messagecontainer').remove();
+    
+});
+//转发消息
+$('.matchtab2').on('click','.message1:nth-child(2)',function(){
+    $('.transparent1').css({display:'block'});
+});
+
+
+$('.transparent1 .fa-times').on('click', function(){
+    $('.transparent1').css({display:'none'});
+});
+
+
+
+
+//处理聊天消息
+
 
 
 
@@ -917,9 +1004,9 @@ $('.lists').on('click', '.chatcontainer', function () {
     var ids = that5[0].firstChild.className;
     //console.log(idvalue);
     //console.log(ids);
-    
-    $('.send').attr('id',ids);
-    
+
+    //$('.send').attr('id',ids);
+
     $('.matchtab2 .placesholder').css({
         display: 'none'
     });
@@ -957,11 +1044,19 @@ $('.lists').on('click', '.chatcontainer', function () {
             display: 'none'
         });
 
+        $('.receiveheader').css({
+            display: 'none'
+        });
+
+        $('.sendmessage').css({
+            display: 'none'
+        });
+
         //$('.send').attr('id',ids);
 
-        console.log($('#' + ids + ' .chatroominfo'));
+        //console.log($('#' + ids + ' .chatroominfo'));
 
-        console.log($('.mainmessagecontainer1').css('display'));
+        //console.log($('.mainmessagecontainer1').css('display'));
 
 
 
@@ -1019,31 +1114,11 @@ $('.lists').on('click', '.chatcontainer', function () {
 
     //标题的长度
 
-    if ($('.matchtab2 .headers #' + ids).length < 1) {
+    if ($('.matchtab2 .headers #' + ids+'.receiveheader').length < 1) {
         //第一次点击
         $('.matchtab2 .headers').prepend(str2);
-
-
-
     }
-    /*else {
-            //第二次点击
-            /*$('#'+ids).css({display:'block'});
-            $('#'+ids).siblings().css({display:'none'});
-            
-            
-            
-            
-            if ( $('#'+ids+' .chatroominfo').css('display')=='none' ){
-                //如果发起了会话
-                
-            }else {
-                $('.receiveheader').css({display:'none'});
-                $('.sendmessage').css({display:'none'});
-            }
-            
-            
-        }*/
+    
 
 
 
@@ -1056,6 +1131,10 @@ $('.lists').on('click', '.chatcontainer', function () {
 });
 
 
+
+
+
+
 $('.receivemessage').on('click', '.joinchatroom', function () {
     var that3 = this;
 
@@ -1063,6 +1142,17 @@ $('.receivemessage').on('click', '.joinchatroom', function () {
     var name = $(that3).attr('data-id');
     console.log(ids);
     console.log(name);
+    
+    var joinRoom = function () {
+        // 加入聊天室
+        conn.joinChatRoom({
+            roomId: ids // 聊天室id
+        });
+    };
+    joinRoom();
+    
+    
+    
 
 
     $('#' + ids + '.receiveheader').css({
@@ -1084,6 +1174,49 @@ $('.receivemessage').on('click', '.joinchatroom', function () {
     $('#' + ids + '.everychatroom' + ' .mainmessagecontainer1').css({
         'display': 'block'
     });
+    
+    
+    
+    
+    
+    
+    if ($('.allchatmessages [data-nid="' + ids + '"]').length < 1) {
+
+        //判断是否有重复
+
+        
+
+        var str2 = '';
+        str2 = str2 + '<div data-nid="' + ids + '" id="' + name + '" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + name + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+
+        $('.allchatmessages').prepend(str2);
+
+        //$('#'+ids).siblings().removeClass('listsactive');
+
+        $('[data-nid="' + ids + '"]').siblings().removeClass('listsactive');
+
+
+    } else {
+        $('.allchatmessages [data-nid="' + ids + '"]').remove();
+        var str3 = '';
+        str3 = str3 + '<div data-nid="' + ids + '" id="' + name + '" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + name + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+        
+        $('.allchatmessages').prepend(str3);
+
+        $('[data-nid="' + ids + '"]').siblings().removeClass('listsactive');
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 });
 
