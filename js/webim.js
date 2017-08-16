@@ -75,7 +75,7 @@ conn.listen({
                 
 
 
-                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1">复制</div><div class="message1">转发</div><div class="message1">删除</div></div></div></div>';
+                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor">转发</div><div class="message1">删除</div></div></div></div>';
 
 
                 $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
@@ -799,6 +799,7 @@ $('.icons1').on('click', function () {
 
 $('.lists').on('click', '.sort_list', function () {
     var that2 = this;
+    
     console.log(that2);
     console.log($(that2).attr('id'));
     var ids = $(that2).attr('id');
@@ -815,7 +816,7 @@ $('.lists').on('click', '.sort_list', function () {
 
     var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">' + ids + '</div><button id ="' + ids + '"  type="button">发消息</button></div>';
 
-    $('.matchtab3 .chatroomcontainer').html(str2);
+    $('.matchtab3 .getmessage').html(str2);
 
 });
 
@@ -836,6 +837,7 @@ $('.matchtab3').on('click', 'button', function () {
     $('#tab3').css({
         display: 'none'
     });
+    $('.matchtab1 .receiveheader').css({display:'block'});
 
     $('.icons .fa-commenting').addClass('greenactive');
     $('.floor3 .fa-users').removeClass('greenactive');
@@ -894,7 +896,7 @@ $('.lists').on('click', '.onlygroupcontainer', function () {
     $(that3).siblings().removeClass('listsactive');
     $(that3).parents('.groups').siblings().find('.sort_list').removeClass('listsactive');
     var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">' + ids + '</div><button data-bid="' + bid + '" id ="' + ids + '"  type="button">发消息</button></div>';
-    $('.matchtab3 .chatroomcontainer').html(str2);
+    $('.matchtab3 .getmessage').html(str2);
     $('.matchtab3 .placesholder').css({
         display: 'none'
     });
@@ -989,7 +991,14 @@ $('.transparent1 .fa-times').on('click', function(){
 
 //处理聊天消息
 
-
+$('.matchtab2').on('click',' .receiveheader .fa-cog',function(event){
+    event.stopPropagation();
+    console.log(this);
+    $('.chatroommanager').css({display:'block'});
+    $(window).on('click',function(){
+        $('.chatroommanager').css({display:'none'});
+    });
+});
 
 
 
