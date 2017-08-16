@@ -977,6 +977,13 @@ body {
 	width: 100%;
     display: none;
     height: 100%;
+    position: relative;
+}
+
+.matchtab1 .placesholder {
+	position: absolute;
+    top: 0;
+    left: 0;
 }
 
 

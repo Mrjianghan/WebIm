@@ -44,6 +44,7 @@ conn.listen({
         $('#tab3').css({
             display: 'none'
         });
+       
 
     },
     onOnline: function () {
@@ -52,7 +53,7 @@ conn.listen({
     }, //本机网络掉线                  
 
     onError: function (message) {
-        //console.log(message);
+        console.log('失败回调'+message);
         console.log("%c 失败回调", 'color:red');
 
     }, //失败回调
@@ -66,8 +67,8 @@ conn.listen({
         console.log(message);
 
         if (gettype == 'chatroom') {
-            console.log(msg_from);
-            console.log(msg_to);
+            //console.log(msg_from);
+            //console.log(msg_to);
             //console.log(delay);
             //console.log(gettype);
 
@@ -79,6 +80,30 @@ conn.listen({
 
 
                 $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
+                
+                
+                var str2 = msg_from +':'+ textcontent;
+                $('.lists [data-nid="'+msg_to+'"].groupcontainer .groupbottomleft').html(str2);
+                
+                
+                function messagetobottom (){
+                    var obj1 = $('.matchtab2  .exists.scrollbar-macosx')[0];
+                    
+                    //var hei = obj1.scrollHeight;
+                    var cli = obj1.clientHeight;
+                    
+                    var hei = $('.matchtab2'+' #'+msg_to+'.everychatroom')[0].scrollHeight;
+                    
+                    //console.log( $('.matchtab2'+' #'+msg_to+'.everychatroom') );
+                    
+                    console.log( hei );
+                    console.log( cli );
+                    $('.matchtab2  .exists.scrollbar-macosx').scrollTop( hei-cli );
+                    
+                }
+                //接收消息滚到最下面
+                messagetobottom();
+                
 
 
             }
@@ -779,10 +804,49 @@ $('.iconcenter').on('click', function () {
     } else {
         /*$('.sendmessage').css({display:'none'});*/
     }
+    
+    console.log($('#tab2 .chatrooms'));
+    console.log( $('#tab2 .chatrooms').html()=='' );
+    var outer = $('.lists.scroll-content')[0];
+    console.log(outer);
+    var cli1 = $('.lists.scroll-content')[0].clientHeight;
+    var hei1 = $('.lists.scroll-content')[0].scrollHeight;
+    
+    
+    $('.lists.scroll-content').on('scroll',function(){
+        var jqtop1 = $('.lists.scroll-content').scrollTop();
+        console.log( jqtop1 );
+    });
 
 
 });
 //切换加载
+
+//AJAX加载聊天室列表
+
+
+
+
+
+
+//AJAX加载聊天室列表
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $('.icons1').on('click', function () {
     var str = '<img class="firstscreen" src="imgs/u13.png">';
@@ -1015,6 +1079,7 @@ $('.lists').on('click', '.chatcontainer', function () {
     //console.log(ids);
 
     //$('.send').attr('id',ids);
+    $('.writein').val('');
 
     $('.matchtab2 .placesholder').css({
         display: 'none'
@@ -1236,13 +1301,18 @@ $('.receivemessage').on('click', '.joinchatroom', function () {
 
 
 
-
+//tab1下点击事件
 $('.lists').on('click', '.groupcontainer', function (event) {
     var that4 = this;
     $(that4).addClass('listsactive');
     $(that4).siblings().removeClass('listsactive');
 
 });
+
+
+
+//tab1下点击事件
+
 
 $('.lists').on('contextmenu', '.groupcontainer', function (event) {
     var that5 = this;

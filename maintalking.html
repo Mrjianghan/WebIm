@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="js/vue.js"></script>
         <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/jquery.scrollbar.css">
         <link rel="stylesheet" href="css/talkingstyle.css">
@@ -33,7 +34,7 @@
                 <h4 class="h1">没有账号,<a class="a1" href="javascript:;">现在注册</a></h4>
                 <h4 class="h2 hide">已有账号,<a class="a2" href="javascript:;">登录</a></h4>
         </div>
-        <div class="containermain">
+        <div id="firstvue" class="containermain">
             
             <div class="clearmessages">清屏</div>
             
@@ -172,28 +173,21 @@
                 <div class="receivemessage">
                     <div class="matchtab1">
                         <div class="slideinfo scrollbar-macosx">
-                        <div class="slidecontainer">
+                            <div class="slidecontainer">
+                            </div>
                         </div>
-                        <!--<button class="quitchatroom" type="button">退出该聊天室</button>-->
-                        </div><!--点击滑出来-->
                         
-                        <div class="placesholder"></div>
+                        <div class="placesholder">
+                            
+                        </div>
+                        <div class="specialcontainerouter">
+                            <div class="headers">
+                            </div>
+                            <div class="exists scrollbar-macosx">
+                            </div>
+                        </div><!--specialcontainerouter-->
                         
-                        <div class="getmessage">
-                            <div class="receiveheader">
-                                <div class="headername">
-                                    <!--momoclo1<span></span><i class="fa fa-caret-down"></i>-->
-                                </div>
-                                <i class="fa fa-cog"></i>
-                                <div class="clearfix"></div>
-                            </div><!--receiveheader-->
-                            <div class="personalcontainer">
-                                <div class="messagecontents scrollbar-macosx">
-                                    <div class="chatroomcontainer">
-                                    </div>
-                                </div>
-                            </div><!--personalcontainer-->    
-                        </div><!--getmessage-->
+                        
                         
                     </div><!--match1-->
                     <div class="matchtab2">
@@ -215,39 +209,10 @@
                         </div>
                         <div class="specialcontainerouter">
                             <div class="headers">
-                               <!--<div class="receiveheader">
-                                    <div class="headername">
-                                    </div>
-                                    <i class="fa fa-cog"></i>
-                                    <div class="clearfix"></div>
-                                </div>-->
                             </div>
-                            
                             <div class="exists scrollbar-macosx">
-                                
-                                
-                                
-                                
-                                
                             </div>
-                            
-                            
-                            
-                            
                         </div><!--specialcontainerouter-->
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                     </div><!--match2-->
                     
@@ -301,6 +266,7 @@
         <!--[if lte IE 9]>
         <script src="swfupload/swfupload.min.js"></script>
         <![endif]-->
+        <script src="js/importvue.js"></script>
         <script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
         <script src="Config_JS/websdk-1.4.11.js"></script>
@@ -316,6 +282,7 @@
         <script src="js/emoji.js"></script>
         <script src="js/webim.js"></script>
         <script src="js/jquery.charfirst.pinyin.js"></script>
-        <!--<script src="js/sort.js"></script>-->
+        
+        
     </body>
 </html>
