@@ -64,7 +64,7 @@ conn.listen({
         var msg_from = message.from;
         var textcontent = message.data;
         var delay = message.delay;
-        console.log(message);
+        //console.log(message);
 
         if (gettype == 'chatroom') {
             //console.log(msg_from);
@@ -76,10 +76,12 @@ conn.listen({
                 
 
 
-                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor">转发</div><div class="message1">删除</div></div></div></div>';
+                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
 
 
                 $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
+                
+                
                 
                 
                 var str2 = msg_from +':'+ textcontent;
@@ -93,19 +95,10 @@ conn.listen({
                     var cli = obj1.clientHeight;
                     
                     var hei = $('.matchtab2'+' #'+msg_to+'.everychatroom')[0].scrollHeight;
-                    
-                    //console.log( $('.matchtab2'+' #'+msg_to+'.everychatroom') );
-                    
-                    console.log( hei );
-                    console.log( cli );
                     $('.matchtab2  .exists.scrollbar-macosx').scrollTop( hei-cli );
-                    
                 }
                 //接收消息滚到最下面
                 messagetobottom();
-                
-
-
             }
 
 
@@ -139,7 +132,7 @@ conn.listen({
 
     onAudioMessage: function (message) {
 
-        console.log('audio');
+        //console.log('audio');
 
     }, //收到音频消息
 
@@ -453,7 +446,7 @@ var listRooms = function () {
     var option = {
         apiUrl: 'https://a1.easemob.com',
         pagenum: 1, // 页数
-        pagesize: 20, // 每页个数
+        pagesize: 50, // 每页个数
         success: function (list) {
             //console.log(list);
             var i = 0;
@@ -474,6 +467,21 @@ var listRooms = function () {
     conn.getChatRooms(option);
 };
 //获取聊天室 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //获取聊天室列表
@@ -790,6 +798,45 @@ $('.icons3').on('click', function () {
 
 
 
+
+
+
+var listRooms2 = function () {
+    var option = {
+        apiUrl: 'https://a1.easemob.com',
+        pagenum: 2, // 页数
+        pagesize: 100, // 每页个数
+        success: function (list) {
+            //console.log(list);
+            var i = 0;
+            var str = '';
+            for (i in list.data) {
+                let name2 = list.data[i].name;
+                //console.log(name2);
+                let ids = list.data[i].id;
+                //console.log(ids);
+                str = str + '<div id="' + name2 + '" class="chatcontainer"><img class=' + ids + ' src="imgs/group-1.jpg"><div class="onlyname">' + name2 + '</div><div class="clearfix"></div></div>';
+            };
+            $('.chatrooms').html(str);
+            
+            return false;
+            
+        },
+        error: function () {
+            console.log('List chat room error');
+        }
+    };
+    conn.getChatRooms(option);
+};
+
+
+
+
+
+
+
+
+
 //切换加载
 
 $('.iconcenter').on('click', function () {
@@ -805,44 +852,116 @@ $('.iconcenter').on('click', function () {
         /*$('.sendmessage').css({display:'none'});*/
     }
     
-    console.log($('#tab2 .chatrooms'));
-    console.log( $('#tab2 .chatrooms').html()=='' );
+    //console.log($('#tab2 .chatrooms'));
+    //console.log( $('#tab2 .chatrooms').html()=='' );
     var outer = $('.lists.scroll-content')[0];
-    console.log(outer);
-    var cli1 = $('.lists.scroll-content')[0].clientHeight;
-    var hei1 = $('.lists.scroll-content')[0].scrollHeight;
+    //console.log(outer);
     
     
+    
+    //AJAX加载聊天室列表
+
+
     $('.lists.scroll-content').on('scroll',function(){
         var jqtop1 = $('.lists.scroll-content').scrollTop();
-        console.log( jqtop1 );
+        var cli2 = $('.lists.scroll-content')[0].clientHeight;
+        var hei2 = $('.lists.scroll-content')[0].scrollHeight;
+        //console.log( cli2 );
+        //console.log( hei2 );
+        if ( jqtop1 == hei2-cli2 ){
+            listRooms2();
+            //有问题暂时保留
+        }
     });
 
-
+    //AJAX加载聊天室列表
+    
 });
 //切换加载
 
-//AJAX加载聊天室列表
+
+
+//发送消息
+
+
+
+
+$('.send').on('click',function(){
+    
+    
+    
+    function messagetobottom (){
+        var obj1 = $('.matchtab2  .exists.scrollbar-macosx')[0];
+        
+        var cli = obj1.clientHeight;
+                    
+        var hei = $('.matchtab2'+' #'+chatroomid+'.everychatroom')[0].scrollHeight;
+                    
+        //console.log( $('.matchtab2'+' #'+msg_to+'.everychatroom') );
+                    
+        //console.log( hei );
+        //console.log( cli );
+        $('.matchtab2  .exists.scrollbar-macosx').scrollTop( hei-cli );
+                    
+    };
+    
+    
+    
+    
+    var mes1 = $('.writein.scrollbar-macosx')[1].value;
+    if ( mes1!='' ){
+        
+        var chatroomid = $('.send').attr('id');
+        var sendRoomText = function () {
+            var id = conn.getUniqueId();         // 生成本地消息id
+            var msg = new WebIM.message('txt', id); // 创建文本消息
+            var option = {
+                msg: mes1,          // 消息内容
+                to: chatroomid,               // 接收消息对象(聊天室id)
+                roomType: true,
+                chatType: 'chatRoom',
+                success: function () {
+                    console.log('send room text success');
+                    var str1 = '<div id="' + mes1 + '" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="rightpic"><div class=" messagecontent messagecontent2">' + mes1 + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor">转发</div><div class="message1">删除</div></div></div></div>';
+
+
+                    $('.matchtab2  #'+chatroomid+'.everychatroom  .mainmessagecontainer1').append(str1);
+                    $('.writein.scrollbar-macosx').val('');
+                    messagetobottom();
+
+
+                    var str2 = mes1;
+                    $('.lists [data-nid="'+ chatroomid +'"].groupcontainer .groupbottomleft').html(str2);
+
+
+
+                },
+                fail: function () {
+                    console.log('failed');
+                }
+            };
+            msg.set(option);
+            msg.setGroup('groupchat');
+            conn.send(msg.body);
+        };
+        if ( $('.matchtab2 '+'#'+chatroomid+'.everychatroom'+'  .mainmessagecontainer1').css('display') == 'block' ) {
+            sendRoomText();
+        }
+    }
+});
 
 
 
 
 
 
-//AJAX加载聊天室列表
 
 
 
 
 
 
-
-
-
-
-
-
-
+//发送消息
 
 
 
@@ -943,10 +1062,8 @@ $('.matchtab3').on('click', 'button', function () {
         var str3 = '';
         str3 = str3 + '<div data-nid="' + cid + '" id="' + ids + '" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
         $('.allchatmessages').prepend(str3);
-
         $('[data-nid="' + cid + '"]').siblings().removeClass('listsactive');
     }
-
 });
 
 
@@ -1010,9 +1127,9 @@ $('.clearmessages').on('click',function(){
 //处理聊天消息
 
 $('.matchtab2').on('click','.messagecontent',function(event){
-    console.log(event);
+    //console.log(event);
     event.stopPropagation();
-    console.log(this);
+    //console.log(this);
     
     //console.log($(this).html());
     $(this).parents('.messagecontainer').find('.messagecontrol').css({display:'block'});
@@ -1040,9 +1157,331 @@ $('.matchtab2').on('click','.message1:last-child',function(){
     $(this).parents('.messagecontainer').remove();
     
 });
+
+
+
+var listGroups3 = function () {
+    var option = {
+        success: function (rooms) {
+            //console.log(rooms);
+            var str5 = '';
+            for (var i in rooms) {
+                //console.log(rooms[i].roomId);
+                var groupnames = rooms[i].name;
+                var groupnumber = rooms[i].roomId;
+                str5 = str5 + '<div data-id="' + groupnumber + '" id="' + groupnames + '" class="onlygroupcontainer"><input class="groupcheck" type="checkbox" value="'+ groupnames +'"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
+                
+            }
+           
+            $('.transparent1 .groupcontainer2').append(str5);
+            
+            $('input.groupcheck').attr('v-model',"list");
+            
+
+
+
+
+
+        },
+        error: function () {
+            console.log('List chat rooms error');
+        }
+    };
+    conn.listRooms(option);
+
+
+};
+//获取已加入的群组
+
+
+
+var getRoasters4 = function () {
+    var option = {
+        success: function (roster) {
+            var str3 = '';
+            var o;
+            var l = roster.length;
+            for (o = 0; o < l; o++) {
+                var names = roster[o].name;
+                if (names != 'undefined') {
+                    //console.log(names);
+                    /*str3 = str3 + '<div id="'+ names +'" class="onlyfriendcontainer"><img src="imgs/zhaoyun-1.jpg"><div class="onlyname">' + names + '</div><div class="clearfix"></div></div>';*/
+                    str3 = str3 + '<div id = "' + names + '" class="sort_list"><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">' + names + '</div></div>';
+                };
+            } //for 循环
+
+            $('.friends .sort_box').html(str3);
+
+
+
+
+            function makePy(str) {
+                if (typeof (str) != "string")
+                    throw new Error(-1, "函数makePy需要字符串类型参数!");
+                var arrResult = new Array(); //保存中间结果的数组  
+                for (var i = 0, len = str.length; i < len; i++) {
+                    //获得unicode码  
+                    var ch = str.charAt(i);
+                    //检查该unicode码是否在处理范围之内,在则返回该码对映汉字的拼音首字母,不在则调用其它函数处理  
+                    arrResult.push(checkCh(ch));
+                }
+                //处理arrResult,返回所有可能的拼音首字母串数组  
+                return mkRslt(arrResult);
+            }
+
+            function checkCh(ch) {
+                var uni = ch.charCodeAt(0);
+                //如果不在汉字处理范围之内,返回原字符,也可以调用自己的处理函数  
+                if (uni > 40869 || uni < 19968)
+                    return ch; //dealWithOthers(ch);  
+                //检查是否是多音字,是按多音字处理,不是就直接在strChineseFirstPY字符串中找对应的首字母  
+                return (oMultiDiff[uni] ? oMultiDiff[uni] : (strChineseFirstPY.charAt(uni - 19968)));
+            }
+
+            function mkRslt(arr) {
+                var arrRslt = [""];
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    var str = arr[i];
+                    var strlen = str.length;
+                    if (strlen == 1) {
+                        for (var k = 0; k < arrRslt.length; k++) {
+                            arrRslt[k] += str;
+                        }
+                    } else {
+                        var tmpArr = arrRslt.slice(0);
+                        arrRslt = [];
+                        for (k = 0; k < strlen; k++) {
+                            //复制一个相同的arrRslt  
+                            var tmp = tmpArr.slice(0);
+                            //把当前字符str[k]添加到每个元素末尾  
+                            for (var j = 0; j < tmp.length; j++) {
+                                tmp[j] += str.charAt(k);
+                            }
+                            //把复制并修改后的数组连接到arrRslt上  
+                            arrRslt = arrRslt.concat(tmp);
+                        }
+                    }
+                }
+                return arrRslt;
+            }
+
+
+
+
+
+
+
+
+            $(function () {
+                var Initials = $('.initials');
+                var LetterBox = $('#letter');
+                Initials.find('ul').append('<li>A</li><li>B</li><li>C</li><li>D</li><li>E</li><li>F</li><li>G</li><li>H</li><li>I</li><li>J</li><li>K</li><li>L</li><li>M</li><li>N</li><li>O</li><li>P</li><li>Q</li><li>R</li><li>S</li><li>T</li><li>U</li><li>V</li><li>W</li><li>X</li><li>Y</li><li>Z</li><li>#</li>');
+                initials();
+
+                $(".initials ul li").click(function () {
+                    var _this = $(this);
+                    var LetterHtml = _this.html();
+                    LetterBox.html(LetterHtml).fadeIn();
+
+                    Initials.css('background', 'rgba(145,145,145,0.6)');
+
+                    setTimeout(function () {
+                        Initials.css('background', 'rgba(145,145,145,0)');
+                        LetterBox.fadeOut();
+                    }, 1000);
+
+                    var _index = _this.index()
+                    if (_index == 0) {
+                        $('html,body').animate({
+                            scrollTop: '0px'
+                        }, 300); //点击第一个滚到顶部
+                    } else if (_index == 27) {
+                        var DefaultTop = $('#default').position().top;
+                        $('html,body').animate({
+                            scrollTop: DefaultTop + 'px'
+                        }, 300); //点击最后一个滚到#号
+                    } else {
+                        var letter = _this.text();
+                        if ($('#' + letter).length > 0) {
+                            var LetterTop = $('#' + letter).position().top;
+                            $('html,body').animate({
+                                scrollTop: LetterTop - 45 + 'px'
+                            }, 300);
+                        }
+                    }
+                })
+
+                var windowHeight = $(window).height();
+                var InitHeight = windowHeight - 45;
+                Initials.height(InitHeight);
+                var LiHeight = InitHeight / 28;
+                Initials.find('li').height(LiHeight);
+            })
+
+            function initials() { //公众号排序
+                var SortList = $(".sort_list");
+                var SortBox = $(".sort_box");
+                SortList.sort(asc_sort).appendTo('.sort_box'); //按首字母排序
+                function asc_sort(a, b) {
+                    return makePy($(b).find('.num_name').text().charAt(0))[0].toUpperCase() < makePy($(a).find('.num_name').text().charAt(0))[0].toUpperCase() ? 1 : -1;
+                }
+
+                var initials = [];
+                var num = 0;
+                SortList.each(function (i) {
+                    var initial = makePy($(this).find('.num_name').text().charAt(0))[0].toUpperCase();
+                    if (initial >= 'A' && initial <= 'Z') {
+                        if (initials.indexOf(initial) === -1)
+                            initials.push(initial);
+                    } else {
+                        num++;
+                    }
+
+                });
+
+                $.each(initials, function (index, value) { //添加首字母标签
+                    SortBox.append('<div class="sort_letter" id="' + value + '">' + value + '</div>');
+                });
+                if (num != 0) {
+                    SortBox.append('<div class="sort_letter" id="default">#</div>');
+                }
+
+                for (var i = 0; i < SortList.length; i++) { //插入到对应的首字母后面
+                    var letter = makePy(SortList.eq(i).find('.num_name').text().charAt(0))[0].toUpperCase();
+                    switch (letter) {
+                        case "A":
+                            $('#A').after(SortList.eq(i));
+                            break;
+                        case "B":
+                            $('#B').after(SortList.eq(i));
+                            break;
+                        case "C":
+                            $('#C').after(SortList.eq(i));
+                            break;
+                        case "D":
+                            $('#D').after(SortList.eq(i));
+                            break;
+                        case "E":
+                            $('#E').after(SortList.eq(i));
+                            break;
+                        case "F":
+                            $('#F').after(SortList.eq(i));
+                            break;
+                        case "G":
+                            $('#G').after(SortList.eq(i));
+                            break;
+                        case "H":
+                            $('#H').after(SortList.eq(i));
+                            break;
+                        case "I":
+                            $('#I').after(SortList.eq(i));
+                            break;
+                        case "J":
+                            $('#J').after(SortList.eq(i));
+                            break;
+                        case "K":
+                            $('#K').after(SortList.eq(i));
+                            break;
+                        case "L":
+                            $('#L').after(SortList.eq(i));
+                            break;
+                        case "M":
+                            $('#M').after(SortList.eq(i));
+                            break;
+                        case "O":
+                            $('#O').after(SortList.eq(i));
+                            break;
+                        case "P":
+                            $('#P').after(SortList.eq(i));
+                            break;
+                        case "Q":
+                            $('#Q').after(SortList.eq(i));
+                            break;
+                        case "R":
+                            $('#R').after(SortList.eq(i));
+                            break;
+                        case "S":
+                            $('#S').after(SortList.eq(i));
+                            break;
+                        case "T":
+                            $('#T').after(SortList.eq(i));
+                            break;
+                        case "U":
+                            $('#U').after(SortList.eq(i));
+                            break;
+                        case "V":
+                            $('#V').after(SortList.eq(i));
+                            break;
+                        case "W":
+                            $('#W').after(SortList.eq(i));
+                            break;
+                        case "X":
+                            $('#X').after(SortList.eq(i));
+                            break;
+                        case "Y":
+                            $('#Y').after(SortList.eq(i));
+                            break;
+                        case "Z":
+                            $('#Z').after(SortList.eq(i));
+                            break;
+                        default:
+                            $('#default').after(SortList.eq(i));
+                            break;
+                    }
+                };
+            }
+
+
+
+
+
+
+
+
+
+        } //success
+
+    }; //option
+
+    conn.getRoster(option);
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //转发消息
 $('.matchtab2').on('click','.message1:nth-child(2)',function(){
     $('.transparent1').css({display:'block'});
+    
+    //listGroups3();
+    
+    
+    //getRoasters3();
+    
+    $('.transferselect.scroll-content').html();
 });
 
 
@@ -1214,8 +1653,8 @@ $('.receivemessage').on('click', '.joinchatroom', function () {
 
     var ids = $(that3).attr('id');
     var name = $(that3).attr('data-id');
-    console.log(ids);
-    console.log(name);
+    //console.log(ids);
+    //console.log(name);
     
     var joinRoom = function () {
         // 加入聊天室

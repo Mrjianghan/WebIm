@@ -932,12 +932,47 @@ body {
     border: 1px solid #d7d7d7;
     display: block;
 }
+.groupcontainer2 {
+    width: 100%;
+    height: auto;
+}
+.friendcontainer2 {
+    width: 100%;
+    height: auto;
+}
 
+.groupcontainer2 .onlygroupcontainer {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d7d7d7;
+    padding-left: 20px;
+}
+.groupcontainer2 .onlygroupcontainer img {
+    width: 15%;
+    display: block;
+    float: left;
+    border-radius: 5px;
+}
 
-
-
-
-
+.groupcontainer2  .onlyname {
+    height: 47px;
+    width: 50%;
+    line-height: 47px;
+    float: left;
+    margin-left: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.groupcheck {
+    display: block;
+    float: left;
+    margin-top: 19px;
+    margin-right: 20px;
+}
 
 
 
@@ -1124,6 +1159,9 @@ body {
     margin-top: 10px;
     position: relative;
 }
+
+
+
 .leftpic {
     width: 50px;
     border-radius: 5px;
@@ -1132,6 +1170,15 @@ body {
     box-sizing: border-box;
     float: left;
     margin-right: 15px;
+}
+.rightpic {
+    width: 50px;
+    border-radius: 5px;
+    
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: right;
+    margin-left: 15px;
 }
 .nickname1 {
     width: 85%;
@@ -1152,7 +1199,9 @@ body {
     position: relative;
     max-width: 65%;
     word-wrap: break-word;
+    min-height: 50px;
 }
+
 .messagecontent1:after {
     content: '';
     position: absolute;
@@ -1162,6 +1211,33 @@ body {
     height: 0;
     border: 8px solid transparent;
     border-right-color: #a4dfa4;
+}
+.messagecontent2 {
+	float: right;
+    background-color: #5edf65;
+    padding-left: 15px;
+    padding-right: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #5edf65;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 65%;
+    word-wrap: break-word;
+    min-height: 50px;
+}
+
+.messagecontent2:after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 16px;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-left-color: #5edf65;
 }
 
 .clearmessages {
@@ -1186,7 +1262,7 @@ body {
     position: fixed;
     background-color: #f7fdff;
     border-radius: 10px;
-    display: none;
+    display:none;
     z-index: 201;
     border: 1px solid #d7d7d7;
 }
