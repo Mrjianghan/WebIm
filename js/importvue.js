@@ -2,41 +2,37 @@ var vm = new Vue({
     el:"#firstvue",
     data:{
         list:[],
-        arr1:[],
-        groupnames:'',
-        groupnumber:'',
-        htmlall:'',
+        room:'',
+        index:{},
     },
     methods:{
         showorhide:function(){
-           return false; 
+           return this.list.length; 
         },
         listGroups3:function(){
+            var bridge;
+            var ano;
             var option = {
                 success: function (rooms) {
-                    //console.log(rooms);
-                    for (var i in rooms) {
-
-                        this.groupnames = rooms[i].name;
-                        this.groupnumber = rooms[i].roomId;
-                        
-                        
-                        
-
-                    }
+                    console.log(rooms);
+                    
                 },
                 error: function () {
                     console.log('List chat rooms error');
                 }
             };
             conn.listRooms(option);
+        },
+        check:function(){
+            if ( $('.transparent1 .groupcontainer2 input').is(":checked") ){
+                $('.confirm2').css({backgroundColor:'rgb(39, 134, 5)'});
+                $('.confirm2').prop({"disabled":false});
+            }else {
+                $('.confirm2').css({backgroundColor:'#a1a1a1'});
+                $('.confirm2').prop({"disabled":true});
+            }
             
         },
-        ale:function(){
-            alert('hi');
-        }
-        
-        
     },
         
            

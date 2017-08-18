@@ -59,9 +59,9 @@
                     </div>
                     <div class="transferselect scrollbar-macosx">
                         
-                        <div class="groupcontainer2" v-for="">
-                            <template>
-                                <div data-id="groupnumber" id="{{groupnames}}" class="onlygroupcontainer"><input class="groupcheck" @click="ale()" type="checkbox" value="'+ groupnames +'"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>
+                        <div class="groupcontainer2">
+                            <template v-for="index in list">
+                                <div :data-id="index" :id="room" class="onlygroupcontainer"><input class="groupcheck" type="checkbox" :value="index" @change="check()"  v-model="list"  ><img src="imgs/group-1.jpg"><div class="onlyname">{{index}}</div><div class="clearfix"></div></div>
                             </template> 
                             
                             
@@ -69,7 +69,7 @@
                         <div class="friendcontainer2">
                         </div>
                     </div>
-                    <button class="confirm2" disabled>确定<span v-if="showorhide()">{{ list.length }}</span></button>
+                    <button class="confirm2" disabled>确定<span v-if="showorhide()">({{ list.length }})</span></button>
                 </div>
             </div>
             
@@ -136,7 +136,7 @@
                                 </div>
                             </div><!--infoslidemenu-->
                             <div class="username">罗宾汉</div>
-                            <i class="fa fa-bars"></i>
+                            <i @click="listGroups3()" class="fa fa-bars"></i>
                             <div class="slidedownmenu">
                                 <ul>
                                     <li><i class="fa fa-comment-o"></i>&nbsp;发起聊天</li>

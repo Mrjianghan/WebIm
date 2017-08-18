@@ -1006,8 +1006,8 @@ $('.lists').on('click', '.sort_list', function () {
 $('.matchtab3').on('click', 'button', function () {
     console.log(this);
     var that4 = this;
-    var ids = $(that4).attr('id');
-    var cid = $(that4).attr('data-bid');
+    var ids = $(that4).attr('id');//名字 
+    var cid = $(that4).attr('data-bid');//数字
     $('.matchtab3').css({
         display: 'none'
     });
@@ -1020,24 +1020,28 @@ $('.matchtab3').on('click', 'button', function () {
     $('#tab3').css({
         display: 'none'
     });
-    $('.matchtab1 .receiveheader').css({display:'block'});
+   
 
     $('.icons .fa-commenting').addClass('greenactive');
+    
+    
     $('.floor3 .fa-users').removeClass('greenactive');
+    
+    
     $('.matchtab1 .placesholder').css({
         display: 'none'
     });
-    $('.matchtab1 .getmessage').css({
-        display: 'block'
-    });
+    
     $('.sendmessage').css({
         display: 'block'
     });
-    $('.matchtab1 .headername').html(ids);
+    
+    
+    $('.send').attr('id',cid);
 
-
-
-
+    
+        
+    
 
 
 
@@ -1052,9 +1056,29 @@ $('.matchtab3').on('click', 'button', function () {
 
         $('.allchatmessages').prepend(str2);
 
-        //$('#'+ids).siblings().removeClass('listsactive');
-
         $('[data-nid="' + cid + '"]').siblings().removeClass('listsactive');
+        
+        
+        
+        var str4 ='';
+        
+        str4 = str4 + '<div data-id="' + ids + '" id="' + cid + '" class="receiveheader"><div class="headername">' + ids + '</div><i class="fa fa-cog"></i><div class="clearfix"></div></div>';
+        
+        
+        $('.matchtab1 .headers').prepend(str4);
+        
+        $('.matchtab1 #' + cid + '.receiveheader').css({display:'block'});
+        $('.matchtab1 #'+ cid + '.receiveheader').siblings().css({display:'none'});
+        
+        var str5 = '<div id="' + cid + '" class="everychatroom"><div class="chatroominfo"></div><div class="mainmessagecontainer1"></div></div>';
+        
+        $('.matchtab1 .exists.scroll-content').prepend(str5);
+        
+        $('.matchtab1 #' + cid + '.everychatroom').css({display:'block'});
+        $('.matchtab1 #'+ cid + '.everychatroom').siblings().css({display:'none'});
+        
+        
+        
 
 
     } else {
@@ -1156,11 +1180,14 @@ $('.matchtab2').on('click','.message1:last-child',function(){
     console.log( $(this).parents('.messagecontainer') );
     $(this).parents('.messagecontainer').remove();
     
+    
+    
+    
 });
 
 
 
-var listGroups3 = function () {
+/*var listGroups3 = function () {
     var option = {
         success: function (rooms) {
             //console.log(rooms);
@@ -1190,7 +1217,7 @@ var listGroups3 = function () {
     conn.listRooms(option);
 
 
-};
+};*/
 //获取已加入的群组
 
 
@@ -1340,7 +1367,7 @@ var getRoasters4 = function () {
                 });
 
                 $.each(initials, function (index, value) { //添加首字母标签
-                    SortBox.append('<div class="sort_letter" id="' + value + '">' + value + '</div>');
+                    SortBox.append('<div class="sort_letter" data-nid="'+  +'" id="' + value + '">' + value + '</div>');
                 });
                 if (num != 0) {
                     SortBox.append('<div class="sort_letter" id="default">#</div>');
@@ -1482,7 +1509,13 @@ $('.matchtab2').on('click','.message1:nth-child(2)',function(){
     //getRoasters3();
     
     $('.transferselect.scroll-content').html();
+    
+    
+    
 });
+
+
+ 
 
 
 $('.transparent1 .fa-times').on('click', function(){
@@ -1668,10 +1701,10 @@ $('.receivemessage').on('click', '.joinchatroom', function () {
     
 
 
-    $('#' + ids + '.receiveheader').css({
+    $('.matchtab2  #' + ids + '.receiveheader').css({
         display: 'block'
     });
-    $('#' + ids + '.receiveheader').siblings().css({
+    $('.matchtab2  #' + ids + '.receiveheader').siblings().css({
         display: 'none'
     });
 
@@ -1745,8 +1778,27 @@ $('.lists').on('click', '.groupcontainer', function (event) {
     var that4 = this;
     $(that4).addClass('listsactive');
     $(that4).siblings().removeClass('listsactive');
+    
+    var idnumber = $(this).attr('data-nid');
+    var idname = $(this).attr('id');
+    console.log( idnumber );
+    console.log( idname );
+    $('.send').attr('id',idnumber);
+    
+    $('.matchtab1 '+'#'+idnumber+'.receiveheader').css({display:'block'});
+    
+    
+    $('.matchtab1 '+'#'+idnumber+'.receiveheader').siblings().css({display:'none'});
+    
+    
+    
+    
+    $('.matchtab1 '+'#'+idnumber+'.everychatroom').css({display:'block'});
+    
+    $('.matchtab1 '+'#'+idnumber+'.everychatroom').siblings().css({display:'none'});
 
 });
+
 
 
 
@@ -1824,6 +1876,13 @@ $('.listscontronller .contronller:nth-child(2)').on('click', function () {
 
 
 //删除置顶按钮
+
+
+
+
+
+
+
 
 //点击锯齿
 var target1 = 2;
