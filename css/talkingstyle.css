@@ -498,6 +498,14 @@ body {
     margin-top: 15px;
     cursor: pointer;
 }
+.receiveheader .fa-plus {
+	height: 50px;
+    font-size: 25px;
+    display: block;
+    float: right;
+    margin-top: 15px;
+    cursor: pointer;
+}
 
 
 
@@ -523,6 +531,12 @@ body {
     display: block;
     width: 60%;
     margin: 0 auto;
+}
+
+
+.groupmember3 {
+    width: 100%;
+    height: 120px;
 }
 
 
@@ -618,8 +632,31 @@ body {
 }
 
 
-
-
+.changegroupinfo {
+    background-color: #fff;
+    border: 1px solid pink;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -200px;
+    z-index: 320;
+    display: none;
+}
+.changegroup1 {
+    width: 80%;
+    height: 100px;
+    
+}
+.changegroup2 {
+    width: 80%;
+    height: 100px;
+    
+}
 
 
 
@@ -1022,6 +1059,110 @@ body {
     left: 0;
 }
 
+.slidecontainer {
+    width: 100%;
+    height: auto;
+}
+
+.plushumans {
+	width: 60px;
+    height: 60px;
+    background: #fff;
+    float: left;
+    margin-left: 11px;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+}
+.plushumans .fa-plus {
+	font-size: 24px;
+}
+
+.close1 {
+    float: right;
+    margin-right: 20px;
+}
+.close1 .fa.fa-times {
+    font-size: 20px;
+    font-weight: lighter;
+    cursor: pointer;
+    color: #f90606;
+}
+.tab1peoples {
+    width: 90%;
+    margin: 0 auto;
+}
+.peoplesinfo {
+    position: absolute;
+    height: 333px;
+    width: 222px;
+    z-index: 330;
+    border-radius: 10px;
+    background-color: #fff;
+    
+}
+.showinfopic {
+    width: 100%;
+    border-radius: 10px;
+}
+.showinfoname {
+    width: 100%;
+    height: 110px;
+    line-height: 110px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+
+
+
+.slidepeople {
+    width: 60px;
+    height: 80px;
+    float: left;
+    margin-right: 11px;
+    margin-left: 11px;
+    margin-bottom: 10px;
+}
+.slidepic {
+	width: 60px;
+}
+.slidename {
+	width: 100%;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.groupmaster {
+    width: 60px;
+    height: 80px;
+    float: left;
+    margin-right: 11px;
+    margin-left: 11px;
+    margin-bottom: 10px;
+}
+.groupmaster-pic {
+	width: 60px;
+}
+.groupmaster-name {
+	width: 100%;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
 
 
 .justname {
@@ -1138,6 +1279,58 @@ body {
 .matchtab3 .justtowatch {
 	margin-top: 150px;
 }
+
+
+.groupmanager1 {
+	position: absolute;
+    right: 70px;
+    top: 30px;
+    display: none;
+    height: 100px;
+    width: 160px;
+    background-color: #f7fdff;
+    z-index: 300;
+    border-radius: 10px;
+    border: 1px solid #d7d7d7;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.gmanagers {
+    height: 33.3%;
+    line-height: 33.3px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+}
+.gmanagers:hover {
+    color: #371e6a;
+}
+.gmanager1 {
+    border-bottom: 1px solid #d7d7d7;
+}
+.gmanager2 {
+    border-bottom: 1px solid #d7d7d7;
+}
+.groupmanager1 .fa {
+	font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

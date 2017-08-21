@@ -34,7 +34,14 @@
                 <h4 class="h1">没有账号,<a class="a1" href="javascript:;">现在注册</a></h4>
                 <h4 class="h2 hide">已有账号,<a class="a2" href="javascript:;">登录</a></h4>
         </div>
-        <div id="firstvue" class="containermain">
+        <div id="firstvue" class="containermain" @click="clear">
+            
+            <div class="changegroupinfo">
+                
+                <input type="text" class="changegroup1">
+                <input type="text" class="changegroup2">
+                <button type="button">确定</button>
+            </div>
             
             <div class="clearmessages">清屏</div>
             
@@ -61,7 +68,7 @@
                         
                         <div class="groupcontainer2">
                             <template v-for="index in list">
-                                <div :data-id="index" :id="room" class="onlygroupcontainer"><input class="groupcheck" type="checkbox" :value="index" @change="check()"  v-model="list"  ><img src="imgs/group-1.jpg"><div class="onlyname">{{index}}</div><div class="clearfix"></div></div>
+                                <div :data-id="index.roomId" :id="index.name" class="onlygroupcontainer" ><input class="groupcheck" type="checkbox" :value="index.roomId" @change="check()"  v-model="list2"><img src="imgs/group-1.jpg"><div class="onlyname">{{ index.name }}</div><div class="clearfix"></div></div>
                             </template> 
                             
                             
@@ -69,7 +76,7 @@
                         <div class="friendcontainer2">
                         </div>
                     </div>
-                    <button class="confirm2" disabled>确定<span v-if="showorhide()">({{ list.length }})</span></button>
+                    <button class="confirm2" disabled>确定<span v-if="showorhide()">({{ list2.length }})</span></button>
                 </div>
             </div>
             
@@ -154,7 +161,7 @@
                         <div class="floor3">
                             <a href="#tab1"><div class=" icons1 icons"><i class="fa fa-commenting greenactive"></i></div></a>
                             <a href="#tab2"><div class="icons iconcenter"><i class="fa fa-book"></i></div></a>
-                            <a href="#tab3"><div class="icons3 icons"><i class="fa fa-users"></i></div></a>
+                            <a href="#tab3"><div @click="listGroups3()" class="icons3 icons"><i class="fa fa-users"></i></div></a>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -169,7 +176,15 @@
                     <div id="tab3">
                         <div class="groups">
                             <div class="groupself">群组</div>
-                            <div class="groupinner"></div>
+                            <div class="groupinner">
+                                
+                                <template v-for="list2son in list">
+                                    
+                                    <div  v-on:click="queryroommember1($event),querygroupinfo1()" :data-id="list2son.roomId" :id="list2son.name" class="onlygroupcontainer"><img src="imgs/group-1.jpg"><div class="onlyname"> {{ list2son.name }}</div><div class="clearfix"></div></div>
+                                    
+                                </template>
+                                
+                            </div>
                         </div>
                         <div class="friends">
                             <div id="letter"></div>
@@ -180,9 +195,55 @@
             </div>
             <div class="main-right">
                 <div class="receivemessage">
+                    
+                    <div v-show="showinfo" class="peoplesinfo">
+                        <img class="showinfopic" src="imgs/zhaoyun-1.jpg">
+                        <div class="showinfoname"> {{ cardname }} </div>
+                    </div>
+                    
                     <div class="matchtab1">
+                        
+                        <div class="groupmanager1">
+                            <div class="gmanager1 gmanagers">
+                                <i class="fa fa-users"></i>&nbsp;管理群成员
+                            </div>
+                            <div class="gmanager2 gmanagers">
+                                <i class="fa fa-pencil"></i>&nbsp;修改群信息
+                            </div>
+                            <div class="gmanager3 gmanagers">
+                                <i class="fa fa-lock"></i>&nbsp;群禁言
+                            </div>
+                        </div><!--点击弹出来-->
+                        
+                        
+                        
+                        
+                        
                         <div class="slideinfo scrollbar-macosx">
                             <div class="slidecontainer">
+                                <div class="close1">
+                                    <i @click="closethis1" class="fa fa-times"></i>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="tab1peoples">
+                                    <div :data-id="groupmaster" class="groupmaster" @click.stop="showinformation($event)">
+                                        <img class="groupmaster-pic" src="imgs/zhaoyun-1.jpg">
+                                            <div class="groupmaster-name">{{ groupmaster }}
+                                            </div>
+                                    </div>
+                                    <template v-for="name1 in list3">
+                                        
+                                        <div :data-id="name1" class="slidepeople" @click.stop="showinformation($event)">
+                                            <img class="slidepic" src="imgs/zhaoyun-1.jpg">
+                                            <div class="slidename">{{name1}}
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div class="plushumans" @click="addpeople2()">
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
                         </div>
                         
@@ -239,7 +300,8 @@
                         
                         <div class="placesholder"></div>
                         
-                        <div class="getmessage"></div><!--getmessage-->
+                        <div class="getmessage">
+                        </div><!--getmessage-->
                         
                     </div><!--match3-->
                 </div><!--receivemessage-->
@@ -279,9 +341,9 @@
         <script src="js/importvue.js"></script>
         <script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
-        <script src="Config_JS/websdk-1.4.11.js"></script>
+        <script src="Config_JS/websdk-1.4.12.js"></script>
         <script src="Config_JS/adapter.js"></script>
-        <script src="Config_JS/webrtc-1.4.11.js"></script>
+        <script src="Config_JS/webrtc-1.4.12.js"></script>
         
         <script src="js/jquery.scrollbar.min.js"></script>
         <script>

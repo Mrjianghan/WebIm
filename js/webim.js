@@ -229,6 +229,7 @@ var wrapper1 = function () {
         console.log('登录');
         console.log(name);
         $('.username').html(name);
+        $('.username').attr('id',name);
     };
     signin();
 };
@@ -271,6 +272,7 @@ $('.submit').on('click', function () {
                 conn.open(options);
                 console.log('登录');
                 $('.username').html(name);
+                $('.username').attr('id',name);
             };
             signin();
         };
@@ -761,11 +763,6 @@ var listGroups2 = function () {
                 str5 = str5 + '<div data-id="' + groupnumber + '" id="' + groupnames + '" class="onlygroupcontainer"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
             }
             $('.groups .groupinner').html(str5);
-
-
-
-
-
         },
         error: function () {
             console.log('List chat rooms error');
@@ -777,9 +774,22 @@ var listGroups2 = function () {
 };
 //获取已加入的群组
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 $('.icons3').on('click', function () {
     if ($('.groups .sort_box').html() === '' || $('.friends .sort_box').html() === '') {
-        listGroups2();
+        //listGroups2();
         getRoasters3();
         var str = '<img class="firstscreen" src="imgs/u13.png">';
         $('.matchtab3 .placesholder').html(str);
@@ -967,6 +977,15 @@ $('.send').on('click',function(){
 
 
 
+
+
+
+
+
+
+
+
+
 $('.icons1').on('click', function () {
     var str = '<img class="firstscreen" src="imgs/u13.png">';
     $('.matchtab1 .placesholder').html(str);
@@ -1004,7 +1023,7 @@ $('.lists').on('click', '.sort_list', function () {
 });
 
 $('.matchtab3').on('click', 'button', function () {
-    console.log(this);
+    //console.log(this);
     var that4 = this;
     var ids = $(that4).attr('id');//名字 
     var cid = $(that4).attr('data-bid');//数字
@@ -1049,7 +1068,7 @@ $('.matchtab3').on('click', 'button', function () {
 
         //判断是否有重复
 
-        console.log($('.allchatmessages [data-nid="' + cid + '"]').length);
+        //console.log($('.allchatmessages [data-nid="' + cid + '"]').length);
 
         var str2 = '';
         str2 = str2 + '<div data-nid="' + cid + '" id="' + ids + '" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
@@ -1094,13 +1113,12 @@ $('.matchtab3').on('click', 'button', function () {
 
 $('.lists').on('click', '.onlygroupcontainer', function () {
     var that3 = this;
-    console.log(that3);
+    //console.log(that3);
     var ids = $(that3).attr('id');
     var bid = $(that3).attr('data-id');
     $(that3).addClass('listsactive');
-    $(that3).siblings().removeClass('listsactive');
-    $(that3).parents('.groups').siblings().find('.sort_list').removeClass('listsactive');
-    var str2 = '<div class="justtowatch"><img src="imgs/zhaoyun-1.jpg"> <div class="justname">' + ids + '</div><button data-bid="' + bid + '" id ="' + ids + '"  type="button">发消息</button></div>';
+    $(that3).siblings().removeClass('listsactive'); $(that3).parents('.groups').siblings().find('.sort_list').removeClass('listsactive');
+    var str2 = '<div class="justtowatch"><div class="groupmember3"></div> <div class="justname">' + ids + '</div><button data-bid="' + bid + '" id ="' + ids + '" class="groupbtn"  type="button">发消息</button></div>';
     $('.matchtab3 .getmessage').html(str2);
     $('.matchtab3 .placesholder').css({
         display: 'none'
@@ -1108,7 +1126,144 @@ $('.lists').on('click', '.onlygroupcontainer', function () {
     $('.matchtab3 .getmessage').css({
         display: 'block'
     });
+    
+    
+    // 查询群组成员
+    /*var queryRoomMember = function () {
+        var member = '';
+        conn.queryRoomMember({
+            roomId: bid,
+            success: function (members) {
+                var membername = '';
+                console.log(members.length);
+                for (var o in members) {
+                    member = members[o];
+                    console.log(member);
+                    //console.log(member.jid);
+                    //console.log(member.jid.slice(24,-12));
+                    membername = membername + member.jid.slice(24,-12);
+                }
+                $('.groupmember3').html( membername );
+            }
+        });
+    };*/
+    //queryRoomMember();
+    // 查询群组成员
+    
+    // 获取群组信息
+    /*var queryGroupInfo = function () {
+        conn.queryRoomInfo({
+            roomId: bid,
+            success: function (settings, members, fields) {
+                console.log('settings: ', settings);
+                console.log('members: ', members);
+                console.log('fields: ', fields);
+                
+            },
+            error: function () {
+                console.log('Error!');
+            }
+        });
+    };
+    queryGroupInfo();*/
+    // 获取群组信息
+    
+    
+    
 });
+
+
+//获取群组成员团
+
+
+$('.matchtab3').on('click','.groupbtn',function(){
+    var that1 = this; 
+    var idnumber = $(that1).attr('data-bid');
+    var idname = $(that1).attr('id');
+    console.log( idnumber );
+    console.log( idname );
+    
+    $('.groupmanager1').attr('id',idnumber);
+    
+    // 查询群组成员
+    var queryRoomMember = function () {
+        var member = '';
+        conn.queryRoomMember({
+            roomId: idnumber,
+            success: function (members) {
+                for (var o in members) {
+                    member = members[o];
+                    console.log(member);
+                    console.log(member.jid);
+                    console.log(member.jid.slice(24,-12));
+                    membername = membername + member.jid.slice(24,-12);
+                }
+            }
+        });
+    };
+    queryRoomMember();
+    // 查询群组成员
+    
+    // 获取群组信息
+    var queryGroupInfo = function () {
+        conn.queryRoomInfo({
+            roomId: idnumber,
+            success: function (settings, members, fields) {
+                console.log('settings: ', settings);
+                console.log('members: ', members);
+                console.log('fields: ', fields);
+                var groupowner = fields.owner;
+                console.log(groupowner);
+                
+                
+                if ( $('.username').attr('id') == groupowner ){
+                    
+                    $('.matchtab1 .headers  #'+idnumber+'.receiveheader .fa-cog').attr('id',groupowner);
+                    
+                }else {
+                    $('.matchtab1 '+' #'+idnumber+'.receiveheader i').attr('class','fa fa-plus');
+                    $('.matchtab1 '+' #'+idnumber+'.receiveheader i').attr('id',idnumber);
+                }
+                
+                
+                
+                
+                
+                
+            },
+            error: function () {
+                console.log('Error!');
+            }
+        });
+    };
+    queryGroupInfo();
+    // 获取群组信息
+    
+});
+//获取群组成员团
+
+var target1 = 2;
+$('.matchtab1').on('click','.fa-plus',function(event){
+    event.stopPropagation();
+    if (target1 == 2) {
+        target1 = 3;
+        $('.matchtab1 .slideinfo').slideDown(300);
+    } else if (target1 == 3) {
+
+        $('.matchtab1 .slideinfo').slideUp(300);
+        target1 = 2;
+    }
+    
+    
+    
+});
+
+
+
+
+
+
+
 
 
 
@@ -1187,7 +1342,7 @@ $('.matchtab2').on('click','.message1:last-child',function(){
 
 
 
-/*var listGroups3 = function () {
+var listGroups3 = function () {
     var option = {
         success: function (rooms) {
             //console.log(rooms);
@@ -1217,7 +1372,7 @@ $('.matchtab2').on('click','.message1:last-child',function(){
     conn.listRooms(option);
 
 
-};*/
+};
 //获取已加入的群组
 
 
@@ -1783,6 +1938,8 @@ $('.lists').on('click', '.groupcontainer', function (event) {
     var idname = $(this).attr('id');
     console.log( idnumber );
     console.log( idname );
+    
+    $('.groupmanager1').attr('id',idnumber);
     $('.send').attr('id',idnumber);
     
     $('.matchtab1 '+'#'+idnumber+'.receiveheader').css({display:'block'});
@@ -1803,6 +1960,63 @@ $('.lists').on('click', '.groupcontainer', function (event) {
 
 
 //tab1下点击事件
+
+$('.gmanager1').on('click',function(event){
+    event.stopPropagation();
+    console.log( $(this).parent().attr('id') );
+    $('.matchtab1 .slideinfo').slideDown(300);
+    
+    $(window).on('click',function(){
+        
+        console.log(this);
+        
+        $('.matchtab1 .slideinfo').slideUp(300);
+    });
+    
+    $('.matchtab1 .slideinfo').on('click',function(){
+        $(this).css({display:'block'});
+    })
+    $('.groupmanager1').css({display:'none'});
+    
+});
+
+
+
+
+
+$('.gmanager2').on('click',function(event){
+    event.stopPropagation();
+    var idnumber = $(this).parent().attr('id');
+    
+    $('.changegroupinfo').attr("id",idnumber);
+    
+});
+
+
+// 修改群信息
+    
+    
+$('.changegroupinfo button').on('click',function(){
+    
+    var idnumber = $(this).parent().attr('id');
+    var groupname =$('.changegroup1').val();
+    var groupdes = $('.changegroup2').val();
+    
+    var changeGroupInfo = function () {
+        var option = {
+            roomId: idnumber,
+            subject: groupname,    // 群组名称
+            description: groupdes,  // 群组简介
+            success: function () {
+                console.log('Change Group Names Success!');
+            }
+        };
+        conn.changeGroupSubject(option);
+    };
+    changeGroupInfo();
+});
+
+
 
 
 $('.lists').on('contextmenu', '.groupcontainer', function (event) {
@@ -1889,19 +2103,21 @@ var target1 = 2;
 $('.matchtab1').on('click', '.fa-cog', function (event) {
     event.stopPropagation();
     if (target1 == 2) {
-
         target1 = 3;
-        $('.matchtab1 .slideinfo').slideDown(300);
+        $('.matchtab1 .groupmanager1').css({display:'block'});
     } else if (target1 == 3) {
-
-        $('.matchtab1 .slideinfo').slideUp(300);
+        $('.matchtab1 .groupmanager1').css({display:'none'});
         target1 = 2;
     }
 });
 $(window).on('click', function () {
-    $('.matchtab1 .slideinfo').slideUp(500);
+    $('.matchtab1 .groupmanager1').css({display:'none'});
     target1 = 2;
 });
+
+
+
+
 
 var target2 = 2;
 $('.matchtab2').on('click', '.fa-cog', function (event) {
@@ -1921,19 +2137,7 @@ $(window).on('click', function () {
     target1 = 2;
 });
 
-var target3 = 2;
-$('.matchtab3').on('click', '.fa-cog', function (event) {
-    event.stopPropagation();
-    if (target1 == 2) {
 
-        target1 = 3;
-        $('.matchtab3 .slideinfo').slideDown(300);
-    } else if (target1 == 3) {
-
-        $('.matchtab3 .slideinfo').slideUp(300);
-        target1 = 2;
-    }
-});
 $(window).on('click', function () {
     $('.matchtab3 .slideinfo').slideUp(300);
     target1 = 2;
