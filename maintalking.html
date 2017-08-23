@@ -82,6 +82,33 @@
             
             
             
+            <div class="transparent2">
+                <div class="getlistspop1-2">
+                    <div class="pophead1-2">添加会话成员
+                        <i class="fa fa-times" @click="closetrans2"></i>
+                    </div>
+                    <div class="contab3-2">
+                        <i class="fa fa-search"></i>
+                        <input type="search" name="transferto" placeholder="搜索">
+                    </div>
+                    <div class="transferselect-2 scrollbar-macosx">
+                        
+                        
+                        <div class="friendcontainer2-2">
+                            
+                            <div class="selectallcontainer1">
+                                <input type="checkbox" name="selectall1" class="selectall1" >&nbsp;&nbsp;&nbsp;<span>全选</span>
+                            </div>
+                            <template v-for="onlyname in list4">
+                                <div :id="onlyname" class="onlygroupcontainer" ><input class="groupcheck" type="checkbox" :value="onlyname"   v-model="list2"><img src="imgs/group-1.jpg"><div class="onlyname">{{ onlyname }}</div><div class="clearfix"></div></div>
+                            </template>
+                        </div>
+                    </div>
+                    <button class="confirm2-2" disabled>确定<span v-if="showorhide2()">({{ list4.length }})</span></button>
+                </div>
+            </div>
+            
+            
             
             
             
@@ -161,14 +188,16 @@
                         <div class="floor3">
                             <a href="#tab1"><div class=" icons1 icons"><i class="fa fa-commenting greenactive"></i></div></a>
                             <a href="#tab2"><div class="icons iconcenter"><i class="fa fa-book"></i></div></a>
-                            <a href="#tab3"><div @click="listGroups3()" class="icons3 icons"><i class="fa fa-users"></i></div></a>
+                            <a href="#tab3"><div @click="listGroups3(),getRoasters1()" class="icons3 icons"><i class="fa fa-users"></i></div></a>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
                 <div class="lists scrollbar-macosx">
                     <div id="tab1">
-                        <div class="allchatmessages"></div>
+                        <div class="allchatmessages">
+                            
+                        </div>
                     </div>
                     <div id="tab2">
                         <div class="chatrooms"></div>
@@ -187,8 +216,18 @@
                             </div>
                         </div>
                         <div class="friends">
-                            <div id="letter"></div>
-                            <div class="sort_box"></div>
+                            
+                            <div class="sort_box">
+                                <template v-for="fname in list5">
+                                    <div class="sort_list">
+                                        <div class="num_logo">
+                                            <img src="imgs/zhaoyun-1.jpg">
+                                        </div>
+                                        <div class="num_name">{{fname}}</div>
+                                    </div>
+                                </template>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -240,9 +279,15 @@
                                         </div>
                                     </template>
                                     <div class="plushumans" @click="addpeople2()">
-                                        
+                                       <img src="imgs/plus.jpg"> 
+                                    </div>
+                                    
+                                    <div @click="deletepeople()" v-show="ifornot" class="deletehumans">
+                                        <img src="imgs/minutes.jpg">
                                     </div>
                                     <div class="clearfix"></div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -306,14 +351,19 @@
                     </div><!--match3-->
                 </div><!--receivemessage-->
                 <div class="sendmessage">
+                    <div v-show="emojishow" class="emojicontainer">
+                        
+                            
+                       
+                    </div>
                     <ul class="sendicons">
-                        <li><i class="fa fa-smile-o"></i></li>
+                        <li @click.stop="emojishow =!emojishow"><i class="fa fa-smile-o"></i></li>
                         <li><i class="fa fa-folder-o"></i></li>
                         <div class="clearfix"></div>
                     </ul>   
                     <textarea class="writein scrollbar-macosx"></textarea>
                     <div class="sendbutton">
-                        <button class="send" type="button">发送
+                        <button  class="send" type="button">发送
                         </button>
                         <div class="clearfix"></div>
                     </div>
@@ -333,11 +383,11 @@
         
         
         
-        
         <!--[if lte IE 9]>
         <script src="swfupload/swfupload.min.js"></script>
         <![endif]-->
         <script src="js/jquery-1.12.4.min.js"></script>
+        
         <script src="js/importvue.js"></script>
         <script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
@@ -354,7 +404,7 @@
         <script src="js/emoji.js"></script>
         <script src="js/webim.js"></script>
         <script src="js/jquery.charfirst.pinyin.js"></script>
-        
+        <script src="js/sort.js"></script>
         
     </body>
 </html>

@@ -1025,6 +1025,125 @@ body {
 
 /*弹出层1*/
 
+/*弹出层2*/
+
+
+.transparent2 {
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(51,67,45,0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    display: none;
+}
+.getlistspop1-2 {
+    position: absolute;
+    width: 360px;
+    height: 550px;
+    left: 50%;
+    top: 50%;
+    margin-left: -180px;
+    margin-top: -275px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.pophead1-2 {
+	width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #e7f8fe;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+.pophead1-2 .fa-times {
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    font-size: 20px;
+    color: #aeaeae;
+    cursor: pointer;
+}
+.contab3-2 {
+	height: 60px;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #d7d7d7;
+    border-top: 1px solid #d7d7d7;
+}
+.contab3-2 .fa-search{
+	font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.contab3-2 input {
+    height: 25px;
+    width: 280px;
+    position: absolute;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.transferselect-2 {
+	height: 370px;
+    width: 100%;
+    border-bottom: 1px solid #d7d7d7;
+}
+.confirm2-2 {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #d7d7d7;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid #d7d7d7;
+    display: block;
+    outline: 0;
+}
+
+.friendcontainer2-2 {
+    width: 100%;
+    height: auto;
+}
+
+.selectallcontainer1 {
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
+    padding-left: 20px;
+    color: #787878;
+    font-size: 14px;
+    border-bottom: 1px solid #d7d7d7;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*弹出层2*/
+
+
+
 
 
 
@@ -1074,9 +1193,25 @@ body {
     line-height: 60px;
     cursor: pointer;
 }
-.plushumans .fa-plus {
-	font-size: 24px;
+.plushumans img {
+	width: 60px;
 }
+
+.deletehumans {
+	width: 60px;
+    height: 60px;
+    background: #fff;
+    float: left;
+    margin-left: 11px;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+}
+.deletehumans img {
+	width: 60px;
+}
+
+
 
 .close1 {
     float: right;
@@ -1508,7 +1643,31 @@ body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     display: none;
+    position: relative;
 }
+.emojicontainer {
+	position: absolute;
+    width: 226px;
+    height: 162px;
+    border: 1px solid pink;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    top: -180px;
+    left: 10px;
+    -webkit-box-shadow: 5px -5px 3px #eae3e3;
+    box-shadow: 5px -5px 3px #eae3e3;
+}
+.emojievery {
+	float: left;
+}
+.emojievery img {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
 
 .sendicons {
 	margin-top: 10px;

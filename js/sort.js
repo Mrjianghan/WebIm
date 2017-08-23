@@ -1,8 +1,5 @@
 //自由驱动工作室
 //作者：林鑫
-
-
-
 $(function(){
         var Initials=$('.initials');
         var LetterBox=$('#letter');
@@ -153,7 +150,3 @@ function initials() {//公众号排序
         }
     };
 }
-    
-    
-    
-    
