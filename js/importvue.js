@@ -14,8 +14,10 @@ var vm = new Vue({
         ifornot:false,
         emojishow:false,
         emojilist:[],
-        
+        trans2:false,
+        trans3:false,
     },
+    
     methods:{
         showorhide:function(){
             if( !$('.transparent1 .groupcontainer2 input').is(":checked") ){
@@ -23,7 +25,6 @@ var vm = new Vue({
             }else {
                 return true;
             }
-           
         },
         showorhide2:function(){
             if( !$('.transparent2 .friendcontainer2-2 input').is(":checked") ){
@@ -31,7 +32,6 @@ var vm = new Vue({
             }else {
                 return true;
             }
-           
         },
         
         check:function(){
@@ -55,6 +55,7 @@ var vm = new Vue({
                 }
             };
             conn.listRooms(option);
+            
         },
         
         queryroommember1:function (event) {
@@ -97,6 +98,7 @@ var vm = new Vue({
                     console.log(fields.owner);
                     vm.groupmaster = fields.owner;
                     
+                    
                 },
                 error: function () {
                     console.log('Error!');
@@ -106,46 +108,10 @@ var vm = new Vue({
         closethis1:function(){
             $('.matchtab1 .slideinfo').slideUp(300);
         },
+        addfriends:function(){
+            vm.trans2 = true;
+        },
         
-        addpeople2:function(){
-            $('.transparent2').css({display:'block'});
-            
-            var getRoasters4 = function () {
-                
-                var option = {
-                    success: function (roster) {
-                        var o;
-                        var arrin=[];
-                        var l = roster.length;
-                        console.log(roster);
-                        
-                        for (o = 0; o < l; o++) {
-                            var state = roster[o].subscription;
-                            var names = roster[o].name;
-                            if ( state == 'both' ) {
-                                arrin.push(names);
-                            };
-                        }
-                        console.log(arrin);
-                        vm.list4 = arrin;
-                    } //success
-                }; //option
-                conn.getRoster(option);
-            };
-            getRoasters4();
-
-            
-            
-            
-            
-            
-            
-            
-            
-        },
-        deletepeople:function(){
-            alert('delete');
-        },
         showinformation:function(event){
             this.showinfo = true;
             console.log(event);
@@ -163,7 +129,7 @@ var vm = new Vue({
             $('.matchtab1 .slideinfo').slideUp(300);
         },
         closetrans2:function(){
-            $('.transparent2').css({display:'none'});
+            vm.trans2 = false;
         },
         getRoasters1:function () {
             var option = {
@@ -184,7 +150,29 @@ var vm = new Vue({
                 } //success
             }; //option
             conn.getRoster(option);
+            //initials();
         },
+        alert5:function(){
+            alert('5555');
+        },
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         

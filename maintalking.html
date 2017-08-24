@@ -82,9 +82,9 @@
             
             
             
-            <div class="transparent2">
+            <div class="transparent2" v-if="trans2">
                 <div class="getlistspop1-2">
-                    <div class="pophead1-2">添加会话成员
+                    <div class="pophead1-2"><header>添加会话成员</header>
                         <i class="fa fa-times" @click="closetrans2"></i>
                     </div>
                     <div class="contab3-2">
@@ -95,13 +95,39 @@
                         
                         
                         <div class="friendcontainer2-2">
-                            
                             <div class="selectallcontainer1">
                                 <input type="checkbox" name="selectall1" class="selectall1" >&nbsp;&nbsp;&nbsp;<span>全选</span>
                             </div>
-                            <template v-for="onlyname in list4">
-                                <div :id="onlyname" class="onlygroupcontainer" ><input class="groupcheck" type="checkbox" :value="onlyname"   v-model="list2"><img src="imgs/group-1.jpg"><div class="onlyname">{{ onlyname }}</div><div class="clearfix"></div></div>
-                            </template>
+                            <div class="sort_box1">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <button class="confirm2-2" disabled>确定<span v-if="showorhide2()">({{ list4.length }})</span></button>
+                </div>
+            </div>
+            
+            
+            
+            <div class="transparent3" v-if="trans3">
+                <div class="getlistspop1-2">
+                    <div class="pophead1-2"><header>删除会话成员</header>
+                        <i class="fa fa-times" @click="closetrans2"></i>
+                    </div>
+                    <div class="contab3-2">
+                        <i class="fa fa-search"></i>
+                        <input type="search" name="transferto" placeholder="搜索">
+                    </div>
+                    <div class="transferselect-2 scrollbar-macosx">
+                        
+                        
+                        <div class="friendcontainer2-2">
+                            <div class="selectallcontainer1">
+                                <input type="checkbox" name="selectall1" class="selectall1" >&nbsp;&nbsp;&nbsp;<span>全选</span>
+                            </div>
+                            <div class="sort_box1">
+                            </div>
+                            
                         </div>
                     </div>
                     <button class="confirm2-2" disabled>确定<span v-if="showorhide2()">({{ list4.length }})</span></button>
@@ -188,8 +214,10 @@
                         <div class="floor3">
                             <a href="#tab1"><div class=" icons1 icons"><i class="fa fa-commenting greenactive"></i></div></a>
                             <a href="#tab2"><div class="icons iconcenter"><i class="fa fa-book"></i></div></a>
-                            <a href="#tab3"><div @click="listGroups3(),getRoasters1()" class="icons3 icons"><i class="fa fa-users"></i></div></a>
+                            <a href="#tab3"><div @click="listGroups3()" class="icons3 icons"><i class="fa fa-users"></i></div></a>
                             <div class="clearfix"></div>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -215,20 +243,7 @@
                                 
                             </div>
                         </div>
-                        <div class="friends">
-                            
-                            <div class="sort_box">
-                                <template v-for="fname in list5">
-                                    <div class="sort_list">
-                                        <div class="num_logo">
-                                            <img src="imgs/zhaoyun-1.jpg">
-                                        </div>
-                                        <div class="num_name">{{fname}}</div>
-                                    </div>
-                                </template>
-                            </div>
-                            
-                        </div>
+                        <div class="friends"><div class="sort_box"></div></div>
                     </div>
                 </div>
             </div>
@@ -278,11 +293,11 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <div class="plushumans" @click="addpeople2()">
+                                    <div class="plushumans" @click="addfriends">
                                        <img src="imgs/plus.jpg"> 
                                     </div>
                                     
-                                    <div @click="deletepeople()" v-show="ifornot" class="deletehumans">
+                                    <div v-show="ifornot" class="deletehumans">
                                         <img src="imgs/minutes.jpg">
                                     </div>
                                     <div class="clearfix"></div>
@@ -401,10 +416,12 @@
                 $('.scrollbar-macosx').scrollbar();
             });
         </script>
-        <script src="js/emoji.js"></script>
-        <script src="js/webim.js"></script>
         <script src="js/jquery.charfirst.pinyin.js"></script>
         <script src="js/sort.js"></script>
+        <script src="js/emoji.js"></script>
+        <script src="js/webim.js"></script>
+        
+        
         
     </body>
 </html>

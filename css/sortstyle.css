@@ -109,8 +109,24 @@ header.fixed{
     line-height: 40px;
     border-bottom: 1px solid #5db52d;
 }
+.sort_list1 {
+    padding: 10px 60px 10px 80px;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #5db52d;
+}
 
 .sort_list .num_logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 5px;
+    left: 20px;
+}
+.sort_list1 .num_logo {
     width: 50px;
     height: 50px;
     border-radius: 10px;
@@ -124,8 +140,16 @@ header.fixed{
     width: 50px;
     height: 50px;
 }
+.sort_list1 .num_logo img {
+    width: 50px;
+    height: 50px;
+}
+
 
 .sort_list .num_name {
+    color: #000;
+}
+.sort_list1 .num_name {
     color: #000;
 }
 

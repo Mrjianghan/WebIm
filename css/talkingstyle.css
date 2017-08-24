@@ -1036,7 +1036,6 @@ body {
     height: 100%;
     width: 100%;
     z-index: 20;
-    display: none;
 }
 .getlistspop1-2 {
     position: absolute;
@@ -1058,6 +1057,13 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     position: relative;
+}
+.pophead1-2  header{
+	width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    
 }
 .pophead1-2 .fa-times {
     position: absolute;

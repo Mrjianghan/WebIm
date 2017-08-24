@@ -595,25 +595,149 @@ var listGroups2 = function () {
 
 
 
-
+function getRoasters1() {
+    var option = {
+        success: function (roster) {
+            var o;
+            var arrin=[];
+            var l = roster.length;
+            console.log(roster);
+            var str = '';
+            for (o = 0; o < l; o++) {
+                var state = roster[o].subscription;
+                var names = roster[o].name;
+                
+                if ( state == 'both' ) {
+                    arrin.push(names);
+                    
+                    str = str + '<div id="'+names+'" class="sort_list"><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
+                    
+                };
+            }
+            console.log(str);
+            $('.friends .sort_box').html(str);
+            initials();
+           
+            
+        } //success
+        
+         
+    }; //option
+    conn.getRoster(option);
+    //initials();
+    
+    
+};
+        
 
 
 
 
 
 $('.icons3').on('click', function () {
+    var str = '<img class="firstscreen" src="imgs/u13.png">';
+    $('.matchtab3 .placesholder').html(str);
+    $('.matchtab3  .getmessage').css({
+        display: 'none'
+    });
+    $('.sendmessage').css({
+        display: 'none'
+    });
     
-        
-        var str = '<img class="firstscreen" src="imgs/u13.png">';
-        $('.matchtab3 .placesholder').html(str);
-        $('.matchtab3  .getmessage').css({
-            display: 'none'
-        });
-        $('.sendmessage').css({
-            display: 'none'
-        });
+    getRoasters1();
     
 });
+
+
+
+function getRoasters2() {
+        var option = {
+            success: function (roster) {
+                var o;
+                var l = roster.length;
+                console.log(roster);
+                var str10 = '';
+                
+                for (o = 0; o < l; o++) {
+                    var state = roster[o].subscription;
+                    var names = roster[o].name;
+
+                    if ( state == 'both' ) {
+                        
+                        
+                        
+
+                        str10 = str10 +'<div id="'+names+'" class="sort_list1"><input @click="alert5" class="trans2input" type="checkbox" ><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
+
+                    };
+                }
+                
+                console.log(str10);
+
+                $('.friendcontainer2-2 .sort_box1').html(str10);
+                
+                
+                initials1();
+                
+                
+
+            } //success
+        }; //option
+        conn.getRoster(option);
+        //initials1();
+    
+    
+    };
+
+
+
+$('.tab1peoples').on('click','.plushumans',function(){
+    getRoasters2();
+    
+});
+
+
+
+$('.deletehumans').on('click',function(){
+    console.log(this);
+    var that = this;
+    console.log($(that).parents('.scroll-wrapper.slideinfo'));
+    console.log($(that).parents('.scroll-wrapper.slideinfo').siblings('.groupmanager1').attr('id'));
+    var idnumber = $(that).parents('.scroll-wrapper.slideinfo').siblings('.groupmanager1').attr('id');
+    
+    function queryroommember3() {
+        var member = '';
+        var blankarr=[];
+        conn.queryRoomMember({
+            roomId: idnumber,
+            success: function (members) {
+                var membername = '';
+                console.log(members);
+                console.log(members.length);
+                for (var o in members) {
+                    member = members[o];
+                    console.log(member);
+                    //console.log(member.jid);
+                    console.log(member.jid.slice(24,-12));
+                    membername = membername + member.jid.slice(24,-12);
+                    blankarr.push(member.jid.slice(24,-12));
+                }
+            console.log( blankarr );
+            //vm.list3 = blankarr;
+            vm.trans3=true;
+                
+            
+                
+            }
+        });
+            
+    };
+    queryroommember3();
+    
+    
+});
+
+
 
 
 
@@ -1136,7 +1260,7 @@ var listGroups3 = function () {
                 //console.log(rooms[i].roomId);
                 var groupnames = rooms[i].name;
                 var groupnumber = rooms[i].roomId;
-                str5 = str5 + '<div data-id="' + groupnumber + '" id="' + groupnames + '" class="onlygroupcontainer"><input class="groupcheck" type="checkbox" value="'+ groupnames +'"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
+                str5 = str5 + '<div data-id="' + groupnumber + '" id="' + groupnames + '" class="onlygroupcontainer"><input  class="groupcheck" type="checkbox" value="'+ groupnames +'"><img src="imgs/group-1.jpg"><div class="onlyname">' + groupnames + '</div><div class="clearfix"></div></div>';
                 
             }
            
@@ -1196,6 +1320,7 @@ $('.matchtab2').on('click','.message1:nth-child(2)',function(){
 
 $('.transparent1').on('click','.fa-times',function(){
     $('.transparent1').css({display:'none'});
+    
 });
 
 
