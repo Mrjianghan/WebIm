@@ -1150,6 +1150,122 @@ body {
 
 
 
+/*弹出层3*/
+
+.transparent3 {
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(51,67,45,0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+}
+.getlistspop1-3 {
+    position: absolute;
+    width: 360px;
+    height: 550px;
+    left: 50%;
+    top: 50%;
+    margin-left: -180px;
+    margin-top: -275px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.pophead1-3 {
+	width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #e7f8fe;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+.pophead1-3  header{
+	width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    
+}
+.pophead1-3 .fa-times {
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    font-size: 20px;
+    color: #aeaeae;
+    cursor: pointer;
+}
+.contab3-3 {
+	height: 60px;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #d7d7d7;
+    border-top: 1px solid #d7d7d7;
+}
+.contab3-3 .fa-search{
+	font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.contab3-3 input {
+    height: 25px;
+    width: 280px;
+    position: absolute;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.transferselect-3 {
+	height: 370px;
+    width: 100%;
+    border-bottom: 1px solid #d7d7d7;
+}
+.confirm2-3 {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #d7d7d7;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid #d7d7d7;
+    display: block;
+    outline: 0;
+}
+
+.friendcontainer2-3 {
+    width: 100%;
+    height: auto;
+}
+
+.selectallcontainer2 {
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
+    padding-left: 20px;
+    color: #787878;
+    font-size: 14px;
+    border-bottom: 1px solid #d7d7d7;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+
+/*弹出层3*/
+
+
 
 
 
@@ -1191,10 +1307,12 @@ body {
 
 .plushumans {
 	width: 60px;
-    height: 60px;
+    height: 80px;
     background: #fff;
     float: left;
     margin-left: 11px;
+    margin-right: 11px;
+    margin-bottom: 10px;
     text-align: center;
     line-height: 60px;
     cursor: pointer;
@@ -1205,10 +1323,12 @@ body {
 
 .deletehumans {
 	width: 60px;
-    height: 60px;
+    height: 80px;
     background: #fff;
     float: left;
     margin-left: 11px;
+    margin-right: 11px;
+    margin-bottom: 10px;
     text-align: center;
     line-height: 60px;
     cursor: pointer;
@@ -1509,7 +1629,6 @@ body {
 .rightpic {
     width: 50px;
     border-radius: 5px;
-    
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     float: right;
@@ -1523,20 +1642,27 @@ body {
     margin-top: 10px;
 	float: left;
     background-color: #a4dfa4;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid #a4dfa4;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    /*padding-bottom: 10px;
+    padding-top: 10px;*/
+    padding-top: 12px;
     border-radius: 10px;
     position: relative;
     max-width: 65%;
+    vertical-align: middle;
     word-wrap: break-word;
     min-height: 50px;
+    font-size: 18px;
 }
 
+.fitword {
+    width: 26px;
+    vertical-align: middle;
+}
 .messagecontent1:after {
     content: '';
     position: absolute;
@@ -1547,6 +1673,11 @@ body {
     border: 8px solid transparent;
     border-right-color: #a4dfa4;
 }
+
+.messagecontent1  img {
+    vertical-align: middle;
+}
+
 .messagecontent2 {
 	float: right;
     background-color: #5edf65;

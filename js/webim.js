@@ -122,6 +122,7 @@ conn.listen({
         console.log('emoji');
         console.log(message);
         console.log(emotype);
+        var msg_from = message.from;
         
         var msg_to = message.to;
         var datas = message.data;
@@ -146,7 +147,7 @@ conn.listen({
                 if (img.type == 'txt') {
                     string = string + img.data;
                 } else {
-                    string = string + '<img ' + 'src="' + img.data + '" />';
+                    string = string + '<img class="fitword" ' + 'src="' + img.data + '" />';
                 }
 
 
@@ -161,14 +162,22 @@ conn.listen({
             console.log( parseEmoji(datas) );
 
             console.log( string );
+            
+            
+            var str1 = '<div id="11" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + string + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
         
         
-            var str3 = '<div id="11" class="messagecontainer">'+  string +'</div>';
+            
+            
+            console.log(str1);
 
 
-            $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str3);
+            $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
+            
+            
+            
         
-            var strsss = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+            
         
         }
         
@@ -606,10 +615,8 @@ function getRoasters1() {
             for (o = 0; o < l; o++) {
                 var state = roster[o].subscription;
                 var names = roster[o].name;
-                
                 if ( state == 'both' ) {
                     arrin.push(names);
-                    
                     str = str + '<div id="'+names+'" class="sort_list"><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
                     
                 };
@@ -617,16 +624,10 @@ function getRoasters1() {
             console.log(str);
             $('.friends .sort_box').html(str);
             initials();
-           
-            
         } //success
-        
-         
     }; //option
     conn.getRoster(option);
     //initials();
-    
-    
 };
         
 
@@ -657,22 +658,16 @@ function getRoasters2() {
                 var l = roster.length;
                 console.log(roster);
                 var str10 = '';
-                
                 for (o = 0; o < l; o++) {
                     var state = roster[o].subscription;
                     var names = roster[o].name;
-
                     if ( state == 'both' ) {
-                        
-                        
-                        
 
-                        str10 = str10 +'<div id="'+names+'" class="sort_list1"><input @click="alert5" class="trans2input" type="checkbox" ><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
+                        str10 = str10 +'<div id="'+names+'" class="sort_list1"><input value="'+names+'" class="trans2input" type="checkbox" ><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ names +'</div></div>';
 
                     };
                 }
                 
-                console.log(str10);
 
                 $('.friendcontainer2-2 .sort_box1').html(str10);
                 
@@ -684,17 +679,159 @@ function getRoasters2() {
             } //success
         }; //option
         conn.getRoster(option);
-        //initials1();
-    
-    
     };
 
 
 
 $('.tab1peoples').on('click','.plushumans',function(){
     getRoasters2();
+    console.log(this);
+    var idname = $(this).attr('id');
+    $('.transparent2 button').attr('id',idname);
+    console.log( $('.transparent2 button') );
+});
+
+
+//添加会话成员弹窗
+$('.containermain').on("click",'.transparent2  .sort_box1 input',function(){
+    
+    if ( $('.sort_box1 input').is(":checked") ) {
+        
+        $('.transparent2 button').css({backgroundColor:"#278605"});
+        
+        var arr1 = $('.sort_box1 input:checked'); 
+        console.log( arr1 );
+        var arr2 = [];
+        
+        $.each(arr1,function(i,n){
+            var value = n.getAttribute('value')
+            console.log(n);
+            console.log( value );
+            arr2.push(value);
+            //console.log(arr2);
+        });
+        console.log(arr2);
+        
+        $('.transparent2 button span').text( "("+arr2.length+")");
+        
+        $('.transparent2 button').prop('disabled',false);
+        
+        $('.transparent2 button').on('click',function(){
+            
+            //暂时没有商量好
+            
+        })   
+    
+    
+     }else {
+         $('.transparent2 button').prop('disabled',true);
+         $('.transparent2 button').css({backgroundColor:'#d7d7d7'});
+         $('.transparent2 button span').text('');
+     }
+    
+    
+    
     
 });
+
+$('.containermain').on('click','.transparent2 .selectallcontainer1 input',function(){
+    console.log(this);
+    if ($(this).is(":checked")){
+        $(this).parent().siblings('.sort_box1').find('input').prop('checked',true);
+        
+        var number = $(this).parent().siblings('.sort_box1').find('input').length;
+        
+        $('.transparent2 button span').text( "("+ number +")");
+        
+        
+        $('.transparent2 button').css({backgroundColor:"#278605"});
+        
+        $('.transparent2 button').prop('disabled',false);
+        
+        
+    }else {
+        $(this).parent().siblings('.sort_box1').find('input').prop('checked',false);
+        $('.transparent2 button').css({backgroundColor:'#d7d7d7'});
+        $('.transparent2 button').prop('disabled',true);
+        $('.transparent2 button span').text('');
+    }
+});
+
+//添加会话成员弹窗
+
+//删除会话成员弹窗
+
+
+$('.containermain').on("click",'.transparent3  .sort_box1 input',function(){
+    
+    if ( $('.sort_box1 input').is(":checked") ) {
+        
+        $('.transparent3 button').css({backgroundColor:"#278605"});
+        
+        var arr1 = $('.sort_box1 input:checked'); 
+        console.log( arr1 );
+        var arr2 = [];
+        
+        $.each(arr1,function(i,n){
+            var value = n.getAttribute('value')
+            console.log(n);
+            console.log( value );
+            arr2.push(value);
+            //console.log(arr2);
+        });
+        console.log(arr2);
+        
+        $('.transparent3 button span').text( "("+arr2.length+")");
+        
+        $('.transparent3 button').prop('disabled',false);
+        
+        $('.transparent3 button').on('click',function(){
+            
+            //暂时没有商量好
+            
+        })   
+    
+    
+     }else {
+         $('.transparent3 button').prop('disabled',true);
+         $('.transparent3 button').css({backgroundColor:'#d7d7d7'});
+         $('.transparent3 button span').text('');
+     }
+    
+    
+    
+    
+});
+
+$('.containermain').on('click','.transparent3 .selectallcontainer2 input',function(){
+    console.log(this);
+    if ($(this).is(":checked")){
+        $(this).parent().siblings('.sort_box1').find('input').prop('checked',true);
+        
+        var number = $(this).parent().siblings('.sort_box1').find('input').length;
+        
+        $('.transparent3 button span').text( "("+ number +")");
+        
+        
+        $('.transparent3 button').css({backgroundColor:"#278605"});
+        
+        $('.transparent3 button').prop('disabled',false);
+        
+        
+    }else {
+        $(this).parent().siblings('.sort_box1').find('input').prop('checked',false);
+        $('.transparent3 button').css({backgroundColor:'#d7d7d7'});
+        $('.transparent3 button').prop('disabled',true);
+        $('.transparent3 button span').text('');
+    }
+});
+
+
+
+
+
+//删除会话成员弹窗
+
 
 
 
@@ -712,21 +849,22 @@ $('.deletehumans').on('click',function(){
             roomId: idnumber,
             success: function (members) {
                 var membername = '';
+                var str11 = '';
                 console.log(members);
                 console.log(members.length);
                 for (var o in members) {
                     member = members[o];
                     console.log(member);
-                    //console.log(member.jid);
                     console.log(member.jid.slice(24,-12));
-                    membername = membername + member.jid.slice(24,-12);
+                    membername = member.jid.slice(24,-12);
                     blankarr.push(member.jid.slice(24,-12));
+                    
+                    str11 = str11 +'<div id="'+membername+'" class="sort_list1"><input value="'+membername+'" class="trans2input" type="checkbox" ><div class="num_logo"><img src="imgs/zhaoyun-1.jpg" alt=""></div><div class="num_name">'+ membername +'</div></div>';
                 }
-            console.log( blankarr );
-            //vm.list3 = blankarr;
-            vm.trans3=true;
-                
             
+                $('.friendcontainer2-3 .sort_box1').html(str11);
+                
+                initials1();  
                 
             }
         });
@@ -735,7 +873,27 @@ $('.deletehumans').on('click',function(){
     queryroommember3();
     
     
+    
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -835,26 +993,28 @@ $('.send').on('click',function(){
     
     function messagetobottom (){
         var obj1 = $('.matchtab2  .exists.scrollbar-macosx')[0];
-        
         var cli = obj1.clientHeight;
-                    
         var hei = $('.matchtab2'+' #'+chatroomid+'.everychatroom')[0].scrollHeight;
-                    
         //console.log( $('.matchtab2'+' #'+msg_to+'.everychatroom') );
-                    
         //console.log( hei );
         //console.log( cli );
         $('.matchtab2  .exists.scrollbar-macosx').scrollTop( hei-cli );
-                    
     };
-    
-    
-    
-    
     var mes1 = $('.writein.scrollbar-macosx')[1].value;
     if ( mes1!='' ){
-        
         var chatroomid = $('.send').attr('id');
+        /*for (var i = 0; i < message.data.length; i++) {
+            var img = message.data[i];
+            var string;
+            if (img.type == 'txt') {
+                string = string + img.data;
+            } else {
+                string = string + '<img class="fitword" ' + 'src="' + img.data + '" />';
+            }
+
+        }*/
+        
+        
         
         var sendRoomText = function () {
             var id = conn.getUniqueId();         // 生成本地消息id
@@ -873,12 +1033,10 @@ $('.send').on('click',function(){
                     $('.writein.scrollbar-macosx').val('');
                     messagetobottom();
 
-
                     var str2 = mes1;
                     $('.lists [data-nid="'+ chatroomid +'"].groupcontainer .groupbottomleft').html(str2);
-
-
-
+                    parseEmoji(mes1);
+                    console.log(mes1);
                 },
                 fail: function () {
                     console.log('failed');
@@ -1053,7 +1211,7 @@ $('.matchtab3').on('click', 'button', function () {
         
         var str4 ='';
         
-        str4 = str4 + '<div data-id="' + ids + '" id="' + cid + '" class="receiveheader"><div class="headername">' + ids + '</div><i class="fa fa-plus"></i><div class="clearfix"></div></div>';
+        str4 = str4 + '<div data-id="' + ids + '" id="' + cid + '" class="receiveheader"><div class="headername">' + ids + '</div><i id="'+cid+'" data-name="'+ids+'" class="fa fa-plus"></i><div class="clearfix"></div></div>';
         $('.matchtab1 .headers').prepend(str4);
         $('.matchtab1 #' + cid + '.receiveheader').css({display:'block'});
         $('.matchtab1 #'+ cid + '.receiveheader').siblings().css({display:'none'});
@@ -1116,6 +1274,7 @@ $('.matchtab3').on('click','.groupbtn',function(){
     console.log( idname );
     
     $('.groupmanager1').attr('id',idnumber);
+    $('.groupmanager1').attr('data-name',idname);
     
     function querygroupinfo3() {
         conn.queryRoomInfo({
@@ -1583,6 +1742,7 @@ $('.lists').on('click', '.groupcontainer', function (event) {
     var idname = $(this).attr('id');
     console.log( idnumber );
     console.log( idname );
+    $('.groupmanager1').attr('data-name',idname);
     $('.groupmanager1').attr('id',idnumber);
     $('.send').attr('id',idnumber);
     $('.matchtab1 '+'#'+idnumber+'.receiveheader').css({display:'block'});
@@ -1650,7 +1810,15 @@ $('.lists').on('click', '.groupcontainer', function (event) {
 
 $('.gmanager1').on('click',function(event){
     event.stopPropagation();
+    
     console.log( $(this).parent().attr('id') );
+    var idname = $(this).parent().attr('data-name');
+    var idnumber = $(this).parent().attr('id');
+    
+    $('.deletehumans').attr('id',idnumber);
+    
+    $('.plushumans').attr('id',idname);
+    
     $('.matchtab1 .slideinfo').slideDown(300);
     
     $(window).on('click',function(){

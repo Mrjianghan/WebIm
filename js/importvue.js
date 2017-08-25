@@ -108,8 +108,14 @@ var vm = new Vue({
         closethis1:function(){
             $('.matchtab1 .slideinfo').slideUp(300);
         },
-        addfriends:function(){
+        addfriends:function($event){
             vm.trans2 = true;
+            
+        },
+        deletefiends:function($event){
+            vm.trans3 = true;
+            
+            
         },
         
         showinformation:function(event){
@@ -130,6 +136,9 @@ var vm = new Vue({
         },
         closetrans2:function(){
             vm.trans2 = false;
+        },
+        closetrans3:function(){
+            vm.trans3 = false;
         },
         getRoasters1:function () {
             var option = {
@@ -152,9 +161,7 @@ var vm = new Vue({
             conn.getRoster(option);
             //initials();
         },
-        alert5:function(){
-            alert('5555');
-        },
+        
         
         
         

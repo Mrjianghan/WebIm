@@ -91,46 +91,42 @@
                         <i class="fa fa-search"></i>
                         <input type="search" name="transferto" placeholder="搜索">
                     </div>
-                    <div class="transferselect-2 scrollbar-macosx">
-                        
-                        
+                    <div class="transferselect-2">
                         <div class="friendcontainer2-2">
                             <div class="selectallcontainer1">
                                 <input type="checkbox" name="selectall1" class="selectall1" >&nbsp;&nbsp;&nbsp;<span>全选</span>
                             </div>
                             <div class="sort_box1">
                             </div>
-                            
                         </div>
                     </div>
-                    <button class="confirm2-2" disabled>确定<span v-if="showorhide2()">({{ list4.length }})</span></button>
+                    <button class="confirm2-2" disabled>确定<span></span></button>
                 </div>
             </div>
             
             
             
             <div class="transparent3" v-if="trans3">
-                <div class="getlistspop1-2">
-                    <div class="pophead1-2"><header>删除会话成员</header>
-                        <i class="fa fa-times" @click="closetrans2"></i>
+                <div class="getlistspop1-3">
+                    <div class="pophead1-3"><header>删除会话成员</header>
+                        <i class="fa fa-times" @click="closetrans3"></i>
                     </div>
-                    <div class="contab3-2">
+                    <div class="contab3-3">
                         <i class="fa fa-search"></i>
                         <input type="search" name="transferto" placeholder="搜索">
                     </div>
-                    <div class="transferselect-2 scrollbar-macosx">
+                    <div class="transferselect-3 scrollbar-macosx">
                         
                         
-                        <div class="friendcontainer2-2">
-                            <div class="selectallcontainer1">
+                        <div class="friendcontainer2-3">
+                            <div class="selectallcontainer2">
                                 <input type="checkbox" name="selectall1" class="selectall1" >&nbsp;&nbsp;&nbsp;<span>全选</span>
                             </div>
-                            <div class="sort_box1">
-                            </div>
+                            <div class="sort_box1"></div>
                             
                         </div>
                     </div>
-                    <button class="confirm2-2" disabled>确定<span v-if="showorhide2()">({{ list4.length }})</span></button>
+                    <button class="confirm2-3" disabled>确定<span></span></button>
                 </div>
             </div>
             
@@ -293,11 +289,11 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <div class="plushumans" @click="addfriends">
+                                    <div class="plushumans" @click="addfriends($event)">
                                        <img src="imgs/plus.jpg"> 
                                     </div>
                                     
-                                    <div v-show="ifornot" class="deletehumans">
+                                    <div v-show="ifornot" class="deletehumans" @click="deletefiends($event)">
                                         <img src="imgs/minutes.jpg">
                                     </div>
                                     <div class="clearfix"></div>
@@ -387,16 +383,6 @@
             </div>
             <div class="clearfix"></div>
         </div><!--containermain-->
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         <!--[if lte IE 9]>
         <script src="swfupload/swfupload.min.js"></script>
