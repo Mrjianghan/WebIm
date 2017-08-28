@@ -1817,6 +1817,16 @@ body {
 .sendicons .fa {
 	font-size: 22px;
     cursor: pointer;
+    position: relative;
+}
+.sendicons input {
+    opacity: 0;
+    z-index: 5;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 .writein {
     height: 45%;

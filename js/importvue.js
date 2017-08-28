@@ -16,6 +16,8 @@ var vm = new Vue({
         emojilist:[],
         trans2:false,
         trans3:false,
+        timer1:{},
+        timer2:{},
     },
     
     methods:{
@@ -110,14 +112,20 @@ var vm = new Vue({
         },
         addfriends:function($event){
             vm.trans2 = true;
-            
+            vm.timer1 = setTimeout(function(){
+                $('.scrollbar-macosx').scrollbar();
+            },100);
+            console.log(vm.timer1);
+            console.log( typeof(vm.timer1) );
         },
         deletefiends:function($event){
             vm.trans3 = true;
-            
-            
+            vm.timer2 = setTimeout(function(){
+                $('.scrollbar-macosx').scrollbar();
+            },100);
+            console.log(vm.timer2);
+            console.log( typeof(vm.timer2) );
         },
-        
         showinformation:function(event){
             this.showinfo = true;
             console.log(event);
@@ -136,9 +144,13 @@ var vm = new Vue({
         },
         closetrans2:function(){
             vm.trans2 = false;
+            clearTimeout( vm.timer1 );
+            console.log( vm.timer1 );
         },
         closetrans3:function(){
             vm.trans3 = false;
+            clearTimeout( vm.timer2 );
+            console.log( vm.timer2 );
         },
         getRoasters1:function () {
             var option = {

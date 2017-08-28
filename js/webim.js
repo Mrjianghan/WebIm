@@ -6,7 +6,8 @@ var conn = new WebIM.connection({
     isAutoLogin: true,
     heartBeatWait: WebIM.config.heartBeatWait,
     autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
-    autoReconnectInterval: WebIM.config.autoReconnectInterval
+    autoReconnectInterval: WebIM.config.autoReconnectInterval,
+    apiUrl:WebIM.config.apiURL,
 });
 conn.listen({
     onOpened: function (message) {
@@ -994,49 +995,52 @@ $('.send').on('click',function(){
     function messagetobottom (){
         var obj1 = $('.matchtab2  .exists.scrollbar-macosx')[0];
         var cli = obj1.clientHeight;
-        var hei = $('.matchtab2'+' #'+chatroomid+'.everychatroom')[0].scrollHeight;
+        var hei = $('.matchtab2'+' #'+sendid+'.everychatroom')[0].scrollHeight;
         //console.log( $('.matchtab2'+' #'+msg_to+'.everychatroom') );
         //console.log( hei );
         //console.log( cli );
         $('.matchtab2  .exists.scrollbar-macosx').scrollTop( hei-cli );
     };
+    
+    function messagetobottom1 (){
+        var obj1 = $('.matchtab1  .exists.scrollbar-macosx')[0];
+        var cli = obj1.clientHeight;
+        var hei = $('.matchtab1'+' #'+sendid+'.everychatroom')[0].scrollHeight;
+        //console.log( $('.matchtab2'+' #'+msg_to+'.everychatroom') );
+        //console.log( hei );
+        //console.log( cli );
+        $('.matchtab1  .exists.scrollbar-macosx').scrollTop( hei-cli );
+    };
+    
+    
+    
+    
     var mes1 = $('.writein.scrollbar-macosx')[1].value;
     if ( mes1!='' ){
-        var chatroomid = $('.send').attr('id');
-        /*for (var i = 0; i < message.data.length; i++) {
-            var img = message.data[i];
-            var string;
-            if (img.type == 'txt') {
-                string = string + img.data;
-            } else {
-                string = string + '<img class="fitword" ' + 'src="' + img.data + '" />';
-            }
-
-        }*/
-        
-        
+        var sendid = $('.send').attr('id');
         
         var sendRoomText = function () {
             var id = conn.getUniqueId();         // 生成本地消息id
             var msg = new WebIM.message('txt', id); // 创建文本消息
             var option = {
                 msg: mes1,          // 消息内容
-                to: chatroomid,               // 接收消息对象(聊天室id)
+                to: sendid,               // 接收消息对象(聊天室id)
                 roomType: true,
                 chatType: 'chatRoom',
                 success: function () {
                     console.log('send room text success');
-                    var str1 = '<div id="' + mes1 + '" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="rightpic"><div class=" messagecontent messagecontent2">' + mes1 + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor">转发</div><div class="message1">删除</div></div></div></div>';
+                    var str1 = '<div id="' + id + '" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="rightpic"><div class=" messagecontent messagecontent2">' + mes1 + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor">转发</div><div class="message1">删除</div></div></div></div>';
 
 
-                    $('.matchtab2  #'+chatroomid+'.everychatroom  .mainmessagecontainer1').append(str1);
+                    $('.matchtab2  #' + sendid + '.everychatroom  .mainmessagecontainer1').append(str1);
+                    
                     $('.writein.scrollbar-macosx').val('');
-                    messagetobottom();
+                    
+                    messagetobottom();//滚动
+                    
+                    
 
-                    var str2 = mes1;
-                    $('.lists [data-nid="'+ chatroomid +'"].groupcontainer .groupbottomleft').html(str2);
-                    parseEmoji(mes1);
-                    console.log(mes1);
+                    
                 },
                 fail: function () {
                     console.log('failed');
@@ -1046,17 +1050,29 @@ $('.send').on('click',function(){
             msg.setGroup('groupchat');
             conn.send(msg.body);
         };
+        
+        
+        
+        
         
         var sendGroupText = function () {
             var id = conn.getUniqueId();            // 生成本地消息id
             var msg = new WebIM.message('txt', id); // 创建文本消息
             var option = {
                 msg: mes1,             // 消息内容
-                to: 'group id',                     // 接收消息对象(群组id)
+                to: sendid,                     // 接收消息对象(群组id)
                 roomType: false,
                 chatType: 'chatRoom',
                 success: function () {
                     console.log('send room text success');
+                    var str1 = '<div id="' + id + '" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="rightpic"><div class=" messagecontent messagecontent2">' + mes1 + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor">转发</div><div class="message1">删除</div></div></div></div>';
+                    
+                    $('.matchtab1 '+'#'+sendid+'.everychatroom'+'  .mainmessagecontainer1').append( str1 );
+                    
+                    $('.writein.scrollbar-macosx').val('');
+                    
+                    messagetobottom1();//滚动
+                    
                 },
                 fail: function () {
                     console.log('failed');
@@ -1066,14 +1082,6 @@ $('.send').on('click',function(){
             msg.setGroup('groupchat');
             conn.send(msg.body);
         };
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -1100,8 +1108,13 @@ $('.send').on('click',function(){
         
         
         
-        if ( $('.matchtab2 '+'#'+chatroomid+'.everychatroom'+'  .mainmessagecontainer1').css('display') == 'block' ) {
+        if ( $('.matchtab2 '+'#'+sendid+'.everychatroom'+'  .mainmessagecontainer1').css('display') == 'block' ) {
+            
             sendRoomText();
+            
+            
+        } else if ( $('.matchtab1 '+'#'+sendid+'.everychatroom'+'  .mainmessagecontainer1').css('display') == 'block' ){
+            sendGroupText();       
         }
     }
 });
@@ -1280,10 +1293,10 @@ $('.matchtab3').on('click','.groupbtn',function(){
         conn.queryRoomInfo({
             roomId: idnumber,
             success: function (settings, members, fields) {
-                console.log('settings: ', settings);
-                console.log('members: ', members);
-                console.log('fields: ', fields);
-                console.log(fields.owner);
+                //console.log('settings: ', settings);
+                //console.log('members: ', members);
+                //console.log('fields: ', fields);
+                //console.log(fields.owner);
                 if ( fields.owner== $('.username').attr('id') ){
                     //$('[data-id="'+ ids +'"] i').attr('class','fa fa-plus');
                     
@@ -1800,7 +1813,48 @@ $('.lists').on('click', '.groupcontainer', function (event) {
         });
             
     };
-    queryroommember2();
+    //queryroommember2();
+    function queryr(){
+        var pageNum = 1,
+        pageSize = 1000;
+        var options = {
+            pageNum: pageNum,
+            pageSize: pageSize,
+            groupId: idnumber,
+            
+            success: function (resp) {
+                console.log("Response: ", resp);
+                var i;
+                for( i in resp.data ){
+                    console.log( resp.data[i] );
+                    console.log( resp.data[i].member );
+                    console.log( resp.data[i].owner );
+                }
+                //console.log(resp.data);
+                
+            },
+            error: function(e){}
+        };
+        conn.listGroupMember(options);
+        console.log('query');
+    };
+    
+    queryr();
+    
+    function getUserGroup (){
+        var options = {
+            success: function (resp) {
+                console.log("Response: ", resp)
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        };
+        conn.getGroup(options);
+        
+    };
+    //getUserGroup();
+    
 });
 
 
@@ -1810,15 +1864,11 @@ $('.lists').on('click', '.groupcontainer', function (event) {
 
 $('.gmanager1').on('click',function(event){
     event.stopPropagation();
-    
     console.log( $(this).parent().attr('id') );
     var idname = $(this).parent().attr('data-name');
     var idnumber = $(this).parent().attr('id');
-    
     $('.deletehumans').attr('id',idnumber);
-    
     $('.plushumans').attr('id',idname);
-    
     $('.matchtab1 .slideinfo').slideDown(300);
     
     $(window).on('click',function(){
@@ -1827,7 +1877,7 @@ $('.gmanager1').on('click',function(event){
     
     $('.matchtab1 .slideinfo').on('click',function(){
         $(this).css({display:'block'});
-    })
+    });
     $('.groupmanager1').css({display:'none'});
     
     
