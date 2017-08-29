@@ -1681,19 +1681,26 @@ body {
 .messagecontent2 {
 	float: right;
     background-color: #5edf65;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid #5edf65;
-    padding-bottom: 15px;
-    padding-top: 15px;
     border-radius: 10px;
     position: relative;
     max-width: 65%;
     word-wrap: break-word;
     min-height: 50px;
 }
+
+
+.filecontainer {
+    width: 200px;
+    height: 150px;
+}
+
+
+
 
 .messagecontent2:after {
     content: '';
@@ -1803,6 +1810,10 @@ body {
     margin: 0;
     padding: 0;
     display: block;
+}
+
+.picmessage {
+    max-width: 350px;
 }
 
 

@@ -18,6 +18,7 @@ var vm = new Vue({
         trans3:false,
         timer1:{},
         timer2:{},
+        sendfileid:'',
     },
     
     methods:{

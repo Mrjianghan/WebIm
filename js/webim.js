@@ -622,7 +622,7 @@ function getRoasters1() {
                     
                 };
             }
-            console.log(str);
+            //console.log(str);
             $('.friends .sort_box').html(str);
             initials();
         } //success
@@ -1114,17 +1114,172 @@ $('.send').on('click',function(){
             
             
         } else if ( $('.matchtab1 '+'#'+sendid+'.everychatroom'+'  .mainmessagecontainer1').css('display') == 'block' ){
-            sendGroupText();       
+            sendGroupText();
         }
     }
 });
 
 
+// 群组发送图片消息
+        
+
+
+var sendGroupImg = function (vars) {
+            var id = conn.getUniqueId();                   // 生成本地消息id
+            var msg = new WebIM.message('img', id);        // 创建图片消息
+            var input = $('.sendpic')[0];  // 选择图片的input
+            var file = WebIM.utils.getFileUrl(input);      // 将图片转化为二进制文件
+            var img_url;
+            var allowType = {
+                'jpg': true,
+                'gif': true,
+                'png': true,
+                'bmp': true
+            };
+            if (file.filetype.toLowerCase() in allowType) {
+                var option = {
+                    apiUrl: WebIM.config.apiURL,
+                    file: file,
+                    to: vars,                       // 接收消息对象
+                    roomType: false,
+                    chatType: 'chatRoom',
+                    onFileUploadError: function () {      // 消息上传失败
+                        console.log('onFileUploadError');
+                    },
+                    onFileUploadComplete: function (e) {   // 消息上传成功
+                        console.log('onFileUploadComplete');
+                        console.log(e);
+                        img_url= e.uri + '/' +e.entities[0].uuid;
+                        console.log( img_url );
+                        
+                    },
+                    success: function () {                // 消息发送成功
+                        console.log('Success');
+                        console.log( img_url );
+                        var str1 = '<div id="' + id + '" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="rightpic"><div class=" messagecontent messagecontent2"><img class="picmessage" src="'+ img_url +'"></div><div class="clearfix"></div></div></div>'; 
+                    
+                        $('.matchtab1 '+'#'+vars+'.everychatroom'+'  .mainmessagecontainer1').append( str1 ); 
+                        
+                        
+                        
+                    },
+                    flashUpload: WebIM.flashUpload
+                };
+                msg.set(option);
+                msg.setGroup('groupchat');
+                conn.send(msg.body);
+            }
+        };
 
 
 
 
 
+
+$('.sendpic').on('change',function(){
+    
+    console.log( $('.sendpic') );
+    
+    var idnumber = $(this).attr('id');
+    
+    if ( $(this).has('[data-group]') ) {
+        
+        sendGroupImg( idnumber );
+        
+            
+        console.log( $('.sendpic') );
+
+        $('.sendpic')[0].value = '';
+    }
+});
+
+function getcurrenttime (){
+    var time = new Date();
+    console.log( time );
+    console.log( time.getFullYear()+":"+(time.getMonth()+1)+":"+time.getDate()+":"+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() );
+};
+
+
+$('.sendfile').on('change',function(){
+    
+    console.log(this);
+    
+    var idnumber = $(this).attr('id');
+    var localname = $(this)[0].value;
+    
+    console.log(localname);
+    
+    console.log( localname.slice(12) );
+    
+    var local_name = localname.slice(12);
+
+    
+    var sendGroupfile = function () {
+        
+            var id = conn.getUniqueId();                   // 生成本地消息id
+            var msg = new WebIM.message('file', id);        // 创建图片消息
+            var input = $('.sendfile')[0];  // 选择图片的input
+            var file = WebIM.utils.getFileUrl(input);      // 将图片转化为二进制文件
+            var img_url;
+            var allowType = {
+                'jpg': true,
+                'gif': true,
+                'png': true,
+                'bmp': true,
+                'zip': true,
+                'txt': true,
+                'doc': true,
+                'pdf': true,
+                'mp3': true,
+                'amr': true,
+                'wmv': true,
+                'mp4': true,
+                'avi': true,
+                'rmvb':true,
+                'mkv': true
+            };
+            if (file.filetype.toLowerCase() in allowType) {
+                var option = {
+                    apiUrl: WebIM.config.apiURL,
+                    file: file,
+                    to: idnumber,                       // 接收消息对象
+                    roomType: false,
+                    chatType: 'chatRoom',
+                    onFileUploadError: function () {      // 消息上传失败
+                        console.log('onFileUploadError');
+                    },
+                    onFileUploadComplete: function (e) {   // 消息上传成功
+                        console.log('onFileUploadComplete');
+                        console.log(e);
+                        img_url= e.uri + '/' +e.entities[0].uuid;
+                        console.log( img_url );
+                        
+                    },
+                    success: function () {                // 消息发送成功
+                        console.log('Success');
+                        console.log( img_url );
+                        var str1 = '<div id="' + id + '" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="rightpic"><div class=" messagecontent messagecontent2">'+ 
+                            
+                        '<div class="filecontainer"><div class="fileleft">'+local_name+'</div><div class="fileright"><a download="'+ local_name +'"   target="_blank" href="'+ img_url +'">下载</a></div><div class="clearfix"></div></div>'+'</div><div class="clearfix"></div></div></div>'; 
+                    
+                        $('.matchtab1 '+'#'+idnumber+'.everychatroom'+'  .mainmessagecontainer1').append( str1 );
+                        
+                        
+                       
+                        
+                    },
+                    flashUpload: WebIM.flashUpload
+                };
+                msg.set(option);
+                msg.setGroup('groupchat');
+                conn.send(msg.body);
+            }
+        };
+    
+    
+    sendGroupfile();
+    getcurrenttime();
+});
 
 
 
@@ -1285,6 +1440,15 @@ $('.matchtab3').on('click','.groupbtn',function(){
     var idname = $(that1).attr('id');
     console.log( idnumber );
     console.log( idname );
+    
+    $('#tab1 [data-nid="'+idnumber+'"].groupcontainer').attr('data-group','group');
+    
+    
+    
+    $('.sendicons input').attr('data-group','group');
+    $('.sendicons input').attr('id',idnumber);
+    
+    
     
     $('.groupmanager1').attr('id',idnumber);
     $('.groupmanager1').attr('data-name',idname);
@@ -1755,6 +1919,7 @@ $('.lists').on('click', '.groupcontainer', function (event) {
     var idname = $(this).attr('id');
     console.log( idnumber );
     console.log( idname );
+    vm.sendfileid = idnumber;
     $('.groupmanager1').attr('data-name',idname);
     $('.groupmanager1').attr('id',idnumber);
     $('.send').attr('id',idnumber);
