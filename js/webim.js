@@ -66,6 +66,27 @@ conn.listen({
         var textcontent = message.data;
         var delay = message.delay;
         console.log(message);
+        console.log(gettype);
+        
+        var messagearr = [];
+        
+        function getcurrenttime (){
+            var time = new Date();
+            console.log( time );
+            console.log( time.getFullYear()+":"+(time.getMonth()+1)+":"+time.getDate()+":"+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() );
+            return { time.getFullYear()+":"+(time.getMonth()+1)+":"+time.getDate()+":"+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() };
+        };
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         if (gettype == 'chatroom') {
             //console.log(msg_from);
@@ -109,6 +130,17 @@ conn.listen({
 
 
 
+        }else if ( gettype == 'groupchat' ){
+            
+            if ($('#' + msg_to + '.everychatroom  .mainmessagecontainer1').css('display') === 'block') {
+                
+                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+
+
+                $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
+                
+            }
+            
         }
 
 
@@ -990,8 +1022,6 @@ $('.iconcenter').on('click', function () {
 
 $('.send').on('click',function(){
     
-    
-    
     function messagetobottom (){
         var obj1 = $('.matchtab2  .exists.scrollbar-macosx')[0];
         var cli = obj1.clientHeight;
@@ -1011,9 +1041,6 @@ $('.send').on('click',function(){
         //console.log( cli );
         $('.matchtab1  .exists.scrollbar-macosx').scrollTop( hei-cli );
     };
-    
-    
-    
     
     var mes1 = $('.writein.scrollbar-macosx')[1].value;
     if ( mes1!='' ){
@@ -1053,8 +1080,17 @@ $('.send').on('click',function(){
         
         
         
+        function getcurrenttimehm (){
+                        var time = new Date();
+                        console.log( time );
+                        console.log( time.getHours()+":"+time.getMinutes() );
+                        timestr = time.getHours()+":"+time.getMinutes();
+                        $('[data-nid="'+sendid+'"].groupcontainer .grouptopright').html(timestr);
+                    };
         
         
+        
+        var msgarr = [];
         var sendGroupText = function () {
             var id = conn.getUniqueId();            // 生成本地消息id
             var msg = new WebIM.message('txt', id); // 创建文本消息
@@ -1073,6 +1109,23 @@ $('.send').on('click',function(){
                     
                     messagetobottom1();//滚动
                     
+                    var me = $('.username').attr('id');
+                    
+                    $('[data-nid="'+sendid+'"].groupcontainer .groupbottomleft').html(me+':'+mes1);
+                    
+                    
+                    var timestr;
+                    
+                    function getcurrenttimehm (){
+                        var time = new Date();
+                        console.log( time );
+                        console.log( time.getHours()+":"+time.getMinutes() );
+                        timestr = time.getHours()+":"+time.getMinutes();
+                        $('[data-nid="'+sendid+'"].groupcontainer .grouptopright').html(timestr);
+                    };
+                    
+                    getcurrenttimehm ();
+                    
                 },
                 fail: function () {
                     console.log('failed');
@@ -1081,6 +1134,11 @@ $('.send').on('click',function(){
             msg.set(option);
             msg.setGroup('groupchat');
             conn.send(msg.body);
+            
+            
+           
+           
+            
         };
         
         
@@ -1115,6 +1173,15 @@ $('.send').on('click',function(){
             
         } else if ( $('.matchtab1 '+'#'+sendid+'.everychatroom'+'  .mainmessagecontainer1').css('display') == 'block' ){
             sendGroupText();
+             msgarr.push({
+                        "groupid":'sendid',
+                        "msgcontent":'mes1',
+                        "time":'timestr',
+                        "send_from":'me',
+                        "msg_type":'txt',
+                        "msgid":'id'
+                    });
+            console.log(msgarr);
         }
     }
 });
