@@ -9,6 +9,10 @@ var conn = new WebIM.connection({
     autoReconnectInterval: WebIM.config.autoReconnectInterval,
     apiUrl:WebIM.config.apiURL,
 });
+
+var msgLengthTextArr = [];//全局变量，暂时是文本消息存储空数组
+var subGroupArr = [];//全局变量，暂时用于存储群组类型的消息的空数组
+
 conn.listen({
     onOpened: function (message) {
         //连接成功回调
@@ -60,30 +64,41 @@ conn.listen({
     }, //失败回调
 
     onTextMessage: function (message) {
+        
         var gettype = message.type;
+        
         var msg_to = message.to;
+        
         var msg_from = message.from;
+        
         var textcontent = message.data;
+        
         var delay = message.delay;
         console.log(message);
         console.log(gettype);
+        msgLengthTextArr.push(message);
         
-        var messagearr = [];
+        console.log( msgLengthTextArr.length );
+        console.log( msgLengthTextArr );
+        
+        var msgnumbers = msgLengthTextArr.length;
+        
         
         function getcurrenttime (){
             var time = new Date();
             console.log( time );
-            console.log( time.getFullYear()+":"+(time.getMonth()+1)+":"+time.getDate()+":"+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() );
-            return { time.getFullYear()+":"+(time.getMonth()+1)+":"+time.getDate()+":"+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() };
+            console.log( time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() );
+            
+            return time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds();
         };
         
         
+        getcurrenttime ();
+        
+        $('#tab1 [data-nid="'+msg_to+'"].groupcontainer .groupbottomleft').text(msg_from+":"+message.data);
         
         
-        
-        
-        
-        
+        $('#tab1 [data-nid="'+msg_to+'"].groupcontainer .grouptopright').text(msgnumbers);
         
         
         
@@ -132,16 +147,62 @@ conn.listen({
 
         }else if ( gettype == 'groupchat' ){
             
+            console.log( message );
+            
+            message.time = getcurrenttime();
+            
+            console.log( message.time );
+                        
+            subGroupArr.push( message );
+            
+            console.log( subGroupArr );
+            
+            console.log( subGroupArr.length );
+            
+            var jsobj = JSON.stringify( subGroupArr );
+            
+            console.log( jsobj );
+            
+            var me = $('.username').attr('id');
+            
+            localStorage[me+":"+msg_to] = jsobj;
+            
+            console.log( localStorage[me+":"+msg_to] );
+            
+            var parsecontent = JSON.parse( localStorage[me+":"+msg_to] );
+            
+            console.log(parsecontent);
+            
+            
+            
+            
+            
+            
+            
+            
             if ($('#' + msg_to + '.everychatroom  .mainmessagecontainer1').css('display') === 'block') {
                 
-                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+                for ( i in parsecontent ){
+                    
+                    console.log( parsecontent[i].data );
+                    
+                    var str1 = '<div id="'+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + '</div><div class=" messagecontent messagecontent1">' + parsecontent[i].data + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+                    
+                    
+                }
+                
+                
+                
+                /*var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';*/
 
 
                 $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
                 
+            } else {
+                
             }
             
-        }
+        }//聊天室类型的消息
 
 
 
@@ -1436,7 +1497,7 @@ $('.matchtab3').on('click', 'button', function () {
         //判断是否有重复
 
         var str2 = '';
-        str2 = str2 + '<div data-nid="' + cid + '" id="' + ids + '" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright">10:00</div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">昵称：消息信息</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+        str2 = str2 + '<div data-nid="' + cid + '" id="' + ids + '" class="groupcontainer listsactive"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + ids + '</div><div class="grouptopright"></div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft"></div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
 
         $('.allchatmessages').prepend(str2);
 
