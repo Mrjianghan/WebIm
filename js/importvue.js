@@ -118,6 +118,7 @@ var vm = new Vue({
             },100);
             console.log(vm.timer1);
             console.log( typeof(vm.timer1) );
+            
         },
         deletefiends:function($event){
             vm.trans3 = true;

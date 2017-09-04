@@ -13,6 +13,21 @@ var conn = new WebIM.connection({
 var msgLengthTextArr = [];//全局变量，暂时是文本消息存储空数组
 var subGroupArr = [];//全局变量，暂时用于存储群组类型的消息的空数组
 
+var testarr = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 conn.listen({
     onOpened: function (message) {
         //连接成功回调
@@ -74,21 +89,18 @@ conn.listen({
         var textcontent = message.data;
         
         var delay = message.delay;
-        console.log(message);
-        console.log(gettype);
-        msgLengthTextArr.push(message);
+        //console.log(message);
+        //console.log(gettype);
+        //msgLengthTextArr.push(message);
         
-        console.log( msgLengthTextArr.length );
+        /*console.log( msgLengthTextArr.length );
         console.log( msgLengthTextArr );
         
-        var msgnumbers = msgLengthTextArr.length;
+        var msgnumbers = msgLengthTextArr.length;*/
         
         
         function getcurrenttime (){
             var time = new Date();
-            console.log( time );
-            console.log( time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds() );
-            
             return time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds();
         };
         
@@ -98,7 +110,7 @@ conn.listen({
         $('#tab1 [data-nid="'+msg_to+'"].groupcontainer .groupbottomleft').text(msg_from+":"+message.data);
         
         
-        $('#tab1 [data-nid="'+msg_to+'"].groupcontainer .grouptopright').text(msgnumbers);
+        //$('#tab1 [data-nid="'+msg_to+'"].groupcontainer .grouptopright').text(msgnumbers);
         
         
         
@@ -146,61 +158,105 @@ conn.listen({
 
 
         }else if ( gettype == 'groupchat' ){
+            message.time = getcurrenttime();
             
             console.log( message );
             
-            message.time = getcurrenttime();
-            
-            console.log( message.time );
-                        
-            subGroupArr.push( message );
-            
-            console.log( subGroupArr );
-            
-            console.log( subGroupArr.length );
-            
-            var jsobj = JSON.stringify( subGroupArr );
-            
-            console.log( jsobj );
-            
+            var msgto = message.to;
             var me = $('.username').attr('id');
             
-            localStorage[me+":"+msg_to] = jsobj;
+            var strmix = me+":"+msgto;
             
-            console.log( localStorage[me+":"+msg_to] );
+            console.log( strmix );
             
-            var parsecontent = JSON.parse( localStorage[me+":"+msg_to] );
+            subGroupArr.push(message);
             
-            console.log(parsecontent);
+            var jsonarr = JSON.stringify( subGroupArr );
+            
+            localStorage[strmix] = jsonarr;
+            
+            console.log( localStorage[strmix] );
+            
+            //去侦测接收到的次数
+            if ( message.to == 21281596571650 ){
+                
+                console.log(message);
+                
+                testarr.push(message);
+                
+                console.log( testarr.length );
+                
+                $('#tab1 [data-nid="'+21281596571650+'"].groupcontainer .groupbottomright').text(testarr.length);
+                
+            }//去侦测接收到的次数
+            
+            
+            if ($('.allchatmessages [data-nid="' + msgto + '"]').length < 1) {
+                var str2 = '';
+            
+                str2 = str2 + '<div data-nid="' + msgto + '" id="' + msgto + '" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + msgto + '</div><div class="grouptopright"></div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft"></div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+
+                $('.allchatmessages').prepend(str2);
+            }
+            
+            var parsecontent = JSON.parse(jsonarr);
+            
+            console.log( parsecontent );
+            
+            var i;
+            
+            /*for ( i in parsecontent ){
+                
+                console.log(parsecontent[i]);
+                
+                if( parsecontent[i].to == 21281596571650 ){
+                    console.log( parsecontent[i] );
+                    
+                    var numberi = parseInt(i);
+                    
+                }
+                
+            }
+            
+            $('#tab1 [data-nid="'+msg_to+'"].groupcontainer .groupbottomright').text(numberi+1);*/
+            
+            //console.log(parseInt(i));
+            
+            /*console.log( i );
+            
+            console.log(typeof(i));
+            
+            var numberi = parseInt(i);
+            
+            $('#tab1 [data-nid="'+msg_to+'"].groupcontainer .groupbottomright').text(numberi+1);*/
+            
+            
+           
             
             
             
-            
-            
-            
-            
-            
-            if ($('#' + msg_to + '.everychatroom  .mainmessagecontainer1').css('display') === 'block') {
+            /*if ($('#' + msg_to + '.everychatroom  .mainmessagecontainer1').css('display') === 'block') {
+                //如果当前收到消息的群组块显示
                 
                 for ( i in parsecontent ){
                     
                     console.log( parsecontent[i].data );
                     
-                    var str1 = '<div id="'+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + '</div><div class=" messagecontent messagecontent1">' + parsecontent[i].data + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+                    var str1 = '<div id="'+message.id+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' +message.from+ '</div><div class=" messagecontent messagecontent1">' + parsecontent[i].data + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
                     
                     
                 }
                 
                 
                 
-                /*var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';*/
+                var str1 = '<div id="'+textcontent+'" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent1">' + textcontent + '</div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
 
 
                 $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
                 
             } else {
                 
-            }
+            }*/
             
         }//聊天室类型的消息
 
@@ -378,6 +434,8 @@ rtcCall = new WebIM.WebRTC.Call({
         }
     }
 });
+
+
 
 
 
