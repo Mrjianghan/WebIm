@@ -35,6 +35,17 @@ body {
     display: block;
     
 }
+
+
+.nothingcontainer {
+	height: 0;
+	width: 0;
+}
+.garbagecontainer {
+	height: 0;
+	width: 0;
+}
+
 .containers h2 {
     text-align: center;
     margin-bottom: 20px;

@@ -19,6 +19,7 @@ var vm = new Vue({
         timer1:{},
         timer2:{},
         sendfileid:'',
+        showfeedback:'',
     },
     
     methods:{

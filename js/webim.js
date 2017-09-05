@@ -15,8 +15,9 @@ var subGroupArr = [];//全局变量，暂时用于存储群组类型的消息的
 
 var testarr = [];
 
+var groupNamearr = [];//群组名称空数组容器
 
-
+var num = 0;
 
 
 
@@ -116,6 +117,7 @@ conn.listen({
         
 
         if (gettype == 'chatroom') {
+			//聊天室消息
             //console.log(msg_from);
             //console.log(msg_to);
             //console.log(delay);
@@ -152,32 +154,78 @@ conn.listen({
 
 
 
-
-
-
-
-
         }else if ( gettype == 'groupchat' ){
+			//群组消息
             message.time = getcurrenttime();
             
             console.log( message );
             
             var msgto = message.to;
-            var me = $('.username').attr('id');
+			
+			console.log( msgto );
+			
+			
+			var strgarbage ='<div id="'+ msgto +'" class="garbagecontainer"></div>';
+			
+			$('.nothingcontainer').append( strgarbage );
+			
+			//console.log( $('#'+msgto+'.garbagecontainer') );
+			
+			
+			
+            //var me = $('.username').attr('id');
             
-            var strmix = me+":"+msgto;
+            //var strmix = me+":"+msgto;
+			
+			groupNamearr.push(msgto);
+			
+			//console.log(groupNamearr);
+			
+			
+			
+			var groupNames1 = _.uniq( groupNamearr );//剔除重复
+			
+			console.log( groupNames1 );
+			
+			//21281596571650 一个群组id
+			
+			for (var i in groupNames1 ) {
+				
+				console.log( groupNames1[i] );
+				
+				console.log( $('#'+groupNames1[i]+'.garbagecontainer') );
+				
+				var testarr = $('#'+groupNames1[i]+'.garbagecontainer');
+				
+				$('#tab1 [data-nid="'+groupNames1[i]+'"].groupcontainer .groupbottomright').text(testarr.length);
+				
+				
+				
+				
+			}
+			
+			
+			
+			/*if ( message.to = 21281596571650 ){
+				console.log( message ) ;
+			}*/
+			
+			
+			
+			
             
-            console.log( strmix );
+            //console.log( strmix );
             
-            subGroupArr.push(message);
+            /*subGroupArr.push(message);
             
             var jsonarr = JSON.stringify( subGroupArr );
             
-            localStorage[strmix] = jsonarr;
+            localStorage[strmix] = jsonarr;*/
             
-            console.log( localStorage[strmix] );
+            //console.log( localStorage[strmix] );
+			
             
-            //去侦测接收到的次数
+            /*//去侦测接收到的次数
             if ( message.to == 21281596571650 ){
                 
                 console.log(message);
@@ -188,22 +236,22 @@ conn.listen({
                 
                 $('#tab1 [data-nid="'+21281596571650+'"].groupcontainer .groupbottomright').text(testarr.length);
                 
-            }//去侦测接收到的次数
+            }//去侦测接收到的次数*/ 
             
             
             if ($('.allchatmessages [data-nid="' + msgto + '"]').length < 1) {
                 var str2 = '';
             
-                str2 = str2 + '<div data-nid="' + msgto + '" id="' + msgto + '" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + msgto + '</div><div class="grouptopright"></div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft"></div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+                str2 = str2 + '<div data-nid="' + msgto + '" id="' + msgto + '" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + msgto + '</div><div class="grouptopright"></div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">'+message.from+':'+message.data+'</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
 
                 $('.allchatmessages').prepend(str2);
-            }
+            }//接收到消息追加显示到聊天列表里面
             
-            var parsecontent = JSON.parse(jsonarr);
+            /*var parsecontent = JSON.parse(jsonarr);
             
             console.log( parsecontent );
             
-            var i;
+            var i;*/
             
             /*for ( i in parsecontent ){
                 
@@ -2106,6 +2154,11 @@ $('.lists').on('click', '.groupcontainer', function (event) {
     console.log( idnumber );
     console.log( idname );
     vm.sendfileid = idnumber;
+	
+	$('#'+idnumber+'.garbagecontainer').remove();
+	
+	
+	
     $('.groupmanager1').attr('data-name',idname);
     $('.groupmanager1').attr('id',idnumber);
     $('.send').attr('id',idnumber);

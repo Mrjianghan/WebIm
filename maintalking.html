@@ -171,6 +171,32 @@
                 </div>
             </div>
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <div v-if="showfeedback">
+                
+                
+                
+            </div>
+            
+            
+            
+            
+            
+            
             <div class="main-left">
                 <div class="userdatas">
                     <div class="datacenter">
@@ -196,7 +222,7 @@
                             <div class="slidedownmenu">
                                 <ul>
                                     <li><i class="fa fa-comment-o"></i>&nbsp;发起聊天</li>
-                                    <li><i class="fa fa-envelope-o"></i>&nbsp;意见反馈</li>
+                                    <li @click=""><i class="fa fa-envelope-o"></i>&nbsp;意见反馈</li>
                                     <li><i class="fa fa-power-off"></i>&nbsp;退出</li>
                                 </ul>
                             </div>
@@ -384,13 +410,20 @@
                 </div><!--sendmessage-->
             </div>
             <div class="clearfix"></div>
+			
+			
+			
+			
+			<div class="nothingcontainer">
+				
+			</div>
         </div><!--containermain-->
         
         <!--[if lte IE 9]>
         <script src="swfupload/swfupload.min.js"></script>
         <![endif]-->
         <script src="js/jquery-1.12.4.min.js"></script>
-        
+        <script src="js/lodash.min.js"></script>
         <script src="js/importvue.js"></script>
         <script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
