@@ -408,7 +408,28 @@ conn.listen({
 
     }, //收到音频消息
 
-    onLocationMessage: function (message) {}, //收到位置消息
+    onLocationMessage: function (message) {
+		
+		var msgto = message.to;
+		
+		console.log('location');
+		
+		console.log(message);
+		
+		console.log(message.addr);
+		
+		
+		if ($('.allchatmessages [data-nid="' + msgto + '"]').length < 1) {
+                var str2 = '';
+            
+                str2 = str2 + '<div data-nid="' + msgto + '" id="' + msgto + '" class="groupcontainer"><div class="groupinfo"><div class="groupinfo-left"><img src="imgs/group-1.jpg"></div><div class="groupinfo-right"><div class="groupifrightcontainer"><div class="grouptop"><div class="grouptopleft">' + msgto + '</div><div class="grouptopright"></div><div class="clearfix"></div></div><div class="groupbottom"><div class="groupbottomleft">'+message.from+':'+message.data+'</div><div class="groupbottomright"><i class="fa fa-bell-slash"></i></div><div class="clearfix"></div></div></div></div><div class="clearfix"></div></div></div>';
+
+                $('.allchatmessages').prepend(str2);
+            }//接收到消息追加显示到聊天列表里面
+		
+		
+		
+	}, //收到位置消息
 
     onPresence: function (message) { //收到联系人订阅请求、处理群组、聊天室被踢解散等消息
 
@@ -460,6 +481,12 @@ rtcCall = new WebIM.WebRTC.Call({
         onGotRemoteStream: function (stream, streamType) {
             console.log('onGotRemoteStream::', 'stream: ', stream, 'streamType: ', streamType);
             console.log(streamType);
+			
+			$('#tab1 .allchatmessages').append();
+			
+			
+			
+			
         },
         onGotLocalStream: function (stream, streamType) {
             console.log('onGotLocalStream::', 'stream:', stream, 'streamType: ', streamType);
@@ -469,6 +496,7 @@ rtcCall = new WebIM.WebRTC.Call({
             console.log(caller);
             var con1 = caller.slice(24, -12);
             console.log(con1);
+			
         },
         onTermCall: function (reason) {
             console.log('onTermCall::');
