@@ -1,4 +1,10 @@
+
+
+
+
 /* 初始化 */
+
+
 var conn = new WebIM.connection({
     isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
     https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
@@ -416,7 +422,41 @@ conn.listen({
 		
 		console.log(message);
 		
+		var msgfrom = message.from;
+		
 		console.log(message.addr);
+		
+		console.log(message.lat);
+		
+		console.log(message.lng);
+		
+		var str1 = '<div id="11" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msgfrom + '</div><div class=" messagecontent messagecontent1"><div id="allmap"></div></div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+        
+        
+            
+            
+        console.log(str1);
+
+
+        $('#' + msgto + '.everychatroom .mainmessagecontainer1').append(str1);
+		
+		
+		var timer = window.setTimeout(function(){
+			var map = new BMap.Map("allmap");
+			var point = new BMap.Point(116.328173, 40.058377);
+			map.centerAndZoom(point, 15);
+			var marker = new BMap.Marker(point);  // 创建标注
+			map.addOverlay(marker);               // 将标注添加到地图中
+			marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		},1000);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		if ($('.allchatmessages [data-nid="' + msgto + '"]').length < 1) {
@@ -2524,3 +2564,18 @@ $('.selector a').on('click', function () {
         display: 'none'
     });
 });
+
+
+
+
+
+
+
+	// 百度地图API功能
+	/*var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.328173, 40.058377);
+	map.centerAndZoom(point, 15);
+	var marker = new BMap.Marker(point);  // 创建标注
+	map.addOverlay(marker);               // 将标注添加到地图中
+	marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画  */
+

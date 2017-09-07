@@ -17,6 +17,12 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
+#allmap{height:200px;width:200px;}
+		#r-result{width:100%; font-size:14px;}
+
+
 .containers {
     width: 380px;
     background-color: #fff;
