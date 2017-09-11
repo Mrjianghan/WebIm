@@ -86,15 +86,10 @@ conn.listen({
     }, //失败回调
 
     onTextMessage: function (message) {
-        
         var gettype = message.type;
-        
         var msg_to = message.to;
-        
         var msg_from = message.from;
-        
         var textcontent = message.data;
-        
         var delay = message.delay;
         //console.log(message);
         //console.log(gettype);
@@ -402,7 +397,8 @@ conn.listen({
 
     onPictureMessage: function (message) {
 
-
+		console.log(message);
+		
 
     }, //收到图片消息
 
@@ -410,7 +406,83 @@ conn.listen({
 
     onAudioMessage: function (message) {
 
-        //console.log('audio');
+        console.log('audio');
+		
+		console.log(message);
+		
+		var msg_to = message.to;
+		var msg_from = message.from;
+		var source1 = message.url;
+		
+		console.log( msg_to );
+		console.log( msg_from );
+		console.log( source1 );
+		
+		
+		
+		
+		
+		
+		
+		var options = { url: message.url };
+    
+		options.onFileDownloadComplete = function ( response ) { 
+		  //音频下载成功，需要将response转换成blob，使用objectURL作为audio标签的src即可播放。
+		    var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
+			
+			console.log( objectURL );
+			
+			console.log( response );
+			
+			
+			
+			
+			var str1 = '<div id="11" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msg_from + '</div><div class=" messagecontent messagecontent2">' +'<audio controls><source src="'+objectURL+'"></audio><div class="audioicon"><i class="fa fa-volume-up"></i></div><div>'+ '</div><div class="clearfix"></div><div class="messagecontrol"></div></div></div>';
+        
+        
+
+
+            $('#' + msg_to + '.everychatroom .mainmessagecontainer1').append(str1);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		};  
+
+		options.onFileDownloadError = function () {
+		  //音频下载失败 
+			
+			
+			console.log('下载失败');
+		};  
+
+		//通知服务器将音频转为mp3
+		options.headers = { 
+		  'Accept': 'audio/mp3'
+		};
+
+		WebIM.utils.download.call(conn, options);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
     }, //收到音频消息
 
@@ -430,7 +502,10 @@ conn.listen({
 		
 		console.log(message.lng);
 		
-		var str1 = '<div id="11" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msgfrom + '</div><div class=" messagecontent messagecontent1"><div id="allmap"></div></div><div class="clearfix"></div><div class="messagecontrol"><div class="message1 messagebor">复制</div><div class="message1 messagebor" >转发</div><div class="message1">删除</div></div></div></div>';
+		
+		/*http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&width=280&height=140&zoom=12*/
+		
+		var str1 = '<div id="11" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msgfrom + '</div><div class=" messagecontent messagecontent1">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</div><div class="clearfix"></div></div></div>';
         
         
             
@@ -441,14 +516,7 @@ conn.listen({
         $('#' + msgto + '.everychatroom .mainmessagecontainer1').append(str1);
 		
 		
-		var timer = window.setTimeout(function(){
-			var map = new BMap.Map("allmap");
-			var point = new BMap.Point(116.328173, 40.058377);
-			map.centerAndZoom(point, 15);
-			var marker = new BMap.Marker(point);  // 创建标注
-			map.addOverlay(marker);               // 将标注添加到地图中
-			marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-		},1000);
+		
 		
 		
 		
@@ -504,6 +572,90 @@ conn.listen({
                 break;
         }
     },
+	
+	
+	onInviteMessage: function ( message ) {
+		
+		
+		
+		
+	},  //处理群组邀请
+	
+	
+	
+	onFileMessage: function ( message ) {
+		
+		console.log(message);
+		
+		
+		
+		
+		
+		
+		
+		console.log( message.filename );
+		
+		
+		
+		var filetype = message.filename.slice(-3);
+		
+		//arr1 = ['zip','txt','doc','pdf'];
+		
+		
+		str1 = 'ziptxtdocpdf';
+		
+		str2 = 'mp3amrwmv';
+		
+		str3 = 'mp4avirmvbmkv';
+		
+		console.log(filetype);
+		
+		//str1.match(filetype);
+		
+		console.log( str1.match(filetype) );
+		
+		if ( str1.match(filetype) != null ){
+			 
+			alert("docs");
+			
+		}else if ( str2.match(filetype) !=null ){
+			
+			alert('music');	  
+		}else if ( str3.match(filetype) !=null ){
+			
+			alert('video');	  
+		}
+		
+		
+		
+		
+        
+        
+		
+		
+		//var str1 = '<div id="11" class="messagecontainer"><img src="imgs/dsad-1.jpg" class="leftpic"><div class="nickname1">' + msgfrom + '</div><div class=" messagecontent messagecontent1">'++'</div><div class="clearfix"></div></div></div>';
+        
+        
+            
+            
+        //console.log(str1);
+
+
+        //$('#' + msgto + '.everychatroom .mainmessagecontainer1').append(str1);
+		
+		
+		
+	},    //收到文件消息
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }); /* 初始化 */
 // 初始化WebRTC Call
 var rtcCall = null;
@@ -1453,6 +1605,7 @@ var sendGroupImg = function (vars) {
                         console.log(e);
                         img_url= e.uri + '/' +e.entities[0].uuid;
                         console.log( img_url );
+						
                         
                     },
                     success: function () {                // 消息发送成功
@@ -1463,6 +1616,8 @@ var sendGroupImg = function (vars) {
                         $('.matchtab1 '+'#'+vars+'.everychatroom'+'  .mainmessagecontainer1').append( str1 ); 
                         
                         
+						
+						
                         
                     },
                     flashUpload: WebIM.flashUpload
@@ -1524,10 +1679,6 @@ $('.sendfile').on('change',function(){
             var file = WebIM.utils.getFileUrl(input);      // 将图片转化为二进制文件
             var img_url;
             var allowType = {
-                'jpg': true,
-                'gif': true,
-                'png': true,
-                'bmp': true,
                 'zip': true,
                 'txt': true,
                 'doc': true,
@@ -1566,7 +1717,9 @@ $('.sendfile').on('change',function(){
                     
                         $('.matchtab1 '+'#'+idnumber+'.everychatroom'+'  .mainmessagecontainer1').append( str1 );
                         
-                        
+                        console.log(file.filetype);
+						
+						
                        
                         
                     },

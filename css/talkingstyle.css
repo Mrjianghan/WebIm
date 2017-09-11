@@ -19,6 +19,21 @@ body {
 }
 
 
+
+.messagecontent audio {
+	opacity: 0;
+}
+
+.messagecontent2 {
+	position: relative;
+}
+.audioicon {
+	position: absolute;
+	bottom: 0;
+}
+
+
+
 #allmap{height:200px;width:200px;}
 		#r-result{width:100%; font-size:14px;}
 
@@ -1694,6 +1709,23 @@ body {
 .messagecontent1  img {
     vertical-align: middle;
 }
+
+.mapimg {
+	height: 300px;
+	width: 400px;
+}
+
+.mapaddr {
+	position: absolute;
+	width: 400px;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	background-color: Rgba(97,97,97,0.3);
+	bottom: 0;
+}
+
+
 
 .messagecontent2 {
 	float: right;

@@ -189,11 +189,32 @@
             
             
             
-            <div v-if="showfeedback">
+            <!--<div class="trans5" v-if="showfeedback">
                 
+				<div>
+					<h2>发送反馈</h2>
+					<textarea></textarea>
+					<button>btn</button>
+				</div>
+                
+                
+            </div>-->
+			
+			
+			
+			<div v-if="showfeedback" id="feedback">
+                
+				<div>
+					<h2>发送反馈</h2>
+					<textarea></textarea>
+					<button>btn</button>
+				</div>
                 
                 
             </div>
+				
+				
+			
             
             
             
@@ -225,7 +246,7 @@
                             <div class="slidedownmenu">
                                 <ul>
                                     <li><i class="fa fa-comment-o"></i>&nbsp;发起聊天</li>
-                                    <li @click=""><i class="fa fa-envelope-o"></i>&nbsp;意见反馈</li>
+                                    <li @click="feedback()"><i class="fa fa-envelope-o"></i>&nbsp;意见反馈</li>
                                     <li><i class="fa fa-power-off"></i>&nbsp;退出</li>
                                 </ul>
                             </div>
@@ -400,7 +421,7 @@
                     <ul class="sendicons">
                         <li @click.stop="emojishow =!emojishow"><i class="fa fa-smile-o"></i></li>
                         <li><i class="fa fa-folder-o"><input :id="sendfileid"   class="sendfile" type="file"></i></li>
-                        <li><i class="fa fa-picture-o"><input :id="sendfileid"  class="sendpic" type="file" accept="image/gif,image/jpg,image/png,image/bmp"></i></li>
+                        <li><i class="fa fa-picture-o"><input :id="sendfileid"  class="sendpic" type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i></li>
                         <div class="clearfix"></div>
                     </ul>   
                     <textarea class="writein scrollbar-macosx"></textarea>
@@ -421,6 +442,19 @@
 				
 			</div>
         </div><!--containermain-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
         
         <!--[if lte IE 9]>
         <script src="swfupload/swfupload.min.js"></script>

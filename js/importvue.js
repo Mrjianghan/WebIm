@@ -1,3 +1,6 @@
+Vue.component('feedback',)
+
+
 var vm = new Vue({
     el:"#firstvue",
     data:{
@@ -19,7 +22,7 @@ var vm = new Vue({
         timer1:{},
         timer2:{},
         sendfileid:'',
-        showfeedback:'',
+        showfeedback:false,
     },
     
     methods:{
@@ -177,7 +180,9 @@ var vm = new Vue({
             //initials();
         },
         
-        
+        feedback:function(){
+			vm.showfeedback = true;
+		}
         
         
         
