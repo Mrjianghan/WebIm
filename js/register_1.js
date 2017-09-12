@@ -1,22 +1,79 @@
-function pop1 (){
-    
-    $('.popout').css({display:'block'});
-    $('.popout').animate({display:'block'},1000,function(){
-        $('.popout').css({display:'none'})});
-};
+axios.defaults.withCredentials = true;
+var vm = new Vue({
+	el:'#subBody',
+	data:{
+		rightorwrong1:false,
+		rightorwrong2:false,
+		firstinputval:'',
+		secondinputval:'0',
+		ableornot1:true,
+		btncolorswitch2:false,
+		ableornot2:true,
+	},
+	created:function(){
+		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
+		}).catch(function(err){
+			console.log(err);
+		});
+		//获取token
+	},
+	methods:{
+		
+		nextstepfinal:function(){
+			/*axios.post('http://47.95.6.203:8183/im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
+				console.log(res);
+				//window.location.href="http://www.baidu.com";
+			}).catch(function(err){
+				console.log(err);
+			})*/
+			console.log('click');
+			//window.location.href="";
+		},
+		//点击下一步
+		checknick:function(){
+			var reg1 = /^([\u4e00-\u9fa5a-zA-Z]{1})([a-zA-Z\u4e00-\u9fa50-9]{3,19})$/igm;
+			var t1 = vm.firstinputval.match(reg1);
+			console.log(t1);
+			if ( t1 == null ){
+				vm.rightorwrong2 = true;
+				vm.rightorwrong1 = false;
+				return false;
+			} else {
+				vm.rightorwrong1 = true;
+				vm.rightorwrong2 = false;
+			}
+			
+		},
+		//检查昵称
+		clearinput1:function(){
+			vm.firstinputval = '';
+		},
+		//清理昵称
+		select:function(){
+			var flag = vm.secondinputval;
+			var reg1 = /^([\u4e00-\u9fa5a-zA-Z]{1})([a-zA-Z\u4e00-\u9fa50-9]{3,19})$/igm;
+			var t1 = vm.firstinputval.match(reg1);
+			
+			if ( ( flag != 0 )&&( t1 != null ) ){
+				console.log('hi');
+				vm.btncolorswitch2 = true;
+				vm.ableornot2 = false;
+			} else {
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
+			}
+		},
+		//性别选择
+		
+		
+		
+		
+		
+		
+		
+	}
+		
+});
 
 
 
-function able2(){
-        
-    var pnumber = $('input[name="phonenumber"]').val();
-    var pass = $('input[name="passnumber"]').val();
-    var pnumber1 = pnumber !== '';
-    var pass1 = pass !== '';
-        
-    if ( pnumber1 && pass1 ){
-        $('.getphone').prop('disabled',false); $('.getphone').css({'backgroundColor':'#278605'});
-        $('.getphone').css({'cursor':'pointer'});
-    }
-};
-    

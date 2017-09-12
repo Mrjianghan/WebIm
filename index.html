@@ -7,88 +7,75 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/index.css">
-        
+		<link rel="icon shotcut" href="imgs/linklogo.png">
+		<script src="./js/axios.js"></script>
         <!-- HTML5 element -->
         <script src="Config_JS/browser-polyfill.min.js"></script>
-        <script src="js/vue.js"></script>
+		<script src="js/vue.js"></script>
     </head>
     <body>
-        <div class="subbody">
-            
-            <div class="popout">
-                <div class="alertinfo">
-                    手机号或密码错误，请重新输入
-                </div>
-            </div>
-            
-            <div class="register">
-                <div class="switch">
-                    <div class="number">
-                        <a class="white" href="#tab1">账户登录</a>
-                    </div>
-                    <div class="scan">
-                        <a href="#tab2">扫码登录</a>
-                    </div>
-                </div><!--switch-->
-                <div class="tabscontainer">
-                    <div id="tab1">
-                        <div class="tab1in">
-                            <form>
-                                <input type="text" name="phonenumber" placeholder="请输入你的手机号">
-                                
-                                
-                                <div class="clearfix">
-                                </div>
-                                <input type="password" name="password" placeholder="请输入密码">
-                                <button type="submit" disabled>登录</button>
-                            </form>
-                            <div class="doubleswitch">
-                                <div class="lefta">
-                                    <a href="register.html">立即注册</a>
-                                </div>
-                            
-                                <div class="righta">
-                                    <a href="javascript:;">忘记密码</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    <div id="tab2">
-                        <div class="tab2in">
-                            <img src="imgs/twodiension.PNG">
-                            <div class="please">请使用众享手机版扫描二维码登录</div>
-                            <div class="centera">
-                                    <a href="https://www.google.com.hk/" target="_blank">立即注册</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="bottomdownload">
-                <div class="floatright">
-                    <div><i class="fa fa-apple"></i>&nbsp;&nbsp;<a href="javascript:;" target="_blank">IPhone版下载</a>
-                    </div>
-                    <div><i class="fa fa-android"></i>&nbsp;&nbsp;<a href="imgs/girl.jpg" download='girl.jpg'>Android版下载</a>
-                    </div>
-                </div>
-            <div class="clearfix"></div>
-            </div>
+        <div class="subbody" id="subBody">
+            <header>
+				<img src="imgs/index-logo.png">
+				<div class="headerName">惠众通享</div>
+				<div class="clearfix"></div>
+			</header>
+			
+			<div class="setNick">
+				<article><div @click="switch6()" class="head1" :class="{headeractive:headswitch1}">账户登录</div><div @click="switch8()" :class="{headeractive:headswitch2}" class="head2">扫码登录</div></article>
+				
+				<div v-if="switchheader" class="tab1">
+					
+					<div class="inputContainer">
+						<div class="errOuter"></div>
+						<div class="firstinput samesize">
+							<input @change="checkphone()" v-model="firstinputval" type="text" placeholder="请输入手机号" name="psw" maxlength="20"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
+						</div>
+
+						<div class="secondinput samesize">
+							<input @change="checkpsw2()" v-model="secondinputval" type="password" placeholder="请输入密码" name="psw2" maxlength="20"><i @click="clearinput2" v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
+						</div>
+						<div class="placeholder2">
+							<a class="aouter1" href="forgetpwd.html">忘记密码&nbsp;?</a>
+						</div>
+						<button @click="nextstepfinal" type="button" class="nextstep" :class="{btnable:btncolorswitch2}" :disabled="ableornot2">
+						登录
+						</button>
+						<div class="placeholder3">
+							<a class="aouter1" href="forgetpwd.html">还没有账号&nbsp;?&nbsp;立即注册&nbsp;&raquo;</a>
+						</div>
+					
+					</div>
+
+					
+					
+					
+				</div><!--tab1-->
+				<div v-else class="tab2">
+					<div class="twodimention">
+						<img src="imgs/twodiension.PNG">
+					</div>
+					<div class="please">请使用众享手机版扫描二维码登录</div>
+					<div class="bot1"><a href="register.html">立即注册</a></div>
+				</div>
+				
+					
+			</div>
+			
+			<footer>
+				<div class="footer1">
+					<i class="fa fa-apple"></i>&nbsp;&nbsp;&nbsp;<a href="javascript:;"><span>iPhone版下载</span></a>
+				</div>
+				<div class="clearfix"></div>
+				<div class="footer2">
+					<i class="fa fa-android"></i>&nbsp;&nbsp;&nbsp;<a href="javascript:;"><span>Android版下载</span></a>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+         
         </div>
+        
         <script src="js/jquery-1.12.4.min.js"></script>
         <script src="js/index.js"></script>
-		<script>
-			var vm = new Vue({
-				el:"#tab1",
-				data:{
-					
-				}
-				
-			});
-		</script>
     </body>
 </html>

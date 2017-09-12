@@ -2,7 +2,6 @@ axios.defaults.withCredentials = true;
 var vm = new Vue({
 	el:'#subBody',
 	data:{
-		switchheader:true,
 		rightorwrong1:false,
 		rightorwrong2:false,
 		rightorwrong3:false,
@@ -12,8 +11,6 @@ var vm = new Vue({
 		ableornot1:true,
 		btncolorswitch2:false,
 		ableornot2:true,
-		headswitch1:true,
-		headswitch2:false,
 	},
 	created:function(){
 		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
@@ -35,26 +32,35 @@ var vm = new Vue({
 			//window.location.href="";*/
 		},
 		//点击下一步
-		checkphone:function(){
-			var input1 = vm.firstinputval;
-			if ( !(/^1[0-9]{10}$/.test( input1 )) ){
+		checkpsw1:function(){
+			var reg1 = /^([a-zA-Z0-9`~!@#$%^&*()_+<>?:"{},.\/;'[\]·]{6,20})$/img;
+			var t1 = vm.firstinputval.match(reg1);
+			console.log(t1);
+			if ( t1 == null ){
 				vm.rightorwrong2 = true;
 				vm.rightorwrong1 = false;
 				return false;
 			} else {
 				vm.rightorwrong1 = true;
 				vm.rightorwrong2 = false;
-				
 			}
-		},
-		//检查手机号码正确与否
-		checkpsw1:function(){
-			
 			
 		},
 		//检查密码
 		checkpsw2:function(){
-			
+			if ( vm.firstinputval == vm.secondinputval ){
+				vm.rightorwrong4 = false;
+				vm.rightorwrong3 = true;
+				vm.btncolorswitch2 = true;
+				vm.ableornot2 = false;
+				
+			}else {
+				vm.rightorwrong3 = false;
+				vm.rightorwrong4 = true;
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
+				return false;
+			}
 			
 		},
 		//检查密码
@@ -64,16 +70,7 @@ var vm = new Vue({
 		clearinput2:function(){
 			vm.secondinputval = '';
 		},
-		switch6:function(){
-			vm.switchheader = true;
-			vm.headswitch1 = true;
-			vm.headswitch2 = false;
-		},
-		switch8:function(){
-			vm.switchheader = false;
-			vm.headswitch2 = true;
-			vm.headswitch1 = false;
-		}
+		
 		
 		
 		
