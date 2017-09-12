@@ -48,13 +48,14 @@ var vm = new Vue({
 			}
 		},
 		//检查手机号码正确与否
-		checkpsw1:function(){
-			
-			
-		},
-		//检查密码
 		checkpsw2:function(){
-			
+			if (vm.secondinputval != ''){
+				vm.btncolorswitch2 = true;
+				vm.ableornot2 = false;
+			}else {
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
+			}
 			
 		},
 		//检查密码
