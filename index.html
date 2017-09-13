@@ -12,6 +12,9 @@
         <!-- HTML5 element -->
         <script src="Config_JS/browser-polyfill.min.js"></script>
 		<script src="js/vue.js"></script>
+		<script src="Config_JS/webim.config.js"></script>
+        <script src="Config_JS/strophe-1.2.8.min.js"></script>
+        <script src="Config_JS/websdk-1.4.12.js"></script>
     </head>
     <body>
         <div class="subbody" id="subBody">
@@ -27,7 +30,9 @@
 				<div v-if="switchheader" class="tab1">
 					
 					<div class="inputContainer">
-						<div class="errOuter"></div>
+						<div class="errOuter">
+							<div v-show="errorshow"><i class="fa fa-minus-circle"></i>&nbsp;&nbsp;{{ errormessage }}</div>
+						</div>
 						<div class="firstinput samesize">
 							<input @change="checkphone()" v-model="firstinputval" type="text" placeholder="请输入手机号" name="psw" maxlength="20"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
 						</div>

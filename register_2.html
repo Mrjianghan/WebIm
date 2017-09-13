@@ -12,6 +12,9 @@
         <!-- HTML5 element -->
         <script src="Config_JS/browser-polyfill.min.js"></script>
 		<script src="js/vue.js"></script>
+		<script src="Config_JS/webim.config.js"></script>
+        <script src="Config_JS/strophe-1.2.8.min.js"></script>
+        <script src="Config_JS/websdk-1.4.12.js"></script>
     </head>
     <body>
         <div class="subbody" id="subBody">
@@ -24,7 +27,9 @@
 			<div class="setNick">
 				<article><div>设置密码</div><a href="index.html"><i class="fa fa-times"></i></a></article>
 				<div class="inputContainer">
-					<div class="errOuter"></div>
+					<div class="errOuter">
+						<div v-if="errshow"><i class="fa fa-minus-circle"></i>&nbsp;<span>{{errmsg}}</span></div>
+					</div>
 					<div class="firstinput samesize">
 						<input @change="checkpsw1()" v-model="firstinputval" type="text" placeholder="请输入密码" name="psw" maxlength="20"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
 					</div>

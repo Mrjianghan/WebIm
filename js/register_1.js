@@ -1,4 +1,5 @@
 axios.defaults.withCredentials = true;
+var globallocal;
 var vm = new Vue({
 	el:'#subBody',
 	data:{
@@ -16,18 +17,27 @@ var vm = new Vue({
 			console.log(err);
 		});
 		//获取token
+		console.log(localStorage['huanxinreg']);
+		
+		if ( localStorage['huanxinreg'] ){
+			
+			globallocal = JSON.parse( localStorage['huanxinreg'] );
+		
+			console.log(globallocal);
+			
+		}
+		
 	},
 	methods:{
 		
 		nextstepfinal:function(){
-			/*axios.post('http://47.95.6.203:8183/im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
-				console.log(res);
-				//window.location.href="http://www.baidu.com";
-			}).catch(function(err){
-				console.log(err);
-			})*/
-			console.log('click');
-			//window.location.href="";
+			console.log(globallocal);
+			globallocal.nickname = vm.firstinputval;
+			globallocal.sex = vm.secondinputval;
+			console.log(globallocal);
+			localStorage['huanxinreg'] = JSON.stringify( globallocal );
+			console.log( localStorage['huanxinreg'] );
+			window.location.href = "register_2.html";
 		},
 		//点击下一步
 		checknick:function(){
