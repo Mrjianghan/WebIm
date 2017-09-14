@@ -1,3 +1,14 @@
+var ids;
+var conn = new WebIM.connection({
+    isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
+    https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
+    url: WebIM.config.xmppURL,
+    isAutoLogin: true,
+    heartBeatWait: WebIM.config.heartBeatWait,
+    autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
+    autoReconnectInterval: WebIM.config.autoReconnectInterval,
+    apiUrl:WebIM.config.apiURL,
+});
 axios.defaults.withCredentials = true;
 var globallocal;
 var vm = new Vue({
@@ -28,7 +39,6 @@ var vm = new Vue({
 	},
 	methods:{
 		nextstepfinal:function(){
-			
 			axios.post('http://47.95.6.203:8183/im/user/register.json?loginName='+globallocal.loginName+'&captcha='+globallocal.captcha+'&smscode='+globallocal.smscode+'&nickname='+globallocal.nickname+'&sex='+globallocal.sex+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
 				console.log(res.data.code);
 				var code = res.data.code;
@@ -36,7 +46,36 @@ var vm = new Vue({
 					case 2000 :
 						vm.errshow = true;
 						vm.errmsg = '信息保存成功';
-						window.location.href="message.html";
+						axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res){
+							console.log( res.data );
+							//console.log(res.data.data);
+							var data = res.data.data;
+							currentid = data.id;//考虑全局变量
+							console.log( currentid );
+							globallocal.psw = vm.firstinputval;
+							JSON.stringify(globallocal);
+							localStorage['huanxinreg'] = JSON.stringify(globallocal);
+							
+							/*var options = { 
+								username: currentid,
+								password: vm.firstinputval,
+								nickname: globallocal.nickname,
+								appKey: WebIM.config.appkey,
+								success: function () {
+									
+									window.location.href="message.html";
+								},  
+								error: function () {
+									vm.errshow = true;
+									vm.errmsg = '注册失败';
+								}, 
+								apiUrl: WebIM.config.apiURL
+							}; 
+							conn.registerUser(options);*/
+							
+						}).catch(function(err){
+							console.log(err);
+						});
 						break;
 					case 4000 :
 						vm.errshow = true;
@@ -102,8 +141,8 @@ var vm = new Vue({
 				vm.rightorwrong2 = false;
 				
 				if ( vm.firstinputval == vm.secondinputval ) {
-					vm.btncolorswitch2 = false;
-					vm.ableornot2 = true;
+					vm.btncolorswitch2 = true;
+					vm.ableornot2 = false;
 					vm.rightorwrong3 = true;
 					vm.rightorwrong4 = false;
 					

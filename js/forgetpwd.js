@@ -1,4 +1,5 @@
 axios.defaults.withCredentials = true;
+var findpsw;
 var vm = new Vue({
 	el:'#subBody',
 	data:{
@@ -48,8 +49,48 @@ var vm = new Vue({
 		},
 		//切换验证码
 		sendphonevalidate:function(){
-			axios.post('http://47.95.6.203:8183/im/sms/captcha/reg.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
-				console.log(res);
+			
+			axios.post('http://47.95.6.203:8183/im/sms/captcha/repwd.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
+				var code = res.data.code;
+				console.log(code);
+				switch ( code ){
+					case 2000 :
+						vm.errormessage = '发送成功';
+						vm.errorshow = true;
+						
+						break;
+					case 4000 :
+						vm.errormessage = '发送失败';
+						vm.errorshow = true;
+						return false;
+						break;
+					case 4001 :
+						vm.errormessage = '1分钟内只能发送1条短信';
+						vm.errorshow = true;
+						return false;
+						break;
+					case 4002 :
+						vm.errormessage = '1小时内只能发送3条短信';
+						vm.errorshow = true;
+						return false;
+						break;
+					case 4003 :
+						vm.errormessage = '1天内只能发送6条短信';
+						vm.errorshow = true;
+						return false;
+						break;
+					case 4005 :
+						vm.errormessage = '不是合法的手机号';
+						vm.errorshow = true;
+						return false;
+						break;
+					case 4007 :
+						vm.errormessage = '图片验证码错误';
+						vm.errorshow = true;
+						return false;
+						break;
+				}
+				
 			}).catch(function(err){
 				console.log(err);
 			});
@@ -70,12 +111,12 @@ var vm = new Vue({
 			},1000);
 			
 		},
-		//发送手机验证码
+		//发送重置密码手机验证码
 		useragreeinfo(){
 			vm.rightorwrong5 = !vm.rightorwrong5;
 			if ( vm.rightorwrong5 == false ){
-				if ( ( vm.firstinputval != '' )&&( vm.secondinputval != '' )&&( vm.thirdinputval != '' ) ){
-					console.log('hi');
+				if ( ( vm.rightorwrong1 )&&( vm.secondinputval != '' )&&( vm.thirdinputval.length == 6  ) ){
+					
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
 				}
@@ -90,11 +131,14 @@ var vm = new Vue({
 			if ( !(/^1[0-9]{10}$/.test( input1 )) ){
 				vm.rightorwrong2 = true;
 				vm.rightorwrong1 = false;
+				vm.ableornot1 = true;//禁用
+				vm.btncolorswitch = false;//禁用
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
 				return false;
 			} else {
 				vm.rightorwrong1 = true;
 				vm.rightorwrong2 = false;
-				
 			}
 		},
 		//检查手机号码正确与否
@@ -103,47 +147,68 @@ var vm = new Vue({
 		},
 		//清空手机号
 		checkvalidate:function(){
-			if ( (vm.firstinputval != '')&&(vm.secondinputval != '') ) {
-				vm.ableornot1 = false;
-				vm.btncolorswitch = true;
-			}else {
-				vm.ableornot1 = true;
-				vm.btncolorswitch = false;
-			}
+			axios.get('http://47.95.6.203:8183/captcha/validate.json?captcha='+vm.secondinputval).then(function(res){
+				var data1 = res.data.data;
+				if ( (data1)&&(vm.rightorwrong1)   ) {
+					console.log('验证');
+					console.log(data1);
+					vm.ableornot1 = false;
+					vm.btncolorswitch = true;
+				} else {
+					vm.ableornot1 = true;
+					vm.btncolorswitch = false;
+					console.log('错误');
+				}
+				
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+			
 		},
 		//启用发送手机短信
 		nextstepfinal:function(){
-			axios.post('http://47.95.6.203:8183/im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
-				console.log(res);
-				//window.location.href="http://www.baidu.com";
+			//检查验证码
+			axios.get('http://47.95.6.203:8183/im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.thirdinputval).then(function(res){
+				console.log( res.data );
+				var code = res.data.data;
+				console.log(code);
+				switch( code ){
+					case 2000 :
+						vm.errormessage = '验证成功';
+						vm.errorshow = true;
+						//window.location.href = "forgetpwd_1.html";
+						
+						
+						break;
+					case 4000 :
+						vm.errormessage = '验证失败';
+						vm.errorshow = true;
+						return false;
+						break;
+					case 4005 :
+						vm.errormessage = '不是合法的手机号';
+						vm.errorshow = true;
+						return false;
+						break;
+				}
 			}).catch(function(err){
-				console.log(err);
-			})
-			
-			
+				console.log()
+			});
+				
 			
 		},
 		//点击下一步
-		checksms:function(){
-			//console.log( vm.thirdinputval.length );
-			
-			/*if ( vm.thirdinputval.length==6 ){
-				vm.rightorwrong3 = true;
-			}else {
-				vm.rightorwrong3 = false;
-			}*/
-		},
-		//检查短信
 		
 		
 		
 		
 		
+		/**/
 		
 		
 		
-	}
-		
+	},//methods	
 });
 
 

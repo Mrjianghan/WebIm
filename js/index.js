@@ -1,4 +1,5 @@
 var currentid;//当前用户登录密码
+var timerlonger;//全局计时器
 var conn = new WebIM.connection({
     isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
     https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
@@ -53,6 +54,7 @@ var vm = new Vue({
 		headswitch2:false,
 		errorshow:false,
 		errormessage:'',
+		get2dimention:'',
 	},
 	created:function(){
 		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
@@ -78,10 +80,12 @@ var vm = new Vue({
 							var currentnickname = data.nickname;//考虑全局变量
 							var currentgender = data.sex;//考虑全局变量
 							//console.log( currentid );
+							var pswget = JSON.parse(localStorage["huanxinreg"]).psw;
+							
 							var options = { 
 							  apiUrl: WebIM.config.apiURL,
 							  user: currentid,
-							  pwd: currentid,
+							  pwd: pswget,
 							  appKey: WebIM.config.appkey
 							};
 							conn.open(options);
@@ -104,8 +108,6 @@ var vm = new Vue({
 						break;
 				}
 				
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			})
@@ -125,10 +127,7 @@ var vm = new Vue({
 					vm.btncolorswitch2 = false;
 					vm.ableornot2 = true;
 				}
-				
 				return false;
-				
-				
 				
 			} else {
 				vm.rightorwrong1 = true;
@@ -167,14 +166,55 @@ var vm = new Vue({
 			vm.switchheader = true;
 			vm.headswitch1 = true;
 			vm.headswitch2 = false;
+			clearInterval(timerlonger);
 		},
-		//标题切换1
+		//标题切换1清理扫码计时器
 		switch8:function(){
 			vm.switchheader = false;
 			vm.headswitch2 = true;
 			vm.headswitch1 = false;
+			var id2d;
+			axios.get('http://47.95.6.203:8183/qrcode.json').then(function(res){
+					var code = res.data.code;
+					var data = res.data.data;
+					var path = res.data.data.path;
+					
+					vm.get2dimention = 'http://47.95.6.203:8189/zxupl'+path;
+					var idbridge = res.data.data.id;
+					var trans = JSON.parse(idbridge);
+					
+					id2d = trans.id;
+					console.log(trans);
+					console.log(id2d);
+				
+			}).catch(function(err){
+				console.log(err);
+			});
+				
+			timerlonger = window.setInterval(function(){
+				console.log(timerlonger);
+				axios.post('http://47.95.6.203:8183/login.json?qrcode='+id2d).then(function(res){
+					console.log(res.data);
+					var code = res.data.code;
+					switch (code){
+						case 2000 :
+							
+							//window.location.href = "message.html";
+							break;
+						case 4000 :
+							return false;
+							break;
+					}
+				}).catch(function(err){
+					console.log(err);
+				});
+					
+					
+				
+			},2000);
+			
 		},
-		//标题切换2
+		//标题切换2加上扫码计时器
 		
 	}
 		

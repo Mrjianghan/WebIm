@@ -10,8 +10,8 @@ var conn = new WebIM.connection({
     apiUrl:WebIM.config.apiURL,
 });
 
-var nothing = localStorage.dispear;
-ids = JSON.parse( nothing );//登陆必备
+/*var nothing = localStorage.dispear;
+ids = JSON.parse( nothing );//登陆必备*/
 
 
 
@@ -47,7 +47,24 @@ conn.listen({
 
 
 
-
+Vue.component('currentuser',{
+	template:'#current',
+	data:function(){
+		return {
+			currentImg:'imgs/girl.jpg',
+			searchshow:false,
+		}
+	},
+	methods:{
+		popcurrent:function(){
+			
+		},//显示当前用户卡片
+		mainsearch:function() {
+			this.searchshow = true;
+			console.log( this.searchshow );
+		},//主搜索
+	}
+})
 
 
 
@@ -56,14 +73,24 @@ var vm = new Vue({
 	el:"#messagemaster",
 	data:{
 		
+		
 	},
 	created:function(){
 		var options = { 
 		  apiUrl: WebIM.config.apiURL,
-		  user: ids,
-		  pwd: ids,
+		  user: 'momoclo',//
+		  pwd: '901217',//
 		  appKey: WebIM.config.appkey
 		};
 		conn.open(options);
 	},
+	methods:{
+		clearsearch:function(){
+			//vm.searchshow = true;
+			console.log('hi');
+			console.log(this.$children[0]);
+			this.$children[0]._data.searchshow = false;
+		},
+		
+	}
 });

@@ -133,6 +133,8 @@ var vm = new Vue({
 				vm.rightorwrong1 = false;
 				vm.ableornot1 = true;
 				vm.btncolorswitch = false;
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
 				return false;
 			} else {
 				vm.rightorwrong1 = true;
@@ -188,7 +190,6 @@ var vm = new Vue({
 						console.log( localStorage['huanxinreg'] );
 						window.location.href="register_1.html";
 						break;
-						
 						
 					case 4000 :
 						vm.errormessage = '短信验证码错误';

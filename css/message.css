@@ -1,10 +1,159 @@
-
-
-
-
-
-
-
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    height: 100%;
+    width: 100%;
+}
+body {
+    font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
+    background-image: url(../imgs/adelaidehills.jpg);
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 650px;
+}
+.clearfix {
+	clear: both;
+}
+.shenglue {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#messagemaster {
+	margin: 0 auto;
+	width: calc( 100% - 520px );
+	min-height: 650px;
+	height: 100%;
+	min-width: 1100px;
+	background-color: #fff;
+}
 .login {
 	z-index: -10;
+}
+.mainleft {
+	width: 420px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 100%;
+	float: left;
+	background-color: #e4eaf4;
+}
+.mainright {
+	width: calc( 100% - 420px );
+	min-width: 680px;
+	height: 100%;
+	float: left;
+}
+.current {
+	height: 240px;
+	width: 420px;
+	border: 1px solid pink;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #e4eaf4;
+}
+.currentinner {
+	width: 360px;
+	height: 180px;
+	margin: 30px auto;
+	
+}
+.firstline {
+	height: 60px;
+	width: 100%;
+	position: relative;
+}
+.firstline img {
+	width: 60px;
+	display: inline-block;
+	height: 60px;
+}
+.currentname {
+	height: 60px;
+	width: 200px;
+	display: inline-block;
+	line-height: 60px;
+	font-size: 28px;
+	color: #333;
+	margin-left: 25px;
+}
+.firstline .fa-bars {
+	font-size: 28px;
+	color: #b0b2b5;
+	position: absolute;
+	right: 20px;
+	top: 16px;
+	cursor: pointer;
+}
+.firstline .fa-bars:hover {
+	color: #1a7dff;
+}
+.secondline {
+	margin-top: 20px;
+	width: 100%;
+	height: 40px;
+	background-color: #f8f8f8;
+	position: relative;
+}
+.secondline input {
+	height: 40px;
+	width: 320px;
+	line-height: 40px;
+	background: #f8f8f8;
+	border: none;
+	outline: none;
+	padding-left: 14px;
+	color: #999;
+	font-size: 22px;
+}
+.secondline .fa-search {
+	font-size: 22px;
+	position: absolute;
+	right: 10px;
+	top:9px;
+	color: #b0b2b5;
+	cursor: pointer;
+}
+.secondline .fa-search:hover {
+	color: #1a7dff;
+}
+.searchslidedown {
+	min-height: 450px;
+	height: 450px;
+	width: 100%;
+	background-color: #fff;
+	position: absolute;
+	-webkit-transform: translateY(20px);
+	transform: translateY(20px);
+}
+.search1-enter {
+	opacity: 0;
+	-webkit-transform: translateY(-100px);
+	transform: translateY(-100px);
+}
+.search1-enter-active {
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.search1-enter-to {
+	opacity: 1;
+	-webkit-transform: translateY(20px);
+	transform: translateY(20px);
+}
+.search1-leave {
+	opacity: 1;
+	-webkit-transform: translateY(20px);
+	transform: translateY(20px);
+}
+.search1-leave-active {
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.search1-leave-to {
+	opacity: 0;
+	-webkit-transform: translateY(-100px);
+	transform: translateY(-100px);
 }
