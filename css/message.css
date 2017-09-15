@@ -157,3 +157,227 @@ body {
 	-webkit-transform: translateY(-100px);
 	transform: translateY(-100px);
 }
+.slidebars {
+	height: 195px;
+	width: 200px;
+	position: relative;
+	background-color: #fff;
+	left: 170px;
+	border-radius: 10px;
+	z-index: 5;
+}
+.slidebars:after {
+	height: 0;
+	width: 0;
+	position: absolute;
+	content: "";
+	border: 10px solid transparent;
+	right: 33px;
+	top: -20px;
+	border-bottom-color: #fff;
+}
+.lis {
+	height: 65px;
+	width: 100%;
+	cursor: pointer;
+}
+.feedbackmenu {
+	border-bottom: 1px solid #e3e3e3;
+	border-top: 1px solid #e3e3e3;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.lis span {
+	color:#999;
+	line-height: 65px;
+	font-size: 18px;
+	display: inline-block;
+	letter-spacing: 3px;
+	width: 90px;
+}
+.lis span:last-child {
+	text-align: center;
+	
+}
+.lis .fa {
+	font-size: 30px;
+	margin-left: 30px;
+	margin-right: 15px;
+	vertical-align: sub;
+}
+.lis:hover {
+	color: #1a7dff;
+}
+.lis span:hover {
+	color: #1a7dff;
+}
+
+/*弹出反馈*/
+.transfeedback {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(163,163,163,0.5);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 2000;
+}
+.feedbackpop {
+	height: 550px;
+	position: absolute;
+	width: 604px;
+	left: 50%;
+	top:50%;
+	margin-left: -302px;
+	margin-top: -275px;
+	background-color: #f7f7f7;
+	border-radius: 20px;
+}
+.feedhead {
+	height: 80px;
+	width: 100%;
+	line-height: 80px;
+	font-size: 26px;
+	color: #333;
+	position: relative;
+	background-color: #e4eaf4;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.feedhead .fa {
+	position: absolute;
+	right: 70px;
+	top: 25px;
+	color: #999;
+	cursor: pointer;
+	font-size: 30px;
+}
+.feedhead .fa:hover {
+	color: #2285ff;
+}
+.feedbackcore {
+	width: 524px;
+	height: 275px;
+	display: inline-block;
+	border-radius: 20px;
+	border: 1px solid #ccc;
+	margin-left: 40px;
+	margin-top: 40px;
+	padding: 20px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: 20px;
+	color: #333;
+	outline: none;
+	font-family: "Microsoft Yahei";
+	resize: none;
+}
+.feedbackpop button {
+	width: 484px;
+	height: 60px;
+	line-height: 60px;
+	background-color: #2285ff;
+	color: #fff;
+	text-align: center;
+	border: none;
+	display: block;
+	margin: 0 auto;
+	margin-top: 40px;
+	font-size: 26px;
+	border-radius: 10px;
+	cursor: pointer;
+	outline: none;
+}
+/*弹出反馈*/
+
+/*发起聊天*/
+.transreadychat {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(163,163,163,0.5);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 2000;
+}
+.readychatpop {
+	height: 600px;
+	width: 604px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -302px;
+	margin-top: -360px;
+	background-color: #fff;
+	border-radius: 20px;
+	
+}
+.readychathead {
+	height: 80px;
+	width: 100%;
+	line-height: 80px;
+	font-size: 26px;
+	color: #333;
+	position: relative;
+	background-color: #e4eaf4;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.readychathead .fa {
+	position: absolute;
+	right: 70px;
+	top: 25px;
+	color: #999;
+	cursor: pointer;
+	font-size: 30px;
+}
+.readychathead .fa:hover {
+	color: #2285ff;
+}
+.switchchat {
+	width: 100%;
+	height: 80px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.switchchat .selectfriends {
+	width: 302px;
+	border-bottom: 1px solid #e5e5e5;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	float: left;
+	font-size: 24px;
+	color: #666;
+	cursor: pointer;
+	border-right: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.switchchat .selectchatrooms {
+	width: 302px;
+	border-bottom: 1px solid #e5e5e5;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	font-size: 24px;
+	color: #666;
+	cursor: pointer;
+	float: left;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.switchchat .selects {
+	color: #1a7dff;
+	border-bottom-color: #1a7dff;
+}
+
+/*发起聊天*/	

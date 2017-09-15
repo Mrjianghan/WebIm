@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="js/vue.js"></script>
 		<script src="js/vuex.js"></script>
+		<script src="js/axios.js"></script>
         <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/jquery.scrollbar.css">
         <link rel="stylesheet" href="css/animate.css">
@@ -31,12 +32,19 @@
 								
 					<div class="firstline">
 						<img :src="currentImg" @click="popcurrent()">
-						<div class="currentname shenglue">dsvsdsdvsbdhsdbvshdbvshdvbshdvbshdvbshdvbhbsvhbdhb
+						<div class="currentname shenglue">{{username}}
 									</div>
-						<i class="fa fa-bars"></i>
+						<i @click.stop="changebar()" class="fa fa-bars"></i>
+						
+						<div v-if="showslidebars" class="slidebars">
+							<div @click.stop="startchat()" class="startchat lis"><i class="fa fa-commenting-o"></i><span>发起聊天</span></div>
+							<div @click.stop="feedbackpop()" class="feedbackmenu lis"><i class="fa fa-pencil-square-o"></i><span>意见反馈</span></div>
+							<div @click.stop="exit()" class="exit lis"><i class="fa fa-power-off"></i><span>退出</span></div>
+						</div>
+						
 					</div>
 					<div class="secondline">
-						<input @change.stop ="mainsearch()"  type="text" placeholder="搜索">
+						<input v-model="mainsearchval" type="text" placeholder="搜索">
 						<i @click.stop="mainsearch()" class="fa fa-search">
 						</i>
 						<transition name="search1">
@@ -47,18 +55,48 @@
 					<div class="thirdline">
 									
 					</div>
-								
+					
+					<div>
+					</div>			
 				</div>
 			</div>
 		</template>
 		
 		<div id="messagemaster" @click="clearsearch()">
+			
+			<div v-if="feedbackshow" class="transfeedback">
+				<div class="feedbackpop">
+					<div class="feedhead">
+						<div>意见反馈</div><i @click="exitfeedback()" class="fa fa-times"></i>
+					</div>
+					<textarea class="feedbackcore" type="text":value="feedbacktext"></textarea>
+					<button @click="sendfeedback()" >确定</button>
+				</div>
+			</div><!--反馈框-->
+			
+			<div v-if="readychatshow" class="transreadychat">
+				<div class="readychatpop">
+					<div class="readychathead">
+						<div>发起群聊</div><i @click="exitreadychat()" class="fa fa-times"></i>
+					</div>
+					<div class="switchchat">
+						<div class="selectfriends">
+							选择好友
+						</div>
+						<div class="selectchatrooms">
+							选择群聊
+						</div>
+					</div>
+				</div>
+			</div><!--发起聊天框-->
+			
+			
+			
+			
 			<div class="mainleft">
-				<currentuser>
-					
-					
-					
-				</currentuser>
+				
+				
+				<currentuser></currentuser>
 				
 				
 				

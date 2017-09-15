@@ -35,7 +35,7 @@
 					</div>
 					<div class="thirdinput samesize2">
 						<div class="thirdcon">
-							<input type="text" v-model="thirdinputval" placeholder="请输入手机验证码" name="phonevalidate"><i v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
+							<input @change="checkphonecode" type="text" v-model="thirdinputval" placeholder="请输入手机验证码" name="phonevalidate"><i v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
 						</div>
 						<button type="button" :class="{ btnable : btncolorswitch }" @click="sendphonevalidate" :disabled="ableornot1"><span v-text="btntext"></span><span v-show="countshow">(&nbsp;{{ countnumber }}&nbsp;</span><span v-show="countshow">s&nbsp;)</span></button>
 					</div>

@@ -218,8 +218,15 @@ var vm = new Vue({
 			
 			if ( vm.thirdinputval.length==6 ){
 				vm.rightorwrong3 = true;
+				vm.rightorwrong4 = false;
+				//vm.btncolorswitch2 = false;
+				//vm.ableornot2 = true;
 			}else {
 				vm.rightorwrong3 = false;
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
+				vm.rightorwrong3 = false;
+				vm.rightorwrong4 = true;
 			}
 		},
 		//检查短信

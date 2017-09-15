@@ -21,6 +21,7 @@ var vm = new Vue({
 		thirdinputval:'',
 		btncolorswitch2:false,
 		ableornot2:true,
+		
 	},
 	created:function(){
 		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
@@ -57,7 +58,6 @@ var vm = new Vue({
 					case 2000 :
 						vm.errormessage = '发送成功';
 						vm.errorshow = true;
-						
 						break;
 					case 4000 :
 						vm.errormessage = '发送失败';
@@ -177,9 +177,7 @@ var vm = new Vue({
 					case 2000 :
 						vm.errormessage = '验证成功';
 						vm.errorshow = true;
-						//window.location.href = "forgetpwd_1.html";
-						
-						
+						window.location.href = "forgetpwd_1.html";
 						break;
 					case 4000 :
 						vm.errormessage = '验证失败';
@@ -199,7 +197,22 @@ var vm = new Vue({
 			
 		},
 		//点击下一步
-		
+		checkphonecode:function(){
+			
+			if ( vm.thirdinputval.length==6 ){
+				vm.rightorwrong3 = true;
+				vm.rightorwrong4 = false;
+				//vm.btncolorswitch2 = false;
+				//vm.ableornot2 = true;
+			}else {
+				vm.rightorwrong3 = false;
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
+				vm.rightorwrong3 = false;
+				vm.rightorwrong4 = true;
+			}
+			
+		},//验证手机验证码
 		
 		
 		

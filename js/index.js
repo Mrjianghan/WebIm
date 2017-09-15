@@ -66,6 +66,7 @@ var vm = new Vue({
 	methods:{
 		
 		nextstepfinal:function(){
+			
 			axios.post('http://47.95.6.203:8183/signin.json?username='+vm.firstinputval+'&password='+vm.secondinputval).then(function(res){
 				console.log(res);
 				var code = res.data.code;
@@ -73,22 +74,23 @@ var vm = new Vue({
 					case 2000 :
 						console.log(2000);
 						axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res){
-							console.log(res.data.data);
-							var data = res.data.data;
-							currentid = data.id;//考虑全局变量
-							var currentloginName = data.loginName;//考虑全局变量
-							var currentnickname = data.nickname;//考虑全局变量
-							var currentgender = data.sex;//考虑全局变量
-							//console.log( currentid );
-							var pswget = JSON.parse(localStorage["huanxinreg"]).psw;
 							
-							var options = { 
-							  apiUrl: WebIM.config.apiURL,
-							  user: currentid,
-							  pwd: pswget,
-							  appKey: WebIM.config.appkey
-							};
-							conn.open(options);
+							var code = res.data.code;
+							var data = res.data.data;
+							console.log(code);
+							console.log(data);
+							currentid = data.id;//考虑全局变量
+								switch(code){
+									case 2000:
+										data.psw = vm.secondinputval; 
+										var usermaster = JSON.stringify(data);
+										localStorage["currentuser"] = usermaster;
+										window.location.href="message.html";
+										break;
+									case 4000:
+										return false;
+										break;
+								}
 							
 						}).catch(function(err){
 							console.log(err);

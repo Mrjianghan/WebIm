@@ -46,35 +46,54 @@ var vm = new Vue({
 					case 2000 :
 						vm.errshow = true;
 						vm.errmsg = '信息保存成功';
-						axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res){
-							console.log( res.data );
-							//console.log(res.data.data);
-							var data = res.data.data;
-							currentid = data.id;//考虑全局变量
-							console.log( currentid );
-							globallocal.psw = vm.firstinputval;
-							JSON.stringify(globallocal);
-							localStorage['huanxinreg'] = JSON.stringify(globallocal);
-							
-							/*var options = { 
-								username: currentid,
-								password: vm.firstinputval,
-								nickname: globallocal.nickname,
-								appKey: WebIM.config.appkey,
-								success: function () {
-									
-									window.location.href="message.html";
-								},  
-								error: function () {
+						axios.post('http://47.95.6.203:8183/signin.json?username='+globallocal.loginName+'&password='+vm.firstinputval).then(function(res1){
+							var code = res1.data.code;
+							console.log(res1.data);
+							switch (code){
+								case 2000 :
 									vm.errshow = true;
-									vm.errmsg = '注册失败';
-								}, 
-								apiUrl: WebIM.config.apiURL
-							}; 
-							conn.registerUser(options);*/
+									vm.errmsg = '登录成功';
+									
+									axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res3){
+										console.log(res3.data);
+										var code = res3.data.code;
+										var data = res3.data.data;
+										switch(code){
+											case 2000:
+												data.psw = vm.firstinputval; 
+												var usermaster = JSON.stringify(data);
+												localStorage["currentuser"] = usermaster;
+												window.location.href="message.html";
+												break;
+											case 4000:
+												return false;
+												break;
+										}
+										
+										
+										
 							
-						}).catch(function(err){
-							console.log(err);
+									}).catch(function(err3){
+										console.log(err3);
+									});
+									
+									
+									return false;
+									break;
+								case 4000 :
+									vm.errshow = true;
+									vm.errmsg = '无效的用户名或密码';
+									return false;
+									break;
+								case 4004 :
+									vm.errshow = true;
+									vm.errmsg = '账户已锁定，请执行找回登录密码后解除锁定';
+									return false;
+									break;	
+							}
+							
+						}).catch(function( err1 ){
+							console.log(err1);
 						});
 						break;
 					case 4000 :
@@ -114,8 +133,8 @@ var vm = new Vue({
 						break;
 				}
 				
-			}).catch(function(err){
-				console.log(err);
+			}).catch(function(errs){
+				console.log(errs);
 			})
 			
 			//errshow:false,
