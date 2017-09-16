@@ -19,6 +19,8 @@ if ( localStorage.currentuser ){
 	console.log(ids);
 	console.log(ids.id);
 	console.log(ids.psw);
+}else {
+	window.location.href = "index.html";
 }
 
 
@@ -72,24 +74,38 @@ Vue.component('currentuser',{
 	template:'#current',
 	data:function(){
 		return {
-			currentImg:this.$store.state.user.avatar ? this.$store.state.user.avatar :'imgs/default.png',
+			currentImg:this.$store.state.user.avatar ? 'http://47.95.6.203:8189/zxupl/'+this.$store.state.user.avatar :'imgs/default.png',
 			searchshow:false,
 			showslidebars:false,
 			mainsearchval:'',
 			username:this.$store.state.user.nickname,
-			
+			isboy:ids.sex == 1? true: false,
+			isgirl:ids.sex == 2? true: false,
+			currentusershow: false,
+			areaId:this.$store.state.user.areaId ?this.$store.state.user.areaId:' ',
+			signature: this.$store.state.user.signature ?this.$store.state.user.signature:' ',
+			top1:'',
+			left1:'',
 		}
 	},
+	created:function(){
+		console.log(this.$store.state.user);
+		console.log(this.$store.state.user.signature);
+		
+	},
 	methods:{
-		popcurrent:function(){
-			
+		popcurrent:function($event){
+			this.currentusershow = true;
+			this.showslidebars = false;
+			this.top1 = $event.y+"px";
+			this.left1 = $event.x -300 +"px";
 		},//显示当前用户卡片
 		mainsearch:function() {
 			this.searchshow = true;
 			console.log( this.searchshow );
 		},//主搜索
 		startchat:function(){
-			
+			this.$parent.readychatshow = true;
 		},//发起聊天
 		feedbackpop:function(){
 			console.log(this);
@@ -109,6 +125,7 @@ Vue.component('currentuser',{
 		},//退出
 		changebar:function(){
 			this.showslidebars = !this.showslidebars;
+			this.currentusershow = false;
 		},//弹出汉堡菜单
 	}
 })
@@ -120,9 +137,16 @@ var vm = new Vue({
 	el:"#messagemaster",
 	store,
 	data:{
-		feedbacktext:'用户体验很好!',
+		feedbacktext:'',
 		feedbackshow:false,
-		readychatshow:true,
+		readychatshow:false,
+		placeholderfeed:'用户体验很好！',
+		sel1:true,
+		sel2:false,
+		slebossswicth:true,
+		selectallornot:false,
+		
+		
 	},
 	created:function(){
 		var options = { 
@@ -135,19 +159,54 @@ var vm = new Vue({
 	},
 	methods:{
 		clearsearch:function(){
-			console.log('hi');
-			console.log(this.$children[0]);
 			this.$children[0]._data.searchshow = false;
 		},//关闭搜索框
+		clearslidebars:function(){
+			this.$children[0].showslidebars = false;
+		},//关闭汉堡菜单
+		clearcurrentinfo:function(){
+			this.$children[0].currentusershow = false;
+		},//关闭用户卡片
 		exitfeedback:function(){
 			this.feedbackshow = false;
 		},//关闭反馈框
 		sendfeedback:function(){
-			
+			axios.post('http://47.95.6.203:8183/im/feedback/append.json?content='+vm.feedbacktext+'&name='+ids.nickname+'&contact='+ids.loginName).then(function(res){
+				console.log(res.data);
+				var code = res.data.code;
+				console.log(code);
+				switch (code) {
+					case 2000:
+						vm.feedbackshow = false;
+						console.log(vm.feedbacktext);
+						break;
+					case 4001:
+						vm.placeholderfeed = '内容不能为空';
+						return false;
+						break;
+				}
+				
+			}).catch(function(err){
+				console.log(err);
+			});
 		},//发送反馈
 		exitreadychat:function(){
+			vm.readychatshow = false;
+		},//关闭发起聊天窗口
+		sel1action:function(){
+			vm.sel1 = true;
+			vm.sel2 = false;
+			vm.slebossswicth = true;
+		},//点击发起聊天的选择好友
+		sel2action:function(){
+			vm.sel1 = false;
+			vm.sel2 = true;
+			vm.slebossswicth = false;
+		},//点击发起聊天的选择群聊
+		selectbossornot:function(){
+			vm.selectallornot = !vm.selectallornot;
 			
-		},//发起聊天窗口
+		},//发起聊天全部选择或取消
 		
 	}
 });

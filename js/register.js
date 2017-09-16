@@ -139,8 +139,6 @@ var vm = new Vue({
 			} else {
 				vm.rightorwrong1 = true;
 				vm.rightorwrong2 = false;
-				
-				
 			}
 		},
 		//检查手机号码正确与否

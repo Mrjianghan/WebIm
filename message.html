@@ -8,9 +8,10 @@
         <script src="js/vue.js"></script>
 		<script src="js/vuex.js"></script>
 		<script src="js/axios.js"></script>
+		<link rel="icon" href="imgs/linklogo.png">
+		<link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/jquery.scrollbar.css">
-        <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/sortstyle.css">
 		<link rel="stylesheet" href="css/message.css">
         <style>
@@ -31,16 +32,25 @@
 				<div class="currentinner">
 								
 					<div class="firstline">
-						<img :src="currentImg" @click="popcurrent()">
-						<div class="currentname shenglue">{{username}}
-									</div>
+						<img class="firsttimeimg" :src="currentImg" @click.stop="popcurrent($event)">
+						
+						<div v-if="currentusershow" class="currentinfo animated bounceIn" :style="{top:top1,left:left1}">
+							<img class="currentpiccontainer" :src="currentImg">
+							<div class="nameandgender shenglue">{{username}} <i v-if="isgirl" class="fa fa-venus"></i><i v-if="isboy" class="fa fa-mars"></i> </div>
+							<div class="cardarea">地区：{{ areaId }}
+							</div>
+							<div class="cardsignature">个性签名：{{ signature }}
+							</div>
+						</div><!--个人卡片-->
+						
+						<div class="currentname shenglue">{{ username }}</div>
 						<i @click.stop="changebar()" class="fa fa-bars"></i>
 						
 						<div v-if="showslidebars" class="slidebars">
 							<div @click.stop="startchat()" class="startchat lis"><i class="fa fa-commenting-o"></i><span>发起聊天</span></div>
 							<div @click.stop="feedbackpop()" class="feedbackmenu lis"><i class="fa fa-pencil-square-o"></i><span>意见反馈</span></div>
 							<div @click.stop="exit()" class="exit lis"><i class="fa fa-power-off"></i><span>退出</span></div>
-						</div>
+						</div><!--三条列表-->
 						
 					</div>
 					<div class="secondline">
@@ -50,7 +60,7 @@
 						<transition name="search1">
 							<div v-if="searchshow" class="searchslidedown scrollbar-macosx">
 							</div>
-						</transition>
+						</transition><!--搜索结果容器-->
 					</div>
 					<div class="thirdline">
 									
@@ -62,29 +72,63 @@
 			</div>
 		</template>
 		
-		<div id="messagemaster" @click="clearsearch()">
+		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
-			<div v-if="feedbackshow" class="transfeedback">
-				<div class="feedbackpop">
+			<div v-if="feedbackshow" class="transfeedback ">
+				<div class="feedbackpop animated bounceIn">
 					<div class="feedhead">
 						<div>意见反馈</div><i @click="exitfeedback()" class="fa fa-times"></i>
 					</div>
-					<textarea class="feedbackcore" type="text":value="feedbacktext"></textarea>
+					<textarea :placeholder="placeholderfeed" class="feedbackcore" type="text" v-model="feedbacktext"></textarea>
 					<button @click="sendfeedback()" >确定</button>
 				</div>
 			</div><!--反馈框-->
 			
-			<div v-if="readychatshow" class="transreadychat">
-				<div class="readychatpop">
+			<div v-if="readychatshow" class="transreadychat ">
+				<div class="readychatpop  animated bounceIn">
 					<div class="readychathead">
 						<div>发起群聊</div><i @click="exitreadychat()" class="fa fa-times"></i>
 					</div>
 					<div class="switchchat">
-						<div class="selectfriends">
+						<div @click="sel1action()" class="selectfriends" :class = "{selects:sel1}">
 							选择好友
 						</div>
-						<div class="selectchatrooms">
+						<div @click="sel2action()" class="selectchatrooms" :class = "{selects:sel2}">
 							选择群聊
+						</div>
+					</div><!--发起群聊头部-->
+					<div class="switchcontainerboss">
+						
+						<div v-if="slebossswicth" class="sel1con">
+							<div class="nouseholder"></div><!--追加头像显示容器暂时保留-->
+							<div class="selectallboss">
+								<div @click="selectbossornot" class="selectallcon">
+									<img v-if="selectallornot" src="imgs/selected.png"><img v-else src="imgs/unselected.png">
+									
+									
+									
+									
+									
+									<!--<input ref="in1" type="checkbox">-->遗留的大问题
+									
+									
+									
+									
+									
+									
+								</div>
+								<span>全选</span>
+							</div>
+							<div class="getfriendscontainer">
+								
+							</div>
+							<button type="button"  >
+								
+							</button>
+						</div>
+						<div v-else class="sel2con">
+							
+							
 						</div>
 					</div>
 				</div>

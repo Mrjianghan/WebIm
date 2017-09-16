@@ -22,6 +22,17 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.fa-venus {
+	color: #f047de;
+}
+.fa-mars {
+	color: #2285ff;
+}
+	
+
+
+
+/*全局样式*/
 #messagemaster {
 	margin: 0 auto;
 	width: calc( 100% - 520px );
@@ -50,7 +61,6 @@ body {
 .current {
 	height: 240px;
 	width: 420px;
-	border: 1px solid pink;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background-color: #e4eaf4;
@@ -66,7 +76,62 @@ body {
 	width: 100%;
 	position: relative;
 }
-.firstline img {
+
+
+
+/*当前用户信息框*/
+.currentinfo {
+	height: 405px;
+	width: 270px;
+	border-radius: 10px;
+	background-color: #fff;
+	position: absolute;
+	z-index: 10;
+	overflow: hidden;
+	-webkit-box-shadow: 5px 5px 3px #eecefe;
+	box-shadow: 5px 5px 3px #eecefe;
+}
+
+.currentpiccontainer {
+	width: 270px;
+}
+.nameandgender {
+	font-size: 22px;
+	color: #333;
+	position: relative;
+	margin-top: 5px;
+	margin-left: 20px;
+	width: 240px;
+}
+.nameandgender .fa-venus {
+	position: absolute;
+	margin-left: 5px;
+	vertical-align: sub;
+	top: 4px;
+	
+}
+.cardarea {
+	color: #999;
+	font-size: 16px;
+	margin-left: 20px;
+	margin-top: 5px;
+}
+.cardsignature {
+	width: 230px;
+	margin: 0 auto;
+	margin-top: 5px;
+	color: #999;
+}
+.nameandgender .fa-mars {
+	position: absolute;
+	margin-left: 5px;
+	vertical-align: sub;
+	top: 4px;
+}
+
+/*当前用户信息框*/
+
+.firsttimeimg {
 	width: 60px;
 	display: inline-block;
 	height: 60px;
@@ -211,7 +276,12 @@ body {
 .lis span:hover {
 	color: #1a7dff;
 }
-
+.exit:hover {
+	color:#f93634;
+} 
+.exit span:hover {
+	color:#f93634;
+}
 /*弹出反馈*/
 .transfeedback {
 	height: 100%;
@@ -311,7 +381,7 @@ body {
 	left: 50%;
 	top: 50%;
 	margin-left: -302px;
-	margin-top: -360px;
+	margin-top: -300px;
 	background-color: #fff;
 	border-radius: 20px;
 	
@@ -379,5 +449,67 @@ body {
 	color: #1a7dff;
 	border-bottom-color: #1a7dff;
 }
+.switchcontainerboss {
+	height: 440px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	
+}
+.sel1con {
+	height: 440px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.sel2con {
+	height: 440px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.selectallboss {
+	height: 40px;
+	width: 100%;
+	line-height: 40px;
+	border: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
 
-/*发起聊天*/	
+.selectallboss span {
+	display: inline-block;
+	height: 40px;
+	width: auto;
+	position: absolute;
+	top: 0;
+	color: #666;
+	font-size: 20px;
+	font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
+}
+.selectallcon {
+	height: 40px;
+	width: 40px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-left: 40px;
+	display: inline-block;
+	position: relative;
+}
+.selectallcon input {
+	width: 26px;
+	height: 40px;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+}
+.selectallcon img {
+	margin: 0 auto;
+	margin-top: 7px;
+}
+.getfriendscontainer {
+	height: 240px;
+	width: 100%;
+}
+/*发起聊天*/
