@@ -54,16 +54,118 @@
 						
 					</div>
 					<div class="secondline">
-						<input v-model="mainsearchval" type="text" placeholder="搜索">
+						<input  v-model="mainsearchval" type="text" placeholder="搜索">
 						<i @click.stop="mainsearch()" class="fa fa-search">
 						</i>
 						<transition name="search1">
-							<div v-if="searchshow" class="searchslidedown scrollbar-macosx">
+							<div v-if="searchshow" class="searchslidedown">
+								<div v-if="serachingornot" class="searchalllist">
+								
+									<div class="serach1friendtitle">
+										<div class="searchfriendtitlewords">好友</div><div class="searchhr"></div>
+									</div>
+									
+									<div class="unsearchfriends">
+										<template v-for="friendsarr in friendsarrOne">
+											<div>
+												
+												<div class="searchfriendcon">
+													<img :src="picsrc+friendsarr.avatar">
+													<div class="searchfriendname">
+														{{ friendsarr.nickname }}
+													</div>
+												</div>
+											</div>
+										</template>
+									</div>
+									
+									<div class="serach1grouptitle">
+										<div class="searchgrouptitlewords">群组</div><div class="searchhr"></div>
+									</div>
+									
+									<div class="unsearchgroups">
+										<template v-for="groupsarr in groupsarrOne">
+											<div>
+												
+												<div class="searchgroupcon">
+													<img :src="groupsarr.avatar ? picsrc+groupsarr.avatar : defaultpic">
+													<div class="searchgroupsname">
+														{{ groupsarr.name }}
+													</div>
+												</div>
+											
+											</div>
+											
+										</template>
+									</div>
+									
+									
+								</div><!--未搜索状态-->
+								
+								<div v-else>
+									
+									<div v-if="haveresult">
+										
+										<div class="searchresultfriends">
+											<template v-for="friend2 in tempfriendsarrcon[0]">
+												
+												<div class="innercon">
+														
+														<img :src="friend2.avatar ? picsrc+friend2.avatar : defaultpic">
+														<div class="searchgroupsname">
+															{{ friend2.nickname }}
+														</div>
+														
+												</div>
+												
+											</template>
+											
+										</div>
+										
+										<div class="searchresultgroups">
+											<template v-for="group2 in tempgroupsarrcon[0]">
+												<div>
+													<div class="innercon">
+														
+														<img :src="group2.avatar ? picsrc+group2.avatar : defaultpic">
+														<div class="searchgroupsname">
+															{{ group2.name }}
+														</div>
+														
+													</div>
+													
+													
+												</div>
+											</template>
+											
+										</div>
+										
+									</div>
+									
+									<div class="noresult" v-else>
+										无结果
+									</div>
+									
+									
+								</div>
+								
+								
+								
+								
+								
 							</div>
 						</transition><!--搜索结果容器-->
 					</div>
 					<div class="thirdline">
-									
+						<div class="thirdflow "><i @click="addbluecolor1()" :class="{blueactive:icons1}" class=" fa fa-commenting"></i>
+						</div>
+						
+						<div class="thirdflow thirdflowcenter"><i @click="addbluecolor2()" :class="{blueactive:icons2}" class="fa fa-microphone"></i>
+						</div>
+						
+						<div class="thirdflow"><i @click="addbluecolor3()" :class="{blueactive:icons3}" class="fa fa-users"></i>
+						</div>
+						
 					</div>
 					
 					<div>
@@ -109,8 +211,7 @@
 									
 									
 									
-									<!--<input ref="in1" type="checkbox">-->遗留的大问题
-									
+									<input ref="in1" type="checkbox"><!--待处理-->
 									
 									
 									
@@ -121,15 +222,26 @@
 							</div>
 							<div class="getfriendscontainer">
 								
+								<div class="sort_box">
+									
+									
+								</div>
 							</div>
-							<button type="button"  >
-								
-							</button>
+							
 						</div>
+						
+						
 						<div v-else class="sel2con">
-							
+							<template v-for="groups in groupsarrOne">
+								
+							</template>
 							
 						</div>
+						<button @click="creategroupOne()"  type="button" class="beginchatbtn" :class="{btncolorswitch:btnswitchmaster}" :disabled ="beginchatbtnable">
+								确定
+						</button>
+						
+						
 					</div>
 				</div>
 			</div><!--发起聊天框-->
@@ -141,7 +253,13 @@
 				
 				
 				<currentuser></currentuser>
-				
+				<div class="threepiecelists">
+					<!--<comlist1></comlist1>
+					<comlist2></comlist2>
+					<comlist3></comlist3>-->
+					
+					<component :is="currentView"></component>
+				</div>
 				
 				
 			</div>

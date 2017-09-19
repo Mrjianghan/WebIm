@@ -216,27 +216,3 @@ var vm = new Vue({
     
     
 })
-/*vm.$emit('click',function(){
-    vm.showinfo = false;
-})*/
-
-
-
-
-/*var listGroups3 = function () {
-    var option = {
-        success: function (rooms) {
-            //console.log(rooms);
-            for (var i in rooms) {
-            
-                this.groupnames = rooms[i].name;
-                this.groupnumber = rooms[i].roomId;
-                
-            }
-        },
-        error: function () {
-            console.log('List chat rooms error');
-        }
-    };
-    conn.listRooms(option);
-};*/
