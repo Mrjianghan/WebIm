@@ -191,6 +191,7 @@ body {
 	min-height: 450px;
 	height: 450px;
 	width: 100%;
+	z-index: 20;
 	background-color: #fff;
 	position: absolute;
 	overflow-y: scroll;
@@ -232,7 +233,7 @@ body {
 	background-color: #fff;
 	left: 170px;
 	border-radius: 10px;
-	z-index: 5;
+	z-index: 21;
 }
 .slidebars:after {
 	height: 0;
@@ -736,7 +737,7 @@ body {
 	
 	height: 40px;
 	margin-top: 30px;
-	font-size: 40px;
+	font-size: 30px;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -769,8 +770,88 @@ body {
 	width: 420px;
 	position: absolute;
 	top: 240px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+/*第三个列表*/
+.listThree_groupheader {
+	height: 50px;
+	width: 420px;
+	font-size: 20px;
+	color: #999;
+	background-color: #fff;
+	line-height: 50px;
+	padding-left: 30px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}	
+.listThree_groupcon {
+	height: 110px;
+	width: 420px;
+	position: relative;
+}
+.listThree_groupcon img {
+	width: 70px;
+	margin-top: 20px;
+	margin-left: 30px;
+}
+.listThree_groupcon .name {
+	width: 250px;
+	height: 110px;
+	line-height: 110px;
+	margin-left: 20px;
+	display: inline-block;
+	position: absolute;
+	font-size: 24px;
+	color: #333;
+	top: 0;
+}
+
+
+
+
+.sort_list1 {
+	height: 110px;
+	width: 420px;
+	position: relative;
+}
+.sort_list1 img {
+	margin-top: 20px;
+	margin-left: 30px;
+	width: 70px;
+}
+.num_name1 {
+	width: 250px;
+	height: 110px;
+	font-size: 24px;
+	color: #333;
+	line-height: 110px;
+	margin-left: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+}
+.sort_letter1 {
+	height: 50px;
+	width: 420px;
+	font-size: 20px;
+	color: #999;
+	background-color: #fff;
+	line-height: 50px;
+	padding-left: 30px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.backgroundcolor {
+	background-color: #fff;
 }
 	
+	
+/*第三个列表*/
+
+
+
 
 
 

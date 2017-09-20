@@ -222,7 +222,7 @@ Vue.component('currentuser',{
 				
 				for ( var i in friendsarr ){
 					console.log( friendsarr[i] );
-					str1 = str1 + '<div id="'+friendsarr[i].nickname+'" class="sort_list"><div class="friendseveryOne" id="'+friendsarr[i].id+'"><div class="selectOnly1"><img class="under1" src="imgs/selected.png"><img class="under2"  src="imgs/unselected.png"><input  value="'+friendsarr[i].id+'" type="checkbox"></div><img class="friendsimg" src="http://47.95.6.203:8189/zxupl/'+friendsarr[i].avatar+'"><div class="num_name">'+ friendsarr[i].nickname +'</div></div></div>'
+					str1 = str1 + '<div id="'+friendsarr[i].nickname+'" class="sort_list"><div class="friendseveryOne" id="'+friendsarr[i].id+'"><div class="selectOnly1"><img class="under1" src="imgs/selected.png"><img class="under2"  src="imgs/unselected.png"><input  value="'+friendsarr[i].id+'" type="checkbox"></div><img class="friendsimg" src="http://47.95.6.203:8189/zxupl/'+friendsarr[i].avatar+'"><div class="num_name">'+ friendsarr[i].nickname +'</div></div></div>';
 				}
 				
 				$('#messagemaster .sort_box').html(str1);
@@ -263,27 +263,92 @@ Vue.component('currentuser',{
 			this.icons1 = true;
 			this.icons2 = false;
 			this.icons3 = false;
-			vm.currentView = 'comlist1';
+			vm.currentView = 'comlistcomOne';
+			vm.currentView1 = 'rightcomOne';
 		},//改变icon1 颜色
 		addbluecolor2:function(){
 			this.icons1 = false;
 			this.icons2 = true;
 			this.icons3 = false;
-			vm.currentView = 'comlist2';
+			vm.currentView = 'comlistcomTwo';
+			vm.currentView1 = 'rightcomTwo';
 		},//改变icon2 颜色
 		addbluecolor3:function(){
 			this.icons1 = false;
 			this.icons2 = false;
 			this.icons3 = true;
-			vm.currentView = 'comlist3';
+			vm.currentView = 'comlistcomThree';
+			vm.currentView1 = 'rightcomThree';
 		},//改变icon3 颜色
 		
 	}
 })
 
 
-
-
+var comlistcomOne = {
+	template:'#comlistcomOne',
+	computed:{
+		
+	},
+};
+var comlistcomTwo = {
+	template:'#comlistcomTwo',
+};
+var comlistcomThree = {
+	template:'#comlistcomThree',
+	data:function(){
+		return {
+			picsrc:'http://47.95.6.203:8189/zxupl/',
+			defaultpic:'imgs/default1.png',
+			whiteon:'',
+			indexstrange:'',
+		}
+	},
+	created:function(){
+		console.log(this);
+		console.log(this.friendsarrOne);
+		console.log(this.groupsarrOne);
+		//初始化生成好友列表
+		var listimer1 = setTimeout(function(){
+			initials1();
+			clearTimeout('listimer1');
+		},90);
+		
+	},
+	computed:Vuex.mapGetters({
+		friendsarrOne:'friendsarrOne',
+		groupsarrOne:'groupsarrOne',
+	}),
+	methods:{
+		changelistcolor1:function($event){
+			//console.log($event);
+			//console.log($event.currentTarget);
+			
+			//console.log($event.currentTarget.attributes[0].value);
+			
+			this.indexstrange = $event.currentTarget.attributes[0].value;
+			
+			console.log(this.indexstrange);
+			
+		},
+		changelistcolor2:function($event){
+			console.log($event.currentTarget);
+			console.log($event.currentTarget.whiteon);
+			//this.whiteon = true;
+			
+		},
+	},
+};
+var rightcomOne = {
+	template:'#rightcomOne',
+};
+var rightcomTwo = {
+	template:'#rightcomTwo',
+};
+var rightcomThree = {
+	template:'#rightcomThree',
+};
+	
 var vm = new Vue({
 	el:"#messagemaster",
 	store,
@@ -302,7 +367,8 @@ var vm = new Vue({
 		createarr1:[],
 		btnswitchmaster:false,
 		creategroup2:[],
-		currentView:'comlist1',
+		currentView:'comlistcomOne',
+		currentView1:'rightcomOne',
 	},
 	/*computed:{
 		friendsarrOne:function(){
@@ -313,9 +379,12 @@ var vm = new Vue({
 		},
 	},*/
 	components:{
-		comlist1:{template:'<div>1</div>'},
-		comlist2:{template:'<div>2</div>'},
-		comlist3:{template:'<div>3</div>'},
+		'comlistcomOne':comlistcomOne,
+		'comlistcomTwo':comlistcomTwo,
+		'comlistcomThree':comlistcomThree,
+		'rightcomOne':rightcomOne,
+		'rightcomTwo':rightcomTwo,
+		'rightcomThree':rightcomThree,
 	},
 	/*data:{
 		currentView:'comlist1',
@@ -476,36 +545,7 @@ var vm = new Vue({
 			
 			
 		},//发起聊天全部选择或取消
-		/*selectOnly1:function($event){
-			//vm.selectOnly1ornot = !vm.selectOnly1ornot;
-			console.log($event);
-			console.log($event.currentTarget);
-			var img1 = $event.currentTarget.childNodes[0].childNodes[0];
-			var img2 = $event.currentTarget.childNodes[0].childNodes[1];
-			console.log($event.currentTarget.childNodes[0].childNodes[0].style);
-			if ( img1.style.display == 'none' ) {
-				img1.style.display = 'block';
-				img2.style.display = 'none';
-			}else if( img1.style.display == 'block' ){
-				img1.style.display = 'none';
-				img2.style.display = 'block';
-			}
-			
-			
-			console.log($event.currentTarget.childNodes);
-			console.log(vm.createarr1);
-			
-			if ( vm.createarr1.length>0 ){
-				vm.btnswitchmaster = true;
-				vm.beginchatbtnable = false;
-				
-			}else {
-				vm.btnswitchmaster = false;
-				vm.beginchatbtnable = true;
-			}
-			
-			
-		},//发起了群聊点击单个好友的时候*/
+		
 		creategroupOne:function(){
 			axios.post('http://47.95.6.203:8183/im/group/create.json?name=自动生成&descr=自行添加&maxUsers=500&openable=1&joinConfirm=1&inviteConfirm=1&allowInvites=1').then(function(res){
 				

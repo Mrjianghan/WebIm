@@ -174,6 +174,74 @@
 			</div>
 		</template>
 		
+		<template id="comlistcomOne">
+			<h1>comlistcomOne</h1>
+		</template>
+		
+		<template id="comlistcomTwo">
+			<h1>comlistcomTwo</h1>
+		</template>
+		
+		<template id="comlistcomThree">
+			<div>
+			
+				<div class="listThree_groupheader">群组
+				</div>
+				
+				<div>
+					<template v-for="(group,index) in groupsarrOne">
+						<div>
+							<div :data-index="index" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">
+								<img :src="group.avatar ? picsrc+group.avatar:defaultpic ">
+								<div class="name">{{group.name}}
+								</div>
+
+							</div>
+						</div>
+					</template>
+				</div>
+				
+				<div  class="sort_box1">
+					<template v-for="(friend,i) in friendsarrOne">
+							<div class="sort_list1" :class="{backgroundcolor:whiteon}" @click="changelistcolor2($event)" :id="friend.nickname">
+								<img :src="friend.avatar ? picsrc+friend.avatar : defaultpic">
+								<div class="num_name1">{{friend.nickname}}
+								</div>
+							</div>
+					</template>	
+					
+									
+				</div>
+				
+				
+				
+				
+				
+				
+			
+			</div>
+			
+			
+		</template>
+		
+		<template id="rightcomOne">
+			
+			
+			<h1>rightcomOne</h1>
+		</template>
+		
+		<template id="rightcomTwo">
+			<h1>rightcomTwo</h1>
+		</template>
+		
+		<template id="rightcomThree">
+			
+			
+			
+			
+			<h1>rightcomThree</h1>
+		</template>
+		
 		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
 			<div v-if="feedbackshow" class="transfeedback ">
@@ -253,17 +321,17 @@
 				
 				
 				<currentuser></currentuser>
-				<div class="threepiecelists">
-					<!--<comlist1></comlist1>
-					<comlist2></comlist2>
-					<comlist3></comlist3>-->
-					
+				<div class="threepiecelists scrollbar-macosx">
+					<keep-alive>
 					<component :is="currentView"></component>
+					</keep-alive>
 				</div>
 				
 				
 			</div>
 			<div class="mainright">
+				
+				<component :is="currentView1"></component>
 				
 			</div>
 			<div class="clearfix"></div>

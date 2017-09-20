@@ -121,13 +121,13 @@ function initials1() { //公众号排序
     var SortBox = $(".sort_box1");
     SortList.sort(asc_sort).appendTo('.sort_box1'); //按首字母排序
     function asc_sort(a, b) {
-        return makePy($(b).find('.num_name').text().charAt(0))[0].toUpperCase() < makePy($(a).find('.num_name').text().charAt(0))[0].toUpperCase() ? 1 : -1;
+        return makePy($(b).find('.num_name1').text().charAt(0))[0].toUpperCase() < makePy($(a).find('.num_name1').text().charAt(0))[0].toUpperCase() ? 1 : -1;
     }
 
     var initials = [];
     var num = 0;
     SortList.each(function(i) {
-        var initial = makePy($(this).find('.num_name').text().charAt(0))[0].toUpperCase();
+        var initial = makePy($(this).find('.num_name1').text().charAt(0))[0].toUpperCase();
         if (initial >= 'A' && initial <= 'Z') {
             if (initials.indexOf(initial) === -1)
                 initials.push(initial);
@@ -138,12 +138,12 @@ function initials1() { //公众号排序
     });
 
     $.each(initials, function(index, value) { //添加首字母标签
-        SortBox.append('<div class="sort_letter" id="' + value + '">' + value + '</div>');
+        SortBox.append('<div class="sort_letter1" id="' + value + '">' + value + '</div>');
     });
-    if (num != 0) { SortBox.append('<div class="sort_letter" id="default">#</div>'); }
+    if (num != 0) { SortBox.append('<div class="sort_letter1" id="default">#</div>'); }
 
     for (var i = 0; i < SortList.length; i++) { //插入到对应的首字母后面
-        var letter = makePy(SortList.eq(i).find('.num_name').text().charAt(0))[0].toUpperCase();
+        var letter = makePy(SortList.eq(i).find('.num_name1').text().charAt(0))[0].toUpperCase();
         switch (letter) {
             case "A":
                 $('#A').after(SortList.eq(i));

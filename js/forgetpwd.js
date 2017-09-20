@@ -148,6 +148,7 @@ var vm = new Vue({
 		//清空手机号
 		checkvalidate:function(){
 			axios.get('http://47.95.6.203:8183/captcha/validate.json?captcha='+vm.secondinputval).then(function(res){
+				console.log(res.data);
 				var data1 = res.data.data;
 				if ( (data1)&&(vm.rightorwrong1)   ) {
 					console.log('验证');
@@ -171,13 +172,21 @@ var vm = new Vue({
 			//检查验证码
 			axios.get('http://47.95.6.203:8183/im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.thirdinputval).then(function(res){
 				console.log( res.data );
-				var code = res.data.data;
+				var code = res.data.code;
 				console.log(code);
 				switch( code ){
 					case 2000 :
 						vm.errormessage = '验证成功';
 						vm.errorshow = true;
 						window.location.href = "forgetpwd_1.html";
+						var forgetpsw = {};
+						forgetpsw.loginName = vm.firstinputval;
+						forgetpsw.captcha = vm.secondinputval;
+						forgetpsw.smscode = vm.thirdinputval;
+						console.log(forgetpsw);
+						var value = JSON.stringify(forgetpsw);
+						console.log(value);
+						localStorage['forgetpsw'] = value;
 						break;
 					case 4000 :
 						vm.errormessage = '验证失败';
