@@ -759,6 +759,7 @@ body {
 }
 .thirdflow .fa:hover {
 	color: #1a7dff;
+	cursor: pointer;
 }
 /*切换3个icon*/
 
@@ -857,3 +858,105 @@ body {
 
 
 /*动态组件3条列表容器*/
+
+
+/*右边展示群组信息*/
+
+.rightgroupcon {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.rightgroupcon img {
+	margin: 0 auto;
+	margin-top: 20%;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 50px;
+	display: block;
+	border-radius: 10px;
+}
+.rightgroupcon p {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 32px;
+	color: #333;
+}
+.rightgroupcon span {
+	
+	font-size: 24px;
+	color: #333;
+}
+.rightgroupcon button {
+	margin: 0 auto;
+	background-color: #187bff;
+	height: 60px;
+	width: 300px;
+	border: none;
+	display: block;
+	color: #f8f8f8;
+	border-radius: 10px;
+	font-size: 26px;
+	line-height: 60px;
+	text-align: center;
+	margin-top: 110px;
+	cursor: pointer;
+}
+.rightfriendcon {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.rightfriendcon button {
+	margin: 0 auto;
+	background-color: #187bff;
+	height: 60px;
+	width: 300px;
+	border: none;
+	display: block;
+	color: #f8f8f8;
+	border-radius: 10px;
+	font-size: 26px;
+	line-height: 60px;
+	text-align: center;
+	margin-top: 50px;
+	cursor: pointer;
+}
+.rightfriendcon img {
+	margin: 0 auto;
+	margin-top: 15%;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 50px;
+	display: block;
+	border-radius: 10px;
+}
+.rightfriendcon .name {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 32px;
+	color: #333;
+}
+.rightfriendcon .sign {
+	font-size: 20px;
+	color: #666;
+	text-align: center;
+	margin-top: 20px;
+}
+.rightfriendcon .addon {
+	font-size: 20px;
+	color: #666;
+	text-align: center;
+	margin-top: 50px;
+}
+.rightfriendcon .area {
+	font-size: 20px;
+	color: #666;
+	text-align: center;
+	margin-top: 10px;
+}
+
+
+
+
+/*右边展示群组信息*/

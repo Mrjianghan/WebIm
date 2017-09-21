@@ -64,7 +64,8 @@ var vm = new Vue({
 			var reg1 = /^([\u4e00-\u9fa5a-zA-Z]{1})([a-zA-Z\u4e00-\u9fa50-9]{3,19})$/igm;
 			var t1 = vm.firstinputval.match(reg1);
 			
-			if ( ( flag != 0 )&&( t1 != null ) ){
+			if ( ( flag != 3 )&&( t1 != null ) ){
+				//注意性别
 				console.log('hi');
 				vm.btncolorswitch2 = true;
 				vm.ableornot2 = false;

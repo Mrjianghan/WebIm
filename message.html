@@ -190,20 +190,44 @@
 				
 				<div>
 					<template v-for="(group,index) in groupsarrOne">
-						<div>
-							<div :data-index="index" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">
+						<div class="con">
+							
+							<div :data-index="index" :data-name="group.name" :id="group.id" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">
 								<img :src="group.avatar ? picsrc+group.avatar:defaultpic ">
 								<div class="name">{{group.name}}
 								</div>
 
 							</div>
+							
 						</div>
 					</template>
 				</div>
 				
+				
+				<!--<div v-if="showgroupsright" class="rightgroupcon">
+
+						<img src="imgs/default1.png">
+						<p>群组占位<span>(群主)</span></p>
+						<button type="button">发消息</button>
+
+				</div>
+				<div v-else class="rightfriendcon">
+					<img src="imgs/default1.png">
+					<p class="name">好友占位<i  class="fa fa-venus"></i><i  class="fa fa-mars"></i> </p>
+					<div class="sign">签名</div>
+					<div class="addon">备注&nbsp;:&nbsp;{{}}</div>
+					<div class="area">地区&nbsp;:&nbsp;{{}}</div>
+					<button type="button">发消息</button>
+				</div>-->
+				
+				
+				
+				
+				
+				
 				<div  class="sort_box1">
 					<template v-for="(friend,i) in friendsarrOne">
-							<div class="sort_list1" :class="{backgroundcolor:whiteon}" @click="changelistcolor2($event)" :id="friend.nickname">
+							<div :data-index="i" :data-name="friend.nickname" :id="friend.id" class="sort_list1" :class="{backgroundcolor:indexstrange2 == -1-i}" @click="changelistcolor2($event)" :id="friend.nickname">
 								<img :src="friend.avatar ? picsrc+friend.avatar : defaultpic">
 								<div class="num_name1">{{friend.nickname}}
 								</div>
@@ -237,9 +261,24 @@
 		<template id="rightcomThree">
 			
 			
+			<div v-if="showgroupsright" class="rightgroupcon">
+				
+					<img :src="avatar ? picsrc+ avatar : defaultpic">
+					<p>{{ name }}<span v-if="level == 10">(群主)</span></p>
+					<button :id="id" type="button">发消息</button>
+				
+			</div>
+			
+			<div v-else class="rightfriendcon">
+				<img :src="avatar1 ? picsrc+ avatar1 : defaultpic">
+				<p class="name">{{namef}}<i v-if="girl" class="fa fa-venus"></i><i v-else class="fa fa-mars"></i> </p>
+				<div class="sign">{{signature}}</div>
+				<div class="addon">备注&nbsp;:&nbsp;{{remark}}</div>
+				<div class="area">地区&nbsp;:&nbsp;{{areaId}}</div>
+				<button :id="idf" type="button">发消息</button>
+			</div>
 			
 			
-			<h1>rightcomThree</h1>
 		</template>
 		
 		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
@@ -330,9 +369,9 @@
 				
 			</div>
 			<div class="mainright">
-				
-				<component :is="currentView1"></component>
-				
+				<!--<keep-alive>-->
+					<component :is="currentView1"></component>
+				<!--</keep-alive>-->
 			</div>
 			<div class="clearfix"></div>
 			
