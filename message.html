@@ -174,15 +174,27 @@
 			</div>
 		</template>
 		
-		<template id="comlistcomOne">
-			<h1>comlistcomOne</h1>
+		<!--<template id="comlistcomOne">
+			
+			<div>
+				<h1>comlistcomOne</h1>
+				<input type="text">
+			</div>
+			
 		</template>
 		
 		<template id="comlistcomTwo">
-			<h1>comlistcomTwo</h1>
+			
+			<div>
+				<h1>comlistcomTwo</h1>
+				<input type="text">
+			</div>
+			
 		</template>
 		
 		<template id="comlistcomThree">
+			
+			
 			<div>
 			
 				<div class="listThree_groupheader">群组
@@ -202,27 +214,6 @@
 						</div>
 					</template>
 				</div>
-				
-				
-				<!--<div v-if="showgroupsright" class="rightgroupcon">
-
-						<img src="imgs/default1.png">
-						<p>群组占位<span>(群主)</span></p>
-						<button type="button">发消息</button>
-
-				</div>
-				<div v-else class="rightfriendcon">
-					<img src="imgs/default1.png">
-					<p class="name">好友占位<i  class="fa fa-venus"></i><i  class="fa fa-mars"></i> </p>
-					<div class="sign">签名</div>
-					<div class="addon">备注&nbsp;:&nbsp;{{}}</div>
-					<div class="area">地区&nbsp;:&nbsp;{{}}</div>
-					<button type="button">发消息</button>
-				</div>-->
-				
-				
-				
-				
 				
 				
 				<div  class="sort_box1">
@@ -246,16 +237,35 @@
 			</div>
 			
 			
-		</template>
+		</template>-->
 		
 		<template id="rightcomOne">
+			<div>
+				<input type="text">
 			
+				<h1>rightcomOne</h1>
+			</div>
 			
-			<h1>rightcomOne</h1>
 		</template>
 		
 		<template id="rightcomTwo">
-			<h1>rightcomTwo</h1>
+			
+			
+			<div>
+				<div class="placeholder2" v-if="placeholder2show">
+					<div class="imgcon"><img src="imgs/chatroom-logo.png">
+					</div>
+					
+					<div class="name">众享商务通讯平台</div>
+				</div>
+				
+				<div>
+				</div>
+				
+				
+			</div>
+			
+			
 		</template>
 		
 		<template id="rightcomThree">
@@ -361,15 +371,84 @@
 				
 				<currentuser></currentuser>
 				<div class="threepiecelists scrollbar-macosx">
-					<keep-alive>
-					<component :is="currentView"></component>
-					</keep-alive>
+					
+						<!--<component :is="currentView"></component>-->
+					
+				
+					<div v-if="showleft1" id="comlistcomOne">
+						
+						<template>
+							<div class="listOnecon">
+								<img src="imgs/default1.png">
+								<div class="circle">12</div>
+								<div class="listOnedetails">
+									<div class="listOneconleft">
+										<div class="listOnetopleft shenglue">名字
+										</div>
+										<div class="listOnebottomleft shenglue"><span>[名片]</span>聊天消息
+										</div>
+									</div>
+									<div class="listOneconright">
+										<div class="listOnetopright">18:04
+										</div>
+										<div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</template>
+						
+					</div>
+					
+					<div v-else-if="showleft2"  id="comlistcomTwo">
+						<div class="chatroom">
+							<div class="chatroomarea">
+							</div>
+							<div class="chatroomtrade">
+							</div>
+						</div>
+						
+					</div>
+					
+					<div v-else id="comlistcomThree">
+						<div class="listThree_groupheader">群组</div>
+				
+						<div>
+							<template v-for="(group,index) in groupsarrOne">
+								<div class="con">
+
+									<div :data-index="index" :data-name="group.name" :id="group.id" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">
+										<img :src="group.avatar ? picsrc+group.avatar:defaultpic ">
+										<div class="name">{{group.name}}
+										</div>
+
+									</div>
+
+								</div>
+							</template>
+						</div>
+
+
+						<div  class="sort_box1">
+							<template v-for="(friend,i) in friendsarrOne">
+									<div :data-index="i" :data-name="friend.nickname" :id="friend.id" class="sort_list1" :class="{backgroundcolor:indexstrange2 == -1-i}" @click="changelistcolor2($event)" :id="friend.nickname">
+										<img :src="friend.avatar ? picsrc+friend.avatar : defaultpic">
+										<div class="num_name1">{{friend.nickname}}
+										</div>
+									</div>
+							</template>	
+
+
+						</div>
+					</div>
+					
 				</div>
 				
 				
 			</div>
 			<div class="mainright">
-				<!--<keep-alive>-->
+				<!--<keep-alive include="rightcomTwo,rightcomOne">-->
 					<component :is="currentView1"></component>
 				<!--</keep-alive>-->
 			</div>

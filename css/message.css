@@ -594,17 +594,18 @@ body {
 	background-color: #fff;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	z-index: 5;
+	z-index: 6;
 }
 .searchhr {
 	height: 20px;
-	width: 300px;
+	width: 280px;
 	position: absolute;
 	top: 0;
 	right: 0;
 	border-bottom: 1px solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	z-index: 4;
 }
 .searchfriendcon {
 	height: 70px;
@@ -851,10 +852,90 @@ body {
 	
 /*第三个列表*/
 
+/*第一个列表*/
+
+.listOnecon {
+	width: 420px;
+	height: 110px;
+	position: relative;
+	
+}
+.listOnecon img {
+	width: 70px;
+	height: 70px;
+	margin-top: 20px;
+	margin-left: 20px;
+	
+	display: inline-block;
+}
+.listOnecon .circle {
+	position: absolute;
+	height: 18px;
+	width: 18px;
+	border-radius: 50%;
+	background-color: #ff3b30;
+	top: 10px;
+	left: 80px;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+	line-height: 18px;
+}
+.listOnedetails {
+	height: 70px;
+	width: 290px;
+	
+	display: inline-block;
+	margin-left: 18px;
+}
+.listOneconleft {
+	width: 240px;
+	float: left;
+	height: 100%;
+	
+	position: relative;
+}
+.listOnetopleft {
+	font-size: 24px;
+	color: #333;
+	position: absolute;
+	top: 0;	
+}
+.listOnebottomleft {
+	font-size: 20px;
+	color: #999;
+	position: absolute;
+	bottom: 0;
+}
+.listOnebottomleft span {
+	font-size: 20px;
+	color: #ff3b30;
+	
+} 
 
 
 
-
+.listOneconright {
+	width: 50px;
+	float: left;
+	height: 100%;
+	position: relative;
+}	
+.listOnetopright {
+	font-size: 20px;
+	color: #999;
+	position: absolute;
+	top: 0;	
+}
+.listOnebottomright {
+	color: #999;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 20px;
+	cursor: pointer;
+}
+/*第一个列表*/
 
 
 /*动态组件3条列表容器*/
@@ -960,3 +1041,23 @@ body {
 
 
 /*右边展示群组信息*/
+
+/*右边聊天室*/
+
+.placeholder2 {
+	margin-top: 300px;
+}
+.placeholder2 .imgcon {
+	
+	text-align: center;
+	
+}
+.placeholder2 .name {
+	text-align: center;
+	margin-top: 80px;
+	color: #333;
+	font-size: 32px;
+}
+
+
+/*右边聊天室*/

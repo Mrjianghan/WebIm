@@ -287,27 +287,57 @@ Vue.component('currentuser',{
 			this.icons3 = false;
 			vm.currentView = 'comlistcomOne';
 			vm.currentView1 = 'rightcomOne';
+			vm.showleft1 = true;
+			vm.showleft2 = false;
 		},//改变icon1 颜色
+		
 		addbluecolor2:function(){
 			this.icons1 = false;
 			this.icons2 = true;
 			this.icons3 = false;
 			vm.currentView = 'comlistcomTwo';
 			vm.currentView1 = 'rightcomTwo';
+			vm.showleft1 = false;
+			vm.showleft2 = true;
+			//聊天室获取
+			
+			axios.post('http://47.95.6.203:8183/im/room/area/find.json').then(function(res){
+				console.log(res.data.data);//聊天室地区数组
+				
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+			axios.post('http://47.95.6.203:8183/im/room/trade/find.json').then(function(res){
+				console.log(res.data.data);//聊天室行业数组
+				
+			}).catch(function(err){
+				console.log(err);
+			})
+			
+			
 		},//改变icon2 颜色
+		
 		addbluecolor3:function(){
 			this.icons1 = false;
 			this.icons2 = false;
 			this.icons3 = true;
 			vm.currentView = 'comlistcomThree';
 			vm.currentView1 = 'rightcomThree';
+			
+			var listimer1 = setTimeout(function(){
+				initials1();
+				clearTimeout('listimer1');
+			},90);
+			vm.showleft1 = false;
+			vm.showleft2 = false;
 		},//改变icon3 颜色
 		
 	}
 })
 
 
-var comlistcomOne = {
+/*var comlistcomOne = {
 	template:'#comlistcomOne',
 	computed:{
 		
@@ -349,12 +379,16 @@ var comlistcomThree = {
 	methods:{
 		changelistcolor1:function($event){
 			this.indexstrange = $event.currentTarget.attributes[0].value;
-			//console.log(this.indexstrange);
+			console.log(this.indexstrange);
 			this.indexstrange2 = true;
 			vm.$store.commit('showgroupsinfo',true);
 			//console.log($event.currentTarget.id);
 			var idnumber =  $event.currentTarget.id;
 			vm.$store.commit('setright3groupid',idnumber);
+			
+			console.log(vm.$children[2].name);
+			console.log( vm.$children[2] );
+			
 		},
 		changelistcolor2:function($event){
 			//console.log($event.currentTarget);
@@ -362,7 +396,7 @@ var comlistcomThree = {
 			//console.log($event.currentTarget.attributes[0].value == i);
 			this.indexstrange2 = $event.currentTarget.attributes[0].value;
 			
-			//console.log( this.indexstrange2 );
+			console.log( this.indexstrange2 );
 			//console.log( -1 - this.indexstrange2 );
 			this.indexstrange2 = -1 - this.indexstrange2;
 			
@@ -371,14 +405,22 @@ var comlistcomThree = {
 			vm.$store.commit('showgroupsinfo',false);
 			
 			vm.$store.commit('setright3friendid',idnumber);
+			
+			console.log(vm.$children[2].namef);
 		},
 	},
-};
+};*/
 var rightcomOne = {
 	template:'#rightcomOne',
 };
 var rightcomTwo = {
 	template:'#rightcomTwo',
+	data:function(){
+		return {
+			placeholder2show:true,
+			
+		}
+	}
 };
 var rightcomThree = {
 	template:'#rightcomThree',
@@ -407,19 +449,6 @@ var rightcomThree = {
 		getright3groupid:'getright3groupid',
 		
 	}),
-	/*created:function(){
-		
-		console.log(this.getright3groupid);
-		axios.get('http://47.95.6.203:8183/im/group/info.json?id='+this.getright3groupid).then(function(res){
-			console.log(res.data);
-			
-			
-		}).catch(function(err){
-			console.log(err);
-		});
-		
-		
-	},*/
 	watch:{
 		
 		getright3groupid:function(){
@@ -435,16 +464,21 @@ var rightcomThree = {
 				
 				console.log(res.data.data.genre);
 				
-				vm.$children[2].name = res.data.data.name;
-				vm.$children[2].id = res.data.data.id;
-				vm.$children[2].avatar = res.data.data.avatar;
+				vm.$children[1].name = res.data.data.name;
+				vm.$children[1].id = res.data.data.id;
+				vm.$children[1].avatar = res.data.data.avatar;
 				
+				console.log( vm.$children[1] );
 				
 				
 
 			}).catch(function(err){
 				console.log(err);
 			});
+			
+		},
+		name:function(){
+			console.log( vm.$children[1].name );
 		},
 		
 		getright3friendid:function(){
@@ -453,20 +487,20 @@ var rightcomThree = {
 			
 			axios.get('http://47.95.6.203:8183/im/user/detail.json?id='+this.getright3friendid).then(function(res){
 				var data = res.data.data;
-				vm.$children[2].idf = res.data.data.id;
-				vm.$children[2].namef = res.data.data.nickname;
-				vm.$children[2].gender = res.data.data.sex;
-				vm.$children[2].signature = res.data.data.signature;
-				vm.$children[2].level = res.data.data.genre;
-				vm.$children[2].remark = res.data.data.remark;
-				vm.$children[2].areaId = res.data.data.areaId;
-				vm.$children[2].avatar1 = res.data.data.avatar;
+				vm.$children[1].idf = res.data.data.id;
+				vm.$children[1].namef = res.data.data.nickname;
+				vm.$children[1].gender = res.data.data.sex;
+				vm.$children[1].signature = res.data.data.signature;
+				vm.$children[1].level = res.data.data.genre;
+				vm.$children[1].remark = res.data.data.remark;
+				vm.$children[1].areaId = res.data.data.areaId;
+				vm.$children[1].avatar1 = res.data.data.avatar;
 				
-				console.log( vm.$children[2].gender );
-				if ( vm.$children[2].gender == 0 ){
-					vm.$children[2].girl = true; 
-				} else if ( vm.$children[2].gender == 1 ) {
-					vm.$children[2].girl = false; 
+				console.log( vm.$children[1].gender );
+				if ( vm.$children[1].gender == 0 ){
+					vm.$children[1].girl = true; 
+				} else if ( vm.$children[1].gender == 1 ) {
+					vm.$children[1].girl = false; 
 				}
 				console.log(data);
 				
@@ -501,6 +535,23 @@ var vm = new Vue({
 		creategroup2:[],
 		currentView:'comlistcomOne',
 		currentView1:'rightcomOne',
+		
+		
+		
+		
+		
+		picsrc:'http://47.95.6.203:8189/zxupl/',
+		defaultpic:'imgs/default1.png',
+		whiteon:'',
+		indexstrange:'',
+		indexstrange2:false,
+		showleft1:true,
+		showleft2:false,
+		
+		
+		
+		
+		
 	},
 	/*computed:{
 		friendsarrOne:function(){
@@ -511,12 +562,12 @@ var vm = new Vue({
 		},
 	},*/
 	components:{
-		'comlistcomOne':comlistcomOne,
-		'comlistcomTwo':comlistcomTwo,
-		'comlistcomThree':comlistcomThree,
-		'rightcomOne':rightcomOne,
-		'rightcomTwo':rightcomTwo,
-		'rightcomThree':rightcomThree,
+		/*comlistcomOne:comlistcomOne,
+		comlistcomTwo:comlistcomTwo,
+		comlistcomThree:comlistcomThree,*/
+		rightcomOne:rightcomOne,
+		rightcomTwo:rightcomTwo,
+		rightcomThree:rightcomThree,
 	},
 	/*data:{
 		currentView:'comlist1',
@@ -705,6 +756,42 @@ var vm = new Vue({
 				
 			});
 		},//确定创建群聊
+		
+		
+		
+		
+		
+		changelistcolor1:function($event){
+			this.indexstrange = $event.currentTarget.attributes[0].value;
+			console.log(this.indexstrange);
+			this.indexstrange2 = true;
+			vm.$store.commit('showgroupsinfo',true);
+			//console.log($event.currentTarget.id);
+			var idnumber =  $event.currentTarget.id;
+			vm.$store.commit('setright3groupid',idnumber);
+			
+			console.log(vm.$children[1].name);
+			console.log( vm.$children[1] );
+			
+		},
+		changelistcolor2:function($event){
+			//console.log($event.currentTarget);
+			this.indexstrange = 'string';
+			//console.log($event.currentTarget.attributes[0].value == i);
+			this.indexstrange2 = $event.currentTarget.attributes[0].value;
+			
+			console.log( this.indexstrange2 );
+			//console.log( -1 - this.indexstrange2 );
+			this.indexstrange2 = -1 - this.indexstrange2;
+			
+			var idnumber =  $event.currentTarget.id;
+			console.log(idnumber);
+			vm.$store.commit('showgroupsinfo',false);
+			
+			vm.$store.commit('setright3friendid',idnumber);
+			
+			console.log(vm.$children[1].namef);
+		},
 		
 	}
 });
