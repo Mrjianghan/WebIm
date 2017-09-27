@@ -10,7 +10,7 @@ var globalimg = 'http://assets.zhongxiangim.com/zxupl';
 var templatearr=[];//全局数组
 var templatearr1=[];//全局数组
 var templatearr2=[];//全局数组
-var globaltextmsgarr=[];//文本消息数组
+var globalmsgarr=[];//消息数组
 var globaltextmsgarrcopy1=[];//文本消息数组
 var globaltextmsgarrbridge=[];//文本消息数组
 var globaltextmsgarrcopy2=[];//文本消息数组
@@ -18,12 +18,12 @@ var globaltextmsgarrcopy2=[];//文本消息数组
 var unreadlength=[];//未读消息数
 
 var allmessagecontainer=[];//所有消息容器
+var allmsgreverse = [];
 
 function getCurrentTime(){
 	var globaltime = new Date();
 	var getglobaltime = globaltime.toTimeString();
 	var now = getglobaltime.slice(0,5);
-	console.log(now);
 	return now;
 };//获取当前时间
 
@@ -89,261 +89,106 @@ conn.listen({
 		localStorage.clear();
 	},          //失败回调
 	
+	
+	
+			
 	onTextMessage: function ( message ) {
 		
 		console.log('文本消息');
 		
-		allmessagecontainer.push(message);
+		message.time = getCurrentTime();
 		
-		JSON.stringify(allmessagecontainer);
+		console.log(message);
+		var type = message.type;
 		
-		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
-		
-		console.log( localStorage['allmessage'] );
-		
-		
-		
-		
-		
-		vm.$store.dispatch('pushmessage');
-		
-		
-		
-		switch (message.type) {
-			case "groupchat":
-				console.log('群组文本消息');
-				console.log(vm.chathistoryarr1);
-				console.log(globaltextmsgarr);
-				console.log(message);
-				
-				
-				
-				
-				
-				
-				break;
-			case "chat":
-				console.log('单聊文本消息');
-				console.log(vm.chathistoryarr1);
-				
-				console.log(message);
-				
-				console.log(message.ext);
-				
-				//console.log(message.ext.mingpian);//是否为名片
-				//是否为名片
-				
-				
-				
-				
-				var from = message.from;
-				var id = message.id;
-				var to = message.to;
-				var type = message.type;
-				
-				
-				
-				
-				axios.get(globaldomain+'im/user/detail.json?id='+from).then(function(res){
+		switch ( type ) {
+			case 'chat':
+				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					var data = res.data.data;
+					console.log(data);
+					var name = data.nickname;
+					var avatar = data.avatar;
+					message.name = name;
+					message.avatar = avatar;
+					message.friendi = message.from;
+					
+					
+					console.log(message);
+					
+					allmsgreverse.unshift(message);//反数组
+					
+					var rev = _.uniqBy(allmsgreverse, 'to');
+					
+					console.log( rev );
+					
+					var con = _.concat(rev, vm.chathistoryarr1);
+					
+					console.log(con);
+					
+					//存在bug
+					
+					vm.chathistoryarr1 = _.uniqBy(con, 'fiendi');
 					
 					
 					
 					
 					
-					var data1 = res.data.data;
-					
-					console.log(data1);
-					
-					var ava = data1.avatar;
-					
-					var name = data1.nickname;
-					
-					var obj1 = {};
-					
-					
-					var finaltime = getCurrentTime();
-					
-					
-					console.log(finaltime);
+					vm.chathistoryarr1 = _.uniqBy(con, 'to');
+					//存在bug
 					
 					
 					
-					
-					if ( message.ext.mingpian ) {
-						var data = '[名片]';
-						var cardinfo = message.ext;
-						console.log(cardinfo);
-						obj1.mingpian = cardinfo;
-
-
-
-					} else {
-						var data = message.data;
-					}
-					
-					
-					
-					
-					obj1.time = finaltime;
-					obj1.name = name;
-					obj1.avatar = ava;//从回掉里抓数据
-					
-					obj1.data = data;//从消息里抓数据
-					obj1.from = from;
-					obj1.id = id;
-					obj1.to = to;
-					obj1.type = type;//从消息里抓数据
-					obj1.msgtype = "text";
-				
-					console.log(obj1);
-					
-					
-					
-					
-					
-					/*为了生成消息列表*/
-					
-					
-					
-					var localgetter = vm.chathistoryarr1;//抓取已存在的聊天列表里的数据
-				
-					console.log(localgetter);
-
-					localgetter.unshift(obj1);
-
-					var localarr2 =[];
-
-					localarr2 = _.uniqBy(localgetter, 'from');//整合接收消息生成列表与发消息按钮生成的列表
-
-					console.log(localarr2);
-
-					vm.chathistoryarr1 = localarr2; //重设聊天列表数组
-
 					console.log(vm.chathistoryarr1);
-					
-					
-					
-					
-					
-					/*为了生成消息列表*/
-					
-					
-					
-					
-					
-					/*为了存储消息*/
-					
-					/*globaltextmsgarrbridge.push(obj1);
-					
-					
-				
-					console.log(globaltextmsgarrbridge);
-					
-					
-					var transdata = JSON.stringify(globaltextmsgarrbridge);
-					
-					console.log(transdata);
-					
-					localStorage[to+":"+from] = transdata;
-					
-					var parsemsg = JSON.parse(transdata);*/
-					
-					
-					
-					
-					
-					//vm.$refs.rightone.messagearr = parsemsg;
-					
-					//console.log(vm.$refs.rightone.messagearr);
-					
-					
-					
-					
-					
-					
-					/*为了存储消息*/
-					
-					/*为了侦测未读条目数*/
-					
-					
-					
-					
-					
-					
-					obj1.count = parsemsg.length;
-					
-					console.log(obj1);
-					
-					
-					
-					
-					/*为了侦测未读条目数*/
-					
-					
+
+
+
 				}).catch(function(err){
 					console.log(err);
-				})
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				});
 				
 				
 				break;
-			case "chatroom":
-				console.log('聊天室文本消息');
-				console.log(vm.chathistoryarr1);
-				console.log(globaltextmsgarr);
-				console.log(message);
+			case 'groupchat':
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					console.log(message);
+					allmsgreverse.unshift(message);//反数组
+					
+					
+					
+					var rev = _.uniqBy(allmsgreverse, 'to');
+					console.log( rev );
+					var con = _.concat(rev, vm.chathistoryarr1);
+					
+					console.log(con);
+					
+					
+					vm.chathistoryarr1 = _.uniqBy(con, 'to');
+					
+					
+					
+					console.log(vm.chathistoryarr1);
+
+
+
+
+				}).catch(function(err){
+					console.log(err);
+				});
+		
 				
 				
+				break;
+			case 'chatroom':
 				
-			
-				
-			
 				
 				
 				break;
@@ -353,44 +198,276 @@ conn.listen({
 		
 		
 		
+		
+		
+		/*去除重复，设定聊天列表*/
+		/*allmsgreverse.unshift(message);//反数组
+		
+		var rev = _.uniqBy(allmsgreverse, 'to');
+		
+		console.log( rev );*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*axios.get(globaldomain+'im/group/info.json?id='+rev.to).then(function(res){
+			var data = res.data.data;
+			console.log(data);
+			
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+		
+		axios.get(globaldomain+'im/user/detail.json?id='+rev.from).then(function(res){
+			var data = res.data.data;
+			console.log(data);
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});*/
+		
+		
+		/*去除重复，设定聊天列表*/
+		
+		
+		
+		
+		
+		
+		/*存储消息*/
+		allmessagecontainer.push(message);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		console.log(allmessagecontainer);
+		
+		JSON.stringify(allmessagecontainer);
+		
+		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
+		
+		console.log( localStorage['allmessage'] );
+		
+		vm.$store.dispatch('pushmessage');
+		
+		
+		console.log(vm.$store.getters);
+		
+		/*getchat:'getchat',单人聊天
+		getgroupchat:'getgroupchat',群组聊天
+		getchatroom:'getchatroom',*/
+		
+		console.log(vm.getchat);
+		console.log(vm.getgroupchat);
+		console.log(vm.getchatroom);
+		
+		
+		
+		console.log(vm.getallmessage);
+		
+		
+		/*_.find(vm.getchat, function(o){
+			console.log(o.from);
+		});*/
+		
+		
+		
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		console.log(message.from);
+		
+		globalmsgarr.push(message.from);
+		
+		
+		
+		/*存储消息*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		console.log(vm.$store.getters.getchatroom);
+		
+		console.log(vm.$store.getters.getgroupchat);
+
+				
+				
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+	
+		
+		
 	},    //收到文本消息
     onEmojiMessage: function ( message ) {
 		console.log('表情消息');
+		message.time = getCurrentTime();
 		console.log(message);
 		
 		allmessagecontainer.push(message);
+		allmsgreverse.unshift(message);
 		JSON.stringify(allmessagecontainer);
 		
 		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
 		
 		console.log( localStorage['allmessage'] );
 		vm.$store.dispatch('pushmessage');
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	},   //收到表情消息
     onPictureMessage: function ( message ) {
 		console.log('图片消息');
+		message.time = getCurrentTime();
 		console.log(message);
 		allmessagecontainer.push(message);
+		allmsgreverse.unshift(message);
 		JSON.stringify(allmessagecontainer);
 		
 		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
 		
 		console.log( localStorage['allmessage'] );
 		vm.$store.dispatch('pushmessage');
+		
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}, //收到图片消息
     
     onAudioMessage: function ( message ) {
 		console.log('音频消息');
+		message.time = getCurrentTime();
 		console.log(message);
 		allmessagecontainer.push(message);
+		allmsgreverse.unshift(message);
 		JSON.stringify(allmessagecontainer);
 		
 		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
 		
 		console.log( localStorage['allmessage'] );
 		vm.$store.dispatch('pushmessage');
+		
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -417,8 +494,10 @@ conn.listen({
 	
     onLocationMessage: function ( message ) {
 		console.log('位置消息');
+		message.time = getCurrentTime();
 		console.log(message);
 		allmessagecontainer.push(message);
+		allmsgreverse.unshift(message);
 		
 		JSON.stringify(allmessagecontainer);
 		
@@ -427,13 +506,41 @@ conn.listen({
 		console.log( localStorage['allmessage'] );
 		
 		vm.$store.dispatch('pushmessage');
+		
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	},//收到位置消息
 	
     onFileMessage: function ( message ) {
 		console.log('文件消息');
+		message.time = getCurrentTime();
 		console.log(message);
 		allmessagecontainer.push(message);
+		allmsgreverse.unshift(message);
 		
 		JSON.stringify(allmessagecontainer);
 		
@@ -443,10 +550,50 @@ conn.listen({
 		
 		vm.$store.dispatch('pushmessage');
 		
+		
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	},    //收到文件消息
 	
     onVideoMessage: function (message) {
 		console.log('视频消息');
+		message.time = getCurrentTime();
+		
+		//聊天记录列表 vm.chathistoryarr1
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
         var node = document.getElementById('privateVideo');
         var option = {
             url: message.url,
@@ -523,7 +670,20 @@ var store = new Vuex.Store({
 		showgroupsright:true,
 		right3groupid:'',
 		right3friendid:'',
-		message:[],
+		message:[
+			
+		],
+		
+		chat:[
+			
+		],
+		groupchat:[
+			
+		],
+		chatroom:[
+			
+		],
+		
 	},
 	mutations:{
 		showfriends:function(state){
@@ -570,7 +730,17 @@ var store = new Vuex.Store({
 		},
 		getallmessage:function(state){
 			return state.message;
-		}
+		},
+		
+		getchat:function(state){
+			return state.chat = _.filter(state.message, ['type', 'chat']);
+		},
+		getgroupchat:function(state){
+			return state.groupchat = _.filter(state.message, ['type', 'groupchat']);
+		},
+		getchatroom:function(state){
+			return state.chatroom = _.filter(state.message, ['type', 'chatroom']);
+		},
 		
 	},
 	actions:{
@@ -1012,23 +1182,39 @@ Vue.component('rightcomthree',{
 				var name = data.name;
 				var id = data.id;
 				
+				console.log(data);
+				
 				var obj1 ={};
 				obj1.avatar = avatar;
 				obj1.name = name;
-				obj1.to = ids.id;
-				obj1.from = id;
+				obj1.to = id;
+				
+				
+				obj1.type="groupchat";
 				
 				console.log(obj1);
 				
-				templatearr1.push(obj1);
+				templatearr1.unshift(obj1);
 				
 				console.log( templatearr1 );
 				
-				vm.chathistoryarr1 = _.uniqBy(templatearr1, 'from');
+				//var rev = _.uniqBy(templatearr1, 'from');
+				
+				var rev = _.uniqBy(templatearr1, 'to');
+				
+				var con = _.concat(rev, vm.chathistoryarr1);
+					
+				console.log(con);
+				
+				vm.chathistoryarr1 = _.uniqBy(con, 'to');
 				
 				console.log(vm.chathistoryarr1);
 				
 				console.log(vm.$refs);
+				
+				
+				
+			
 				
 				
 				
@@ -1070,26 +1256,43 @@ Vue.component('rightcomthree',{
 			axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
 				var data = res.data.data;
 				console.log(data);
-				var id = data.id;
+				
+				
 				var name = data.nickname;
 				var avatar = data.avatar;
-				
+				var friendi = data.id;
 				var obj2 = {};
 				
 				obj2.name = name;
 				obj2.avatar = avatar;
-				obj2.to = ids.id;
-				obj2.from = id;
+				obj2.to = friendi;
+				
+				obj2.type="chat";
+				obj2.friendi = friendi;
+				
+				console.log(obj2);
+				
+				templatearr1.unshift(obj2);
 				
 				
-				templatearr1.push(obj2);
+				var rev = _.uniqBy(templatearr1, 'friendi');
 				
+				var con = _.concat(rev, vm.chathistoryarr1);
+					
+				console.log(con);
 				
-				console.log(templatearr1);
-				
-				vm.chathistoryarr1 = _.uniqBy(templatearr1, 'from');
+				vm.chathistoryarr1 = _.uniqBy(con, 'friendi');
 				
 				console.log(vm.chathistoryarr1);
+				
+				console.log(vm.$refs);
+				
+				
+				
+				
+				
+				
+				
 				
 				
 				
@@ -1179,6 +1382,10 @@ var vm = new Vue({
 		friendsarrOne:'friendsarrOne',
 		groupsarrOne:'groupsarrOne',
 		getallmessage:'getallmessage',//所有的消息
+		getchat:'getchat',
+		getgroupchat:'getgroupchat',
+		getchatroom:'getchatroom',
+		
 	}),
 	
 	
@@ -1228,6 +1435,10 @@ var vm = new Vue({
 			vm.$children[0].tempgroupsarrcon = [];
 			
 			console.log(vm.getallmessage);
+			console.log(vm.getchat);
+			console.log(vm.getchatroom);
+			console.log(vm.getgroupchat);
+			
 			
 		},//关闭搜索框
 		clearslidebars:function(){
@@ -1279,14 +1490,7 @@ var vm = new Vue({
 				var str1 ='';
 				console.log(friendsarr);
 				
-				for ( var i in friendsarr ){
-					console.log( friendsarr[i] );
-					str1 = str1 + '<div id="'+friendsarr[i].nickname+'" class="sort_list"><div class="friendseveryOne" id="'+friendsarr[i].id+'"><div class="selectOnly1"><img class="under1" src="imgs/selected.png"><img class="under2"  src="imgs/unselected.png"><input  value="'+friendsarr[i].id+'" type="checkbox"></div><img class="friendsimg" src="http://47.95.6.203:8189/zxupl/'+friendsarr[i].avatar+'"><div class="num_name">'+ friendsarr[i].nickname +'</div></div></div>'
-				}
 				
-				$('#messagemaster .sort_box').html(str1);
-				
-				$('#messagemaster .sort_box .under1').css({display:'none'});
 			
 				
 				
