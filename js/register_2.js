@@ -1,4 +1,5 @@
 var ids;
+var globaldomain = 'http://api.zhongxiangim.com/';
 var conn = new WebIM.connection({
     isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
     https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
@@ -27,7 +28,7 @@ var vm = new Vue({
 		ableornot2:true,
 	},
 	created:function(){
-		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
+		axios.get(globaldomain+'token.json').then(function(res){
 		}).catch(function(err){
 			console.log(err);
 		});
@@ -39,14 +40,14 @@ var vm = new Vue({
 	},
 	methods:{
 		nextstepfinal:function(){
-			axios.post('http://47.95.6.203:8183/im/user/register.json?loginName='+globallocal.loginName+'&captcha='+globallocal.captcha+'&smscode='+globallocal.smscode+'&nickname='+globallocal.nickname+'&sex='+globallocal.sex+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
+			axios.post(globaldomain+'im/user/register.json?loginName='+globallocal.loginName+'&captcha='+globallocal.captcha+'&smscode='+globallocal.smscode+'&nickname='+globallocal.nickname+'&sex='+globallocal.sex+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
 				console.log(res.data.code);
 				var code = res.data.code;
 				switch(code){
 					case 2000 :
 						vm.errshow = true;
 						vm.errmsg = '信息保存成功';
-						axios.post('http://47.95.6.203:8183/signin.json?username='+globallocal.loginName+'&password='+vm.firstinputval).then(function(res1){
+						axios.post(globaldomain+'signin.json?username='+globallocal.loginName+'&password='+vm.firstinputval).then(function(res1){
 							var code = res1.data.code;
 							console.log(res1.data);
 							switch (code){
@@ -54,7 +55,7 @@ var vm = new Vue({
 									vm.errshow = true;
 									vm.errmsg = '登录成功';
 									
-									axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res3){
+									axios.get(globaldomain+'im/user/info.json').then(function(res3){
 										console.log(res3.data);
 										var code = res3.data.code;
 										var data = res3.data.data;

@@ -19,7 +19,7 @@ WebIM.config = {
     /*
      * Application AppKey
      */
-    appkey: '2015918#zhongxiangtemp',
+    appkey: '1177170803115514#zxswim',
 
     /*
      * Whether to use wss
@@ -94,7 +94,7 @@ WebIM.config = {
      * sender, in order to tell the sender the message has been read.
      * See call back function onReadMessage
      */
-    read: false,
+    read: true,
 
     /**
      * Will encrypt text message and emoji message

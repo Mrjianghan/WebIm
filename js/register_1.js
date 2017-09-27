@@ -1,4 +1,5 @@
 axios.defaults.withCredentials = true;
+var globaldomain = 'http://api.zhongxiangim.com/';
 var globallocal;
 var vm = new Vue({
 	el:'#subBody',
@@ -6,13 +7,13 @@ var vm = new Vue({
 		rightorwrong1:false,
 		rightorwrong2:false,
 		firstinputval:'',
-		secondinputval:'0',
+		secondinputval:3,
 		ableornot1:true,
 		btncolorswitch2:false,
 		ableornot2:true,
 	},
 	created:function(){
-		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
+		axios.get(globaldomain+'token.json').then(function(res){
 		}).catch(function(err){
 			console.log(err);
 		});

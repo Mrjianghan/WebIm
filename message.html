@@ -240,10 +240,107 @@
 		</template>-->
 		
 		<template id="rightcomOne">
-			<div>
-				<input type="text">
-			
-				<h1>rightcomOne</h1>
+			<div class="subrightcomone">
+				<div class="rightoneheader">
+					<div class="rightonetitle">{{name}}<span v-if="isgroupmaster">(8)</span></div><i v-if="isgroupleader" @click="showgroupcontrol = !showgroupcontrol" class="fa fa-cog"></i><i  v-if="notgroupleader" class="fa fa-plus" ></i>
+					<div v-if="showgroupcontrol" class="rightonemenu">
+						<div class="rightonelist1 rightonelists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理群成员</div>
+						<div class="rightonelist2 rightonelists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改群信息</div>
+						<div class="rightonelist3 rightonelists"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
+					</div>
+				</div>
+				
+				<div class="rightonechatcon scrollbar-macosx">
+					<div class="msgconmaster">
+						<div class="msgmasterinner">
+							
+							<div class="msgcontainer">
+								
+								<div class="msgmarginlr">
+									
+									
+									
+									<template v-for="arr in messagearr">
+									
+									
+										<div class="leftmsg">
+											
+											<div class="imgcontainer">
+												<img :id="arr.from" :src="arr.avatar ? picsrc+arr.avatar : defaultpic" class="headpic">
+											</div>
+											
+											<div class="rightcon">
+												<div class="name">{{arr.name}}</div>
+												<div class="wordscontent">
+													<span>{{arr.data}}</span>
+												</div>
+											</div>
+											
+											
+											
+											<div class="clearfix"></div>
+										</div>
+									
+									
+									
+									</template>
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
+								
+								
+								
+							</div>
+							
+							
+						</div>
+						
+						
+						
+						
+						
+						<!--<template v-for="arr in messagearr">
+							
+							<div class="leftmsg">
+								<div>
+									
+									
+								</div>
+								
+								{{ arr.avatar }}
+							</div>
+							
+						</template>
+						
+						
+						<div class="leftmsg">
+							
+							
+						</div>-->
+						
+					</div>
+				</div>
+				
+				<div v-show="defaulthide" class="rightonesend">
+					<div class="rightonesendselect">
+						<i class="fa fa-smile-o"></i>
+						<i class="fa fa-picture-o"><input type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
+						<i class="fa fa-folder"><input type="file"></i>
+					</div>
+					<div class="textcontainer">
+						<textarea>
+						</textarea>
+					</div>
+					<button :id="switchbindid" type="button">发送</button>
+					
+				</div>
 			</div>
 			
 		</template>
@@ -270,24 +367,26 @@
 		
 		<template id="rightcomThree">
 			
+			<div>
 			
-			<div v-if="showgroupsright" class="rightgroupcon">
-				
-					<img :src="avatar ? picsrc+ avatar : defaultpic">
-					<p>{{ name }}<span v-if="level == 10">(群主)</span></p>
-					<button :id="id" type="button">发消息</button>
-				
+			
+				<div v-show="showgroupsright" class="rightgroupcon">
+
+						<img :src="avatar ? picsrc+ avatar : defaultpic">
+						<p>{{ name }}<span v-if="level == 10">(群主)</span></p>
+						<button @click="addchatlistg($event)"  :id="id" type="button">发消息</button>
+
+				</div>
+
+				<div v-show="showgroupsright1" class="rightfriendcon">
+					<img :src="avatar1 ? picsrc+ avatar1 : defaultpic">
+					<p class="name">{{namef}}<i v-if="girl" class="fa fa-venus"></i><i v-else class="fa fa-mars"></i> </p>
+					<div class="sign">{{signature}}</div>
+					<div class="addon">备注&nbsp;:&nbsp;{{remark}}</div>
+					<div class="area">地区&nbsp;:&nbsp;{{areaId}}</div>
+					<button @click="addchatlistf($event)" :id="idf" type="button">发消息</button>
+				</div>
 			</div>
-			
-			<div v-else class="rightfriendcon">
-				<img :src="avatar1 ? picsrc+ avatar1 : defaultpic">
-				<p class="name">{{namef}}<i v-if="girl" class="fa fa-venus"></i><i v-else class="fa fa-mars"></i> </p>
-				<div class="sign">{{signature}}</div>
-				<div class="addon">备注&nbsp;:&nbsp;{{remark}}</div>
-				<div class="area">地区&nbsp;:&nbsp;{{areaId}}</div>
-				<button :id="idf" type="button">发消息</button>
-			</div>
-			
 			
 		</template>
 		
@@ -369,33 +468,37 @@
 			<div class="mainleft">
 				
 				
-				<currentuser></currentuser>
+				<currentuser ref="current"></currentuser>
 				<div class="threepiecelists scrollbar-macosx">
 					
-						<!--<component :is="currentView"></component>-->
 					
 				
 					<div v-if="showleft1" id="comlistcomOne">
 						
-						<template>
-							<div class="listOnecon">
-								<img src="imgs/default1.png">
-								<div class="circle">12</div>
-								<div class="listOnedetails">
-									<div class="listOneconleft">
-										<div class="listOnetopleft shenglue">名字
+						<template v-for="(arr1,indexone) in chathistoryarr1">
+							<div>
+							
+								<div :id="arr1.from" :data-index="indexone" @click="listoneaddcolor($event),arr1.count = 0" :class="{backgroundcolor: indexone == listoneadd }" class="listOnecon">
+									<img :src=" arr1.avatar ? picsrc+arr1.avatar : defaultpic">
+									<div v-if="arr1.count" class="circle">{{arr1.count}}</div>
+									<div class="listOnedetails">
+										<div class="listOneconleft">
+											<div class="listOnetopleft shenglue">{{ arr1.name }}
+											</div>
+											<div class="listOnebottomleft shenglue">{{ arr1.data }}
+												
+											</div>
 										</div>
-										<div class="listOnebottomleft shenglue"><span>[名片]</span>聊天消息
+										<div class="listOneconright">
+											<div class="listOnetopright">{{ arr1.time }}
+											</div>
+											<div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i>
+											</div>
 										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="listOneconright">
-										<div class="listOnetopright">18:04
-										</div>
-										<div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i>
-										</div>
-									</div>
-									<div class="clearfix"></div>
 								</div>
+								
 							</div>
 						</template>
 						
@@ -403,9 +506,44 @@
 					
 					<div v-else-if="showleft2"  id="comlistcomTwo">
 						<div class="chatroom">
-							<div class="chatroomarea">
+							<div class="chatroomheader">
+							
+								<div class="chatroomarea">
+
+									<template v-for="area1 in chatroomarea">
+										<div class="chatroomsame" :id="area1.id">{{ area1.name }}
+										</div>
+
+									</template>
+
+
+								</div>
+								<div class="chatroomtrade">
+									<template v-for="class1 in chatroomclass">
+										<div class="chatroomsame" :id="class1.id">{{ class1.name }}
+										</div>
+
+									</template>
+								</div>
 							</div>
-							<div class="chatroomtrade">
+							
+							
+							<div class="chatroomcontainer">
+								
+								<template v-for="arr2 in chatroominfo">
+									
+									
+									<div class="chatroomouter">
+										<div class="chatroomwrapper">
+											
+											
+										</div>
+										{{arr2}}
+									</div>
+									
+									
+								</template>
+								
 							</div>
 						</div>
 						
@@ -448,9 +586,18 @@
 				
 			</div>
 			<div class="mainright">
-				<!--<keep-alive include="rightcomTwo,rightcomOne">-->
-					<component :is="currentView1"></component>
-				<!--</keep-alive>-->
+				<div v-if="mainrightone" class="rightcomOne">
+					<rightcomone ref="rightone"></rightcomone>
+				</div>
+				<div v-if="mainrighttwo" class="rightTwo">
+					<rightcomtwo ref="righttwo"></rightcomtwo>
+				</div>
+				<div v-show="specialthree" class="rightThree">
+					<rightcomthree ref="rightthree"></rightcomthree>
+				</div>
+				
+				
+				
 			</div>
 			<div class="clearfix"></div>
 			

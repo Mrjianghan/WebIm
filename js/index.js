@@ -1,6 +1,9 @@
+axios.defaults.withCredentials = true;
 var currentid;//当前用户登录密码
 var timerlonger;//全局计时器
-var conn = new WebIM.connection({
+var globaldomain = 'http://api.zhongxiangim.com/';
+
+/*var conn = new WebIM.connection({
     isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
     https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
     url: WebIM.config.xmppURL,
@@ -10,6 +13,8 @@ var conn = new WebIM.connection({
     autoReconnectInterval: WebIM.config.autoReconnectInterval,
     apiUrl:WebIM.config.apiURL,
 });
+
+
 
 conn.listen({
     onOpened: function ( message ) {          //连接成功回调
@@ -33,10 +38,11 @@ conn.listen({
 		
 	},          //失败回调
     
-});
+});*/
 
 
-axios.defaults.withCredentials = true;
+
+
 var vm = new Vue({
 	el:'#subBody',
 	data:{
@@ -57,7 +63,7 @@ var vm = new Vue({
 		get2dimention:'',
 	},
 	created:function(){
-		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
+		axios.get(globaldomain+'token.json').then(function(res){
 		}).catch(function(err){
 			console.log(err);
 		});
@@ -67,13 +73,13 @@ var vm = new Vue({
 		
 		nextstepfinal:function(){
 			
-			axios.post('http://47.95.6.203:8183/signin.json?username='+vm.firstinputval+'&password='+vm.secondinputval).then(function(res){
+			axios.post(globaldomain+'signin.json?username='+vm.firstinputval+'&password='+vm.secondinputval).then(function(res){
 				console.log(res);
 				var code = res.data.code;
 				switch (code){
 					case 2000 :
 						console.log(2000);
-						axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res){
+						axios.get(globaldomain+'im/user/info.json').then(function(res){
 							
 							var code = res.data.code;
 							var data = res.data.data;
@@ -176,12 +182,12 @@ var vm = new Vue({
 			vm.headswitch2 = true;
 			vm.headswitch1 = false;
 			var id2d;
-			axios.get('http://47.95.6.203:8183/qrcode.json').then(function(res){
+			axios.get(globaldomain+'qrcode.json').then(function(res){
 					var code = res.data.code;
 					var data = res.data.data;
 					var path = res.data.data.path;
 					
-					vm.get2dimention = 'http://47.95.6.203:8189/zxupl'+path;
+					vm.get2dimention = globaldomain+'zxupl'+path;
 					var idbridge = res.data.data.id;
 					var trans = JSON.parse(idbridge);
 					
@@ -195,7 +201,7 @@ var vm = new Vue({
 				
 			timerlonger = window.setInterval(function(){
 				console.log(timerlonger);
-				axios.post('http://47.95.6.203:8183/login.json?qrcode='+id2d).then(function(res){
+				axios.post(globaldomain+'login.json?qrcode='+id2d).then(function(res){
 					console.log(res.data);
 					var code = res.data.code;
 					switch (code){

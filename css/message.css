@@ -96,6 +96,7 @@ body {
 
 .currentpiccontainer {
 	width: 270px;
+	height: 270px;
 }
 .nameandgender {
 	font-size: 22px;
@@ -846,7 +847,7 @@ body {
 	box-sizing: border-box;
 }
 .backgroundcolor {
-	background-color: #fff;
+	background-color: #f8f8f8;
 }
 	
 	
@@ -899,13 +900,15 @@ body {
 	font-size: 24px;
 	color: #333;
 	position: absolute;
-	top: 0;	
+	top: 0;
+	width: 100%;
 }
 .listOnebottomleft {
 	font-size: 20px;
 	color: #999;
 	position: absolute;
 	bottom: 0;
+	width: 100%;
 }
 .listOnebottomleft span {
 	font-size: 20px;
@@ -935,9 +938,61 @@ body {
 	font-size: 20px;
 	cursor: pointer;
 }
+
+
 /*第一个列表*/
+/*第二个列表*/
+.chatroom {
+	
+}
+.chatroomheader {
+	background-color: #fff;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+}
+.chatroomarea {
+	width: 380px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	height: 26px;
+	overflow: hidden;
+	
+}
+.chatroomtrade {
+	width: 380px;
+	margin-left: 20px;
+	height: 26px;
+	overflow: hidden;
+}
+.chatroomsame {
+	cursor: pointer;
+	height: auto;
+	font-size: 20px;
+	display: inline-block;
+	color: #333;
+	background-color: #fff;
+	margin-right: 20px;
+	
+}
+.chatroomouter {
+	height: 110px;
+	width: 420px;
+	background-color: #e4eaf4;
+	overflow: hidden;
+}
+.chatroomwrapper {
+	width: 380px;
+	height: 70px;
+	margin-top: 20px;
+	margin-left: 20px;
+	
+	
+}
 
-
+/*第二个列表*/
 /*动态组件3条列表容器*/
 
 
@@ -1061,3 +1116,227 @@ body {
 
 
 /*右边聊天室*/
+
+
+
+
+/*右边聊天界面*/
+.rightcomOne {
+	background-color: #f8f8f8;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.subrightcomone {
+	height: 100%;
+}
+.rightonechatcon {
+	position: absolute;
+	height: calc( 100% - 350px );
+	width: 100%;
+}
+.rightoneheader {
+	height: 110px;
+	width: 100%;
+	border-bottom: 1px solid #efefef;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
+.rightonetitle {
+	height: 110px;
+	line-height: 110px;
+	width: 40%;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 28px;
+	color: #333;
+}
+.rightoneheader .fa-cog {
+	font-size: 28px;
+	position: absolute;
+	right: 60px;
+	top: 41px;
+	cursor: pointer;
+	color: #9b9b9b;
+}
+.rightoneheader .fa-plus {
+	font-size: 28px;
+	position: absolute;
+	right: 60px;
+	top: 41px;
+	cursor: pointer;
+	color: #9b9b9b;
+}
+.rightoneheader .fa-cog:hover {
+	color: #1a7dff;
+}
+.rightoneheader .fa-plus:hover {
+	color: #1a7dff;
+}
+.rightonemenu {
+	position: absolute;
+	height: 195px;
+	width: 200px;
+	right: 90px;
+	top: 50px;
+	background-color: #fff;
+	z-index: 30;
+}
+.rightonelists {
+	height: 65px;
+	width: 100%;
+	line-height: 65px;
+	font-size: 18px;
+	color: #999;
+	text-align: center;
+	cursor: pointer;
+}
+.rightonelists:hover {
+	color: #1a7dff;
+}
+.rightonelist2 {
+	border-bottom: 1px solid #e5e5e5;
+	border-top: 1px solid #e5e5e5;
+}
+.rightonesend {
+	background-color: #fff;
+	width: 100%;
+	height: 246px;
+	border-bottom: 1px solid #efefef;
+	position: absolute;
+	bottom: 0;
+}
+.rightonesendselect {
+	padding-top: 24px;
+	
+	padding-left: 60px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.rightonesendselect .fa {
+	font-size: 24px;
+	color: #808080;
+	cursor: pointer;
+}
+.rightonesendselect .fa:hover {
+	color: #1a7dff;
+}
+.rightonesendselect .fa-picture-o {
+	position: relative;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.rightonesendselect .fa-picture-o input {
+	position: absolute;
+	left: 0;
+	height: 23px;
+	width: 23px;
+	opacity: 0;
+}
+.rightonesendselect .fa-folder {
+	position: relative;
+}
+.rightonesendselect .fa-folder input {
+	position: absolute;
+	left: 0;
+	height: 23px;
+	width: 23px;
+	opacity: 0;
+}
+
+
+.rightonesend textarea {
+	width: 90%;
+	height: 100px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+	resize: none;
+	border: none;
+	font-size: 23px;
+	color: #333;
+	font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
+}
+.rightonesend button {
+	background-color: #00a0e9;
+	width: 116px;
+	line-height: 44px;
+	height: 44px;
+	font-size: 26px;
+	text-align: center;
+	border: none;
+	color: #fff;
+	position: absolute;
+	right: 60px;
+	bottom: 15px;
+}
+.msgconmaster {
+	width: 100%;
+	
+}
+.msgmasterinner {
+	width: 100%;
+	
+}
+.msgcontainer {
+	width: 100%;
+	
+}
+.msgmarginlr {
+	width: 90%;
+	margin:  0 auto;
+	padding-top: 60px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.msgmarginlr .leftmsg {
+	max-width: 70%;
+	margin-bottom: 30px;
+}
+.msgmarginlr .leftmsg  .rightcon {
+	float: left;
+	margin-left: 20px;
+	max-width: 80%;
+}
+.msgmarginlr .leftmsg  .name {
+	font-size: 22px;
+	color: #999;
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+.msgmarginlr .imgcontainer {
+	width: 60px;
+	height: 80px;
+	float: left;
+	
+}
+.msgmarginlr .imgcontainer img {
+	height: 60px;
+	width: 60px;
+	border-radius: 5px;
+}
+.msgmarginlr .leftmsg .wordscontent span{
+	background-color: #00a0e9;
+	padding: 15px;
+	font-size: 22px;
+	color: #fff;
+	display: inline-block;
+	padding-left: 20px;
+	padding-right: 20px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 10px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent span:after{
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-right-color: #00a0e9;
+	left: -20px;
+	top: 20px;
+}
+/*右边聊天界面*/
