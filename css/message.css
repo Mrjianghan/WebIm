@@ -474,6 +474,7 @@ body {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	border-bottom: 1px solid #e5e5e5;
+	overflow-y: scroll;
 }
 .selectallboss {
 	height: 40px;
@@ -509,7 +510,7 @@ body {
 	height: 40px;
 	position: absolute;
 	left: 0;
-	opacity: 0;
+	opacity: 1;
 }
 .selectallcon img {
 	margin: 0 auto;
@@ -550,17 +551,20 @@ body {
 .selectOnly1 .under1{
 	position: absolute;
 	top: 32px;
+	opacity: 0;
 }
 .selectOnly1 .under2{
 	position: absolute;
 	top: 32px;
+	opacity: 0;
 }
 .selectOnly1 input{
 	position: absolute;
 	top: 32px;
 	width: 26px;
 	height: 26px;
-	opacity: 0;
+	
+	
 }
 .btncolorswitch {
 	background-color: #2285ff;
@@ -574,7 +578,37 @@ body {
 	bottom: 10px;
 }
 .sel1con .sort_box input {
-	opacity: 0;
+	opacity: 1;
+}
+.startgrouprightcon {
+	height: 90px;
+	width: 100%;
+	position: relative;
+	border-bottom: 1px solid #e5e5e5;
+	cursor: pointer;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.startrightimgcon {
+	margin-left: 60px;
+	height: 70px;
+	width: 70px;
+	padding-top: 10px;
+	overflow: hidden;
+}
+.startrightimgcon img {
+	width: 70px;
+	height: 70px;
+}
+.groupnameright {
+	width: 70%;
+	position: absolute;
+	height: 90px;
+	line-height: 90px;
+	font-size: 20px;
+	color: #666;
+	top: 0;
+	left: 150px;
 }
 /*发起聊天*/
 
@@ -612,6 +646,7 @@ body {
 	height: 70px;
 	width: 100%;
 	position: relative;
+	cursor: pointer;
 }
 .searchfriendcon img {
 	width: 50px;
@@ -651,6 +686,7 @@ body {
 	height: 70px;
 	width: 100%;
 	position: relative;
+	cursor: pointer;
 }
 .searchgroupcon img {
 	width: 50px;
@@ -854,6 +890,18 @@ body {
 /*第三个列表*/
 
 /*第一个列表*/
+.comlistcomOne {
+	width: 100%;
+	
+}
+.comlist1 {
+	width: 100%;
+}
+.nomessage {
+	text-align: center;
+	font-size: 24px;
+	color: #999;
+}
 
 .listOnecon {
 	width: 420px;
@@ -882,6 +930,20 @@ body {
 	text-align: center;
 	line-height: 18px;
 }
+.listOnecon .transparentone {
+	position: absolute;
+	height: 18px;
+	width: 18px;
+	border-radius: 50%;
+	background-color: transparent;
+	top: 10px;
+	left: 80px;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+	line-height: 18px;
+}
+
 .listOnedetails {
 	height: 70px;
 	width: 290px;
@@ -1121,6 +1183,12 @@ body {
 
 
 /*右边聊天界面*/
+.hidden {
+	display: none;
+}
+
+
+
 .rightcomOne {
 	background-color: #f8f8f8;
 	position: relative;
@@ -1133,6 +1201,10 @@ body {
 .rightonechatcon {
 	position: absolute;
 	height: calc( 100% - 350px );
+	width: 100%;
+}
+.manywindowcon {
+	height: 100%;
 	width: 100%;
 }
 .rightoneheader {
@@ -1271,6 +1343,10 @@ body {
 	right: 60px;
 	bottom: 15px;
 }
+.groupid {
+	
+}
+
 .msgconmaster {
 	width: 100%;
 	
@@ -1286,13 +1362,16 @@ body {
 .msgmarginlr {
 	width: 90%;
 	margin:  0 auto;
-	padding-top: 60px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	height: auto;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	
 }
 .msgmarginlr .leftmsg {
 	max-width: 70%;
-	margin-bottom: 30px;
+	
 }
 .msgmarginlr .leftmsg  .rightcon {
 	float: left;
@@ -1305,13 +1384,13 @@ body {
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
-.msgmarginlr .imgcontainer {
+.msgmarginlr  .leftmsg   .imgcontainer {
 	width: 60px;
 	height: 80px;
 	float: left;
 	
 }
-.msgmarginlr .imgcontainer img {
+.msgmarginlr .leftmsg   .imgcontainer img {
 	height: 60px;
 	width: 60px;
 	border-radius: 5px;
@@ -1339,4 +1418,61 @@ body {
 	left: -20px;
 	top: 20px;
 }
+
+.msgmarginlr .rightmsg {
+	max-width: 100%;
+}
+.rightmaxwidth {
+	max-width: 70%;
+	float: right;
+}
+.msgmarginlr .rightmsg  .rightcon {
+	float: right;
+	margin-left: 20px;
+	max-width: 80%;
+}
+.msgmarginlr .rightmsg  .name {
+	font-size: 22px;
+	color: #999;
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+.msgmarginlr .rightmsg .imgcontainer {
+	width: 60px;
+	height: 80px;
+	float: right;
+	
+}
+.msgmarginlr .rightmsg .imgcontainer img {
+	height: 60px;
+	width: 60px;
+	border-radius: 5px;
+}
+.msgmarginlr .rightmsg  .wordscontent {
+	margin-right: 20px;
+}
+.msgmarginlr .rightmsg  .wordscontent span{
+	background-color: #00a0e9;
+	padding: 15px;
+	font-size: 22px;
+	color: #fff;
+	display: inline-block;
+	padding-left: 20px;
+	padding-right: 20px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 10px;
+	position: relative;
+}
+.msgmarginlr .rightmsg  .wordscontent span:after{
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-left-color: #00a0e9;
+	right: -20px;
+	top: 20px;
+}
+
 /*右边聊天界面*/

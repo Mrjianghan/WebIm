@@ -1,4 +1,5 @@
 axios.defaults.withCredentials = true;
+var globaldomain = 'http://api.zhongxiangim.com/';
 if ( localStorage['forgetpsw'] ){
 	var getvalue = JSON.parse( localStorage['forgetpsw'] );
 	console.log(getvalue);
@@ -22,7 +23,7 @@ var vm = new Vue({
 		errmsg:'',
 	},
 	created:function(){
-		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
+		axios.get(globaldomain+'token.json').then(function(res){
 		}).catch(function(err){
 			console.log(err);
 		});
@@ -35,7 +36,7 @@ var vm = new Vue({
 			var captcha = getvalue.captcha;
 			var smscode = getvalue.smscode;
 					
-			axios.post('http://47.95.6.203:8183/im/user/reset/passwd.json?loginName='+loginName+'&captcha='+captcha+'&smscode='+smscode+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
+			axios.post(globaldomain+'im/user/reset/passwd.json?loginName='+loginName+'&captcha='+captcha+'&smscode='+smscode+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
 				var code = res.data.code;		
 				console.log(code);
 				switch(code) {
@@ -45,7 +46,7 @@ var vm = new Vue({
 						
 						
 						
-						axios.post('http://47.95.6.203:8183/signin.json?username='+loginName+'&password='+vm.firstinputval).then(function(res1){
+						axios.post(globaldomain+'signin.json?username='+loginName+'&password='+vm.firstinputval).then(function(res1){
 							var code = res1.data.code;
 							console.log(res1.data);
 							switch (code){
@@ -53,7 +54,7 @@ var vm = new Vue({
 									vm.errshow = true;
 									vm.errmsg = '登录成功';
 									
-									axios.get('http://47.95.6.203:8183/im/user/info.json').then(function(res3){
+									axios.get(globaldomain+'im/user/info.json').then(function(res3){
 										console.log(res3.data);
 										var code = res3.data.code;
 										var data = res3.data.data;

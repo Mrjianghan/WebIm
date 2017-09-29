@@ -35,6 +35,7 @@
     height: 90px;
     line-height: 90px;
     border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
 
 
@@ -67,14 +68,15 @@
 
 
 .sort_letter {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 40px;
-    color: #787878;
-    font-size: 14px;
-    border-bottom: 1px solid #e5e5e5;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    height: 50px;
+	width: 420px;
+	font-size: 20px;
+	color: #999;
+	background-color: #fff;
+	line-height: 50px;
+	padding-left: 45px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .initials {

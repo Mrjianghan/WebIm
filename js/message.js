@@ -10,13 +10,14 @@ var globalimg = 'http://assets.zhongxiangim.com/zxupl';
 var templatearr=[];//全局数组
 var templatearr1=[];//全局数组
 var templatearr2=[];//全局数组
+
 var globalmsgarr=[];//消息数组
 var globaltextmsgarrcopy1=[];//文本消息数组
 var globaltextmsgarrbridge=[];//文本消息数组
 var globaltextmsgarrcopy2=[];//文本消息数组
 
 var unreadlength=[];//未读消息数
-
+var tempcreategroup = '';
 var allmessagecontainer=[];//所有消息容器
 var allmsgreverse = [];
 
@@ -52,8 +53,6 @@ if ( localStorage.currentuser ){
 	var nothing = localStorage.currentuser;
 	ids = JSON.parse( nothing );//登陆必备*/
 	console.log(ids);
-	console.log(ids.id);
-	console.log(ids.psw);
 }else {
 	window.location.href = "index.html";
 }
@@ -93,7 +92,7 @@ conn.listen({
 	
 			
 	onTextMessage: function ( message ) {
-		
+		vm.nomessage = false;
 		console.log('文本消息');
 		
 		message.time = getCurrentTime();
@@ -108,37 +107,60 @@ conn.listen({
 					console.log(data);
 					var name = data.nickname;
 					var avatar = data.avatar;
+					var msgfrom = message.from;
+					
 					message.name = name;
 					message.avatar = avatar;
-					message.friendi = message.from;
-					
 					
 					console.log(message);
+					/*消息记录*/
+					var str = '';
 					
-					allmsgreverse.unshift(message);//反数组
-					
-					var rev = _.uniqBy(allmsgreverse, 'to');
-					
-					console.log( rev );
-					
-					var con = _.concat(rev, vm.chathistoryarr1);
-					
-					console.log(con);
-					
-					//存在bug
-					
-					vm.chathistoryarr1 = _.uniqBy(con, 'fiendi');
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
 					
+				
+				
 					
-					vm.chathistoryarr1 = _.uniqBy(con, 'to');
-					//存在bug
+					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.from).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					
+					/*消息记录*/
 					
 					
 					
-					console.log(vm.chathistoryarr1);
+					/*消息内容容器*/
+					var str1 = '';
+					str1 = str1 + '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgmasterinner"><div class="msgcontainer"><div class="msgmarginlr">'+message.from+'</div></div></div></div>';	
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+					}
+					
+					/*消息内容容器*/
+
+					
+					
+					
+				
+					
+				
+					
+					
+					
+					
 
 
 
@@ -155,28 +177,123 @@ conn.listen({
 					var avatar = data.avatar;
 					var name = data.name;
 					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
 					message.avatar = avatar;
 					message.name = name;
 					message.genre = genre;
 					
 					console.log(message);
-					allmsgreverse.unshift(message);//反数组
+					/*消息记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
-					var rev = _.uniqBy(allmsgreverse, 'to');
-					console.log( rev );
-					var con = _.concat(rev, vm.chathistoryarr1);
-					
-					console.log(con);
-					
-					
-					vm.chathistoryarr1 = _.uniqBy(con, 'to');
-					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息记录*/
 					
 					
-					console.log(vm.chathistoryarr1);
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						
+						
+						
+						
+					/*消息内容容器*/
+					var str1 = '';
+						
+					str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgmasterinner"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div></div>';	
+					
+					
+					var str2 ='';
+						
+					/*str2 ='<div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div></div>';*/
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+					} else {
+						
+						$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster .msgmasterinner  .msgcontainer').append( str2 );
+						
+						
+						
+					}
+					
+					/*消息内容容器*/
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
 
 
 
@@ -200,46 +317,7 @@ conn.listen({
 		
 		
 		
-		/*去除重复，设定聊天列表*/
-		/*allmsgreverse.unshift(message);//反数组
-		
-		var rev = _.uniqBy(allmsgreverse, 'to');
-		
-		console.log( rev );*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*axios.get(globaldomain+'im/group/info.json?id='+rev.to).then(function(res){
-			var data = res.data.data;
-			console.log(data);
-			
-			
-			
-			
-		}).catch(function(err){
-			console.log(err);
-		});
-		
-		
-		axios.get(globaldomain+'im/user/detail.json?id='+rev.from).then(function(res){
-			var data = res.data.data;
-			console.log(data);
-			
-			
-			
-		}).catch(function(err){
-			console.log(err);
-		});*/
-		
-		
-		/*去除重复，设定聊天列表*/
+	
 		
 		
 		
@@ -247,7 +325,7 @@ conn.listen({
 		
 		
 		/*存储消息*/
-		allmessagecontainer.push(message);
+		/*allmessagecontainer.push(message);
 		
 		
 		
@@ -271,19 +349,19 @@ conn.listen({
 		vm.$store.dispatch('pushmessage');
 		
 		
-		console.log(vm.$store.getters);
+		console.log(vm.$store.getters);*/
 		
 		/*getchat:'getchat',单人聊天
 		getgroupchat:'getgroupchat',群组聊天
 		getchatroom:'getchatroom',*/
 		
-		console.log(vm.getchat);
+		/*console.log(vm.getchat);
 		console.log(vm.getgroupchat);
 		console.log(vm.getchatroom);
 		
 		
 		
-		console.log(vm.getallmessage);
+		console.log(vm.getallmessage);*/
 		
 		
 		/*_.find(vm.getchat, function(o){
@@ -295,9 +373,9 @@ conn.listen({
 		//聊天记录列表 vm.chathistoryarr1
 		
 		
-		console.log(message.from);
+		/*console.log(message.from);
 		
-		globalmsgarr.push(message.from);
+		globalmsgarr.push(message.from);*/
 		
 		
 		
@@ -360,17 +438,18 @@ conn.listen({
 	},    //收到文本消息
     onEmojiMessage: function ( message ) {
 		console.log('表情消息');
+		vm.nomessage = false;
 		message.time = getCurrentTime();
 		console.log(message);
 		
-		allmessagecontainer.push(message);
+		/*allmessagecontainer.push(message);
 		allmsgreverse.unshift(message);
 		JSON.stringify(allmessagecontainer);
 		
 		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
 		
 		console.log( localStorage['allmessage'] );
-		vm.$store.dispatch('pushmessage');
+		vm.$store.dispatch('pushmessage');*/
 		//聊天记录列表 vm.chathistoryarr1
 		
 		
@@ -395,17 +474,19 @@ conn.listen({
 		
 	},   //收到表情消息
     onPictureMessage: function ( message ) {
+		vm.nomessage = false;
 		console.log('图片消息');
 		message.time = getCurrentTime();
 		console.log(message);
-		allmessagecontainer.push(message);
+		
+		/*allmessagecontainer.push(message);
 		allmsgreverse.unshift(message);
 		JSON.stringify(allmessagecontainer);
 		
 		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
 		
 		console.log( localStorage['allmessage'] );
-		vm.$store.dispatch('pushmessage');
+		vm.$store.dispatch('pushmessage');*/
 		
 		//聊天记录列表 vm.chathistoryarr1
 		
@@ -438,17 +519,19 @@ conn.listen({
 	}, //收到图片消息
     
     onAudioMessage: function ( message ) {
+		vm.nomessage = false;
 		console.log('音频消息');
 		message.time = getCurrentTime();
 		console.log(message);
-		allmessagecontainer.push(message);
+		
+		/*allmessagecontainer.push(message);
 		allmsgreverse.unshift(message);
 		JSON.stringify(allmessagecontainer);
 		
 		localStorage['allmessage'] = JSON.stringify(allmessagecontainer);
 		
 		console.log( localStorage['allmessage'] );
-		vm.$store.dispatch('pushmessage');
+		vm.$store.dispatch('pushmessage');*/
 		
 		//聊天记录列表 vm.chathistoryarr1
 		
@@ -493,10 +576,11 @@ conn.listen({
 	},   //收到音频消息
 	
     onLocationMessage: function ( message ) {
+		vm.nomessage = false;
 		console.log('位置消息');
 		message.time = getCurrentTime();
 		console.log(message);
-		allmessagecontainer.push(message);
+		/*allmessagecontainer.push(message);
 		allmsgreverse.unshift(message);
 		
 		JSON.stringify(allmessagecontainer);
@@ -505,7 +589,7 @@ conn.listen({
 		
 		console.log( localStorage['allmessage'] );
 		
-		vm.$store.dispatch('pushmessage');
+		vm.$store.dispatch('pushmessage');*/
 		
 		//聊天记录列表 vm.chathistoryarr1
 		
@@ -536,10 +620,11 @@ conn.listen({
 	},//收到位置消息
 	
     onFileMessage: function ( message ) {
+		vm.nomessage = false;
 		console.log('文件消息');
 		message.time = getCurrentTime();
 		console.log(message);
-		allmessagecontainer.push(message);
+		/*allmessagecontainer.push(message);
 		allmsgreverse.unshift(message);
 		
 		JSON.stringify(allmessagecontainer);
@@ -548,7 +633,7 @@ conn.listen({
 		
 		console.log( localStorage['allmessage'] );
 		
-		vm.$store.dispatch('pushmessage');
+		vm.$store.dispatch('pushmessage');*/
 		
 		
 		//聊天记录列表 vm.chathistoryarr1
@@ -579,6 +664,7 @@ conn.listen({
 	},    //收到文件消息
 	
     onVideoMessage: function (message) {
+		vm.nomessage = false;
 		console.log('视频消息');
 		message.time = getCurrentTime();
 		
@@ -683,6 +769,7 @@ var store = new Vuex.Store({
 		chatroom:[
 			
 		],
+		mainchatselectall:false,
 		
 	},
 	mutations:{
@@ -701,14 +788,10 @@ var store = new Vuex.Store({
 		rightfriendbtn:function(state,value){
 			return state.right3friendid = value;
 		},
-		storemsg:function(state){
-			
-			if (localStorage['allmessage']) {
-				var parsemsg = JSON.parse( localStorage['allmessage'] );
-				return state.message = parsemsg ;
-			}
-			
-		}
+		
+		selectallaction:function(state,value){
+			return state.mainchatselectall = value;
+		},
 		
 		
 	},
@@ -731,22 +814,15 @@ var store = new Vuex.Store({
 		getallmessage:function(state){
 			return state.message;
 		},
+		getselectallstate:function(state){
+			return state.mainchatselectall;
+		},
 		
-		getchat:function(state){
-			return state.chat = _.filter(state.message, ['type', 'chat']);
-		},
-		getgroupchat:function(state){
-			return state.groupchat = _.filter(state.message, ['type', 'groupchat']);
-		},
-		getchatroom:function(state){
-			return state.chatroom = _.filter(state.message, ['type', 'chatroom']);
-		},
+	
 		
 	},
 	actions:{
-		pushmessage:function(context){
-			context.commit('storemsg');
-		}
+		
 	},
 });
 
@@ -764,7 +840,7 @@ Vue.component('currentuser',{
 			mainsearchval:'',
 			username:this.$store.state.user.nickname,
 			isboy:ids.sex == 1? true: false,
-			isgirl:ids.sex == 2? true: false,
+			isgirl:ids.sex == 0? true: false,
 			currentusershow: false,
 			areaId:this.$store.state.user.areaId ?this.$store.state.user.areaId:' ',
 			signature: this.$store.state.user.signature ?this.$store.state.user.signature:' ',
@@ -779,7 +855,7 @@ Vue.component('currentuser',{
 			icons1:true,
 			icons2:false,
 			icons3:false,
-			
+			avatar:'',
 		}
 	},
 	
@@ -803,17 +879,13 @@ Vue.component('currentuser',{
 		},//显示当前用户卡片
 		mainsearch:function() {
 			this.searchshow = true;
-			//var temparrcontainer2 =[];
-			//console.log(this);
-//			console.log( this.searchshow );
-//			console.log(this.friendsarrOne);
-//			console.log(this.groupsarrOne);
+	
 			
 			if ( this.mainsearchval =='' ){
 				
 				this.serachingornot = true;
-				vm.$children[0].tempfriendsarrcon = [];
-				vm.$children[0].tempgroupsarrcon = [];
+				vm.$refs.current.tempfriendsarrcon = [];
+				vm.$refs.current.tempgroupsarrcon = [];
 				
 			} else {
 				this.serachingornot = false;
@@ -821,18 +893,21 @@ Vue.component('currentuser',{
 				console.log(this.mainsearchval);
 				var keywords = this.mainsearchval;
 				console.log( keywords );
-				axios.post(globaldomain +'im/buddy/find.json?key='+keywords).then(function(res){
-					var data = res.data.data;
+				axios.post(globaldomain +'im/buddy/query.json?key='+keywords).then(function(res){
+					
+					var content = res.data.data;
 					var length = res.data.data.length;
 					
+					console.log(content);
+					
 					if ( length>0 ){
-						vm.$children[0].tempfriendsarrcon.push(data);
+						vm.$refs.current.tempfriendsarrcon.push(content);
 						
-						console.log(vm.$children[0].tempfriendsarrcon);
+						console.log(vm.$refs.current.tempfriendsarrcon);
 						
 						console.log('好友有结果');
 						
-						vm.$children[0].haveresult = true;
+						vm.$refs.current.haveresult = true;
 						
 					} else {
 						
@@ -845,16 +920,20 @@ Vue.component('currentuser',{
 					
 				});//获取关键字好友
 				
-				axios.post(globaldomain+'im/group/find.json?name='+keywords).then(function(res){
+				axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000&name='+keywords).then(function(res){
 					var data = res.data.data;
+					var content = res.data.data.content;
+					console.log(content);
 					
-					var length = res.data.data.length;
+					var length = res.data.data.content.length;
 					if ( length>0 ){
-						vm.$children[0].tempgroupsarrcon.push(data);
+						vm.$refs.current.tempgroupsarrcon.push(content);
+						
+						console.log(vm.$refs.current.tempgroupsarrcon);
 						
 						console.log('群组有结果');
 						
-						vm.$children[0].haveresult = true;
+						vm.$refs.current.haveresult = true;
 						
 					} else {
 						console.log('群组无结果');
@@ -869,17 +948,196 @@ Vue.component('currentuser',{
 			
 			
 		},//主搜索
+		
+		nosearchfriendtalking:function($event){
+			
+			vm.nomessage = false;
+			
+			console.log($event.currentTarget);
+			var that = $event.currentTarget;
+			var id = $(that).attr("id");
+			var avatar = $(that).attr("data-avatar");
+			var nick = $(that).attr("data-nick");
+			var obj2={};
+			
+			
+			
+			
+			obj2.name = nick;
+			obj2.avatar = avatar;
+				
+			obj2.type="chat";
+			obj2.id = id;
+				
+			console.log(obj2);
+				
+			var str ='';
+				
+			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				
+				
+			if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
+				$('.mainleft .comlist1').prepend(str);
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		},//没有关键字点击搜索结果中好友列表触发
+		nosearchgrouptalking:function($event){
+			
+			vm.nomessage = false;
+			
+			var that = $event.currentTarget;
+			var name = $(that).attr('data-nick');
+			var avatar = $(that).attr('data-avatar');
+			var id = $(that).attr('id');
+			
+			
+			
+			var obj1 ={};
+			obj1.avatar = avatar;
+			obj1.name = name;
+			obj1.to = id;
+				
+				
+			obj1.type="groupchat";
+			var str = '';
+			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				
+				
+				
+			if ( $('.mainleft .comlist1  #'+obj1.to).length < 1 ){
+				$('.mainleft .comlist1').prepend(str);
+			}
+			
+			
+		
+		},//没有关键字点击搜索结果中群组列表触发
+		searchgrouptalking:function($event){
+			
+			vm.nomessage = false;
+			
+			var that = $event.currentTarget;
+			
+			var name = $(that).attr('data-nick');
+			var avatar = $(that).attr('data-avatar');
+			var id = $(that).attr('id');
+			
+			console.log(id);
+			
+			var obj1 ={};
+			obj1.avatar = avatar;
+			obj1.name = name;
+			obj1.to = id;
+				
+				
+			obj1.type="groupchat";
+			var str = '';
+			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				
+				
+				
+			if ( $('.mainleft .comlist1  #'+obj1.to).length < 1 ){
+				$('.mainleft .comlist1').prepend(str);
+			}
+			
+			
+			
+			
+		},//关键字搜索群组触发
+		searchfriendtalking:function($event){
+			
+			vm.nomessage = false;
+			
+			console.log($event.currentTarget);
+			var that = $event.currentTarget;
+			var id = $(that).attr("id");
+			var avatar = $(that).attr("data-avatar");
+			var nick = $(that).attr("data-nick");
+			var obj2={};
+			
+			
+			
+			
+			obj2.name = nick;
+			obj2.avatar = avatar;
+				
+			obj2.type="chat";
+			obj2.id = id;
+				
+			console.log(obj2);
+				
+			var str ='';
+				
+			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				
+				
+			if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
+				$('.mainleft .comlist1').prepend(str);
+			}
+			
+			
+			
+			
+		},//关键字搜索好友触发
+		
+		
+		
+		
+		
 		startchat:function(){
-			this.$parent.readychatshow = true;
+			
+			vm.readychatshow = true;
+			
+			vm.slebossswicth = true;
+			
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				var friendsarr = res.data.data;
+				
 				myfriends = friendsarr;
+				
 				vm.$store.commit('showfriends');
+				
 				var timer1 = setTimeout(function(){
-					$('.scrollbar-macosx').scrollbar();
+					
+					initials();
 					clearTimeout(timer1);
 				},20);//显示滚动条
-				var str1 ='';
+				console.log(myfriends);
+				
+				vm.mainstartgroupchatarr = myfriends;
+				
+				
+				
+				
+				//vm.mainstartgroupchatarr 
+				
+				
+				
+				
+				
+				
+				/*var str1 ='';
 				console.log(friendsarr);
 				
 				for ( var i in friendsarr ){
@@ -891,9 +1149,9 @@ Vue.component('currentuser',{
 				
 				$('#messagemaster .sort_box .under1').css({display:'none'});
 			
+				*/
 				
-				
-				initials();
+				//initials();
 				
 				
 			}).catch(function(err){
@@ -929,11 +1187,11 @@ Vue.component('currentuser',{
 			vm.currentView1 = 'rightcomOne';
 			vm.showleft1 = true;
 			vm.showleft2 = false;
+			vm.showleft3 = false;
 			vm.mainrightone = true;
 			vm.mainrighttwo = false;
 			vm.specialthree = false;
 			
-			console.log(vm);
 			
 		},//改变icon1 颜色
 		
@@ -945,8 +1203,8 @@ Vue.component('currentuser',{
 			vm.currentView1 = 'rightcomTwo';
 			vm.showleft1 = false;
 			vm.showleft2 = true;
+			vm.showleft3 = false;
 			vm.mainrightone = false;
-			console.log(vm);
 			vm.mainrighttwo = true;
 			
 			vm.specialthree = false;
@@ -955,7 +1213,7 @@ Vue.component('currentuser',{
 			axios.post(globaldomain+'im/room/area/find.json').then(function(res){
 				//聊天室地区数组
 				var data = res.data.data;
-				console.log(data);
+				
 				
 				
 				
@@ -975,7 +1233,7 @@ Vue.component('currentuser',{
 			axios.post(globaldomain+'im/room/trade/find.json').then(function(res){
 				//聊天室行业数组
 				var data = res.data.data;
-				console.log(data);
+				
 				vm.chatroomclass = data;
 				
 				
@@ -987,9 +1245,9 @@ Vue.component('currentuser',{
 			axios.post(globaldomain+'im/room/all.json?sPageNoTR=1&sPageSizeTR=500').then(function(res){
 				
 				var data = res.data.data;
-				console.log(data);
+				
 				var content = data.content;
-				console.log(content);
+				
 				
 				vm.chatroominfo = content;
 				
@@ -1008,7 +1266,7 @@ Vue.component('currentuser',{
 			this.icons3 = true;
 			//vm.currentView = 'comlistcomThree';
 			//vm.currentView1 = 'rightcomThree';
-			console.log(vm);
+			
 			
 			var listimer1 = setTimeout(function(){
 				initials1();
@@ -1017,6 +1275,7 @@ Vue.component('currentuser',{
 			
 			vm.showleft1 = false;
 			vm.showleft2 = false;
+			vm.showleft3 = true;
 			vm.mainrightone = false;
 			vm.mainrighttwo = false;
 			vm.specialthree = true;
@@ -1028,29 +1287,7 @@ Vue.component('currentuser',{
 
 
 
-Vue.component('rightcomone',{
-	template:'#rightcomOne',
-	data:function(){
-		return {
-			showgroupcontrol:false,
-			name:'暂无消息',
-			isgroupmaster:false,
-			isgroupleader:false,
-			notgroupleader:false,
-			defaulthide:false,
-			switchbindid:'',
-			messagearr:[],
-			defaultpic:'imgs/default1.png',
-			picsrc:globalimg,
-			
-		}
-	},
-	created:function(){
-		var msgtimer1 = setTimeout(function(){
-			$('.scrollbar-macosx').scrollbar();
-		},500);
-	},
-});
+
 Vue.component('rightcomtwo',{
 	template:'#rightcomTwo',
 	data:function(){
@@ -1085,11 +1322,6 @@ Vue.component('rightcomthree',{
 		}
 		
 	},
-	created:function(){
-		console.log('created');
-		console.log(this);
-		console.log(this.$parent);
-	},
 	computed:{
 		right3groupid:function(){
 			return this.$parent.$store.getters.right3groupid;
@@ -1121,7 +1353,7 @@ Vue.component('rightcomthree',{
 				vm.$children[1].level = level;
 				vm.$children[1].id = id;
 				vm.$children[1].avatar = avatar;
-				console.log(vm);
+				
 				console.log(data);
 				
 				
@@ -1175,12 +1407,13 @@ Vue.component('rightcomthree',{
 			console.log(vm.chathistoryarr1);
 			
 			console.log(groupid);
+			vm.nomessage = false;
 			
 			axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
 				var data = res.data.data;
 				var avatar = data.avatar;
 				var name = data.name;
-				var id = data.id;
+				var id = data.id;//群组特别标识
 				
 				console.log(data);
 				
@@ -1194,26 +1427,34 @@ Vue.component('rightcomthree',{
 				
 				console.log(obj1);
 				
-				templatearr1.unshift(obj1);
+				var str = '';
 				
-				console.log( templatearr1 );
+				/*str = str + '<div id="'+obj1.to+'" class="listOnecon"><img src="'+ obj1.avatar ? this.picsrc+obj1.avatar : this.defaultpic+'"><div v-if="arr1.count" class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">{{ arr1.data }}</div></div><div class="listOneconright"><div class="listOnetopright">{{ arr1.time }}</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';*/
 				
-				//var rev = _.uniqBy(templatearr1, 'from');
 				
-				var rev = _.uniqBy(templatearr1, 'to');
+				/*str = str + '<div id="'+obj1.to+'" class="listOnecon"><img src="'+ obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic+'"><div v-if="arr1.count" class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">{{ arr1.data }}</div></div><div class="listOneconright"><div class="listOnetopright">{{ arr1.time }}</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';*/
 				
-				var con = _.concat(rev, vm.chathistoryarr1);
-					
-				console.log(con);
-				
-				vm.chathistoryarr1 = _.uniqBy(con, 'to');
-				
-				console.log(vm.chathistoryarr1);
-				
-				console.log(vm.$refs);
+				str = str + '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 				
 				
 				
+				if ( $('.mainleft .comlist1  #'+obj1.to).length < 1 ){
+					$('.mainleft .comlist1').prepend(str);
+				}
+				
+				console.log(this);
+				
+				console.log(vm.$refs.rightthree);
+				
+				console.log( $('.mainleft .comlist1  #'+obj1.to) );
+				
+				
+				
+				
+				
+				
+			
+				//vm.comlist1
 			
 				
 				
@@ -1229,6 +1470,7 @@ Vue.component('rightcomthree',{
 				
 				vm.showleft1 = true;
 				vm.showleft2 = false;
+				vm.showleft3 = false;
 				
 				
 				
@@ -1252,7 +1494,7 @@ Vue.component('rightcomthree',{
 			
 			console.log(vm.chathistoryarr1);
 			var friendid = $event.currentTarget.getAttribute('id');
-			
+			vm.nomessage = false;
 			axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
 				var data = res.data.data;
 				console.log(data);
@@ -1260,34 +1502,25 @@ Vue.component('rightcomthree',{
 				
 				var name = data.nickname;
 				var avatar = data.avatar;
-				var friendi = data.id;
+				var id = data.id;//好友个人标识
 				var obj2 = {};
 				
 				obj2.name = name;
 				obj2.avatar = avatar;
-				obj2.to = friendi;
 				
 				obj2.type="chat";
-				obj2.friendi = friendi;
+				obj2.id = id;
 				
 				console.log(obj2);
 				
-				templatearr1.unshift(obj2);
+				var str ='';
+				
+				str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 				
 				
-				var rev = _.uniqBy(templatearr1, 'friendi');
-				
-				var con = _.concat(rev, vm.chathistoryarr1);
-					
-				console.log(con);
-				
-				vm.chathistoryarr1 = _.uniqBy(con, 'friendi');
-				
-				console.log(vm.chathistoryarr1);
-				
-				console.log(vm.$refs);
-				
-				
+				if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
+					$('.mainleft .comlist1').prepend(str);
+				}
 				
 				
 				
@@ -1306,7 +1539,7 @@ Vue.component('rightcomthree',{
 				
 				vm.showleft1 = true;
 				vm.showleft2 = false;
-				
+				vm.showleft3 = false;
 				
 				/*页面跳转*/
 				
@@ -1334,9 +1567,11 @@ var vm = new Vue({
 		placeholderfeed:'用户体验很好！',
 		sel1:true,
 		sel2:false,
-		slebossswicth:true,
+		slebossswicth:false,
+		slebossswicth1:false,
+		
 		selectallornot:false,
-		beginchatbtnable:true,
+		beginchatbtnable:false,
 		selectOnly1ornot:false,
 		selectOnly2ornot:true,
 		createarr1:[],
@@ -1360,6 +1595,7 @@ var vm = new Vue({
 		indexstrange2:false,
 		showleft1:true,
 		showleft2:false,
+		showleft3:false,
 		cardmingzi:false,
 		
 		
@@ -1374,19 +1610,87 @@ var vm = new Vue({
 		chatroominfo:[],
 		
 		
+		comlist1:'',
+		
+		nomessage:true,
+		
+		
+		
+		showgroupcontrol:false,
+		name:'暂无消息',
+		isgroupmaster:false,
+		isgroupleader:false,
+		notgroupleader:false,
+		defaulthide:false,
+		switchbindid:'',
+		messagearr:[],
+		
+		
+		
+		redcount:false,
+		
+		rightoneheaderobj:{
+			name:'',
+			groupnumber:'',
+			
+		},
+		groupnumbershow:false,
+		targetid:'',
+		
+		
+		
+		
+		sendbtncontent:'',
+		
+		
+		mainstartgroupchatarr:[],
+		
+		selectmaingrouparr:[],
+		selectall:[],
+		
+		selectallstate1:false,
+		
+		bridgeindex2:'',
+		
 		
 		
 	},
 	
-	computed:Vuex.mapGetters({
+	/*computed:Vuex.mapGetters({
 		friendsarrOne:'friendsarrOne',
 		groupsarrOne:'groupsarrOne',
 		getallmessage:'getallmessage',//所有的消息
 		getchat:'getchat',
 		getgroupchat:'getgroupchat',
 		getchatroom:'getchatroom',
+		getselectallstate:'getselectallstate',//发起群聊全选与否
 		
-	}),
+	}),*/
+	
+	computed:{
+		friendsarrOne:function(){
+			return vm.$store.getters.friendsarrOne;
+		},
+		groupsarrOne:function(){
+			return vm.$store.getters.groupsarrOne;
+		},
+		getallmessage:function(){
+			return vm.$store.getters.getallmessage;
+		},
+		getchat:function(){
+			return vm.$store.getters.getchat;
+		},
+		getgroupchat:function(){
+			return vm.$store.getters.getgroupchat;
+		},
+		getchatroom:function(){
+			return vm.$store.getters.getchatroom;
+		},
+		getselectallstate:function(){
+			return vm.$store.getters.getselectallstate;
+		}
+		
+	},
 	
 	
 	
@@ -1403,12 +1707,19 @@ var vm = new Vue({
 			 
 			
 			myfriends = res.data.data;
-			console.log(myfriends);
 			vm.$store.state.userfriends = myfriends;
-			
-			//console.log(vm.$store.state.userfriends);
-			
 			console.log(vm.$store.state.userfriends);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		}).catch(function(err){
 			console.log(err);
@@ -1417,8 +1728,6 @@ var vm = new Vue({
 		
 		axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
 			mygroups = res.data.data.content;
-			console.log(mygroups);
-			
 			vm.$store.state.usergroups = mygroups;
 			console.log(vm.$store.state.usergroups);
 			
@@ -1427,20 +1736,81 @@ var vm = new Vue({
 		});//获取加入的群组
 		
 	},
+	
 	methods:{
 		clearsearch:function(){
 			
-			this.$children[0]._data.searchshow = false;
-			vm.$children[0].tempfriendsarrcon = [];
-			vm.$children[0].tempgroupsarrcon = [];
-			
-			console.log(vm.getallmessage);
-			console.log(vm.getchat);
-			console.log(vm.getchatroom);
-			console.log(vm.getgroupchat);
-			
+			this.$refs.current._data.searchshow = false;
+			vm.$refs.current.tempfriendsarrcon = [];
+			vm.$refs.current.tempgroupsarrcon = [];
 			
 		},//关闭搜索框
+		selectcurrentinput:function($event){
+			console.log($event);
+			
+			console.log($event.currentTarget);
+			var selectnow  = $event.currentTarget;
+			
+			console.log($(selectnow));
+			
+			
+			
+			//console.log($(selectnow).siblings().find('.under1'));
+			/*if ( $(in1).css('display')=='block' ){
+				
+				$(in1).css({display:'none'});
+				$(in2).css({display:'block'});
+			} else {
+				$(in2).css({display:'none'});
+				$(in1).css({display:'block'});
+			}*/
+			
+			if ( $(selectnow).is(':checked') ){
+				
+				console.log('选中');
+				
+			} else {
+				//console.log(vm.$refs.in1);
+				
+				//$(vm.$refs.in1).prop("checked",false);
+				//console.log( $('.selectallcon input').prop("checked") );
+				
+				console.log('没选中');
+				
+				console.log($('.selectallcon input').prop('checked'));
+				
+				$('.selectallcon input').attr("checked",false);
+				
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+		},//选择主搜索好友列表*/
+		grouprightsel1:function($event){
+			var that = $event.currentTarget;
+			var index =  $(that).attr('data-index');
+			var id = $(that).attr('id');
+			
+			console.log(id);
+			
+			vm.bridgeindex2 = index;
+			console.log(vm.bridgeindex2);
+			
+			
+			
+			tempcreategroup = id;//选定的群组
+			
+			
+			console.log( tempcreategroup );
+			
+			
+		},//发起聊天群组被点击
 		clearslidebars:function(){
 			this.$children[0].showslidebars = false;
 		},//关闭汉堡菜单
@@ -1473,28 +1843,42 @@ var vm = new Vue({
 		},//发送反馈
 		exitreadychat:function(){
 			vm.readychatshow = false;
+			vm.slebossswicth = false;
+			vm.slebossswicth1 = false;
+			vm.sel1 = true;
+			vm.sel2 = false;
 		},//关闭发起聊天窗口
 		sel1action:function(){
 			vm.sel1 = true;
 			vm.sel2 = false;
 			vm.slebossswicth = true;
 			
-			
+			vm.slebossswicth1 = false;
 			
 			
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				var friendsarr = res.data.data;
+				
 				myfriends = friendsarr;
+				
 				vm.$store.commit('showfriends');
 				
 				var str1 ='';
+				
 				console.log(friendsarr);
 				
 				
+				
+				//vm.mainstartgroupchatarr
+				
 			
+				var timer1 = setTimeout(function(){
+					
+					initials();
+					clearTimeout(timer1);
+				},20);//显示滚动条
 				
-				
-				initials();
+				//initials();
 				
 				
 			}).catch(function(err){
@@ -1521,9 +1905,15 @@ var vm = new Vue({
 			vm.sel1 = false;
 			vm.sel2 = true;
 			vm.slebossswicth = false;
+			vm.slebossswicth1 = true;
 			
-			axios.post(globaldomain+'im/group/find.json').then(function(res){
-				var groupsarr = res.data.data;
+			axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
+				var groupsarr = res.data.data.content;
+				
+				
+				
+				
+				
 				//console.log(data);
 				mygroups = groupsarr;
 				console.log(mygroups);
@@ -1536,8 +1926,91 @@ var vm = new Vue({
 			});
 			
 		},//点击发起聊天的选择群聊
-		selectbossornot:function(){
-			vm.selectallornot = !vm.selectallornot;
+		selectbossornot:function($event){
+			
+			console.log(vm.selectmaingrouparr);
+			
+			var that = $event.currentTarget;
+			
+			//vm.selectallstate1
+			
+			
+			
+			//console.log($(that).find('input'));
+			
+			//console.log($(that).find('input').prop('checked'));
+			
+			var subinput = $('.transreadychat .sort_box input');
+			
+			console.log( subinput );
+			
+			//console.log( subinput[0] );
+			
+			if ( $(that).find('input').prop('checked') ) {
+				
+				subinput.prop("checked", true);
+				
+				console.log(vm.selectall);
+				
+				console.log(vm.selectmaingrouparr);
+				
+				var temparr1 = [];
+				
+				for (var i = 0; i < subinput.length; i++){
+					
+					console.log(i);
+					
+					console.log(subinput.eq(i)[0].value );
+					
+					temparr1.push(subinput.eq(i)[0].value);
+					
+				}
+				
+				console.log(temparr1);
+				vm.selectmaingrouparr = temparr1;
+				
+				
+				
+				
+				
+			} else {
+				$('.transreadychat .sort_box input').prop("checked", false);
+				
+				
+				vm.selectmaingrouparr=[];
+				
+			}
+			
+			
+			
+			
+			
+			
+		
+			
+			
+			
+			
+			/*if (  ) {
+				
+			} else {
+				
+			}*/
+			
+			/*$('.transreadychat .sort_box input').prop(; , true);
+			
+			
+			console.log( $('.transreadychat .sort_box input').prop('checked') );
+			
+			
+			
+			
+			console.log( $('.transreadychat .sort_box input') );
+			
+			console.log(vm.mainstartgroupchatarr);*/
+			
+			
+			
 			
 			
 		},//发起聊天全部选择或取消
@@ -1547,15 +2020,21 @@ var vm = new Vue({
 				
 				var code = res.data.code;
 				console.log(res.data);
+				
 				if ( code==2000 ){
 					var groupid = res.data.data;
 					console.log(groupid);
 					
-					var members = templatearr.join(',');
-					console.log(templatearr);
+					
+					
+					var members = tempcreategroup;
+					 
+					
 					console.log(members);
-					axios.post(globaldomain+'im/group/member/join.json?groupId='+groupid+'&memberIds='+members).then(function(res){
+					
+					axios.post(globaldomain+'im/group/apply/pull.json?groupId='+groupid+'&groupIds='+members+'&descr=pc端').then(function(res){
 						console.log(res.data);
+						
 						
 					}).catch(function(err){
 						console.log(err);
@@ -1594,8 +2073,6 @@ var vm = new Vue({
 			
 		},//点击群组列表
 		changelistcolor2:function($event){
-			console.log(vm);
-			//console.log(vm.$children[1]);
 			var idnumber = $event.currentTarget.getAttribute('id');
 			var indexinner = $event.currentTarget.getAttribute('data-index');
 			this.indexstrange2 = indexinner;
@@ -1608,154 +2085,338 @@ var vm = new Vue({
 			vm.$children[1].showgroupsright1 = true;
 		},//点击好友列表
 		
-		listoneaddcolor:function($event){
-			console.log($event);
 			
-			console.log(vm.chathistoryarr1);
-			
-			
-			
-			
-			console.log(vm.chathistoryarr1);
-			console.log($event.currentTarget);
-			console.log($event.currentTarget.getAttribute('data-index'));
-			var idall = $event.currentTarget.getAttribute('id');
-			
-			console.log(idall);
-			
-			this.listoneadd = $event.currentTarget.getAttribute('data-index');
-			
-			
-			axios.get(globaldomain+'im/user/detail.json?id='+idall).then(function(res){
-				var data = res.data.data;
-				console.log(data);
-				var id = data.id;
-				var name = data.nickname;
-				var avatar = data.avatar;
-				
-				
-				//console.log(id);
-				//console.log(name);
-				//console.log(avatar);
-				
-				if (data) {
-					console.log( '好友详情' );
-					
-					console.log(vm);
-					console.log(vm.$children[2]);
-					vm.$children[2].name = name;
-					vm.$refs.rightone.defaulthide = true;
-					console.log(data);
-					
-					vm.$refs.rightone.isgroupleader = false;
-					vm.$refs.rightone.notgroupleader = true;
-					
-					vm.$refs.rightone.switchbindid = id;
-					
-					
-					console.log(vm.$refs.rightone.messagearr);
-					
-					
-					
-					var getdata = localStorage[ids.id+":"+idall];
-					
-					console.log(JSON.parse(getdata));
-					
-					vm.$refs.rightone.messagearr = JSON.parse(getdata);
-					
-					console.log(vm.$refs.rightone.messagearr);
-					
-					
-					
-					
-					
-					
-				}
-				
-				
-				
-				
-				
-			
-			}).catch(function(err){
-				console.log(err);
-			});
-			
-			
-			
-			
-			axios.get(globaldomain+'im/group/info.json?id='+idall).then(function(res){
-				var data = res.data.data;
-				var avatar = data.avatar;
-				var name = data.name;
-				var id = data.id;
-				var genre = data.genre;
-				
-				
-				
-				//console.log(data);
-				//console.log(avatar);
-				//console.log(name);
-				//console.log(id);
-				if ( data ){
-					console.log( '群组详情' );
-					//console.log(vm);
-					//console.log(vm.$children[2]);
-					
-					vm.$children[2].name = name;
-					
-					vm.$refs.rightone.defaulthide = true;
-					console.log(data);
-					console.log(genre);
-					
-					if (genre == 30){
-						vm.$refs.rightone.isgroupleader = false;
-						vm.$refs.rightone.notgroupleader = true;
-					} else if ( genre==20 ){
-						vm.$refs.rightone.isgroupleader = true;
-						vm.$refs.rightone.notgroupleader = false;	   
-					} else if ( genre==10 ) {
-						vm.$refs.rightone.isgroupleader = true;
-						vm.$refs.rightone.notgroupleader = false;
-					}
-					
-					
-					console.log(vm.$refs.rightone);
-					console.log(vm.$refs.rightone.isgroupleader);
-					console.log(vm.$refs.rightone.notgroupleader);
-					
-					vm.$refs.rightone.switchbindid = id;
-					
-					
-				}
-				
-				
-				
-				
-				
-				
-				
-				
-			}).catch(function(err){
-				console.log(err);
-			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		},//点击主页聊天列表	
 	}
+});
+
+
+
+//追加jQuery代码
+
+
+
+
+
+
+//点击聊天列表
+$('.mainleft .comlist1').on('click','.listOnecon',function(){
+	
+	console.log(this);
+	var that = this;
+	var listid = $(that).attr('id');
+	console.log(listid);
+	$(that).addClass('backgroundcolor').siblings().removeClass('backgroundcolor');
+	
+	//console.log( $(that+' .circle') );
+	
+	console.log($(that).find( '.circle' ));
+	
+	$(that).find( '.circle' ).removeClass('circle').addClass('transparentone');
+	
+	
+	
+	
+	
+	
+	
+	
+	$('.mainright .rightonechatcon   #'+listid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
+	
+	
+	
+	console.log( $('.mainright .rightonechatcon  #'+listid+'.msgconmaster') );
+	
+	
+	var str1 = '';
+	
+	str1 = str1 + '<div id="'+listid+'" class="msgconmaster hidden">'+'</div>';	
+	
+	
+	if ( $('.mainright .rightonechatcon  #'+listid+'.msgconmaster').length < 1 ){
+		
+		$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+		
+	} else {
+		
+		
+		
+	}
+	
+	/*'<div class="msgmasterinner"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>'*/
+	
+	
+	
+	
+	
+	
+	
+	axios.get(globaldomain+'im/user/detail.json?id='+listid).then(function(res){
+		
+		var data =res.data.data;
+		
+		console.log(data);
+		var name = data.nickname;
+		vm.rightoneheaderobj.name = name;
+		vm.targetid = listid;
+		
+		//$('.mainright .rightonechatcon   #'+listid+'.msgconmaster')
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}).catch(function(err){
+		console.log(err);
+	});
+	
+	axios.get(globaldomain+'im/group/info.json?id='+listid).then(function(res){
+		
+		var data = res.data.data;
+		
+		console.log(data);
+		var name = data.name;
+		var genre = data.genre;
+		var groupnumber = data.count;
+		
+		vm.rightoneheaderobj.name = name;
+		vm.rightoneheaderobj.groupnumber = groupnumber;
+		vm.targetid = listid;
+		
+		
+		
+		
+		
+		
+		
+	}).catch(function(err){
+		console.log(err);
+	});
+	
+	
+});
+//点击聊天列表
+
+
+
+
+
+
+
+//发送消息按钮点击
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('.mainright .rightonesend button').on('click',function(){
+	var that = this;
+	
+	var sendtarget = $(that).attr('id');
+	
+	console.log(sendtarget);
+	
+	
+	
+	
+	var sendPrivateText = function (content,targetone) {
+		var id = conn.getUniqueId();                 // 生成本地消息id
+		var msg = new WebIM.message('txt', id);      // 创建文本消息
+		msg.set({
+			msg: content,                  // 消息内容
+			to: targetone,                          // 接收消息对象（用户id）
+			roomType: false,
+			success: function (id, serverMsgId) {
+				console.log('send private text Success');
+				vm.sendbtncontent = '';
+				
+				
+				axios.get(globaldomain+'im/user/detail.json?id='+sendtarget).then(function(res){
+		
+					var data =res.data.data;
+
+					console.log(data);
+					
+					var avatarss = data.avatar;
+					
+					//$('.mainright .rightonechatcon   #'+listid+'.msgconmaster')
+					
+					
+					var str4 = '';
+				
+					str4 = str4 + '<div class="msgmarginlr"><div class="rightmsg"><div class="wordscontent"><span>'+content+'</span></div><div class="imgcontainer"><img src="'+(avatarss ? vm.$refs.rightthree.picsrc+ avatarss : vm.$refs.rightthree.defaultpic)+'"></div></div></div>';
+
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
+					
+					
+					
+
+
+
+
+
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+
+
+			},
+			fail: function(e){
+				console.log("Send private text error");
+			}
+		});
+		msg.body.chatType = 'singleChat';
+		conn.send(msg.body);
+	};
+	
+	
+	
+	
+	// 群组发送文本消息
+	var sendGroupText = function (content,targetone) {
+		var id = conn.getUniqueId();            // 生成本地消息id
+		var msg = new WebIM.message('txt', id); // 创建文本消息
+		var option = {
+			msg: content,           // 消息内容
+			to: targetone,                       // 接收消息对象(群组id)
+			roomType: false,
+			chatType: 'chatRoom',
+			success: function () {
+				console.log('send room text success');
+				vm.sendbtncontent = '';
+				
+				
+				axios.get(globaldomain+'im/group/info.json?id='+sendtarget).then(function(res){
+		
+					var data = res.data.data;
+
+					console.log(data);
+					var name = data.name;
+					var genre = data.genre;
+					var groupnumber = data.count;
+					var avatar = data.avatar;
+
+					
+					/*'<div class="msgmarginlr">
+						<div class="rightmsg">
+							<div class="rightmaxwidth">
+								<div class="imgcontainer">
+									<img src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'">
+
+								</div>
+							
+							
+							<div class="rightcon">
+								<div class="wordscontent"><span>'+content+'</span></div>
+							</div>
+							</div>
+							<div class="clearfix"><div>
+						</div>
+						
+					</div>'*/
+					
+					
+					
+					
+					var str4 = '';
+				
+					
+					
+					str4 ='<div class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span>'+content+'</span></div></div></div><div class="clearfix"><div></div></div>';
+
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+
+
+
+
+
+
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+
+
+
+
+
+
+			},
+			fail: function () {
+				console.log('failed');
+			}
+		};
+		msg.set(option);
+		msg.setGroup('groupchat');
+		conn.send(msg.body);
+	};
+	
+	
+	
+	
+	
+	
+	
+	if ( vm.sendbtncontent != ''&& sendtarget != ''){
+		
+		sendPrivateText(vm.sendbtncontent,sendtarget);
+		sendGroupText(vm.sendbtncontent,sendtarget);
+		
+	}
+	
+	
+	
+	
+	
 });
 
 
@@ -1769,17 +2430,7 @@ var vm = new Vue({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+//发送消息按钮点击
 
 
 

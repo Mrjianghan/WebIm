@@ -1,4 +1,5 @@
 axios.defaults.withCredentials = true;
+var globaldomain = 'http://api.zhongxiangim.com/';
 var findpsw;
 var vm = new Vue({
 	el:'#subBody',
@@ -24,13 +25,13 @@ var vm = new Vue({
 		
 	},
 	created:function(){
-		axios.get('http://47.95.6.203:8183/token.json').then(function(res){
+		axios.get(globaldomain+'token.json').then(function(res){
 		}).catch(function(err){
 			console.log(err);
 		});
 		//获取token
-		axios.get('http://47.95.6.203:8183//captcha/build').then(function(res){
-			vm.validatecode = 'http://47.95.6.203:8183//captcha/build';
+		axios.get(globaldomain+'/captcha/build').then(function(res){
+			vm.validatecode = globaldomain+'/captcha/build';
 		}).catch(function(err){
 			console.log(err);
 		});
@@ -38,10 +39,10 @@ var vm = new Vue({
 	},
 	methods:{
 		nextpic:function(){
-			axios.get('http://47.95.6.203:8183//captcha/build').then(function(res){
+			axios.get(globaldomain+'/captcha/build').then(function(res){
 				vm.validatecode = '';
 				var timer1 = setTimeout(function(){
-					vm.validatecode = 'http://47.95.6.203:8183//captcha/build';
+					vm.validatecode = globaldomain+'/captcha/build';
 				},10);
 				vm.secondinputval = '';
 			}).catch(function(err){
@@ -51,7 +52,7 @@ var vm = new Vue({
 		//切换验证码
 		sendphonevalidate:function(){
 			
-			axios.post('http://47.95.6.203:8183/im/sms/captcha/repwd.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
+			axios.post(globaldomain+'im/sms/captcha/repwd.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
 				var code = res.data.code;
 				console.log(code);
 				switch ( code ){
@@ -147,7 +148,7 @@ var vm = new Vue({
 		},
 		//清空手机号
 		checkvalidate:function(){
-			axios.get('http://47.95.6.203:8183/captcha/validate.json?captcha='+vm.secondinputval).then(function(res){
+			axios.get(globaldomain+'captcha/validate.json?captcha='+vm.secondinputval).then(function(res){
 				console.log(res.data);
 				var data1 = res.data.data;
 				if ( (data1)&&(vm.rightorwrong1)   ) {
@@ -170,7 +171,7 @@ var vm = new Vue({
 		//启用发送手机短信
 		nextstepfinal:function(){
 			//检查验证码
-			axios.get('http://47.95.6.203:8183/im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.thirdinputval).then(function(res){
+			axios.get(globaldomain+'im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.thirdinputval).then(function(res){
 				console.log( res.data );
 				var code = res.data.code;
 				console.log(code);
