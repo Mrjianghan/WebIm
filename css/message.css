@@ -28,9 +28,64 @@ body {
 .fa-mars {
 	color: #2285ff;
 }
+.allalertinfo {
+	width: 570px;
+	height: 200px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -285px;
+	margin-top: -100px;
+	background-color: #fff;
+	z-index: 100;
+}	
+.allalertinfo .fa-times-circle-o {
+	color:#868686;
+	float: right;
+	margin-right: 20px;
+	font-size: 30px;
+	cursor: pointer;
+	margin-top: 10px;
+}
+.allalertinfo .fa-times-circle-o:hover {
+	color:#1a7dff;
+}
+.allalertinfo .alertcontent {
+	height: 120px;
+	width: 90%;
+	margin: 0 auto;
+	border-bottom: 1px solid #efefef;
+	margin-top: 30px;
+	line-height: 120px;
+	color: #666;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.allalertinfo .bottomenter {
+	height: 50px;
+	width: 90%;
+	margin: 0 auto;
+}
+.allalertinfo .bottomenter .enterss {
+	margin-top: 10px;
+	float: right;
+	height: 30px;
+	width: 100px;
+	line-height: 30px;
+	text-align: center;
+	color: #666;
+	font-size: 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid #efefef;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 	
-
-
+}
+.allalertinfo .bottomenter .enterss:hover {
+	background-color: #1a7dff;
+	color: #fff;
+}
 
 /*全局样式*/
 #messagemaster {

@@ -368,12 +368,14 @@
 		<template id="rightcomThree">
 			
 			<div>
+				
+				
 			
 			
 				<div v-show="showgroupsright" class="rightgroupcon">
 
 						<img :src="avatar ? picsrc+ avatar : defaultpic">
-						<p>{{ name }}<span v-if="level == 10">(群主)</span></p>
+						<p>{{ name }}<span v-if="showowner">(群主)</span></p>
 						<button @click="addchatlistg($event)"  :id="id" type="button">发消息</button>
 
 				</div>
@@ -391,6 +393,18 @@
 		</template>
 		
 		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
+			
+			<div class="allalertinfo" v-if="alertinfoshow">
+				<i @click="exitalert()" class="fa fa-times-circle-o"></i>
+				<div class="alertcontent">
+					{{ alertinfocon }}
+				</div>
+				<div class="bottomenter">
+					<div @click="exitalert1" class="enterss">确定</div>
+					<div class="clearfix"></div>
+				</div>	
+			</div>
+			
 			
 			<div v-if="feedbackshow" class="transfeedback ">
 				<div class="feedbackpop animated bounceIn">

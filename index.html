@@ -38,7 +38,7 @@
 						</div>
 
 						<div class="secondinput samesize">
-							<input @change="checkpsw2()" v-model="secondinputval" type="password" placeholder="请输入密码" name="psw2" maxlength="20"><i @click="clearinput2" v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
+							<input @input="checkpsw2()" v-model="secondinputval" type="password" placeholder="请输入密码" name="psw2" maxlength="20"><i @click="clearinput2" v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
 						</div>
 						<div class="placeholder2">
 							<a class="aouter1" href="forgetpwd.html">忘记密码&nbsp;?</a>
