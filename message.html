@@ -175,47 +175,32 @@
 		</template>
 		
 		<!--<template id="comlistcomOne">
-			
 			<div>
 				<h1>comlistcomOne</h1>
 				<input type="text">
 			</div>
-			
 		</template>
-		
 		<template id="comlistcomTwo">
-			
 			<div>
 				<h1>comlistcomTwo</h1>
 				<input type="text">
 			</div>
-			
 		</template>
-		
 		<template id="comlistcomThree">
-			
-			
 			<div>
-			
 				<div class="listThree_groupheader">群组
 				</div>
-				
 				<div>
 					<template v-for="(group,index) in groupsarrOne">
 						<div class="con">
-							
 							<div :data-index="index" :data-name="group.name" :id="group.id" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">
 								<img :src="group.avatar ? picsrc+group.avatar:defaultpic ">
 								<div class="name">{{group.name}}
 								</div>
-
 							</div>
-							
 						</div>
 					</template>
 				</div>
-				
-				
 				<div  class="sort_box1">
 					<template v-for="(friend,i) in friendsarrOne">
 							<div :data-index="i" :data-name="friend.nickname" :id="friend.id" class="sort_list1" :class="{backgroundcolor:indexstrange2 == -1-i}" @click="changelistcolor2($event)" :id="friend.nickname">
@@ -223,20 +208,9 @@
 								<div class="num_name1">{{friend.nickname}}
 								</div>
 							</div>
-					</template>	
-					
-									
+					</template>		
 				</div>
-				
-				
-				
-				
-				
-				
-			
 			</div>
-			
-			
 		</template>-->
 		
 		<template id="rightcomOne">
@@ -406,6 +380,84 @@
 			</div>
 			
 			
+			<div v-if="addmyfriendshow" class="addmyfriends">
+				<div class="addmyfriendscore  animated bounceIn">
+					<div class="feedhead">
+						<div>添加会话成员</div><i @click="addmyfriendshow = false" class="fa fa-times"></i>
+					</div>
+					
+					<div class="reusecontainer2">
+						<!--<div></div>搜索占位-->
+						<div class="selectallboss">
+							<div @click="" class="selectallcon">
+								<input type="checkbox" >
+							</div>
+							<span>全选</span>
+						</div>
+						<div class="addsort3">
+							<div class="sort_box2">
+								<template v-for="(arr,i) in repeatmyfriendsarr">
+									
+									<div id=""  class="sort_list2">
+										<div class="friendseveryOne" :id="arr.id">
+											<div class="selectOnly1">
+												<input :data-index="i" @click="selectcurrentinput($event)" :value="arr.id" v-model="selectmaingrouparr" type="checkbox">
+											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="num_name2 shenglue">{{arr.nickname}} </div>
+										</div>
+									</div>
+									
+								</template>
+							</div>
+						</div>
+						
+					</div>
+					
+					
+					<div>
+						<button class="bottombtn">确定</button>
+					</div>
+				</div>
+			</div>
+			
+			<div v-if="removemembershow" class="removegroupmember2">
+				<div class="removegroupmember2core  animated bounceIn">
+					<div class="feedhead">
+						<div>删除会话成员</div><i @click="removemembershow = false" class="fa fa-times"></i>
+					</div>
+					
+					<div class="reusecontainer3">
+						<!--<div></div>搜索占位-->
+						<div class="selectallboss">
+							<div @click="" class="selectallcon">
+								<input type="checkbox" >
+							</div>
+							<span>全选</span>
+						</div>
+						<div class="addsort4">
+							<div class="sort_box3">
+								<template v-for="(arr,i) in repeatmyfriendsarr">
+									
+									<div id=""  class="sort_list3">
+										<div class="friendseveryOne" :id="arr.id">
+											<div class="selectOnly1">
+												<input :data-index="i" @click="selectcurrentinput($event)" :value="arr.id" v-model="selectmaingrouparr" type="checkbox">
+											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="num_name3 shenglue">{{arr.nickname}} </div>
+										</div>
+									</div>
+									
+								</template>
+							</div>
+						</div>
+					</div>
+					
+					<div>
+						<button class="bottombtn" type="button">确定</button>
+					</div>
+				</div>
+			</div>
+			
 			<div v-if="feedbackshow" class="transfeedback ">
 				<div class="feedbackpop animated bounceIn">
 					<div class="feedhead">
@@ -435,17 +487,13 @@
 							<div class="nouseholder"></div><!--追加头像显示容器暂时保留-->
 							<div class="selectallboss">
 								<div @click="selectbossornot($event)" class="selectallcon">
-									
-									
-									
 									<input type="checkbox" >
-									
 								</div>
 								<span>全选</span>
 							</div>
 							
 							
-							<div class="getfriendscontainer scrollbar-macosx">
+							<div class="getfriendscontainer">
 								
 								<div class="sort_box">
 									
@@ -681,19 +729,47 @@
 					
 					<div class="subrightcomone">
 						<div class="rightoneheader">
-							<div class="rightonetitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div><i v-show="isgroupleader" class="fa fa-cog"></i><i v-show="notgroupleader" class="fa fa-plus" ></i>
+							<div class="rightonetitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div><i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i><i v-show="isgroupmanager" @click="isgroupmanagermenu" class="fa fa-cog"></i><i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu" v-show="justoneman" class="fa fa-plus" ></i>
 							
 							
 							
 							<div v-show="isgroupmaster" class="rightonemenu">
-								<div class="rightonelist1 rightonelists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理群成员</div>
+								<div class="rightonelist1 rightonelists" @click="popourmenu"><i class="fa fa-users"></i>&nbsp;&nbsp;管理群成员</div>
 								<div class="rightonelist2 rightonelists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改群信息</div>
 								<div class="rightonelist3 rightonelists"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
 							</div>
 							
+							
+							
 						</div>
 						
-						
+						<div v-if="onlyonelistmenushow" class=" animated bounceInDown slidemembersmenu">
+							<i class="fa fa-times" @click="shutonlyonelist"></i>
+								
+							<div class="membermenucontainer">
+								
+								
+								<template v-for="(arr,i) in slidechagearr">
+									<div class="everypeoplecon2" :id="arr.id">
+										<img :src="arr.avatar ? picsrc+arr.avatar : defaultpic">
+										<div class="namecon2 shenglue">
+											{{ arr.nickname }}
+										</div>
+									</div>
+								</template>
+								
+								<div class="pluscontainer">
+									<div @click="addconpop" class="addcontain">
+										<img src="imgs/added.png">
+									</div>
+									<div @click="reduceconpop" v-if="shouldshow" class="reducecontain">
+										<img src="imgs/reduced.png">
+									</div>
+								</div>
+								
+							</div>
+								
+						</div>
 						
 						
 						

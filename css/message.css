@@ -1253,6 +1253,86 @@ body {
 .subrightcomone {
 	height: 100%;
 }
+.slidemembersmenu {
+	width: 100%;
+	background-color: #fff;
+	border-bottom: 1px solid #efefef;
+	padding-top: 50px;
+	margin: 0 auto;
+	z-index: 110;
+	position: absolute;
+}
+.slidemembersmenu .fa-times {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	font-size: 25px;
+	color: #717171;
+	cursor: pointer;
+}
+.slidemembersmenu .fa-times:hover {
+	color: #1a7dff;
+}
+.addcontain {
+	display: inline-block;
+	height: 70px;
+	margin-right: 50px;
+	width: 70px;
+	cursor: pointer;
+}
+.addcontain img {
+	height: 70px;
+	width: 70px;
+}
+.reducecontain img {
+	height: 70px;
+	width: 70px;
+}
+.reducecontain {
+	display: inline-block;
+	height: 70px;
+	width: 70px;
+	margin-right: 50px;
+	cursor: pointer;
+}
+.pluscontainer {
+	display: inline-block;
+	position: absolute;
+}
+.everypeoplecon2 {
+	width: 70px;
+	height: 110px;
+	display: inline-block;
+	margin-right: 50px;
+	position: relative;
+}
+.everypeoplecon2 img{
+	width: 70px;
+	height: 70px;
+}
+.everypeoplecon2 .namecon2 {
+	width: 70px;
+	height: 40px;
+	color: #999;
+	font-size: 16px;
+	line-height: 40px;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+.membermenucontainer {
+	width: 90%;
+	margin: 0 auto;
+	max-height: 300px;
+	position: relative;
+}
+
 .rightonechatcon {
 	position: absolute;
 	height: calc( 100% - 350px );
@@ -1308,7 +1388,7 @@ body {
 	right: 90px;
 	top: 50px;
 	background-color: #fff;
-	z-index: 30;
+	z-index: 300;
 }
 .rightonelists {
 	height: 65px;
@@ -1409,16 +1489,18 @@ body {
 .msgmasterinner {
 	width: 100%;
 	
+	height: auto;
 }
 .msgcontainer {
 	width: 100%;
-	
+	height: auto;
+	margin-bottom: 20px;
 }
 .msgmarginlr {
 	width: 90%;
 	margin:  0 auto;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	height: auto;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -1460,7 +1542,7 @@ body {
 	padding-right: 20px;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 10px;
+	border-radius: 5px;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent span:after{
@@ -1516,7 +1598,7 @@ body {
 	padding-right: 20px;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 10px;
+	border-radius: 5px;
 	position: relative;
 }
 .msgmarginlr .rightmsg  .wordscontent span:after{
@@ -1531,3 +1613,175 @@ body {
 }
 
 /*右边聊天界面*/
+
+
+/*弹出向群组添加好友界面*/
+.addmyfriends {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(163,163,163,0.5);
+	bottom: 0;
+	left: 0;
+	z-index: 500;
+}
+.addmyfriendscore {
+	height: 600px;
+	width: 604px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -302px;
+	margin-top: -300px;
+	background-color: #fff;
+	border-radius: 20px;
+}
+.addmyfriends .bottombtn {
+	height: 60px;
+	width: 484px;
+	background-color: #ccc;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	font-size: 26px;
+	text-align: center;
+	margin-left: 60px;
+	margin-top: 50px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 50px;
+}
+.addmyfriendscore .reusecontainer2 {
+	height: 360px;
+	width: 100%;
+	border-bottom: 1px solid #e5e5e5;
+	
+}
+.addsort3 {
+	width: 100%;
+	height: 320px;
+}
+.sort_list2 {
+	height: 90px;
+	width: 604px;
+	position: relative;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.sort_list2 img {
+	margin-top: 10px;
+	margin-left: 0;
+	width: 70px;
+}
+.num_name2 {
+	width: 250px;
+	height: 90px;
+	font-size: 24px;
+	color: #333;
+	line-height: 90px;
+	margin-left: 140px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+}
+.sort_letter2 {
+	height: 50px;
+	width: 604px;
+	font-size: 20px;
+	color: #999;
+	background-color: #fff;
+	line-height: 50px;
+	padding-left: 45px;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*弹出向群组添加好友界面*/
+
+/*弹出移除群组成员界面*/
+.removegroupmember2 {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(163,163,163,0.5);
+	bottom: 0;
+	left: 0;
+	z-index: 500;
+}
+.removegroupmember2core {
+	height: 600px;
+	width: 604px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -302px;
+	margin-top: -300px;
+	background-color: #fff;
+	border-radius: 20px;
+}
+.removegroupmember2core .bottombtn {
+	height: 60px;
+	width: 484px;
+	background-color: #ccc;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	font-size: 26px;
+	text-align: center;
+	margin-left: 60px;
+	margin-top: 50px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 50px;
+
+}
+.removegroupmember2core .reusecontainer3 {
+	height: 360px;
+	width: 100%;
+	border-bottom: 1px solid #e5e5e5;
+	
+}
+.addsort4 {
+	width: 100%;
+	height: 320px;
+}
+.sort_list3 {
+	height: 90px;
+	width: 604px;
+	position: relative;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.sort_list3 img {
+	margin-top: 10px;
+	margin-left: 0;
+	width: 70px;
+}
+.num_name3 {
+	width: 250px;
+	height: 90px;
+	font-size: 24px;
+	color: #333;
+	line-height: 90px;
+	margin-left: 140px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+}
+.sort_letter3 {
+	height: 50px;
+	width: 604px;
+	font-size: 20px;
+	color: #999;
+	background-color: #fff;
+	line-height: 50px;
+	padding-left: 45px;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*弹出移除群组成员界面*/

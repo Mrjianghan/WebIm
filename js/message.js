@@ -29,8 +29,30 @@ function getCurrentTime(){
 };//获取当前时间
 
 
+/*function messagetobottom (){
+	var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+	var cli = scroll1.clientHeight;
+	var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+	var hei = main.scrollHeight;
+	$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+};*/
+//接收消息滚到最下面
+/*function sendmessagetobottom (){
+	var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+	var cli = scroll1.clientHeight;
+	var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
+	var hei = main.scrollHeight;
+	$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+};*/
+//发送消息滚到最下面
 
-
+/*function sendmessagetobottom1 (){
+	var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+	var cli = scroll1.clientHeight;
+	var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
+	var hei = main.scrollHeight;
+	$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+};*/
 
 
 
@@ -102,7 +124,17 @@ conn.listen({
 		
 		switch ( type ) {
 			case 'chat':
+				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
 					var data = res.data.data;
 					console.log(data);
 					var name = data.nickname;
@@ -123,9 +155,11 @@ conn.listen({
 					
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
 						$('.mainleft .comlist1').prepend(str);
+						
 					} else {
 						$('.mainleft .comlist1  #'+message.from).remove();
 						$('.mainleft .comlist1').prepend(str);
+						
 					}
 					
 					/*消息列表记录*/
@@ -133,8 +167,19 @@ conn.listen({
 					
 					
 					/*消息内容容器*/
-					/*var str1 = '';
-					str1 = str1 + '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgmasterinner"><div class="msgcontainer"><div class="msgmarginlr">'+message.from+'</div></div></div></div>';	
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -143,7 +188,11 @@ conn.listen({
 					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
 
 						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
 
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
 					}
 					
 					/*消息内容容器*/
@@ -168,7 +217,25 @@ conn.listen({
 				
 				break;
 			case 'groupchat':
+				
+				
+				
+				
+				
+				
 				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					
+					
 					var data = res.data.data;
 					console.log(data);
 					var avatar = data.avatar;
@@ -208,30 +275,8 @@ conn.listen({
 					
 					
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-						
+						//获取群组聊天里发送人的详细信息
 						var data = res.data.data;
 						console.log(data);
 						var avatar = data.avatar;
@@ -241,18 +286,41 @@ conn.listen({
 						
 						
 						
-					/*消息内容容器*/
-					/*var str1 = '';
 						
-					str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgmasterinner"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div></div>';	
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					/*生成的消息内容容器*/
+					var str1 = '';
+						
+					str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 					
 					
 					var str2 ='';
 					
 						
-					/*str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
-					*/
+					
 
 
 
@@ -261,25 +329,19 @@ conn.listen({
 					if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
 
 						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						
+						messagetobottom();
 
 					} else {
 						
-						$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster .msgmasterinner  .msgcontainer').append( str2 );
+						$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
 						
+						messagetobottom();
 						
 						
 					}
 					
-					/*消息内容容器*/
-						
-						
-						
-						
-						
-						
-						
-						
-						
+					/*生成的消息内容容器*/
 						
 						
 						
@@ -308,16 +370,6 @@ conn.listen({
 				
 				break;
 		}
-		
-		
-		
-		
-		console.log(vm.$store.getters.getchatroom);
-		
-		console.log(vm.$store.getters.getgroupchat);
-
-			
-	
 		
 		
 	},    //收到文本消息
@@ -1335,8 +1387,14 @@ var vm = new Vue({
 		showgroupcontrol:false,
 		name:'暂无消息',
 		isgroupmaster:false,
-		isgroupleader:false,
-		notgroupleader:false,
+		
+		isgroupleader:false,//等着追踪是否为群主
+		isgroupmanager:false,//管理员
+		notgroupmanager:false,//不是管理员
+		justoneman:false,//只是个人
+		shouldshow:false,
+		
+		
 		defaulthide:false,
 		switchbindid:'',
 		messagearr:[],
@@ -1369,6 +1427,17 @@ var vm = new Vue({
 		
 		alertinfoshow:false,
 		alertinfocon:'请到移动端进行相关操作',
+		
+		slidechagearr:[],//下拉列表好友基群组容器
+		
+		
+		
+		onlyonelistmenushow:false,
+		
+		addmyfriendshow:false,
+		removemembershow:false,
+		
+		repeatmyfriendsarr:[],
 	},
 	
 	computed:{
@@ -1444,6 +1513,7 @@ var vm = new Vue({
 	methods:{
 		exitalert:function(){
 			vm.alertinfoshow = false;
+			
 		},//关闭警告框
 		exitalert1:function(){
 			vm.alertinfoshow = false;
@@ -1453,6 +1523,7 @@ var vm = new Vue({
 			this.$refs.current._data.searchshow = false;
 			vm.$refs.current.tempfriendsarrcon = [];
 			vm.$refs.current.tempgroupsarrcon = [];
+			vm.isgroupmaster = false;
 			
 		},//关闭搜索框
 		selectcurrentinput:function($event){
@@ -1691,16 +1762,28 @@ var vm = new Vue({
 					if ( code == 2000 ){
 						var groupid = res.data.data;
 						console.log(groupid);
-
-
-
 						var members = tempcreategroup;
-
 						console.log(typeof (members));
 
 
 						console.log(members);
 						if ( members == "" ) {
+							//没有选择群的话，将好友向群里面拉入
+							
+							console.log(vm.selectmaingrouparr);
+							var bri = vm.selectmaingrouparr;
+							var transferstr = bri.join(",");
+							console.log(transferstr);
+							console.log( groupid );
+							
+							axios.post(globaldomain+'im/group/member/join.json?groupId='+groupid+'&memberIds='+transferstr).then(function(res){
+								console.log(res.data);
+								
+							}).catch(function(err){
+								console.log(err);
+							});
+							
+							
 
 							vm.readychatshow = false;
 							vm.slebossswicth = false;
@@ -1876,7 +1959,75 @@ var vm = new Vue({
 			vm.$store.commit('rightfriendbtn',idnumber);
 			vm.$children[1].showgroupsright1 = true;
 		},//点击好友列表
-		
+		isgroupleadermenu:function(){
+			vm.isgroupmaster = !vm.isgroupmaster;
+			
+			
+			
+		},//是群主时弹出菜单
+		isgroupmanagermenu:function(){
+			
+			
+		},//是群管理员时弹出列表
+		notgroupmanagermenu:function(){
+			vm.onlyonelistmenushow = true;
+		},//不是管理员时弹出列表
+		onlyusermenu:function(){
+			vm.onlyonelistmenushow = true;
+			
+		},//只是单人时弹出列表
+		shutonlyonelist:function(){
+			vm.onlyonelistmenushow = false;
+		},//关闭名单列表
+		popourmenu:function(){
+			vm.onlyonelistmenushow = true;
+			
+		},//群主时，点击管理群组按钮
+		addconpop:function(){
+			vm.addmyfriendshow = true;
+			vm.removemembershow = false;
+			
+			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
+				
+				var data = res.data.data;
+				console.log(data);
+				vm.repeatmyfriendsarr = data;
+				console.log( vm.repeatmyfriendsarr );
+				
+				var addtimer4 = setTimeout(function(){
+					initials2();
+					clearTimeout(addtimer4);
+				},400);
+				
+				
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+			
+			
+		},//加号图标
+		reduceconpop:function(){
+			vm.addmyfriendshow = false;
+			vm.removemembershow = true;
+			/*axios.post(globaldomain+'im/buddy/find.json').then(function(res){
+				console.log(res);
+				var data = res.data.data;
+				console.log(data);
+				vm.repeatmyfriendsarr = data;
+				console.log( vm.repeatmyfriendsarr );
+				
+				var addtimer5 = setTimeout(function(){
+					initials3();
+					clearTimeout(addtimer5);
+				},400);
+				
+				
+			}).catch(function(err){
+				console.log(err);
+			});*/
+			
+		},//移除群内成员减号图标
 			
 	}
 });
@@ -1892,6 +2043,9 @@ var vm = new Vue({
 
 //点击聊天列表
 $('.mainleft .comlist1').on('click','.listOnecon',function(){
+	
+	
+	//vm.slidechagearr
 	
 	console.log(this);
 	var that = this;
@@ -1918,7 +2072,7 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 	}
 	
 	axios.get(globaldomain+'im/user/detail.json?id='+listid).then(function(res){
-		
+		vm.groupnumbershow = false;
 		var data =res.data.data;
 		
 		console.log(data);
@@ -1937,6 +2091,12 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 		
 		var data = res.data.data;
 		
+		vm.isgroupleader= false;
+		vm.isgroupmanager = false;//管理员
+		vm.notgroupmanager = false;//不是管理员
+		vm.justoneman = true;//只是个人
+		vm.shouldshow = false;
+		
 		console.log(data);
 		var name = data.name;
 		var genre = data.genre;
@@ -1945,6 +2105,117 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 		vm.rightoneheaderobj.name = name;
 		vm.rightoneheaderobj.groupnumber = groupnumber;
 		vm.targetid = listid;
+		
+		vm.groupnumbershow = true;
+		
+		
+		//vm.slidegenre
+		
+		
+		axios.get(globaldomain+'im/group/member/genre.json?groupId='+listid+'&memberId='+ids.id).then(function(res){
+			console.log(res.data);
+			var level = res.data.data;
+			console.log(level);
+			
+			console.log(  typeof(level));
+			switch (level) {
+				case '10':
+					console.log(10);
+					vm.isgroupleader= true;
+					vm.isgroupmanager = false;//管理员
+					vm.notgroupmanager = false;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = true;
+					break;
+				case '20':
+					vm.isgroupleader= false;
+					vm.isgroupmanager = true;//管理员
+					vm.notgroupmanager = false;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = true;
+					break;
+				case '30':
+					vm.isgroupleader= false;
+					vm.isgroupmanager = false;//管理员
+					vm.notgroupmanager = true;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = false;
+					break;
+			}
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+		
+		
+		/*var pageNum = 1,
+			pageSize = 5000;
+			var options = {
+				pageNum: pageNum,
+				pageSize: pageSize,
+				groupId: listid,
+				success: function (resp) {
+					console.log(resp);
+					console.log(resp.data);
+					var arr = resp.data;
+					console.log(arr);
+							
+					var getlast = _.find(arr,'owner');
+							
+					var owner = getlast.owner;
+					
+					
+					
+					
+					
+							
+					console.log(owner);
+					if ( owner == ids.id ) {
+						vm.isgroupleader= true;
+						vm.notgroupleader = false;//不是群主
+						vm.justoneman = false;//只是个人
+					} else {
+						vm.isgroupleader= false;
+						vm.notgroupleader = true;//不是群主
+						vm.justoneman = false;//只是个人
+					}
+							
+							
+				},
+				error: function(e){
+					console.log(e);
+				}
+			};
+		conn.listGroupMember(options);*/
+		
+		
+		axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+listid).then(function(res){
+			console.log(res);
+			var arrgg = res.data.data.content;
+			console.log(arrgg);
+			vm.slidechagearr = arrgg;
+			 
+			
+			
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -1963,18 +2234,6 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 
 
 //发送消息按钮点击
-
-
-
-
-
-
-
-
-
-
-
-
 
 $('.mainright .rightonesend button').on('click',function(){
 	var that = this;
@@ -2004,17 +2263,38 @@ $('.mainright .rightonesend button').on('click',function(){
 
 					console.log(data);
 					
-					//var avatar = data.avatar;
+					var avatar = data.avatar;
 					
 					//$('.mainright .rightonechatcon   #'+listid+'.msgconmaster')
 					
 					
-					/*var str4 = '';
-				
-					str4 = str4 + '<div class="msgmarginlr"><div class="rightmsg"><div class="wordscontent"><span>'+content+'</span></div><div class="imgcontainer"><img src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'"></div></div></div>';
-
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);*/
+					var str4 = '';
 					
+					str4 ='<div class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span>'+content+'</span></div></div></div><div class="clearfix"><div></div></div>';
+					
+
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
+					
+					console.log(sendtarget);
+					
+					
+					function sendmessagetobottom1 (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					sendmessagetobottom1();
+					
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').removeClass('hidden');//对话显示
+					
+					console.log( $('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster') );
+					
+					
+					
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').siblings().addClass('hidden');//同胞关闭显示	
 					
 					
 
@@ -2102,13 +2382,30 @@ $('.mainright .rightonesend button').on('click',function(){
 					
 					
 					
+					//str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
+					$('.mainleft .comlist1  #'+sendtarget+' .listOnebottomleft').text(content); 
 					
+					var sendtime = getCurrentTime();
 					
+					$('.mainleft .comlist1  #'+sendtarget+' .listOnetopright').text(sendtime);
 					
+					function sendmessagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					//发送消息滚到最下面
 					
+					sendmessagetobottom();
+					
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').removeClass('hidden');//对话显示
+					
+					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').siblings().addClass('hidden');//同胞关闭显示
 
 
 

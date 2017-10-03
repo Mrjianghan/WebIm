@@ -141,13 +141,10 @@ conn.listen({
                 
                 
                 function messagetobottom (){
-                    var obj1 = $('.matchtab2  .exists.scrollbar-macosx')[0];
-                    
-                    //var hei = obj1.scrollHeight;
-                    var cli = obj1.clientHeight;
-                    
-                    var hei = $('.matchtab2'+' #'+msg_to+'.everychatroom')[0].scrollHeight;
-                    $('.matchtab2  .exists.scrollbar-macosx').scrollTop( hei-cli );
+                   
+					
+					
+					
                 }
                 //接收消息滚到最下面
                 messagetobottom();
