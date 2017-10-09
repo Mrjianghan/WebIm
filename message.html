@@ -222,6 +222,7 @@
 						<div class="rightonelist2 rightonelists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改群信息</div>
 						<div class="rightonelist3 rightonelists"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
 					</div>
+					
 				</div>
 				
 				<div class="rightonechatcon scrollbar-macosx">
@@ -278,33 +279,21 @@
 						
 						
 						
-						
-						
-						<!--<template v-for="arr in messagearr">
-							
-							<div class="leftmsg">
-								<div>
-									
-									
-								</div>
-								
-								{{ arr.avatar }}
-							</div>
-							
-						</template>
-						
-						
-						<div class="leftmsg">
-							
-							
-						</div>-->
+					
 						
 					</div>
 				</div>
 				
 				<div v-show="defaulthide" class="rightonesend">
+					<div class="emojicontainer">
+						<!--<template v-for="(value,i) in emojiobj ">
+							<div>
+								<img :src="emojisrc+value">
+							</div>
+						</template>-->
+					</div>
 					<div class="rightonesendselect">
-						<i class="fa fa-smile-o"></i>
+						<i @click="showemojicontainer" class="fa fa-smile-o"></i>
 						<i class="fa fa-picture-o"><input type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
 						<i class="fa fa-folder"><input type="file"></i>
 					</div>
@@ -379,6 +368,16 @@
 				</div>	
 			</div>
 			
+			<div v-if="allusershow" class="selectoneinfo animated bounceIn" :style="{top:top2,left:left2}">
+				<img class="currentpiccontainer" :src="selectavatar2 ? picsrc+selectavatar2 :defaultpic">
+				<div class="nameandgender shenglue"><span>{{usernames}}</span> <i v-if="isgirls" class="fa fa-venus"></i><i v-if="isboys" class="fa fa-mars"></i>   <i class="fa fa-commenting-o"></i> </div>
+				<div class="addname2">备注：{{ addonname }}</div>
+				<div class="cardarea">地区：{{ areaIds }}
+				</div>
+				<div class="cardsignature">个性签名：{{ signatures }}
+				</div>
+			</div><!--点击人员卡片-->
+			
 			
 			<div v-if="addmyfriendshow" class="addmyfriends">
 				<div class="addmyfriendscore  animated bounceIn">
@@ -389,8 +388,8 @@
 					<div class="reusecontainer2">
 						<!--<div></div>搜索占位-->
 						<div class="selectallboss">
-							<div @click="" class="selectallcon">
-								<input type="checkbox" >
+							<div  class="selectallcon">
+								<input @click="addallcheck($event)" ref="addselall" type="checkbox"  >
 							</div>
 							<span>全选</span>
 						</div>
@@ -401,7 +400,7 @@
 									<div id=""  class="sort_list2">
 										<div class="friendseveryOne" :id="arr.id">
 											<div class="selectOnly1">
-												<input :data-index="i" @click="selectcurrentinput($event)" :value="arr.id" v-model="selectmaingrouparr" type="checkbox">
+												<input :data-index="i" @click="addmanyinput($event)" :value="arr.id" v-model="addgrouparr" type="checkbox">
 											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
 											<div class="num_name2 shenglue">{{arr.nickname}} </div>
 										</div>
@@ -415,7 +414,7 @@
 					
 					
 					<div>
-						<button class="bottombtn">确定</button>
+						<button :id="groupidbindminus" :disabled="addgrouparr.length == 0" :class="{btncolorswitch: addgrouparr.length != 0}" @click="addpeoplefromfriends($event)" class="bottombtn">确定({{addgrouparr.length}})</button>
 					</div>
 				</div>
 			</div>
@@ -429,8 +428,8 @@
 					<div class="reusecontainer3">
 						<!--<div></div>搜索占位-->
 						<div class="selectallboss">
-							<div @click="" class="selectallcon">
-								<input type="checkbox" >
+							<div class="selectallcon">
+								<input ref="delselall"  @click="deleteallcheck($event)"  type="checkbox" >
 							</div>
 							<span>全选</span>
 						</div>
@@ -441,7 +440,7 @@
 									<div id=""  class="sort_list3">
 										<div class="friendseveryOne" :id="arr.id">
 											<div class="selectOnly1">
-												<input :data-index="i" @click="selectcurrentinput($event)" :value="arr.id" v-model="selectmaingrouparr" type="checkbox">
+												<input :data-index="i" @click="delmanyinput($event)" :value="arr.id" v-model="deletegrouparr" type="checkbox">
 											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
 											<div class="num_name3 shenglue">{{arr.nickname}} </div>
 										</div>
@@ -453,7 +452,7 @@
 					</div>
 					
 					<div>
-						<button class="bottombtn" type="button">确定</button>
+						<button :id="groupidbindminus" @click="deletepeoplefromgroup($event)" :disabled="deletegrouparr.length == 0" :class="{btncolorswitch: deletegrouparr.length != 0}" class="bottombtn" type="button">确定({{deletegrouparr.length}})</button>
 					</div>
 				</div>
 			</div>
@@ -560,7 +559,7 @@
 			
 			
 			
-			<div class="mainleft">
+			<div class="mainleft" @click="offuserlist2">
 				
 				
 				<currentuser ref="current"></currentuser>
@@ -748,9 +747,11 @@
 								
 							<div class="membermenucontainer">
 								
+								<div>
+								</div>
 								
 								<template v-for="(arr,i) in slidechagearr">
-									<div class="everypeoplecon2" :id="arr.id">
+									<div @click.stop="showtheoneinfos($event)"  class="everypeoplecon2" :id="arr.id">
 										<img :src="arr.avatar ? picsrc+arr.avatar : defaultpic">
 										<div class="namecon2 shenglue">
 											{{ arr.nickname }}
@@ -758,15 +759,15 @@
 									</div>
 								</template>
 								
-								<div class="pluscontainer">
-									<div @click="addconpop" class="addcontain">
-										<img src="imgs/added.png">
-									</div>
-									<div @click="reduceconpop" v-if="shouldshow" class="reducecontain">
-										<img src="imgs/reduced.png">
-									</div>
+								
+								<div @click="addconpop" class="addcontain">
+									<img src="imgs/added.png">
 								</div>
 								
+								<div @click="reduceconpop($event)" v-if="shouldshow" :id="groupidbindminus" class="reducecontain">
+										<img src="imgs/reduced.png">
+								</div>
+								<div class="clearfix"></div>
 							</div>
 								
 						</div>
@@ -818,13 +819,20 @@
 						
 
 						<div class="rightonesend">
+							<div v-show="emojishow" class="emojicontainer">
+								<template v-for="(value,i) in emojiobj ">
+									<div  class="emojiwrap">
+										<img :id="i" @click="getemojisrc($event)" :src="emojisrc+value">
+									</div>
+								</template>
+							</div>
 							<div class="rightonesendselect">
-								<i class="fa fa-smile-o"></i>
+								<i @click.stop="showemojicontainer" class="fa fa-smile-o"></i>
 								<i class="fa fa-picture-o"><input type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
 								<i class="fa fa-folder"><input type="file"></i>
 							</div>
 							<div class="textcontainer">
-								<textarea v-model="sendbtncontent">
+								<textarea v-html="sendtextcontent" v-model="sendbtncontent">
 								</textarea>
 							</div>
 							<button :id="targetid" type="button">发送</button>

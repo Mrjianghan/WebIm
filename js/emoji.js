@@ -17,7 +17,8 @@ var Emoji = { //首先加载emoji表情
         '[8o|]': 'ee_14.png',
         '[8-|]': 'ee_15.png',
         '[+o(]': 'ee_16.png',
-        '[,o)]': 'ee_17.png',
+        '[.o)]': 'ee_17.png',
+		//'[<o)]': 'ee_17.png',
         '[|-)]': 'ee_18.png',
         '[*-)]': 'ee_19.png',
         '[:-#]': 'ee_20.png',
@@ -41,7 +42,8 @@ var Emoji = { //首先加载emoji表情
 
 
 WebIM.Emoji = Emoji; //导入emoji表情
-parseEmoji: function parseEmoji(msg) { //解析emoji
+
+/*parseEmoji: function parseEmoji(msg) { //解析emoji
     if (typeof WebIM.Emoji === 'undefined' || typeof WebIM.Emoji.map === 'undefined') {
         return msg;
     } else {
@@ -139,4 +141,4 @@ parseTextMessage: function parseTextMessage(message, faces) { //解析文本消�
             data: message
         }]
     };
-}; //解析文本消息  
+}; //解析文本消息  */

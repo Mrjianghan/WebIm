@@ -27,34 +27,7 @@ function getCurrentTime(){
 	var now = getglobaltime.slice(0,5);
 	return now;
 };//获取当前时间
-
-
-/*function messagetobottom (){
-	var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
-	var cli = scroll1.clientHeight;
-	var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
-	var hei = main.scrollHeight;
-	$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
-};*/
-//接收消息滚到最下面
-/*function sendmessagetobottom (){
-	var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
-	var cli = scroll1.clientHeight;
-	var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
-	var hei = main.scrollHeight;
-	$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
-};*/
-//发送消息滚到最下面
-
-/*function sendmessagetobottom1 (){
-	var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
-	var cli = scroll1.clientHeight;
-	var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
-	var hei = main.scrollHeight;
-	$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
-};*/
-
-
+console.log(WebIM);
 
 
 
@@ -378,6 +351,305 @@ conn.listen({
 		vm.nomessage = false;
 		message.time = getCurrentTime();
 		console.log(message);
+		var messagetype = message.type;
+		
+		for(var i=0;i<message.data.length;i++  ){
+			var img = message.data[i];
+			console.log(img);
+			var string;
+			if (img.type == "txt"){
+				string = string+img.data;
+			}else {
+				string = string + '<img class="emoji" ' + 'src="' + img.data + '" />';
+			}
+					
+		}
+		string = string.replace('undefined','');
+		
+		console.log(string);
+		
+		switch (messagetype){
+			case 'chat':
+				
+			axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+				//console.log(res);
+				
+				function messagetobottom (){
+					var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+					var cli = scroll1.clientHeight;
+					var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+					var hei = main.scrollHeight;
+					$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+				};
+				
+				var data = res.data.data;
+				console.log(data);
+				var name = data.nickname;
+				var avatar = data.avatar;
+				var msgfrom = message.from;
+					
+				message.name = name;
+				message.avatar = avatar;
+					
+				console.log(message);
+					
+					
+				/*消息列表记录*/
+				var str = '';
+					
+				str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[表情]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+				if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+					$('.mainleft .comlist1').prepend(str);
+						
+				} else {
+					$('.mainleft .comlist1  #'+message.from).remove();
+					$('.mainleft .comlist1').prepend(str);
+						
+				}
+					
+				/*消息列表记录*/
+				
+				
+				/*消息内容容器*/
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span>'+string+'</span></div></div><div class="clearfix"></div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span>'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
+
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
+					}
+					
+					/*消息内容容器*/
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}).catch(function(err){
+				console.log(err);
+			})
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			break;
+			case 'groupchat':
+				
+				
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					/*消息列表记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[表情]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息列表记录*/
+					
+					
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						//获取群组聊天里发送人的详细信息
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						/*生成的消息内容容器*/
+						var str1 = '';
+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+
+
+						var str2 ='';
+
+
+						str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+
+
+						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+							messagetobottom();
+
+						} else {
+
+							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
+
+							messagetobottom();
+
+
+						}
+
+						/*生成的消息内容容器*/
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			break;
+			case 'chatroom':
+			break;	
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -388,6 +660,261 @@ conn.listen({
 		console.log('图片消息');
 		message.time = getCurrentTime();
 		console.log(message);
+		var msgtype = message.type;
+		
+		switch( msgtype ){
+			case 'chat':
+				
+				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					console.log(res);
+					
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+				
+					var data = res.data.data;
+					console.log(data);
+					var name = data.nickname;
+					var avatar = data.avatar;
+					var msgfrom = message.from;
+					
+					message.name = name;
+					message.avatar = avatar;
+					
+					console.log(message);
+					console.log(message.url);
+					
+					/*消息列表记录*/
+					var str = '';
+
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+
+					} else {
+						$('.mainleft .comlist1  #'+message.from).remove();
+						$('.mainleft .comlist1').prepend(str);
+
+					}
+
+					/*消息列表记录*/
+					
+					
+					/*消息内容容器*/
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+ '<img src="'+message.url+'" class="picmessagelock">' +'</span></div></div><div class="clearfix"></div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
+
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
+					}
+					
+					/*消息内容容器*/
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				})
+				
+				
+				
+				
+				
+				
+				
+				break;
+			case 'groupchat':
+				
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					console.log(message);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息列表记录*/
+					
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						//获取群组聊天里发送人的详细信息
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						
+						/*生成的消息内容容器*/
+						var str1 = '';
+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+
+
+						var str2 ='';
+
+
+						str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+
+
+						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+							messagetobottom();
+
+						} else {
+
+							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
+
+							messagetobottom();
+
+
+						}
+
+						/*生成的消息内容容器*/
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				
+				
+				break;
+			case 'chatroom':
+				break;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -400,15 +927,276 @@ conn.listen({
 		message.time = getCurrentTime();
 		console.log(message);
 		
-		
-		
-		
-		
 		var options = { url: message.url };
     
 		options.onFileDownloadComplete = function ( response ) { 
 			  //音频下载成功，需要将response转换成blob，使用objectURL作为audio标签的src即可播放。
 			var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
+			console.log(objectURL);
+			console.log(response);
+			
+			console.log(conn);
+			var size = response.size;
+			console.log(size);
+			
+			var sizestr= String(size);
+			
+			console.log(sizestr);
+			var finalsize = sizestr.substring(0,1);
+			
+			
+			console.log(finalsize);
+			
+			var msgtype = message.type;
+		
+		switch( msgtype ){
+			case 'chat':
+				
+				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					console.log(res);
+					
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+				
+					var data = res.data.data;
+					console.log(data);
+					var name = data.nickname;
+					var avatar = data.avatar;
+					var msgfrom = message.from;
+					
+					message.name = name;
+					message.avatar = avatar;
+					
+					console.log(message);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+
+					} else {
+						$('.mainleft .comlist1  #'+message.from).remove();
+						$('.mainleft .comlist1').prepend(str);
+
+					}
+
+					/*消息列表记录*/
+					
+					
+					/*消息内容容器*/
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>' +'</span></div></div><div class="clearfix"></div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
+
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
+					}
+					
+					/*消息内容容器*/
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				})
+				
+				
+				
+				
+				
+				
+				
+				break;
+			case 'groupchat':
+				
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					console.log(message);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息列表记录*/
+					
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						//获取群组聊天里发送人的详细信息
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						
+						/*生成的消息内容容器*/
+						var str1 = '';
+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+
+
+						var str2 ='';
+
+
+						str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+
+
+						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+							messagetobottom();
+
+						} else {
+
+							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
+
+							messagetobottom();
+
+
+						}
+
+						/*生成的消息内容容器*/
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				
+				
+				break;
+			case 'chatroom':
+				break;
+		}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		};  
 
 			options.onFileDownloadError = function () {
@@ -423,13 +1211,237 @@ conn.listen({
 			WebIM.utils.download.call(conn, options);
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	},   //收到音频消息
 	
     onLocationMessage: function ( message ) {
 		vm.nomessage = false;
 		console.log('位置消息');
 		message.time = getCurrentTime();
-		console.log(message);
+		
+		
+		var msgtype = message.type;
+		switch( msgtype ){
+			case 'chat':
+				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					console.log(res);
+					
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+				
+					var data = res.data.data;
+					console.log(data);
+					var name = data.nickname;
+					var avatar = data.avatar;
+					var msgfrom = message.from;
+					
+					message.name = name;
+					message.avatar = avatar;
+					
+					console.log(message);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+
+					} else {
+						$('.mainleft .comlist1  #'+message.from).remove();
+						$('.mainleft .comlist1').prepend(str);
+
+					}
+
+					/*消息列表记录*/
+					
+					/*消息内容容器*/
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan">'+
+						'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
+						+'</span></div></div><div class="clearfix"><div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan ">'+
+						'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
+						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
+
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
+					}
+					
+					/*消息内容容器*/
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				})
+				
+				
+				
+				break;
+			case 'groupchat':
+				
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					console.log(message);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[地理位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息列表记录*/
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						//获取群组聊天里发送人的详细信息
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						
+						/*生成的消息内容容器*/
+						var str1 = '';
+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+
+							'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+
+
+						var str2 ='';
+
+
+						str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+
+
+						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+							messagetobottom();
+
+						} else {
+
+							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
+
+							messagetobottom();
+
+
+						}
+
+						/*生成的消息内容容器*/
+						
+						
+						
+						
+						
+						
+					
+					}).catch(function(err){
+						console.log(err);
+					})
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				break;
+			case 'chatroom':
+				break;
+		
+		}
+		
+		
 		
 		
 	},//收到位置消息
@@ -440,6 +1452,209 @@ conn.listen({
 		message.time = getCurrentTime();
 		console.log(message);
 		
+		var msgtype = message.type;
+		
+		switch( msgtype ){
+			case 'chat':
+				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+				
+					var data = res.data.data;
+					console.log(data);
+					var name = data.nickname;
+					var avatar = data.avatar;
+					var msgfrom = message.from;
+					
+					message.name = name;
+					message.avatar = avatar;
+					
+					console.log(message);
+					console.log(message.url);
+					console.log(message.filename);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+
+					} else {
+						$('.mainleft .comlist1  #'+message.from).remove();
+						$('.mainleft .comlist1').prepend(str);
+
+					}
+
+					/*消息列表记录*/
+					
+					
+					/*消息内容容器*/
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan">'+
+						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+						+'</span></div></div><div class="clearfix"><div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
+						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
+
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
+					}
+					
+					/*消息内容容器*/
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				})
+					
+				break;
+			case 'groupchat':
+				
+				
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					console.log(message);
+					
+					/*消息列表记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息列表记录*/
+					
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						//获取群组聊天里发送人的详细信息
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						
+						
+						
+						/*生成的消息内容容器*/
+						var str1 = '';
+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
+							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+
+
+						var str2 ='';
+
+
+						str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
+							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+
+
+						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+							messagetobottom();
+
+						} else {
+
+							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
+
+							messagetobottom();
+
+
+						}
+
+						/*生成的消息内容容器*/
+						
+						
+					
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+				
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				break;
+			case 'chatroom':
+				break;
+		
+		
+		
+		}
 		
 		
 	},    //收到文件消息
@@ -448,20 +1663,215 @@ conn.listen({
 		vm.nomessage = false;
 		console.log('视频消息');
 		message.time = getCurrentTime();
+		console.log(message);
+		var msgtype = message.type;
 		
-		//聊天记录列表 vm.chathistoryarr1
+		switch( msgtype ){
+			case 'chat':
+				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.from +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+				
+					var data = res.data.data;
+					console.log(data);
+					var name = data.nickname;
+					var avatar = data.avatar;
+					var msgfrom = message.from;
+					
+					message.name = name;
+					message.avatar = avatar;
+					
+					console.log(message);
+					console.log(message.url);
+					console.log(message.filename);
+					
+					
+					/*消息列表记录*/
+					var str = '';
+
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+
+					} else {
+						$('.mainleft .comlist1  #'+message.from).remove();
+						$('.mainleft .comlist1').prepend(str);
+
+					}
+
+					/*消息列表记录*/
+					
+					
+					/*消息内容容器*/
+					var str1 = '';
+					
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+
+						
+					'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan">'+
+						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+						+'</span></div></div><div class="clearfix"><div></div>'
+						
+					+'</div></div></div>';
+					
+					
+					var str2 ='';
+					
+						
+					str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
+						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
+
+
+
+
+
+					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
+
+						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+						messagetobottom();
+
+					} else {
+						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
+						messagetobottom();
+					}
+					
+					/*消息内容容器*/
+					
+					
+					
+					
+					
+					
+				}).catch(function(err){
+					console.log(err);
+				})
+					
+				break;
+			case 'groupchat':
+				
+				
+				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
+					console.log(res);
+					
+					function messagetobottom (){
+						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+						var cli = scroll1.clientHeight;
+						var main = $('.mainright .rightcomOne  #'+ message.to +".msgconmaster" )[0];
+						var hei = main.scrollHeight;
+						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+					};
+					
+					var data = res.data.data;
+					console.log(data);
+					var avatar = data.avatar;
+					var name = data.name;
+					var genre =data.genre;
+					var msgfrom = message.from;//群组内部发送消息的人
+					
+					message.avatar = avatar;
+					message.name = name;
+					message.genre = genre;
+					
+					console.log(message);
+					
+					/*消息列表记录*/
+					var str = '';
+					
+					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+						$('.mainleft .comlist1').prepend(str);
+					} else {
+						$('.mainleft .comlist1  #'+message.to).remove();
+						$('.mainleft .comlist1').prepend(str);
+					}
+					/*消息列表记录*/
+					
+					
+					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
+						
+						//获取群组聊天里发送人的详细信息
+						var data = res.data.data;
+						console.log(data);
+						var avatar = data.avatar;
+						var nickname = data.nickname;
+						
+						
+						
+						
+						/*生成的消息内容容器*/
+						var str1 = '';
+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
+							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+
+
+						var str2 ='';
+
+
+						str2 ='<div class="msgmarginlr">'+'<div id="'+message.id+'" class="leftmsg"><div class="imgcontainer"><img id="message.from" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
+							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+
+
+
+
+
+
+
+						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
+
+							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+
+							messagetobottom();
+
+						} else {
+
+							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
+
+							messagetobottom();
+
+
+						}
+
+						/*生成的消息内容容器*/
+						
+						
+						
+						
+						
+					
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+				
+				}).catch(function(err){
+					console.log(err);
+				});
+				
+				
+				
+				break;
+			case 'chatroom':
+				break;
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-        var node = document.getElementById('privateVideo');
+		}
+        
         var option = {
             url: message.url,
             headers: {
@@ -469,7 +1879,7 @@ conn.listen({
             },
             onFileDownloadComplete: function (response) {
                 var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
-                node.src = objectURL;
+                
             },
             onFileDownloadError: function () {
                 console.log('File down load error.')
@@ -540,7 +1950,6 @@ var store = new Vuex.Store({
 		message:[
 			
 		],
-		
 		chat:[
 			
 		],
@@ -861,10 +2270,6 @@ Vue.component('currentuser',{
 			
 			
 		},//关键字搜索好友触发
-		
-		
-		
-		
 		
 		startchat:function(){
 			
@@ -1438,6 +2843,62 @@ var vm = new Vue({
 		removemembershow:false,
 		
 		repeatmyfriendsarr:[],
+		groupidbindminus:'',
+		deletegrouparr:[],
+		addselesctallarr:[],
+		removeselectallarr:[],
+		addgrouparr:[],
+		allusershow:false,
+		top2:'',
+		left2:'',
+		isboys:true,
+		usernames:'',
+		areaIds:'',
+		signatures:'',
+		isgirls:false,
+		addonname:'',
+		selectavatar2:'',
+		emojisrc:'faces/',
+		emojiobj:{
+			'[):]': 'ee_1.png',
+			'[:D]': 'ee_2.png',
+			'[;)]': 'ee_3.png',
+			'[:-o]': 'ee_4.png',
+			'[:p]': 'ee_5.png',
+			'[(H)]': 'ee_6.png',
+			'[:@]': 'ee_7.png',
+			'[:s]': 'ee_8.png',
+			'[:$]': 'ee_9.png',
+			'[:(]': 'ee_10.png',
+			'[:\'(]': 'ee_11.png',
+			'[:|]': 'ee_12.png',
+			'[(a)]': 'ee_13.png',
+			'[8o|]': 'ee_14.png',
+			'[8-|]': 'ee_15.png',
+			'[+o(]': 'ee_16.png',
+			'[.o)]': 'ee_17.png',
+			//'[<o)]': 'ee_17.png',
+			'[|-)]': 'ee_18.png',
+			'[*-)]': 'ee_19.png',
+			'[:-#]': 'ee_20.png',
+			'[:-*]': 'ee_21.png',
+			'[^o)]': 'ee_22.png',
+			'[8-)]': 'ee_23.png',
+			'[(|)]': 'ee_24.png',
+			'[(u)]': 'ee_25.png',
+			'[(S)]': 'ee_26.png',
+			'[(*)]': 'ee_27.png',
+			'[(#)]': 'ee_28.png',
+			'[(R)]': 'ee_29.png',
+			'[({)]': 'ee_30.png',
+			'[(})]': 'ee_31.png',
+			'[(k)]': 'ee_32.png',
+			'[(F)]': 'ee_33.png',
+			'[(W)]': 'ee_34.png',
+			'[(D)]': 'ee_35.png'
+    	},
+		emojishow:false,
+		sendtextcontent:'',
 	},
 	
 	computed:{
@@ -1524,7 +2985,8 @@ var vm = new Vue({
 			vm.$refs.current.tempfriendsarrcon = [];
 			vm.$refs.current.tempgroupsarrcon = [];
 			vm.isgroupmaster = false;
-			
+			vm.allusershow = false;
+			vm.emojishow = false;
 		},//关闭搜索框
 		selectcurrentinput:function($event){
 			console.log($event);
@@ -1557,6 +3019,78 @@ var vm = new Vue({
 			
 			
 		},//选择主搜索好友列表*/
+		delmanyinput:function($event){
+			var that = $event.currentTarget;
+			console.log(that.checked);
+			console.log(vm.$refs.delselall);
+			
+			var checkstate = that.checked;
+			if ( checkstate ){
+				
+			}else {
+				vm.$refs.delselall.checked = false; 
+			}
+			
+			
+		},//删除会话成员里面的单个input
+		addmanyinput:function($event){
+			var that = $event.currentTarget;
+			console.log(vm.$refs);
+			var checkstate = that.checked;
+			if (checkstate){
+				
+			}else {
+				vm.$refs.addselall.checked = false;
+			}
+		},//添加会话成员的单个input
+		deletepeoplefromgroup:function($event){
+			var id = $event.currentTarget.id;
+			console.log(id);
+			console.log(vm.deletegrouparr);
+			var middle = vm.deletegrouparr;
+			
+			var transstring = middle.join(",");
+			console.log(transstring);
+			axios.post(globaldomain+'im/group/member/kick.json?groupId='+id+'&memberIds='+transstring).then(function(res){
+				
+				var data = res.data;
+				console.log(data);
+				var success = data.success;
+				if (success){
+					vm.removemembershow = false;
+					vm.deletegrouparr = [];
+				}else {
+					vm.deletegrouparr = [];
+				}
+			}).catch(function(err){
+				console.log(err);
+			})
+		},//删除会话成员确定按钮
+		addpeoplefromfriends:function($event){
+			console.log($event);
+			var that = $event.currentTarget;
+			console.log(that.id);
+			var id = that.id;
+			var arrtostring = vm.addgrouparr.join(",");
+			
+			//vm.addgrouparr = ;
+			console.log(arrtostring);
+			axios.post(globaldomain+'im/group/member/join.json?groupId='+id+'&memberIds='+arrtostring).then(function(res){
+				var data = res.data;
+				console.log(data);
+				var success = data.success;
+				if (success){
+					vm.addmyfriendshow = false;
+					vm.addgrouparr = [];
+				}else {
+					vm.addgrouparr = [];
+				}
+				
+			}).catch(function(err){
+				console.log(err);
+			})
+			
+		},//添加会话成员确定按钮
 		grouprightsel1:function($event){
 			var that = $event.currentTarget;
 			var index =  $(that).attr('data-index');
@@ -1691,6 +3225,25 @@ var vm = new Vue({
 			});
 			
 		},//点击发起聊天的选择群聊
+		getemojisrc:function($event){
+			var that = $event.currentTarget;
+			console.log(that);
+			console.log($(that).attr("src"));
+			console.log($(that).attr("id"));
+			var emojitrack = $(that).attr("id");
+			
+			//console.log(vm.sendtextcontent);暂时为空
+			console.log(vm.sendbtncontent);
+			vm.sendbtncontent = vm.sendbtncontent + emojitrack;
+			
+			
+			
+			//vm.sendbtncontent = ;
+			//vm.sendtextcontent = ;
+			
+			
+			
+		},//点击emoji表情，抓取路径
 		selectbossornot:function($event){
 			
 			console.log(vm.selectmaingrouparr);
@@ -1749,7 +3302,51 @@ var vm = new Vue({
 			
 			
 		},//发起聊天全部选择或取消
-		
+		showtheoneinfos:function($event){
+			vm.allusershow = true;
+			var that = $event.currentTarget;
+			
+			var id = that.id;
+			console.log(that.id);
+			
+			vm.left2 = $event.clientX-200 +"px";
+			vm.top2 = $event.clientY +"px";
+			console.log(vm.left2);
+			console.log(vm.top2);
+			
+			axios.get(globaldomain+'im/user/detail.json?id='+id).then(function(res){
+				
+				var data = res.data.data;
+				console.log(data);
+				var areaId = data.areaId;
+				var avatar = data.avatar;
+				var isBuddy = data.isBuddy;
+				var nickname = data.nickname;
+				var remark = data.remark;
+				var sex = data.sex;
+				var signature = data.signature;
+				
+				vm.areaIds = areaId;
+				vm.signatures = signature;
+				vm.addonname = remark;
+				vm.usernames = nickname;
+				if (sex){
+					vm.isboys = true;
+					vm.isgirls = false;
+				}else {
+					vm.isgirls = true;
+					vm.isboys = false;
+				}
+				vm.selectavatar2 = avatar;
+				
+				
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+			
+			
+		},//显示出当前用户信息卡片
 		creategroupOne:function(){
 			
 			if (vm.selectmaingrouparr.length > 1 ){
@@ -1923,7 +3520,9 @@ var vm = new Vue({
 			};
 			
 		},//确定创建群聊
-		
+		offuserlist2:function(){
+			vm.onlyonelistmenushow = false;
+		},//关闭群组成员列表
 		
 		
 		
@@ -2007,13 +3606,16 @@ var vm = new Vue({
 			
 			
 		},//加号图标
-		reduceconpop:function(){
+		reduceconpop:function($event){
 			vm.addmyfriendshow = false;
 			vm.removemembershow = true;
-			/*axios.post(globaldomain+'im/buddy/find.json').then(function(res){
+			var id = $event.currentTarget.getAttribute('id');
+			console.log(id);
+			axios.get(globaldomain+'im/group/member/find.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+id).then(function(res){
 				console.log(res);
-				var data = res.data.data;
+				var data = res.data.data.content;
 				console.log(data);
+				
 				vm.repeatmyfriendsarr = data;
 				console.log( vm.repeatmyfriendsarr );
 				
@@ -2025,9 +3627,59 @@ var vm = new Vue({
 				
 			}).catch(function(err){
 				console.log(err);
-			});*/
+			});
 			
 		},//移除群内成员减号图标
+		deleteallcheck:function($event){
+			var that = $event.currentTarget;
+			console.log(that.checked);
+			console.log(vm.removeselectallarr);
+			var checkstate = that.checked;
+			
+			if ( checkstate ){
+				
+				console.log( $('.sort_box3 input') );
+				
+				var length = vm.repeatmyfriendsarr.length;
+				console.log($('.sort_box3 input').prop("checked"));
+				var arrtemp = [];
+				for ( var i=0; i<length;i++ ){
+				
+					console.log($('.sort_box3 input').eq(i)[0].value);
+					arrtemp.push($('.sort_box3 input').eq(i)[0].value);
+				}
+				console.log(arrtemp);
+				vm.deletegrouparr = arrtemp;
+				
+				
+
+			} else {
+				vm.deletegrouparr =[];
+			}
+			
+		},//删除会话成员的全选
+		addallcheck:function($event){
+			var that = $event.currentTarget;
+			console.log(that.checked);
+			var checkstate = that.checked;
+			
+			if (checkstate){
+				var arr = [];
+				var length = vm.repeatmyfriendsarr.length;
+				for ( var i=0;i<length;i++ ){
+					arr.push($('.sort_box2 input').eq(i)[0].value);
+				}
+				console.log(arr);
+				vm.addgrouparr = arr;
+				
+			}else {
+				vm.addgrouparr = [];
+			}
+		},//添加会话成员全选
+		showemojicontainer:function(){
+			
+			vm.emojishow = !vm.emojishow;
+		},//点击弹出表情容器
 			
 	}
 });
@@ -2096,6 +3748,7 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 		vm.notgroupmanager = false;//不是管理员
 		vm.justoneman = true;//只是个人
 		vm.shouldshow = false;
+		vm.groupidbindminus = listid;
 		
 		console.log(data);
 		var name = data.name;
@@ -2460,9 +4113,6 @@ $('.mainright .rightonesend button').on('click',function(){
 	}
 	
 	
-	
-	
-	
 });
 
 
@@ -2478,9 +4128,13 @@ $('.mainright .rightonesend button').on('click',function(){
 
 //发送消息按钮点击
 
-
-
-
-
-
-
+//播放语音消息
+$('.mainright .rightcomOne ').on('click','.audiospan',function(){
+	var that = this;
+	console.log(that);
+	var audio = $(that).find('audio')[0];
+	var redspot = $(that).find('.redspot')[0];
+	$(redspot).css({ borderColor:'#f5f5f5'});
+	audio.play();
+});
+//播放语音消息

@@ -95,6 +95,7 @@ body {
 	height: 100%;
 	min-width: 1100px;
 	background-color: #fff;
+	position: relative;
 }
 .login {
 	z-index: -10;
@@ -134,9 +135,25 @@ body {
 	position: relative;
 }
 
+.selectoneinfo {
+	-webkit-box-shadow: 5px 5px 3px #F8F8F8;
+	box-shadow: 5px 5px 3px #F8F8F8;
+	overflow: hidden;
+	height: 405px;
+	width: 270px;
+	border-radius: 10px;
+	background-color: #fff;
+	position: absolute;
+	z-index: 310;
+}
+.addname2 {
+	color: #999;
+	font-size: 16px;
+	margin-left: 20px;
+	margin-top: 5px;
+}
 
-
-/*当前用户信息框*/
+/*点击具体某一用户信息框*/
 .currentinfo {
 	height: 405px;
 	width: 270px;
@@ -166,7 +183,16 @@ body {
 	margin-left: 5px;
 	vertical-align: sub;
 	top: 4px;
-	
+}
+
+.nameandgender .fa-commenting-o{
+	float: right;
+	color: #b1b1b1;
+	cursor: pointer;
+}
+.nameandgender span {
+	font-weight: bold;
+	color: #333;
 }
 .cardarea {
 	color: #999;
@@ -187,7 +213,7 @@ body {
 	top: 4px;
 }
 
-/*当前用户信息框*/
+/*点击具体某一用户信息框*/
 
 .firsttimeimg {
 	width: 60px;
@@ -622,7 +648,7 @@ body {
 	
 }
 .btncolorswitch {
-	background-color: #2285ff;
+	background-color: #2285ff !important;
 	
 }
 .friendsimg {
@@ -1245,7 +1271,7 @@ body {
 
 
 .rightcomOne {
-	background-color: #f8f8f8;
+	background-color: #f5f5f5;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -1274,38 +1300,70 @@ body {
 	color: #1a7dff;
 }
 .addcontain {
+	float: left;
+	height: 70px;
+	margin-right: 40px;
+	width: 70px;
+	position: relative;
+	cursor: pointer;
+	
+}
+/*.addcontain {
 	display: inline-block;
 	height: 70px;
-	margin-right: 50px;
+	margin-right: 40px;
 	width: 70px;
+	position: relative;
 	cursor: pointer;
-}
+	
+}*/
 .addcontain img {
 	height: 70px;
 	width: 70px;
+	display: block;
+	position: absolute;
+	
 }
 .reducecontain img {
 	height: 70px;
 	width: 70px;
+	display: block;
+	position: absolute;
 }
 .reducecontain {
+	float: left;
+	height: 70px;
+	width: 70px;
+	cursor: pointer;
+	position: relative;
+}
+/*.reducecontain {
 	display: inline-block;
 	height: 70px;
 	width: 70px;
-	margin-right: 50px;
 	cursor: pointer;
-}
+	position: relative;
+}*/
 .pluscontainer {
-	display: inline-block;
+	display: inline;
 	position: absolute;
+	height: 110px;
+	
 }
 .everypeoplecon2 {
 	width: 70px;
 	height: 110px;
-	display: inline-block;
-	margin-right: 50px;
+	float: left;
+	margin-right: 40px;
 	position: relative;
 }
+/*.everypeoplecon2 {
+	width: 70px;
+	height: 110px;
+	display: inline-block;
+	margin-right: 40px;
+	position: relative;
+}*/
 .everypeoplecon2 img{
 	width: 70px;
 	height: 70px;
@@ -1331,6 +1389,8 @@ body {
 	margin: 0 auto;
 	max-height: 300px;
 	position: relative;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .rightonechatcon {
@@ -1413,6 +1473,21 @@ body {
 	border-bottom: 1px solid #efefef;
 	position: absolute;
 	bottom: 0;
+	
+}
+.emojicontainer {
+	width: 224px;
+	height: 160px;
+	position: absolute;
+	top: -140px;
+	background-color: #00a0e9;
+	border-radius: 10px;
+}
+.emojiwrap {
+	width: 32px;
+	height: 32px;
+	float: left;
+	cursor: pointer;
 }
 .rightonesendselect {
 	padding-top: 24px;
@@ -1451,7 +1526,6 @@ body {
 	width: 23px;
 	opacity: 0;
 }
-
 
 .rightonesend textarea {
 	width: 90%;
@@ -1533,10 +1607,10 @@ body {
 	border-radius: 5px;
 }
 .msgmarginlr .leftmsg .wordscontent span{
-	background-color: #00a0e9;
+	background-color: #fff;
 	padding: 15px;
 	font-size: 22px;
-	color: #fff;
+	color: #333;
 	display: inline-block;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -1551,7 +1625,7 @@ body {
 	height: 0;
 	width: 0;
 	border: 10px solid transparent;
-	border-right-color: #00a0e9;
+	border-right-color: #fff;
 	left: -20px;
 	top: 20px;
 }
@@ -1746,6 +1820,8 @@ body {
 .addsort4 {
 	width: 100%;
 	height: 320px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .sort_list3 {
 	height: 90px;
@@ -1785,3 +1861,215 @@ body {
 }
 
 /*弹出移除群组成员界面*/
+
+/*接收发送图片消息*/
+.picmessagelock {
+	width: 300px;
+}
+.msgmarginlr .leftmsg .wordscontent .picspan{
+	background-color: #fff;
+	padding: 2px !important;
+	border: 1px solid #efefef;
+	font-size: 22px;
+	color: #fff;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent .picspan:after{
+	content: "";
+	position: absolute;
+	border: 1px solid #efefef;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-right-color: #fff;
+	left: -20px;
+	top: 20px;
+}
+
+
+
+
+
+/*接收发送图片消息*/
+
+/*接收语音消息*/
+
+.msgmarginlr .leftmsg .wordscontent .audiospan{
+	background-color: #fff;
+	padding: 2px !important;
+	font-size: 22px;
+	height: 56px;
+	width: 200px;
+	border: 1px solid #efefef;
+	color: #fff;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+	cursor: pointer;
+}
+
+
+.msgmarginlr .leftmsg .wordscontent .length {
+	position: absolute;
+	left: 220px;
+	color: #999;
+	bottom: 0;
+}
+.msgmarginlr .leftmsg .wordscontent .redspot {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-radius: 50%;
+	border: 10px solid #ff3b30;
+	left: 220px;
+	color: #999;
+	top: 0;
+}
+
+.msgmarginlr .leftmsg .wordscontent .audiospan audio{
+	opacity: 0.2;
+	position: absolute;
+	z-index: 0;
+	
+}
+.msgmarginlr .leftmsg .wordscontent .audiospan .fa-volume-up{
+	left: 20px;
+	top: 17px;
+	position: absolute;
+	color: #999;
+}
+.msgmarginlr .leftmsg .wordscontent .audiospan:after{
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-right-color: #fff;
+	left: -20px;
+	top: 20px;
+}
+
+/*接收语音消息*/
+
+/*接收位置消息*/
+.msgmarginlr .leftmsg .wordscontent .locationspan{
+	background-color: #fff;
+	padding: 2px !important;
+	border: 1px solid #efefef;
+	font-size: 22px;
+	color: #fff;
+	height: 300px;
+	width: 400px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent .locationspan a{
+	position: absolute;
+	text-decoration: none;
+	height: 300px;
+	width: 400px;
+	display: inline-block;
+}
+.msgmarginlr .leftmsg .wordscontent .locationspan .mapimg{
+	position: absolute;
+	
+}
+
+.msgmarginlr .leftmsg .wordscontent .locationspan:after{
+	content: "";
+	position: absolute;
+	border: 1px solid #efefef;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-right-color: #fff;
+	left: -20px;
+	top: 20px;
+}
+
+
+.msgmarginlr .leftmsg .wordscontent .locationspan .mapaddr {
+	background-color: rgba(89,89,89,0.7);
+	color: #fff;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	width: 400px;
+	position: absolute;
+	bottom: 0;
+}
+
+/*接收位置消息*/
+
+/*接收文件消息*/
+
+.msgmarginlr .leftmsg .wordscontent .filespan{
+	background-color: #fff;
+	padding: 2px !important;
+	border: 1px solid #efefef;
+	font-size: 22px;
+	color: #fff;
+	height: 150px;
+	width: 400px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan:after{
+	content: "";
+	position: absolute;
+	border: 1px solid #efefef;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-right-color: #fff;
+	left: -20px;
+	top: 20px;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft {
+	height: 100%;
+	float: left;
+	width: 255px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconright {
+	
+	float: left;
+	width: 135px;
+	padding-top: 13px;
+	overflow: hidden;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filename{
+	font-size: 20px;
+	color: #333;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+} 
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload{
+	font-size: 20px;
+	color: #333;
+	border-left: 2px solid #333;
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
+	padding-left: 10px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+} 
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload a{
+	text-decoration: none;
+	color: #2285ff;
+} 
+/*接收文件消息*/
