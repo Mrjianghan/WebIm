@@ -54,7 +54,7 @@
 						
 					</div>
 					<div class="secondline">
-						<input  v-model="mainsearchval" type="text" placeholder="昵称关键字搜索">
+						<input  v-model="mainsearchval" type="text" placeholder="搜索">
 						<i @click.stop="mainsearch()" class="fa fa-search">
 						</i>
 						<transition name="search1">
@@ -173,45 +173,7 @@
 				</div>
 			</div>
 		</template>
-		
-		<!--<template id="comlistcomOne">
-			<div>
-				<h1>comlistcomOne</h1>
-				<input type="text">
-			</div>
-		</template>
-		<template id="comlistcomTwo">
-			<div>
-				<h1>comlistcomTwo</h1>
-				<input type="text">
-			</div>
-		</template>
-		<template id="comlistcomThree">
-			<div>
-				<div class="listThree_groupheader">群组
-				</div>
-				<div>
-					<template v-for="(group,index) in groupsarrOne">
-						<div class="con">
-							<div :data-index="index" :data-name="group.name" :id="group.id" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">
-								<img :src="group.avatar ? picsrc+group.avatar:defaultpic ">
-								<div class="name">{{group.name}}
-								</div>
-							</div>
-						</div>
-					</template>
-				</div>
-				<div  class="sort_box1">
-					<template v-for="(friend,i) in friendsarrOne">
-							<div :data-index="i" :data-name="friend.nickname" :id="friend.id" class="sort_list1" :class="{backgroundcolor:indexstrange2 == -1-i}" @click="changelistcolor2($event)" :id="friend.nickname">
-								<img :src="friend.avatar ? picsrc+friend.avatar : defaultpic">
-								<div class="num_name1">{{friend.nickname}}
-								</div>
-							</div>
-					</template>		
-				</div>
-			</div>
-		</template>-->
+	
 		
 		<template id="rightcomOne">
 			<div class="subrightcomone">
@@ -357,6 +319,17 @@
 		
 		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
+			<div v-if="chatroompopshow" class="chatroominfopop">
+				<div class="chatroomalert animated bounceIn">
+					<div class="header">
+						<i @click="chatroompopshow = false" class="fa fa-times"></i>
+						<div class="clearfix"></div>
+					</div>
+					<div class="chatroompopcontent">聊天室占位</div>
+					<button @click="chatroompopshow = false">知道了</button>
+				</div>
+			</div><!--聊天室弹出消息-->
+			
 			<div class="allalertinfo" v-if="alertinfoshow">
 				<i @click="exitalert()" class="fa fa-times-circle-o"></i>
 				<div class="alertcontent">
@@ -366,7 +339,7 @@
 					<div @click="exitalert1" class="enterss">确定</div>
 					<div class="clearfix"></div>
 				</div>	
-			</div>
+			</div><!--弹出警告框-->
 			
 			<div v-if="allusershow" class="selectoneinfo animated bounceIn" :style="{top:top2,left:left2}">
 				<img class="currentpiccontainer" :src="selectavatar2 ? picsrc+selectavatar2 :defaultpic">
@@ -643,41 +616,62 @@
 							
 								<div class="chatroomarea">
 
-									<template v-for="area1 in chatroomarea">
-										<div class="chatroomsame" :id="area1.id">{{ area1.name }}
+									<template v-for="(area1,i) in chatroomarea">
+										<div @click="areasearch($event)" :data-index="i" :class="{chatroomclick:chatroomindex1==i}" class="chatroomsame" :id="area1.id">{{ area1.name }}
 										</div>
-
 									</template>
 
 
 								</div>
 								<div class="chatroomtrade">
-									<template v-for="class1 in chatroomclass">
-										<div class="chatroomsame" :id="class1.id">{{ class1.name }}
+									<template v-for="(class1,i) in chatroomclass">
+										<div @click="tradesearch($event)" :data-index="i" :class="{chatroomclick:chatroomindex2==i}" class="chatroomsame" :id="class1.id">{{ class1.name }}
 										</div>
-
 									</template>
 								</div>
 							</div>
 							
 							
 							<div class="chatroomcontainer">
-								
-								<template v-for="arr2 in chatroominfo">
+								<div v-if="nosearchchatroom" class="nosearchchatroomlist">
+									<template v-for="(arr2,i) in chatroominfo">
 									
 									
-									<div class="chatroomouter">
+									<div :id="arr2.id" class="chatroomouter" :data-open="arr2.openable" @click="chatroomouterlist($event)" :data-index="i" :class="{backgroundcolor1: thischatroomindex==i }">
 										<div class="chatroomwrapper">
-											
-											
+											<img :src=" arr2.avatar ? picsrc+arr2.avatar : defaultpic">
+											<div class="chatroomname shenglue">{{arr2.name}}
+											</div>
+											<div class="chatroomstatus"><span v-if="arr2.openable" class="public">公开</span> <span v-else class="private">私有</span></div>
 										</div>
-										{{arr2}}
+									</div>
+									
+									
+									</template>
+								</div>
+								
+								
+							</div>
+							
+							<div v-if="searchchatroom" class="searchingchatroom">
+								
+								<template v-for="(arr2,i) in chatroomsearching">
+									
+									
+									<div :id="arr2.id" class="chatroomouter" @click="chatroomouterlist1($event)" :data-index="i" :data-open="arr2.open" :class="{backgroundcolor1: thischatroomindex1==i}">
+										<div class="chatroomwrapper">
+											<img :src=" arr2.avatar ? picsrc+arr2.avatar : defaultpic">
+											<div class="chatroomname shenglue">{{arr2.name}}
+											</div>
+											<div class="chatroomstatus"><span v-if="arr2.openable" class="public">公开</span> <span v-else class="private">私有</span></div>
+										</div>
 									</div>
 									
 									
 								</template>
 								
 							</div>
+							
 						</div>
 						
 					</div>
@@ -828,8 +822,8 @@
 							</div>
 							<div class="rightonesendselect">
 								<i @click.stop="showemojicontainer" class="fa fa-smile-o"></i>
-								<i class="fa fa-picture-o"><input type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
-								<i class="fa fa-folder"><input type="file"></i>
+								<i class="fa fa-picture-o"><input  :id="targetid" @change="uploadimg($event)" type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
+								<i class="fa fa-folder"><input :id="targetid" @change="uploadfile($event)" type="file"></i>
 							</div>
 							<div class="textcontainer">
 								<textarea v-html="sendtextcontent" v-model="sendbtncontent">
@@ -871,7 +865,40 @@
 					
 				</div>
 				<div v-if="mainrighttwo" class="rightTwo">
-					<!--<rightcomtwo ref="righttwo"></rightcomtwo>-->
+					<div v-if="twoplaceholder" class="righttwoplaceholder">
+						<div class="twocenter">
+							<img src="imgs/chatroom-logo.png">
+							<div>众享商务通讯平台</div>
+						</div>
+					</div>
+					<div v-else class="chatroomtalking">
+						<!--<div class="righttwotitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div><i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i><i v-show="isgroupmanager" @click="isgroupmanagermenu" class="fa fa-cog"></i><i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu" v-show="justoneman" class="fa fa-plus" ></i>-->
+						
+						
+						<!--<div v-show="showgroupsright" class="rightgroupcon">
+
+								<img :src="avatar ? picsrc+ avatar : defaultpic">
+								<p>{{ name }}<span v-if="showowner">(群主)</span></p>
+								<button @click="addchatlistg($event)"  :id="id" type="button">发消息</button>
+
+						</div>-->
+						
+						<div v-if="privatechatroompass" class="privateblock">
+							<img :src="chatroomprivateavatar ? picsrc+ chatroomprivateavatar : defaultpic">
+							<p>{{ chatroomprivatename }}<span>(私有)</span></p>
+							<button @click="askforjoinchatroom($event)" :id="chatroomprivateid" type="button">进入聊天室</button>
+							
+						</div>
+						
+						<div v-if="publicchatnow" class="publicchat">
+							
+						</div>
+						
+						
+					</div>
+					
+					
+					
 				</div>
 				<div v-show="specialthree" class="rightThree">
 					<rightcomthree ref="rightthree"></rightcomthree>

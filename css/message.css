@@ -966,7 +966,9 @@ body {
 .backgroundcolor {
 	background-color: #f8f8f8;
 }
-	
+.backgroundcolor1 {
+	background-color: #f8f8f8 !important;
+}	
 	
 /*第三个列表*/
 
@@ -1120,6 +1122,16 @@ body {
 	margin-right: 20px;
 	
 }
+
+.chatroomtrade:hover {
+	color: #00a0e9;
+}
+.chatroomsame:hover {
+	color: #00a0e9;
+}
+.chatroomclick {
+	color: #00a0e9;
+}
 .chatroomouter {
 	height: 110px;
 	width: 420px;
@@ -1131,13 +1143,170 @@ body {
 	height: 70px;
 	margin-top: 20px;
 	margin-left: 20px;
+	position: relative;
 	
+}
+.chatroomwrapper img {
+	width: 70px;
+	height: 70px;
+
 	
+}
+.chatroomname {
+	position: absolute;
+	height: 70px;
+	line-height: 70px;
+	top: 0;
+	left: 90px;
+	font-size: 24px;
+	color: #333;
+	font-weight: bold;
+	width: 200px;
+}
+.chatroomstatus {
+	position: absolute;
+	right: 30px;
+	top: 0;
+	font-size: 20px;
+	color: #999;
+	height: 70px;
+	line-height: 70px;
+}
+.righttwoplaceholder {
+	width: 100%;
+	height: 100%;
+	position:relative;
+}
+.twocenter {
+	height: 270px;
+	width: 300px;
+	margin: 0 auto;
+	margin-top: 30%;
+}
+.twocenter img {
+	display: block;
+	margin: 0 auto;
+	height: 150px;
+	width: 150px;
+}
+.twocenter div {
+	display: block;
+	margin: 0 auto;
+	font-size: 32px;
+	font-weight: bold;
+	color: #333;
+	width: 300px;
+	margin-top: 80px;
+	text-align: center;
+}
+
+.chatroomtalking {
+	width: 100%;
+	height: 100%;
+}
+.privateblock {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.privateblock img {
+	margin: 0 auto;
+	margin-top: 20%;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 50px;
+	display: block;
+	border-radius: 10px;
+}
+.privateblock p {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 32px;
+	color: #333;
+}
+.privateblock span {
+	
+	font-size: 24px;
+	color: #333;
+}
+.privateblock button {
+	margin: 0 auto;
+	background-color: #187bff;
+	height: 60px;
+	width: 300px;
+	border: none;
+	display: block;
+	color: #f8f8f8;
+	border-radius: 10px;
+	font-size: 26px;
+	line-height: 60px;
+	text-align: center;
+	margin-top: 110px;
+	cursor: pointer;
 }
 
 /*第二个列表*/
 /*动态组件3条列表容器*/
 
+
+
+
+/*聊天室弹出窗口*/
+.chatroominfopop {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(163,163,163,0.5);
+	bottom: 0;
+	left: 0;
+	z-index: 500;
+}
+.chatroominfopop .chatroomalert {
+	height: 370px;
+	width: 600px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px;
+	margin-top: -185px;
+	background-color: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+}
+.chatroominfopop .chatroomalert .fa-times {
+	font-size: 30px;
+	float: right;
+	margin-right: 30px;
+	margin-top: 30px;
+	color: #999;
+	cursor: pointer;
+}
+.chatroominfopop .chatroomalert .fa-times:hover {
+	color: #00a0e9;
+	
+}
+.chatroominfopop .chatroomalert .chatroompopcontent {
+	text-align: center;
+	font-size: 24px;
+	color: #666;
+	margin-top: 56px;
+}
+.chatroominfopop button {
+	margin: 0 auto;
+	background-color: #187bff;
+	height: 60px;
+	width: 300px;
+	border: none;
+	display: block;
+	color: #f8f8f8;
+	border-radius: 10px;
+	font-size: 26px;
+	line-height: 60px;
+	text-align: center;
+	margin-top: 110px;
+	cursor: pointer;
+}
+/*聊天室弹出窗口*/
 
 /*右边展示群组信息*/
 
@@ -1862,9 +2031,9 @@ body {
 
 /*弹出移除群组成员界面*/
 
-/*接收发送图片消息*/
+/*接收图片消息*/
 .picmessagelock {
-	width: 300px;
+	width: 250px;
 }
 .msgmarginlr .leftmsg .wordscontent .picspan{
 	background-color: #fff;
@@ -1889,12 +2058,40 @@ body {
 	left: -20px;
 	top: 20px;
 }
+/*接收图片消息*/
+
+/*发送图片消息*/
+
+.picmessagelock {
+	width: 250px;
+}
+.msgmarginlr .rightmsg .wordscontent .picspan{
+	background-color: #00a0e9;
+	padding: 2px !important;
+	border: 1px solid #efefef;
+	font-size: 22px;
+	color: #fff;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+}
+.msgmarginlr .rightmsg .wordscontent .picspan:after{
+	content: "";
+	position: absolute;
+	border: 1px solid #efefef;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-left-color: #00a0e9;
+	right: -20px;
+	top: 20px;
+}
 
 
 
-
-
-/*接收发送图片消息*/
+/*发送图片消息*/
 
 /*接收语音消息*/
 
@@ -2073,3 +2270,137 @@ body {
 	color: #2285ff;
 } 
 /*接收文件消息*/
+
+
+/*接收文件消息*/
+
+.msgmarginlr .leftmsg .wordscontent .filespan{
+	background-color: #fff;
+	padding: 2px !important;
+	border: 1px solid #efefef;
+	font-size: 22px;
+	color: #fff;
+	height: 150px;
+	width: 400px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan:after{
+	content: "";
+	position: absolute;
+	border: 1px solid #efefef;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-right-color: #fff;
+	left: -20px;
+	top: 20px;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft {
+	height: 100%;
+	float: left;
+	width: 255px;
+	position: relative;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconright {
+	
+	float: left;
+	width: 135px;
+	padding-top: 13px;
+	overflow: hidden;
+}
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filename{
+	font-size: 20px;
+	color: #333;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+} 
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload{
+	font-size: 20px;
+	color: #333;
+	border-left: 2px solid #333;
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
+	padding-left: 10px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+} 
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload a{
+	text-decoration: none;
+	color: #2285ff;
+} 
+/*接收文件消息*/
+
+
+
+/*发送文件消息*/
+
+.msgmarginlr .rightmsg .wordscontent .filespan{
+	background-color: #00a0e9;
+	padding: 2px !important;
+	border: 1px solid #efefef;
+	font-size: 22px;
+	color: #fff;
+	height: 150px;
+	width: 400px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 5px;
+	position: relative;
+}
+.msgmarginlr .rightmsg .filefix {
+	margin-right: 40px;
+}
+.msgmarginlr .rightmsg .wordscontent .filespan:after{
+	content: "";
+	position: absolute;
+	border: 1px solid #efefef;
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-left-color: #00a0e9;
+	right: -20px;
+	top: 20px;
+}
+.msgmarginlr .rightmsg .wordscontent .filespan .fileconleft {
+	height: 100%;
+	float: left;
+	width: 255px;
+	position: relative;
+}
+.msgmarginlr .rightmsg .wordscontent .filespan .fileconright {
+	
+	float: left;
+	width: 135px;
+	padding-top: 13px;
+	overflow: hidden;
+}
+.msgmarginlr .rightmsg .wordscontent .filespan .fileconleft .filename{
+	font-size: 20px;
+	color: #fff;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+} 
+.msgmarginlr .rightmsg .wordscontent .filespan .fileconleft .filedownload{
+	font-size: 20px;
+	color: #333;
+	border-left: 2px solid #fff;
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
+	padding-left: 10px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+} 
+.msgmarginlr .rightmsg .wordscontent .filespan .fileconleft .filedownload a{
+	text-decoration: none;
+	color: #fff;
+} 
+/*发送文件消息*/
