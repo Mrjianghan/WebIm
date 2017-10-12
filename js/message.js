@@ -2680,6 +2680,21 @@ var vm = new Vue({
 		chatroomprivateid:'',
 		chatroomprivateavatar:'',
 		chatroompopshow:false,
+		chatroompopwindowinfo:'',
+		//chatroomstatus:'',
+		chatroomtitlename:'',
+		ischatmaster:false,
+		ischatmanager:true,
+		showchatcontrol1:false,
+		showchatcontrol2:false,
+		
+		all1:true,
+		all2:true,
+		
+		
+		chattargetid:'',
+		chattextcontent:'',
+		chatbtncontent:'',
 	},
 	
 	computed:{
@@ -3884,14 +3899,49 @@ var vm = new Vue({
 			
 			
 		},//上传文件
+		upleftslide:function(){
+			$('.chatroomarea').scrollLeft($('.chatroomarea').scrollLeft()-200);
+		},//上左三角
+		uprightslide:function(){
+			$('.chatroomarea').scrollLeft($('.chatroomarea').scrollLeft()+ 200);
+		},//上右三角
+		downleftslide:function(){
+			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()-200);
+		},//左下三角
+		downrightslide:function(){
+			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()+200);
+		},//右下三角
+		chatuploadfile:function($event){
+			
+		},//聊天室发送文件
+		chatuploadimg:function($event){
+			
+		},//聊天室发送图片
+		chatsendmsg:function(){
+			
+		},//聊天室发送文本表情
 		chatroomouterlist:function($event){
 			var that = $event.currentTarget;
 			var getindex = $(that).attr("data-index");
 			var openstatus = $(that).attr("data-open");
 			var chatroomid = $(that).attr("id");
+			var privatestatus = $(that).attr("data-status");
+			var membership = $(that).attr("data-membership");
+			
 			vm.thischatroomindex = getindex;
+			vm.showchatcontrol1 = false;
+			vm.showchatcontrol2 = false;
 			vm.twoplaceholder = false;
+			vm.chattargetid = chatroomid;
+			
+			var chatroomtimer1 = setTimeout(function(){
+				$('.scrollbar-macosx').scrollbar();
+				clearTimeout(chatroomtimer1);
+			},400);
+			
 			console.log(chatroomid);
+			console.log(membership);
+			
 			
 			axios.get(globaldomain+'im/room/info.json?id='+chatroomid).then(function(res){
 				var data = res.data.data;
@@ -3905,17 +3955,100 @@ var vm = new Vue({
 					vm.publicchatnow = true;
 					vm.privatechatroompass = false;
 					
-				
+					var joinRoom = function () {
+						conn.joinChatRoom({
+							roomId: chatroomid // 聊天室id
+						});
+					};
+					// 环信加入聊天室
+					joinRoom();
+					
+					axios.post(globaldomain+'im/room/member/join.json?roomId='+chatroomid+'&memberIds='+ids.id).then(function(res){
+						//后台加入聊天室
+						console.log(res.data);
+						
+						vm.chatroomtitlename = name;
+						
+						console.log(vm.chatroomtitlename);
+						
+						
+						axios.get(globaldomain+'im/room/member/genre.json?roomId='+chatroomid+'&memberId='+ids.id).then(function(res){
+							//用户在后台的身份
+							var genre = res.data.data;
+							console.log(genre);
+							
+							
+							
+							
+							switch ( genre ){
+								case '10':
+									
+									
+									
+									break;
+								case '20':
+									
+									
+									
+									break;
+								case '30':
+									
+									
+									
+									break;
+							}
+							
+
+
+						}).catch(function(err){
+							console.log(err);
+						})
+						
+						
+						
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					})
+					
+					
 				
 				}else {
+					
 					vm.privatechatroompass = true;
-					//私有聊天室需要更多逻辑
-					
-					
+							//私有聊天室需要更多逻辑
 					vm.chatroomprivatename = name;
 					vm.chatroomprivateid = id;
 					vm.chatroomprivateavatar = avatar;
 					
+					switch( privatestatus ){
+						case '20':
+							vm.chatroompopshow = true;
+							vm.chatroompopwindowinfo = "申请处理中。";
+							
+							
+							break;
+						case '30':
+							vm.chatroompopshow = true;
+							vm.chatroompopwindowinfo = "申请通过。";
+							vm.privatechatroompass = false;
+							vm.publicchatnow = true;
+							
+							
+							break;
+						case '40':
+							vm.chatroompopshow = true;
+							vm.chatroompopwindowinfo = "申请被拒绝。";
+							break;
+						case '50':
+							vm.privatechatroompass = false;
+							vm.publicchatnow = true;
+							
+							
+							
+							break;
+					}
 					
 					
 
@@ -3949,10 +4082,15 @@ var vm = new Vue({
 			
 			
 		},//聊天室列表被点击
+		getemojisrc1:function($event){
+			
+		},//聊天室emoji点击
 		askforjoinchatroom:function($event){
 			var that = $event.currentTarget;
 			console.log(that);
+			
 			var sendid = $(that).attr("id");
+			
 			
 			axios.post(globaldomain+'im/room/apply/join.json?roomId='+sendid+'&descr=WEB端发送申请').then(function(res){
 				console.log(res.data);
@@ -3961,6 +4099,8 @@ var vm = new Vue({
 				if ( success ){
 					console.log(success);
 					vm.chatroompopshow = true;
+					vm.chatroompopwindowinfo = "已经发起申请，相关操作请到移动端执行。";
+					
 				}
 				
 			}).catch(function(err){
@@ -3977,8 +4117,17 @@ var vm = new Vue({
 			console.log(openstatus);
 			
 		},//搜索结果的聊天列表被点击
+		ischatmastermenu:function(){
+			vm.showchatcontrol1 = !vm.showchatcontrol1;
+			
+		},//聊天室身份为超级管理员
+		ischatmanagermenu:function(){
+			vm.showchatcontrol2 = !vm.showchatcontrol2;
+		},//聊天室身份为管理员
+		
 		areasearch:function($event){
 			var that = $event.currentTarget;
+			vm.all1 = false;
 			var id = $(that).attr("id");
 			globalarea = id;
 			var index = $(that).attr("data-index");
@@ -4029,8 +4178,22 @@ var vm = new Vue({
 			
 			
 		},//聊天室按区域搜索
+		allclick1:function($event){
+			vm.all1 = true;
+			vm.chatroomindex1 ='str';
+			console.log(globalarea);
+			console.log(globaltrade);
+		
+		},//区域全部
+		allclick2:function($event){
+			vm.all2 = true;
+			vm.chatroomindex2 = 'str';
+			console.log(globalarea);
+			console.log(globaltrade);
+		},//行业全部
 		tradesearch:function($event){
 			var that = $event.currentTarget;
+			vm.all2 = false;
 			var id = $(that).attr("id");
 			globaltrade = id;
 			

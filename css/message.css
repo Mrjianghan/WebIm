@@ -1090,6 +1090,59 @@ body {
 .chatroom {
 	
 }
+.rightTwo {
+	width: 100%;
+	height: 100%;
+}
+.righttwomenu1 {
+	position: absolute;
+	height: 195px;
+	width: 200px;
+	right: 90px;
+	top: 50px;
+	background-color: #fff;
+	z-index: 300;
+}
+.righttwomenu2 {
+	position: absolute;
+	height: 130px;
+	width: 200px;
+	right: 90px;
+	top: 50px;
+	background-color: #fff;
+	z-index: 300;
+}
+.righttwolist1 {
+	border-bottom: 1px solid #e5e5e5;
+}
+.righttwolists {
+	height: 65px;
+	width: 100%;
+	line-height: 65px;
+	font-size: 18px;
+	color: #999;
+	text-align: center;
+	cursor: pointer;
+}
+.righttwolists:hover {
+	color: #1a7dff;
+}
+.righttwolist2 {
+	border-bottom: 1px solid #e5e5e5;
+	border-top: 1px solid #e5e5e5;
+}
+
+.righttwoheader .fa-cog {
+	font-size: 28px;
+	position: absolute;
+	right: 60px;
+	top: 41px;
+	cursor: pointer;
+	color: #9b9b9b;
+}
+.righttwoheader .fa-cog:hover {
+	color: #1a7dff;
+}
 .chatroomheader {
 	background-color: #fff;
 	padding-top: 20px;
@@ -1097,21 +1150,131 @@ body {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 100%;
+	height: 130px;
+	position: relative;
+}
+.fixcoverright {
+	position: absolute;
+	right: 0;
+	height: 100px;
+	width: 30px;
+	background-color: #fff;
+	z-index: 80;
+	opacity: 0;
+}
+.fixcoverleft {
+	position: absolute;
+	left: 0;
+	height: 100px;
+	width: 30px;
+	background-color: #fff;
+	z-index: 80;
 }
 .chatroomarea {
-	width: 380px;
+	width: auto;
 	margin-left: 20px;
-	margin-bottom: 20px;
-	height: 26px;
-	overflow: hidden;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	overflow-x: scroll;
+	height: 40px;
+	white-space: nowrap;
+	-ms-overflow-style: none; 
+    overflow: -moz-scrollbars-none;
+	position: relative;
 	
 }
-.chatroomtrade {
-	width: 380px;
-	margin-left: 20px;
-	height: 26px;
-	overflow: hidden;
+.fa1 {
+	position: absolute;
+	color: #333;
+	opacity: 0.1;
+	z-index: 100;
+	font-size: 25px;
+	cursor: pointer;
+	left: 5px;
+	top: 30px;
 }
+.fa2 {
+	position: absolute;
+	right: 5px;
+	color: #333;
+	opacity: 0.1;
+	z-index: 100;
+	font-size: 25px;
+	cursor: pointer;
+	top: 30px;
+}
+.fa1:hover {
+	opacity: 0.7; 
+}
+.fa4:hover {
+	opacity: 0.7; 
+}
+
+.fa3 {
+	position: absolute;
+	color: #333;
+	opacity: 0.1;
+	z-index: 100;
+	font-size: 25px;
+	cursor: pointer;
+	left: 5px;
+	bottom: 25px;
+}
+.fa4 {
+	position: absolute;
+	right: 5px;
+	color: #333;
+	opacity: 0.1;
+	z-index: 100;
+	font-size: 25px;
+	cursor: pointer;
+	bottom: 25px;
+}
+.fa3:hover {
+	opacity: 0.7; 
+}
+.fa2:hover {
+	opacity: 0.7; 
+}
+
+
+.chatroomarea::-webkit-scrollbar { 
+	display: none;
+} 
+
+.allarea {
+	display: inline-block;
+	font-size: 20px;
+	color: #333;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+.alltrade {
+	display: inline-block;
+	font-size: 20px;
+	color: #333;
+	margin-right: 20px;
+	margin-left: 20px;
+}	
+.alltrade:hover {
+	color: #00a0e9;
+}
+.allarea:hover {
+	color: #00a0e9;
+}
+.chatroomtrade {
+	width: auto;
+	margin-left: 20px;
+	height: 40px;
+	overflow-x: scroll;
+	white-space: nowrap;
+	-ms-overflow-style: none; 
+    overflow: -moz-scrollbars-none; 
+	position: relative;
+}
+.chatroomtrade::-webkit-scrollbar { 
+	display: none;
+} 
 .chatroomsame {
 	cursor: pointer;
 	height: auto;
@@ -1120,7 +1283,6 @@ body {
 	color: #333;
 	background-color: #fff;
 	margin-right: 20px;
-	
 }
 
 .chatroomtrade:hover {
@@ -1176,6 +1338,7 @@ body {
 	width: 100%;
 	height: 100%;
 	position:relative;
+	overflow: hidden;
 }
 .twocenter {
 	height: 270px;
@@ -1203,6 +1366,12 @@ body {
 .chatroomtalking {
 	width: 100%;
 	height: 100%;
+}
+.publicchat {
+	background-color: #f5f5f5;
+	height: 100%;
+	width: 100%;
+	position: relative;
 }
 .privateblock {
 	width: 100%;
@@ -1306,6 +1475,101 @@ body {
 	margin-top: 110px;
 	cursor: pointer;
 }
+.righttwoheader {
+	height: 110px;
+	width: 100%;
+	border-bottom: 1px solid #efefef;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
+.righttwotitle {
+	height: 110px;
+	line-height: 110px;
+	width: 40%;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 28px;
+	color: #333;
+}
+
+.righttwochatcon {
+	position: absolute;
+	height: calc( 100% - 350px );
+	width: 100%;
+}
+.righttwosend {
+	background-color: #fff;
+	width: 100%;
+	height: 246px;
+	border-bottom: 1px solid #efefef;
+	position: absolute;
+	bottom: 0;
+}
+.righttwosendselect {
+	padding-top: 24px;
+	
+	padding-left: 60px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.righttwosendselect .fa {
+	font-size: 24px;
+	color: #808080;
+	cursor: pointer;
+}
+.righttwosendselect .fa:hover {
+	color: #1a7dff;
+}
+.righttwosendselect .fa-picture-o {
+	position: relative;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.righttwosendselect .fa-picture-o input {
+	position: absolute;
+	left: 0;
+	height: 23px;
+	width: 23px;
+	opacity: 0;
+}
+.righttwosendselect .fa-folder {
+	position: relative;
+}
+.righttwosendselect .fa-folder input {
+	position: absolute;
+	left: 0;
+	height: 23px;
+	width: 23px;
+	opacity: 0;
+}
+
+.righttwosend textarea {
+	width: 90%;
+	height: 100px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+	resize: none;
+	border: none;
+	font-size: 23px;
+	color: #333;
+	font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
+}
+.righttwosend button {
+	background-color: #00a0e9;
+	width: 116px;
+	line-height: 44px;
+	height: 44px;
+	font-size: 26px;
+	text-align: center;
+	border: none;
+	color: #fff;
+	position: absolute;
+	right: 60px;
+	bottom: 15px;
+}
+
 /*聊天室弹出窗口*/
 
 /*右边展示群组信息*/

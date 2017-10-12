@@ -325,7 +325,7 @@
 						<i @click="chatroompopshow = false" class="fa fa-times"></i>
 						<div class="clearfix"></div>
 					</div>
-					<div class="chatroompopcontent">聊天室占位</div>
+					<div class="chatroompopcontent">{{chatroompopwindowinfo}}</div>
 					<button @click="chatroompopshow = false">知道了</button>
 				</div>
 			</div><!--聊天室弹出消息-->
@@ -613,22 +613,37 @@
 					<div v-show="showleft2"  id="comlistcomTwo">
 						<div class="chatroom">
 							<div class="chatroomheader">
-							
+								<i @click="upleftslide" class="fa1 fa fa-chevron-left"></i>
+								<i @click="uprightslide" class="fa2 fa fa-chevron-right"></i>
+								<i @click="downleftslide" class="fa3 fa fa-chevron-left"></i>
+								<i @click="downrightslide" class="fa4 fa fa-chevron-right"></i>
+								
+								<div class="fixcoverright">
+								</div>
+								<div class="fixcoverleft">
+								</div>
 								<div class="chatroomarea">
+									
+									
+									<div @click="allclick1($event)" :class="{chatroomclick:all1}" class="allarea">全部</div>
 
 									<template v-for="(area1,i) in chatroomarea">
 										<div @click="areasearch($event)" :data-index="i" :class="{chatroomclick:chatroomindex1==i}" class="chatroomsame" :id="area1.id">{{ area1.name }}
 										</div>
 									</template>
-
+									<div class="clearfix"></div>
 
 								</div>
+								<div class="clearfix"></div>
 								<div class="chatroomtrade">
+									<div @click="allclick2($event)" :class="{chatroomclick:all2}" class="alltrade">全部</div>
 									<template v-for="(class1,i) in chatroomclass">
 										<div @click="tradesearch($event)" :data-index="i" :class="{chatroomclick:chatroomindex2==i}" class="chatroomsame" :id="class1.id">{{ class1.name }}
 										</div>
 									</template>
+									<div class="clearfix"></div>
 								</div>
+								<div class="clearfix"></div>
 							</div>
 							
 							
@@ -637,7 +652,7 @@
 									<template v-for="(arr2,i) in chatroominfo">
 									
 									
-									<div :id="arr2.id" class="chatroomouter" :data-open="arr2.openable" @click="chatroomouterlist($event)" :data-index="i" :class="{backgroundcolor1: thischatroomindex==i }">
+									<div :id="arr2.id" class="chatroomouter" :data-membership="arr2.membership" :data-status="arr2.status" :data-open="arr2.openable" @click="chatroomouterlist($event)" :data-index="i" :class="{backgroundcolor1: thischatroomindex==i }">
 										<div class="chatroomwrapper">
 											<img :src=" arr2.avatar ? picsrc+arr2.avatar : defaultpic">
 											<div class="chatroomname shenglue">{{arr2.name}}
@@ -872,16 +887,6 @@
 						</div>
 					</div>
 					<div v-else class="chatroomtalking">
-						<!--<div class="righttwotitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div><i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i><i v-show="isgroupmanager" @click="isgroupmanagermenu" class="fa fa-cog"></i><i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu" v-show="justoneman" class="fa fa-plus" ></i>-->
-						
-						
-						<!--<div v-show="showgroupsright" class="rightgroupcon">
-
-								<img :src="avatar ? picsrc+ avatar : defaultpic">
-								<p>{{ name }}<span v-if="showowner">(群主)</span></p>
-								<button @click="addchatlistg($event)"  :id="id" type="button">发消息</button>
-
-						</div>-->
 						
 						<div v-if="privatechatroompass" class="privateblock">
 							<img :src="chatroomprivateavatar ? picsrc+ chatroomprivateavatar : defaultpic">
@@ -891,6 +896,55 @@
 						</div>
 						
 						<div v-if="publicchatnow" class="publicchat">
+							<div class="righttwoheader">
+								<div class="righttwotitle"> {{ chatroomtitlename }} </div>
+								<i v-show="ischatmaster" @click.stop="ischatmastermenu" class="fa fa-cog"></i>
+								<i v-show="ischatmanager" @click.stop="ischatmanagermenu" class="fa fa-cog"></i>
+								
+								<div v-if="showchatcontrol1" class="righttwomenu1">
+									<div class="righttwolist1 righttwolists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
+									<div class="righttwolist2 righttwolists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改聊天室信息</div>
+									<div class="righttwolist3 righttwolists"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
+								</div>
+								
+								<div v-if="showchatcontrol2" class="righttwomenu2">
+									<div class="righttwolist1 righttwolists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
+									<div class="righttwolist3 righttwolists"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
+								</div>
+							</div>
+							
+							<div class="righttwochatcon">
+								
+								<div class="manywindowcon scrollbar-macosx">
+									
+								</div>
+								
+							</div>
+							
+							<div class="righttwosend">
+								<div v-show="emojishow" class="emojicontainer">
+									<template v-for="(value,i) in emojiobj ">
+										<div  class="emojiwrap">
+											<img :id="i" @click="getemojisrc1($event)" :src="emojisrc+value">
+										</div>
+									</template>
+								</div>
+								<div class="rightonesendselect">
+									<i @click.stop="showemojicontainer" class="fa fa-smile-o"></i>
+									<i class="fa fa-picture-o"><input  :id="chattargetid" @change="chatuploadimg($event)" type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
+									<i class="fa fa-folder"><input :id="chattargetid" @change="chatuploadfile($event)" type="file"></i>
+								</div>
+								<div class="textcontainer">
+									<textarea v-html="chattextcontent" v-model="chatbtncontent">
+									</textarea>
+								</div>
+								<button @click="chatsendmsg" :id="chattargetid" type="button">发送</button>
+
+							</div>
+							
+							
+						
+							
 							
 						</div>
 						
