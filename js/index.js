@@ -147,14 +147,21 @@ var vm = new Vue({
 					var code = res.data.code;
 					var data = res.data.data;
 					var path = res.data.data.path;
-					
-					vm.get2dimention = globaldomain+'zxupl'+path;
+				console.log(res);
+				console.log(path);
+				console.log( globaldomain );
+				
+					vm.get2dimention = 'http://assets.zhongxiangim.com/zxupl/'+path;
 					var idbridge = res.data.data.id;
 					var trans = JSON.parse(idbridge);
 					
 					id2d = trans.id;
 					console.log(trans);
 					console.log(id2d);
+				
+				
+				
+				
 				
 			}).catch(function(err){
 				console.log(err);
@@ -164,11 +171,35 @@ var vm = new Vue({
 				console.log(timerlonger);
 				axios.post(globaldomain+'login.json?qrcode='+id2d).then(function(res){
 					console.log(res.data);
+					console.log(res.data.token);
+					var psw = res.data.token;
 					var code = res.data.code;
 					switch (code){
 						case 2000 :
-							
 							//window.location.href = "message.html";
+							clearTimeout(timerlonger);
+							
+							axios.get(globaldomain+'im/user/info.json').then(function(res){
+								console.log(res);
+								console.log(res.data.data);
+								var data = res.data.data;
+								data.psw = psw;
+								console.log( data );
+								var usermaster = JSON.stringify(data);
+								localStorage["currentuser"] = usermaster;
+								window.location.href="message.html";
+								
+								
+								
+							}).catch(function(err){
+								console.log(err);
+							})
+							
+							
+							
+							
+							
+							
 							break;
 						case 4000 :
 							return false;
@@ -177,6 +208,8 @@ var vm = new Vue({
 				}).catch(function(err){
 					console.log(err);
 				});
+				
+			
 					
 					
 				

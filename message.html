@@ -319,6 +319,79 @@
 		
 		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
+			<div v-if="messageusershow" class="currentinfo animated bounceIn" :style="{top:top1,left:left1}">
+				<img class="currentpiccontainer" :src="currentImg">
+				<div class="nameandgender shenglue">{{username}} <i v-if="isgirl" class="fa fa-venus"></i><i v-if="isboy" class="fa fa-mars"></i> </div>
+				<div class="cardarea">地区：{{ areaId }}
+				</div>
+				<div class="cardsignature">个性签名：{{ signature }}
+				</div>
+			</div><!--聊天信息个人卡片-->
+			
+			
+			<div v-if="retweetshow" class="chatroominfopop">
+				
+				<div class="addmyfriendscore  animated bounceIn">
+					<div class="feedhead">
+						<div>转发消息</div><i @click="retweetshow = false" class="fa fa-times"></i>
+					</div>
+					
+					<div class="reusecontainer2">
+						<!--<div></div>搜索占位-->
+						<div class="selectallboss">
+							<div  class="selectallcon">
+								<input @click="retweetallcheck($event)" ref="retweetall" type="checkbox"  >
+							</div>
+							<span>全选</span>
+						</div>
+						<div class="addsort5">
+							<div class="sort_box4">
+								<template v-for="(arr,i) in repeatmyfriendsarr">
+									
+									<div id=""  class="sort_list4">
+										<div class="friendseveryOne" :id="arr.id">
+											<div class="selectOnly1">
+												<input :data-index="i" @click="addmanyinput($event)" :value="arr.id" v-model="addgrouparr" type="checkbox">
+											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="num_name4 shenglue">{{arr.nickname}} </div>
+										</div>
+									</div>
+									
+								</template>
+							</div>
+						</div>
+						
+					</div>
+					
+					
+					<div class="bottombtn1con">
+						<button :id="getmsgid" :disabled="addgrouparr.length == 0" :class="{btncolorswitch: addgrouparr.length != 0}" @click="retweetfromfriends($event)" class="bottombtn1">确定({{addgrouparr.length}})</button>
+					</div>
+				</div>
+				
+			</div><!--转发消息-->
+			
+			
+			<div v-if="poppicviewer" class="chatroominfopop" >
+				<div class="picturemaster">
+					<img class="imgview" :src="piccurrentviewsrc">
+					
+					<img @click="closepicview " class="shutdownpic" src="imgs/photo-cancel.png">
+					
+					<div class="piccontrolpanel">
+						<img @click="leftroll()" class="arrowleft" src="imgs/left-arrow.png">
+						<img @click="rightroll()" class="arrowright" src="imgs/right-arrow.png">
+						<a :href="piccurrentviewsrc" download><img class="arrowdownload" src="imgs/download.png"></a>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+			</div><!--图片查看器-->
+			
 			<div v-if="chatroompopshow" class="chatroominfopop">
 				<div class="chatroomalert animated bounceIn">
 					<div class="header">
@@ -535,6 +608,12 @@
 			<div class="mainleft" @click="offuserlist2">
 				
 				
+				<div v-show="popleftlists" :style="{left:popleft1,top:poptop1}" class="leftpoplistmanager">
+					<div :id="managechatlistmenuid" @click="topchat($event)">置顶聊天</div>
+					<div :id="managechatlistmenuid" @click="killchat($event)">关闭聊天</div>
+				</div>
+				
+				
 				<currentuser ref="current"></currentuser>
 				<div class="threepiecelists scrollbar-macosx">
 					
@@ -673,9 +752,9 @@
 								<template v-for="(arr2,i) in chatroomsearching">
 									
 									
-									<div :id="arr2.id" class="chatroomouter" @click="chatroomouterlist1($event)" :data-index="i" :data-open="arr2.open" :class="{backgroundcolor1: thischatroomindex1==i}">
+									<div :id="arr2.id" class="chatroomouter" :data-membership="arr2.membership" :data-status="arr2.status" @click="chatroomouterlist1($event)" :data-index="i" :data-open="arr2.openable"  :class="{backgroundcolor1: thischatroomindex1==i}">
 										<div class="chatroomwrapper">
-											<img :src=" arr2.avatar ? picsrc+arr2.avatar : defaultpic">
+											<img :src="arr2.avatar ? picsrc+arr2.avatar : defaultpic">
 											<div class="chatroomname shenglue">{{arr2.name}}
 											</div>
 											<div class="chatroomstatus"><span v-if="arr2.openable" class="public">公开</span> <span v-else class="private">私有</span></div>
@@ -731,13 +810,36 @@
 				<div v-show="mainrightone" class="rightcomOne">
 					<!--<rightcomone ref="rightone"></rightcomone>-->
 					
+					<div v-show="clearscreenshow" :id="clearid" @click="clearmsgbtn($event)"  :style="{left:leftthree1,top:topthree1}" class="editmsgclear">清屏</div>
+					
+					<div v-show="msgthreeshow" @click="msgthree($event)"  :style="{left:leftthree2,top:topthree2}" class="editmsgthree">
+						<div class="popthree copybtn1" :id="getmsgid" @click="copytext($event)">复制</div>
+						<div class="popthree popthreemiddle" @click="retweet()">转发</div>
+						<div class="popthree" :id="getmsgid" @click="deletethis($event)">删除</div>
+					</div>
+					
+					<div v-show="msgthreeshow2" :style="{left:leftthree3,top:topthree3}" class="editmsgthree2">
+						<div class="popthree">转发</div>
+						<div class="popthree" :id="getmsgid" @click="deletethis($event)">删除</div>
+					</div>
+					
+					<div v-show="msgthreeshow3" :style="{left:leftthree4,top:topthree4}" class="editmsgthree2">
+						<div class="popthree copybtn2" :id="getmsgid" @click="copytext2($event)">复制</div>
+						<div class="popthree" :id="getmsgid" @click="deletethis($event)">删除</div>
+					</div>
 					
 					
+					<div v-show="msgthreeshow4" :style="{left:leftthree5,top:topthree5}" class="editmsgthree3">
+						<div class="popthree" :id="getmsgid" @click="deletethis($event)">删除</div>
+					</div>
 					
 					
 					<div class="subrightcomone">
 						<div class="rightoneheader">
-							<div class="rightonetitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div><i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i><i v-show="isgroupmanager" @click="isgroupmanagermenu" class="fa fa-cog"></i><i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu" v-show="justoneman" class="fa fa-plus" ></i>
+							<div class="rightonetitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div>
+							<i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i>
+							<i v-show="isgroupmanager" @click="isgroupmanagermenu" class="fa fa-cog"></i>
+							<i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu" v-show="justoneman" class="fa fa-plus" ></i>
 							
 							
 							
@@ -745,6 +847,12 @@
 								<div class="rightonelist1 rightonelists" @click="popourmenu"><i class="fa fa-users"></i>&nbsp;&nbsp;管理群成员</div>
 								<div class="rightonelist2 rightonelists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改群信息</div>
 								<div class="rightonelist3 rightonelists"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
+							</div>
+							
+							
+							<div v-if="isgroupmanagermenu1" class="righttwomenu2">
+								<div class="righttwolist1 righttwolists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
+								<div class="righttwolist3 righttwolists"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
 							</div>
 							
 							
@@ -787,37 +895,6 @@
 						<div class="rightonechatcon ">
 							
 							<div class="manywindowcon scrollbar-macosx">
-							
-							
-							<!--<div class="msgconmaster">
-								<div class="msgmasterinner">
-									<div class="msgcontainer">
-										<div class="msgmarginlr">-->
-											
-											
-											
-												<!--<div class="leftmsg">
-													<div class="imgcontainer">
-														<img id="" src="" class="headpic">
-													</div>
-
-													<div class="rightcon">
-														<div class="name">{{name</div>
-														<div class="wordscontent">
-															<span>{{data</span>
-														</div>
-													</div>
-													<div class="clearfix"></div>
-												</div>-->
-										
-											
-											
-											
-											
-							<!--			</div>
-									</div>
-								</div>
-							</div>-->
 							
 							</div>
 							
@@ -917,6 +994,12 @@
 								
 								<div class="manywindowcon scrollbar-macosx">
 									
+									<div class="chatroommessageid" :id="chattargetid">
+										<div class="msgcontainer">
+											
+										</div>
+									</div>
+									
 								</div>
 								
 							</div>
@@ -938,8 +1021,7 @@
 									<textarea v-html="chattextcontent" v-model="chatbtncontent">
 									</textarea>
 								</div>
-								<button @click="chatsendmsg" :id="chattargetid" type="button">发送</button>
-
+								<button @click="chatsendmsg($event)" :id="chattargetid" type="button">发送</button>
 							</div>
 							
 							
@@ -1000,7 +1082,7 @@
         <script src="Config_JS/webrtc-1.4.12.js"></script>
         
         <script src="js/jquery.scrollbar.min.js"></script>
-		
+		<script src="js/clipboard.min.js"></script>
         <script>
             $(function(){
                 $('.scrollbar-macosx').scrollbar();
