@@ -147,6 +147,7 @@ body {
 	min-width: 680px;
 	height: 100%;
 	float: left;
+	position: relative;
 }
 .current {
 	height: 240px;
@@ -180,6 +181,19 @@ body {
 	position: absolute;
 	z-index: 310;
 }
+
+.selectmingpian {
+	-webkit-box-shadow: 5px 5px 3px #F8F8F8;
+	box-shadow: 5px 5px 3px #F8F8F8;
+	overflow: hidden;
+	height: 415px;
+	width: 270px;
+	border-radius: 10px;
+	background-color: #fff;
+	position: absolute;
+	z-index: 310;
+}
+
 .addname2 {
 	color: #999;
 	font-size: 16px;
@@ -218,12 +232,54 @@ body {
 	vertical-align: sub;
 	top: 4px;
 }
+.mingpianspans {
+	height: 150px;
+	width: 340px;
+	background-color: #fff;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 !important;
+	cursor: pointer;
+}
+.mingup {
+	height: 100px;
+	width: 100%;
+	position: relative;
+}
+.mingup img {
+	height: 60px;
+	width: 60px;
+	margin-top: 20px;
+	margin-left: 20px;
+	position: absolute;;
+}
+.mingup .mingpianname {
+	height: 100px;
+	line-height: 100px;
+	position: absolute;
+	width: 200px;
+	margin-left: 100px;
+	font-size: 22px;
+	color: #666;
+}
+.mingdown {
+	height: 50px;
+	width: 100%;
+	padding-left: 30px;
+	font-size: 18px;
+	color: #999;
+	line-height: 50px;
+	border-top: 1px solid #efefef;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
 .nameandgender .fa-commenting-o{
 	float: right;
 	color: #b1b1b1;
 	cursor: pointer;
 }
+
 .nameandgender span {
 	font-weight: bold;
 	color: #333;
@@ -1459,6 +1515,98 @@ body {
 /*动态组件3条列表容器*/
 
 
+.pleasemobilepop {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(163,163,163,0.5);
+	bottom: 0;
+	left: 0;
+	z-index: 500;
+}
+.pleasemobilepop .chatroomalert {
+	height: 320px;
+	width: 480px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -240px;
+	margin-top: -160px;
+	background-color: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+}
+.pleasemobilepop .chatroomalert .fa-times {
+	font-size: 30px;
+	float: right;
+	margin-right: 30px;
+	margin-top: 30px;
+	color: #999;
+	cursor: pointer;
+}
+.pleasemobilepop .chatroomalert .fa-times:hover {
+	color: #00a0e9;
+	
+}
+.pleasemobilepop .chatroomalert .chatroompopcontent {
+	text-align: center;
+	font-size: 24px;
+	color: #666;
+	margin-top: 56px;
+}
+.pleasemobilepop button {
+	margin: 0 auto;
+	background-color: #187bff;
+	height: 60px;
+	width: 300px;
+	border: none;
+	display: block;
+	color: #f8f8f8;
+	border-radius: 10px;
+	font-size: 26px;
+	line-height: 60px;
+	text-align: center;
+	margin-top: 50px;
+	cursor: pointer;
+}
+.changegroupcon {
+	height: 460px;
+	width:604px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	margin-top: -230px;
+	margin-left: -302px;
+	background-color: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+	
+}
+ .changegroupcon .changeheader {
+	 width: 100%;
+	 height: 80px;
+	 background-color: #e4eaf4;
+	 border-bottom: 1px solid #e5e5e5;
+	 -webkit-box-sizing: border-box;
+	 box-sizing: border-box;
+	 text-align: center;
+	 line-height: 80px;
+	 font-size: 26px;
+	 color: #333;
+	 position: relative;
+}
+.changeheader .fa-times {
+	position: absolute;
+	font-size: 26px;
+	color: #999;
+	cursor: pointer;
+	top: 25px;
+	right: 30px;
+}
+.changeheader .fa-times:hover {
+	color: #00a0e9;
+	
+}
 
 
 /*聊天室弹出窗口*/
@@ -2320,6 +2468,7 @@ body {
 	margin-top: -300px;
 	background-color: #fff;
 	border-radius: 20px;
+	overflow: hidden;
 }
 .addmyfriends .bottombtn {
 	height: 60px;
@@ -2334,17 +2483,20 @@ body {
 	margin-top: 50px;
 	cursor: pointer;
 	position: absolute;
+	left: 0;
 	bottom: 50px;
 }
 .addmyfriendscore .reusecontainer2 {
 	height: 360px;
 	width: 100%;
 	border-bottom: 1px solid #e5e5e5;
-	
+	overflow: hidden;
 }
 .addsort3 {
 	width: 100%;
 	height: 320px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .sort_list2 {
 	height: 90px;
@@ -2693,6 +2845,9 @@ body {
 	height: 160px;
 	width: 100%;
 	text-align: center;
+	background-color: #fff;
+	z-index: 610;
+	position: relative;
 }
 .bottombtn1con .bottombtn1 {
 	height: 60px;
@@ -2910,3 +3065,15 @@ body {
 	color: #fff;
 } 
 /*发送文件消息*/
+
+.currentmsginfo {
+	height: 405px;
+	width: 270px;
+	border-radius: 10px;
+	background-color: #fff;
+	position: absolute;
+	z-index: 10;
+	overflow: hidden;
+	-webkit-box-shadow: 5px 5px 3px #e5e5e5;
+	box-shadow: 5px 5px 3px #e5e5e5;
+}

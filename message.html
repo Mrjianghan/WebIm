@@ -319,14 +319,7 @@
 		
 		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
-			<div v-if="messageusershow" class="currentinfo animated bounceIn" :style="{top:top1,left:left1}">
-				<img class="currentpiccontainer" :src="currentImg">
-				<div class="nameandgender shenglue">{{username}} <i v-if="isgirl" class="fa fa-venus"></i><i v-if="isboy" class="fa fa-mars"></i> </div>
-				<div class="cardarea">地区：{{ areaId }}
-				</div>
-				<div class="cardsignature">个性签名：{{ signature }}
-				</div>
-			</div><!--聊天信息个人卡片-->
+			
 			
 			
 			<div v-if="retweetshow" class="chatroominfopop">
@@ -403,6 +396,30 @@
 				</div>
 			</div><!--聊天室弹出消息-->
 			
+			
+			<div v-if="pleasemobileshow" class="pleasemobilepop">
+				<div class="chatroomalert animated bounceIn">
+					<div class="header">
+						<i @click="pleasemobileshow = false" class="fa fa-times"></i>
+						<div class="clearfix"></div>
+					</div>
+					<div class="chatroompopcontent">禁言操作请到移动端执行</div>
+					<button @click="pleasemobileshow = false">知道了</button>
+				</div>
+			</div><!--请到移动端-->
+			
+			<div v-if="changegroupinfoshow" class="pleasemobilepop">
+				<div class="changegroupcon animated bounceIn">
+					<div class="changeheader">修改群信息
+						<i @click="changegroupinfoshow = false" class="fa fa-times"></i>
+						<div class="clearfix"></div>
+					</div>
+					
+				</div>
+			</div><!--修改群组信息-->
+			
+			
+			
 			<div class="allalertinfo" v-if="alertinfoshow">
 				<i @click="exitalert()" class="fa fa-times-circle-o"></i>
 				<div class="alertcontent">
@@ -414,6 +431,10 @@
 				</div>	
 			</div><!--弹出警告框-->
 			
+			
+			
+			
+			
 			<div v-if="allusershow" class="selectoneinfo animated bounceIn" :style="{top:top2,left:left2}">
 				<img class="currentpiccontainer" :src="selectavatar2 ? picsrc+selectavatar2 :defaultpic">
 				<div class="nameandgender shenglue"><span>{{usernames}}</span> <i v-if="isgirls" class="fa fa-venus"></i><i v-if="isboys" class="fa fa-mars"></i>   <i class="fa fa-commenting-o"></i> </div>
@@ -423,6 +444,46 @@
 				<div class="cardsignature">个性签名：{{ signatures }}
 				</div>
 			</div><!--点击人员卡片-->
+			
+			<div v-if="createmyfriendshow" class="addmyfriends">
+				<div class="addmyfriendscore  animated bounceIn">
+					<div class="feedhead">
+						<div :id="targetid">创建群组</div><i @click="createmyfriendshow = false" class="fa fa-times"></i>
+					</div>
+					
+					<div class="reusecontainer2">
+						<!--<div></div>搜索占位-->
+						<div class="selectallboss">
+							<div  class="selectallcon">
+								<input @click="addallcheck($event)" ref="addselall" type="checkbox"  >
+							</div>
+							<span>全选</span>
+						</div>
+						<div class="addsort3">
+							<div class="sort_box2">
+								<template v-for="(arr,i) in repeatmyfriendsarr">
+									
+									<div id=""  class="sort_list2">
+										<div class="friendseveryOne" :id="arr.id">
+											<div class="selectOnly1">
+												<input :data-index="i" @click="addmanyinput($event)" :value="arr.id" v-model="addgrouparr" type="checkbox">
+											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="num_name2 shenglue">{{arr.nickname}} </div>
+										</div>
+									</div>
+									
+								</template>
+							</div>
+						</div>
+						
+					</div>
+					
+					
+					<div class="bottombtn1con">
+						<button :id="groupidbindminus" :disabled="addgrouparr.length == 0" :class="{btncolorswitch: addgrouparr.length != 0}" @click="createnewgroup6($event)" class="bottombtn">确定({{addgrouparr.length}})</button>
+					</div>
+				</div>
+			</div>
 			
 			
 			<div v-if="addmyfriendshow" class="addmyfriends">
@@ -459,7 +520,7 @@
 					</div>
 					
 					
-					<div>
+					<div class="bottombtn1con">
 						<button :id="groupidbindminus" :disabled="addgrouparr.length == 0" :class="{btncolorswitch: addgrouparr.length != 0}" @click="addpeoplefromfriends($event)" class="bottombtn">确定({{addgrouparr.length}})</button>
 					</div>
 				</div>
@@ -807,6 +868,10 @@
 				
 			</div>
 			<div class="mainright">
+				
+				
+				
+				
 				<div v-show="mainrightone" class="rightcomOne">
 					<!--<rightcomone ref="rightone"></rightcomone>-->
 					
@@ -834,25 +899,76 @@
 					</div>
 					
 					
+					
+					<div v-if="messageusershow" class="currentmsginfo animated bounceIn" :style="{top:msgtop1,left:msgleft1}">
+						<img class="currentpiccontainer" :src="mycurrentImg ? picsrc+mycurrentImg :defaultpic">
+						<div class="nameandgender shenglue">{{myname}} <i v-if="meisgirl" class="fa fa-venus"></i><i v-if="meisboy" class="fa fa-mars"></i> </div>
+						<div class="cardarea">地区：{{ myareaId }}
+						</div>
+						<div class="cardsignature">个性签名：{{ mysignature }}
+						</div>
+					</div><!--聊天信息自己卡片-->
+					
+					<div v-if="msgusershow" class="selectoneinfo animated bounceIn" :style="{top:msgtop2,left:msgleft2}">
+						<img class="currentpiccontainer" :src="selectavatar3 ? picsrc+selectavatar3 :defaultpic">
+						<div class="nameandgender shenglue"><span>{{msgusernames}}</span> <i v-if="otherisgirls" class="fa fa-venus"></i><i v-if="otherisboys" class="fa fa-mars"></i>   <i class="fa fa-commenting-o"></i> </div>
+						<div class="addname2">备注：{{ msgaddonname }}</div>
+						<div class="cardarea">地区：{{ msgareaIds }}
+						</div>
+						<div class="cardsignature">个性签名：{{ msgsignatures }}
+						</div>
+					</div><!--聊天信息人员卡片-->
+					
+					<div v-if="mingpianshow" class="selectmingpian animated bounceIn" :style="{top:msgtop3,left:msgleft3}">
+						<img class="currentpiccontainer" :src="selectavatar4 ? picsrc+selectavatar4 :defaultpic">
+						<div class="nameandgender shenglue"><span>{{mingpiannames}}</span> <i v-if="mingpianisgirls" class="fa fa-venus"></i><i v-if="mingpianisboys" class="fa fa-mars"></i> </div>
+						<div class="addname2">年龄：{{ msgage }}</div>
+						<div class="cardarea">单位：{{ msgunit }}
+						</div>
+						<div class="cardsignature">职位：{{ msglevel }}
+						</div>
+						<div class="cardsignature">真实姓名：{{ msgtruename }}
+						</div>
+					</div><!--名片卡片-->
+					
+					
+					
+					<!--<div class="mingpian">
+						<div class="mingup">
+							<img src="">
+							<div class="mingpianname">
+								
+							</div>
+						</div>
+						
+						<div class="mingdown">
+						</div>
+					</div>
+
+					-->
+					
+					
 					<div class="subrightcomone">
+						
+						
 						<div class="rightoneheader">
 							<div class="rightonetitle"> {{rightoneheaderobj.name}} <span v-show="groupnumbershow">({{ rightoneheaderobj.groupnumber }})</span></div>
 							<i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i>
-							<i v-show="isgroupmanager" @click="isgroupmanagermenu" class="fa fa-cog"></i>
-							<i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu" v-show="justoneman" class="fa fa-plus" ></i>
+							<i v-show="isgroupmanager" @click.stop="isgroupmanagermenu" class="fa fa-cog"></i>
+							<i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu($event)" :id="targetid" v-show="justoneman" class="fa fa-plus" ></i>
 							
 							
 							
 							<div v-show="isgroupmaster" class="rightonemenu">
 								<div class="rightonelist1 rightonelists" @click="popourmenu"><i class="fa fa-users"></i>&nbsp;&nbsp;管理群成员</div>
-								<div class="rightonelist2 rightonelists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改群信息</div>
-								<div class="rightonelist3 rightonelists"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
+								<div :id="targetid" class="rightonelist2 rightonelists" @click="changegroupinfoaction($event)"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改群信息</div>
+								<div class="rightonelist3 rightonelists" @click="pleasegotomoblie"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
 							</div>
 							
 							
 							<div v-if="isgroupmanagermenu1" class="righttwomenu2">
-								<div class="righttwolist1 righttwolists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
-								<div class="righttwolist3 righttwolists"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
+								<div class="righttwolist1 righttwolists" @click="popourmenu"><i class="fa fa-users"></i>&nbsp;&nbsp;管理群成员</div>
+								<div class="righttwolist3 righttwolists" @click="pleasegotomoblie"><i class="fa fa-lock"></i>&nbsp;&nbsp;群组禁言</div>
 							</div>
 							
 							
@@ -889,6 +1005,23 @@
 								
 						</div>
 						
+						<div v-if="friendlistmenushow" class=" animated bounceInDown slidemembersmenu">
+							<i class="fa fa-times" @click="friendlistmenushow = false"></i>
+								
+							<div class="membermenucontainer">
+								<div :id="targetid" @click.stop="showtheoneinfos($event)"  class="everypeoplecon2" >
+									<img :src="addavatar ? picsrc+addavatar : defaultpic">
+									<div class="namecon2 shenglue">
+										{{ addnickname }}
+									</div>
+								</div>
+								<div @click="addconpop1" class="addcontain">
+									<img src="imgs/added.png">
+								</div>
+								
+							</div>
+								
+						</div>
 						
 						
 
