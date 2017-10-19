@@ -3307,6 +3307,12 @@ var vm = new Vue({
 		pleasemobileshow:false,
 		changegroupinfoshow:false,
 		
+		groupnamea:'',
+		groupbroada:'',
+		
+		judgefriendid:'',
+		strangeroff:false,
+		strangeropen:false,
 	},
 	
 	computed:{
@@ -3667,6 +3673,8 @@ var vm = new Vue({
 			var id = that.id;
 			console.log(that.id);
 			
+			vm.judgefriendid = id;
+			
 			vm.left2 = $event.clientX-200 +"px";
 			vm.top2 = $event.clientY +"px";
 			console.log(vm.left2);
@@ -3688,7 +3696,7 @@ var vm = new Vue({
 				vm.signatures = signature;
 				vm.addonname = remark;
 				vm.usernames = nickname;
-				if (sex){
+				if (sex == '1'){
 					vm.isboys = true;
 					vm.isgirls = false;
 				}else {
@@ -3906,15 +3914,35 @@ var vm = new Vue({
 		},//点击群组列表
 		changegroupinfoaction:function(){
 			vm.changegroupinfoshow = true;
+			axios.get(globaldomain+'im/group/info.json?id='+vm.targetid).then(function(res){
+				var data = res.data.data;
+				vm.groupnamea = data.name;
+				vm.groupbroada = data.descr;
+				
+			}).catch(function(err){
+				console.log(err);
+			});
+		},//修改群组信息
+		changetwogroup:function($event){
+			var getid = $( $event.currentTarget ).attr('id');
+			axios.post(globaldomain+'im/group/set/name.json?id='+getid+'&name='+vm.groupnamea).then(function(res){
+				var data = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+			axios.post(globaldomain+'im/group/set/notice.json?id='+getid+'&notice='+vm.groupbroada).then(function(res){
+				var data = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+			vm.changegroupinfoshow = false;
 		},//修改群组信息
 		changelistcolor2:function($event){
 			var idnumber = $event.currentTarget.getAttribute('id');
 			var indexinner = $event.currentTarget.getAttribute('data-index');
 			this.indexstrange2 = indexinner;
-			//console.log(this.indexstrange2);
 			this.indexstrange = 'string';
 			this.indexstrange2 = -1-this.indexstrange2;
-			//console.log(vm.$children[1]);
 			vm.$children[1].showgroupsright = false;
 			vm.$store.commit('rightfriendbtn',idnumber);
 			vm.$children[1].showgroupsright1 = true;
@@ -3960,7 +3988,6 @@ var vm = new Vue({
 		},//关闭名单列表
 		popourmenu:function(){
 			vm.onlyonelistmenushow = true;
-			
 			
 		},//群主时，点击管理群组按钮
 		addconpop:function(){
@@ -5920,7 +5947,81 @@ var vm = new Vue({
 			$('#'+getid +'.listOnecon').remove();
 			$('#'+getid+'.msgconmaster').remove();
 			vm.popleftlists = false;
-		},//关闭消息记录	
+		},//关闭消息记录
+		judgeisfriend:function($event){
+			console.log($event);
+			console.log( $event.currentTarget );
+			var getid = $( $event.currentTarget ).attr('id');
+			console.log(getid);
+			
+			
+			axios.post(globaldomain+'im/buddy/is/buddy.json?destId='+getid).then(function(res){
+				var isfriend = res.data.data;
+				console.log(isfriend);
+				
+				var transferavatar ='';
+				var transfername = '';
+				
+				axios.get(globaldomain+'im/user/detail.json?id='+getid).then(function(res){
+						var data = res.data.data;
+						console.log(data);
+						var name = data.nickname;
+						var getavatar = data.avatar;
+					
+					console.log(name);
+					console.log(getavatar);
+					transferavatar = getavatar;
+					transfername = name;
+					
+					
+					
+					if (isfriend){
+					
+						console.log( transferavatar );
+
+						console.log( transfername );
+
+
+						str = str + '<div id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+						if ( $('.mainleft .comlist1  #'+getid).length < 1 ){
+							$('.mainleft .comlist1').prepend(str);
+							
+						}
+
+
+					}else {
+						
+						str = str + '<div data-not="not" id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-eye"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+
+
+						if ( $('.mainleft .comlist1  #'+getid).length < 1 ){
+							$('.mainleft .comlist1').prepend(str);
+							
+						}
+
+					}
+				
+						
+
+				
+
+
+					}).catch(function(err){
+						console.log(err);
+					})
+				
+				var str ='';
+				
+				
+				
+				
+			}).catch(function(err){
+				console.log(err);
+			})
+			
+		},//点击判断是否为好友
 			
 		
 			
@@ -5981,6 +6082,30 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 		vm.rightoneheaderobj.name = name;
 		vm.targetid = getid;
 		
+		
+		if ( $(that).attr('data-not') ){
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = false;//不是好友
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = true;
+			
+			
+			
+		} else {
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = true;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = false;
+			
+		} 
+		
+		
 	}).catch(function(err){
 		console.log(err);
 	});//是否为好友，获取用户详细信息
@@ -6028,6 +6153,8 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 					vm.notgroupmanager = false;//不是管理员
 					vm.justoneman = false;//只是个人
 					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
 					break;
 				case '20':
 					vm.isgroupleader= false;
@@ -6035,6 +6162,8 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 					vm.notgroupmanager = false;//不是管理员
 					vm.justoneman = false;//只是个人
 					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
 					break;
 				case '30':
 					vm.isgroupleader= false;
@@ -6042,6 +6171,8 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 					vm.notgroupmanager = true;//不是管理员
 					vm.justoneman = false;//只是个人
 					vm.shouldshow = false;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
 					break;
 			}
 			
@@ -6123,11 +6254,34 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 	axios.get(globaldomain+'im/user/detail.json?id='+listid).then(function(res){
 		vm.groupnumbershow = false;
 		var data =res.data.data;
-		
 		console.log(data);
 		var name = data.nickname;
 		vm.rightoneheaderobj.name = name;
 		vm.targetid = listid;
+		
+		
+		if ( $(that).attr('data-not') ){
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = false;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = true;
+			
+		} else {
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = true;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = false;
+			
+		} 
+		
+		
+		
 		
 	}).catch(function(err){
 		console.log(err);
@@ -6176,6 +6330,8 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 					vm.notgroupmanager = false;//不是管理员
 					vm.justoneman = false;//只是个人
 					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
 					break;
 				case '20':
 					vm.isgroupleader= false;
@@ -6183,6 +6339,8 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 					vm.notgroupmanager = false;//不是管理员
 					vm.justoneman = false;//只是个人
 					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
 					break;
 				case '30':
 					vm.isgroupleader= false;
@@ -6190,6 +6348,8 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 					vm.notgroupmanager = true;//不是管理员
 					vm.justoneman = false;//只是个人
 					vm.shouldshow = false;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
 					break;
 			}
 			
@@ -6753,7 +6913,7 @@ $('.mainright .rightcomOne ').on('click','.mingpianspans',function(event){
 		vm.msglevel = data.position;
 		vm.mingpiannames = data.nickname;
 		vm.msgtruename = data.name;
-		if(data.sex) {
+		if(data.sex == '1' ) {
 			vm.mingpianisboys = true;
 			vm.mingpianisgirls = false;
 		}else {
@@ -6847,7 +7007,7 @@ $('.mainright .rightcomOne ').on('contextmenu','.selffilespan',function(event){
 		vm.msgtop1 = event.offsetY+150+'px';
 		vm.msgleft1 = event.offsetX+350+'px';
 		
-	})
+	});
 //点击自己的头像
 
 //点击消息里面别人的头像
@@ -6857,6 +7017,8 @@ $('.mainright .rightcomOne ').on('contextmenu','.selffilespan',function(event){
 		console.log(event);
 		var that = this;
 		var getid = $(that).attr('id');
+		vm.judgefriendid = getid;
+		
 		console.log(getid);
 		vm.msgusernames = '';
 		vm.msgaddonname = '';
@@ -6866,23 +7028,31 @@ $('.mainright .rightcomOne ').on('contextmenu','.selffilespan',function(event){
 		axios.get(globaldomain+'im/user/detail.json?id='+getid).then(function(res){
 			var data = res.data.data;
 			console.log(data);
+			
 			vm.msgareaIds = data.areaId;
 			vm.selectavatar3 = data.avatar;
 			vm.msgusernames = data.nickname;
 			vm.msgaddonname = data.remark;
 			vm.msgsignatures = data.signature;
-			if(data.sex){
+			
+			if(data.sex == '1'){
 				vm.otherisboys = true;
 				vm.otherisgirls = false;
 			}else {
 				vm.otherisboys = false;
 				vm.otherisgirls = true;
 			}
+			
 		}).catch(function(err){
 			console.log(err);
 		})
 		vm.msgtop2 = event.offsetY+150+'px';
 		vm.msgleft2 = event.offsetX+150+'px';
 		
-	})
+	});
 //点击消息里面别人的头像
+
+//点击发送消息图标
+
+
+//点击发送消息图标

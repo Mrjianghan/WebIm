@@ -34,7 +34,7 @@
 					<div class="firstline">
 						<img class="firsttimeimg" :src="currentImg" @click.stop="popcurrent($event)">
 						
-						<div v-if="currentusershow" class="currentinfo animated bounceIn" :style="{top:top1,left:left1}">
+						<div v-if="currentusershow" class="currentinfo " :style="{top:top1,left:left1}">
 							<img class="currentpiccontainer" :src="currentImg">
 							<div class="nameandgender shenglue">{{username}} <i v-if="isgirl" class="fa fa-venus"></i><i v-if="isboy" class="fa fa-mars"></i> </div>
 							<div class="cardarea">地区：{{ areaId }}
@@ -47,7 +47,7 @@
 						<i @click.stop="changebar()" class="fa fa-bars"></i>
 						
 						<div v-if="showslidebars" class="slidebars">
-							<div @click.stop="startchat()" class="startchat lis"><i class="fa fa-commenting-o"></i><span>发起聊天</span></div>
+							<div @click.stop="startchat()" class="startchat lis"><i @click="judgeisfriend($event)" :id="judgefriendid" class="fa fa-commenting-o"></i><span>发起聊天</span></div>
 							<div @click.stop="feedbackpop()" class="feedbackmenu lis"><i class="fa fa-pencil-square-o"></i><span>意见反馈</span></div>
 							<div @click.stop="exit()" class="exit lis"><i class="fa fa-power-off"></i><span>退出</span></div>
 						</div><!--三条列表-->
@@ -317,14 +317,14 @@
 			
 		</template>
 		
-		<div id="messagemaster" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
+		<div id="messagemaster" class="ultimate" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
 			
 			
 			
 			<div v-if="retweetshow" class="chatroominfopop">
 				
-				<div class="addmyfriendscore  animated bounceIn">
+				<div class="addmyfriendscore">
 					<div class="feedhead">
 						<div>转发消息</div><i @click="retweetshow = false" class="fa fa-times"></i>
 					</div>
@@ -386,7 +386,7 @@
 			</div><!--图片查看器-->
 			
 			<div v-if="chatroompopshow" class="chatroominfopop">
-				<div class="chatroomalert animated bounceIn">
+				<div class="chatroomalert ">
 					<div class="header">
 						<i @click="chatroompopshow = false" class="fa fa-times"></i>
 						<div class="clearfix"></div>
@@ -398,7 +398,7 @@
 			
 			
 			<div v-if="pleasemobileshow" class="pleasemobilepop">
-				<div class="chatroomalert animated bounceIn">
+				<div class="chatroomalert ">
 					<div class="header">
 						<i @click="pleasemobileshow = false" class="fa fa-times"></i>
 						<div class="clearfix"></div>
@@ -409,10 +409,23 @@
 			</div><!--请到移动端-->
 			
 			<div v-if="changegroupinfoshow" class="pleasemobilepop">
-				<div class="changegroupcon animated bounceIn">
+				<div class="changegroupcon ">
 					<div class="changeheader">修改群信息
 						<i @click="changegroupinfoshow = false" class="fa fa-times"></i>
 						<div class="clearfix"></div>
+					</div>
+					
+					<div class="changecontainer">
+						<div class="groupnamecontainer">
+							<span class="groupnamewords">群组名称</span>
+							<input type="text" v-model="groupnamea">
+						</div>
+						<div class="groupbroadcontainer g1">
+							<span class="groupnamewords">群组公告</span>
+							<input class="addin2" type="text" v-model="groupbroada">
+						</div>
+						<button @click="changetwogroup($event)" :id="targetid">确定
+						</button>
 					</div>
 					
 				</div>
@@ -435,9 +448,9 @@
 			
 			
 			
-			<div v-if="allusershow" class="selectoneinfo animated bounceIn" :style="{top:top2,left:left2}">
+			<div v-if="allusershow" class="selectoneinfo " :style="{top:top2,left:left2}">
 				<img class="currentpiccontainer" :src="selectavatar2 ? picsrc+selectavatar2 :defaultpic">
-				<div class="nameandgender shenglue"><span>{{usernames}}</span> <i v-if="isgirls" class="fa fa-venus"></i><i v-if="isboys" class="fa fa-mars"></i>   <i class="fa fa-commenting-o"></i> </div>
+				<div class="nameandgender shenglue"><span>{{usernames}}</span> <i v-if="isgirls" class="fa fa-venus"></i><i v-if="isboys" class="fa fa-mars"></i>   <i @click="judgeisfriend($event)"  class="fa fa-commenting-o" :id="judgefriendid"></i> </div>
 				<div class="addname2">备注：{{ addonname }}</div>
 				<div class="cardarea">地区：{{ areaIds }}
 				</div>
@@ -446,7 +459,7 @@
 			</div><!--点击人员卡片-->
 			
 			<div v-if="createmyfriendshow" class="addmyfriends">
-				<div class="addmyfriendscore  animated bounceIn">
+				<div class="addmyfriendscore ">
 					<div class="feedhead">
 						<div :id="targetid">创建群组</div><i @click="createmyfriendshow = false" class="fa fa-times"></i>
 					</div>
@@ -487,7 +500,7 @@
 			
 			
 			<div v-if="addmyfriendshow" class="addmyfriends">
-				<div class="addmyfriendscore  animated bounceIn">
+				<div class="addmyfriendscore ">
 					<div class="feedhead">
 						<div>添加会话成员</div><i @click="addmyfriendshow = false" class="fa fa-times"></i>
 					</div>
@@ -527,7 +540,7 @@
 			</div>
 			
 			<div v-if="removemembershow" class="removegroupmember2">
-				<div class="removegroupmember2core  animated bounceIn">
+				<div class="removegroupmember2core ">
 					<div class="feedhead">
 						<div>删除会话成员</div><i @click="removemembershow = false" class="fa fa-times"></i>
 					</div>
@@ -565,7 +578,7 @@
 			</div>
 			
 			<div v-if="feedbackshow" class="transfeedback ">
-				<div class="feedbackpop animated bounceIn">
+				<div class="feedbackpop ">
 					<div class="feedhead">
 						<div>意见反馈</div><i @click="exitfeedback()" class="fa fa-times"></i>
 					</div>
@@ -575,7 +588,7 @@
 			</div><!--反馈框-->
 			
 			<div v-if="readychatshow" class="transreadychat ">
-				<div class="readychatpop  animated bounceIn">
+				<div class="readychatpop ">
 					<div class="readychathead">
 						<div>发起群聊</div><i @click="exitreadychat()" class="fa fa-times"></i>
 					</div>
@@ -900,7 +913,7 @@
 					
 					
 					
-					<div v-if="messageusershow" class="currentmsginfo animated bounceIn" :style="{top:msgtop1,left:msgleft1}">
+					<div v-if="messageusershow" class="currentmsginfo " :style="{top:msgtop1,left:msgleft1}">
 						<img class="currentpiccontainer" :src="mycurrentImg ? picsrc+mycurrentImg :defaultpic">
 						<div class="nameandgender shenglue">{{myname}} <i v-if="meisgirl" class="fa fa-venus"></i><i v-if="meisboy" class="fa fa-mars"></i> </div>
 						<div class="cardarea">地区：{{ myareaId }}
@@ -909,9 +922,9 @@
 						</div>
 					</div><!--聊天信息自己卡片-->
 					
-					<div v-if="msgusershow" class="selectoneinfo animated bounceIn" :style="{top:msgtop2,left:msgleft2}">
+					<div v-if="msgusershow" class="selectoneinfo " :style="{top:msgtop2,left:msgleft2}">
 						<img class="currentpiccontainer" :src="selectavatar3 ? picsrc+selectavatar3 :defaultpic">
-						<div class="nameandgender shenglue"><span>{{msgusernames}}</span> <i v-if="otherisgirls" class="fa fa-venus"></i><i v-if="otherisboys" class="fa fa-mars"></i>   <i class="fa fa-commenting-o"></i> </div>
+						<div class="nameandgender shenglue"><span>{{msgusernames}}</span> <i v-if="otherisgirls" class="fa fa-venus"></i><i v-if="otherisboys" class="fa fa-mars"></i>   <i :id="judgefriendid" @click="judgeisfriend($event)"  class="fa fa-commenting-o"></i> </div>
 						<div class="addname2">备注：{{ msgaddonname }}</div>
 						<div class="cardarea">地区：{{ msgareaIds }}
 						</div>
@@ -919,7 +932,7 @@
 						</div>
 					</div><!--聊天信息人员卡片-->
 					
-					<div v-if="mingpianshow" class="selectmingpian animated bounceIn" :style="{top:msgtop3,left:msgleft3}">
+					<div v-if="mingpianshow" class="selectmingpian " :style="{top:msgtop3,left:msgleft3}">
 						<img class="currentpiccontainer" :src="selectavatar4 ? picsrc+selectavatar4 :defaultpic">
 						<div class="nameandgender shenglue"><span>{{mingpiannames}}</span> <i v-if="mingpianisgirls" class="fa fa-venus"></i><i v-if="mingpianisboys" class="fa fa-mars"></i> </div>
 						<div class="addname2">年龄：{{ msgage }}</div>
@@ -956,6 +969,8 @@
 							<i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i>
 							<i v-show="isgroupmanager" @click.stop="isgroupmanagermenu" class="fa fa-cog"></i>
 							<i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu($event)" :id="targetid" v-show="justoneman" class="fa fa-plus" ></i>
+							<i v-if="strangeropen" class="fa fa-eye"></i>
+							<i v-if="strangeroff" class="fa fa-eye-slash"></i>
 							
 							
 							
