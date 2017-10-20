@@ -47,7 +47,7 @@
 						<i @click.stop="changebar()" class="fa fa-bars"></i>
 						
 						<div v-if="showslidebars" class="slidebars">
-							<div @click.stop="startchat()" class="startchat lis"><i @click="judgeisfriend($event)" :id="judgefriendid" class="fa fa-commenting-o"></i><span>发起聊天</span></div>
+							<div @click.stop="startchat()" class="startchat lis"><i @click="judgeisfriend($event)"  class="fa fa-commenting-o"></i><span>发起聊天</span></div>
 							<div @click.stop="feedbackpop()" class="feedbackmenu lis"><i class="fa fa-pencil-square-o"></i><span>意见反馈</span></div>
 							<div @click.stop="exit()" class="exit lis"><i class="fa fa-power-off"></i><span>退出</span></div>
 						</div><!--三条列表-->
@@ -969,8 +969,8 @@
 							<i v-show="isgroupleader" @click.stop="isgroupleadermenu" class="fa fa-cog"></i>
 							<i v-show="isgroupmanager" @click.stop="isgroupmanagermenu" class="fa fa-cog"></i>
 							<i v-show="notgroupmanager" @click="notgroupmanagermenu" class="fa fa-plus" ></i><i @click="onlyusermenu($event)" :id="targetid" v-show="justoneman" class="fa fa-plus" ></i>
-							<i v-if="strangeropen" class="fa fa-eye"></i>
-							<i v-if="strangeroff" class="fa fa-eye-slash"></i>
+							<i v-if="strangeropen" class="fa fa-eye" :id="targetid" @click="blockpeople($event)"></i>
+							<i v-if="strangeroff" class="fa fa-eye-slash" @click="unblockpeople($event)" :id="targetid"></i>
 							
 							
 							
@@ -989,6 +989,7 @@
 							
 							
 						</div>
+						
 						
 						<div v-if="onlyonelistmenushow" class=" animated bounceInDown slidemembersmenu">
 							<i class="fa fa-times" @click="shutonlyonelist"></i>
@@ -1066,10 +1067,10 @@
 								<i class="fa fa-folder"><input :id="targetid" @change="uploadfile($event)" type="file"></i>
 							</div>
 							<div class="textcontainer">
-								<textarea v-html="sendtextcontent" v-model="sendbtncontent">
+								<textarea :id="targetid" @keyup.ctrl.enter="twowaysend($event)" v-html="sendtextcontent" v-model="sendbtncontent">
 								</textarea>
 							</div>
-							<button :id="targetid" type="button">发送</button>
+							<button :id="targetid" type="button" @click="twowaysend($event)">发送</button>
 
 						</div>
 					</div>
@@ -1166,7 +1167,7 @@
 									<i class="fa fa-folder"><input :id="chattargetid" @change="chatuploadfile($event)" type="file"></i>
 								</div>
 								<div class="textcontainer">
-									<textarea v-html="chattextcontent" v-model="chatbtncontent">
+									<textarea :id="chattargetid"  @keyup.ctrl.enter="chatsendmsg($event)" v-html="chattextcontent" v-model="chatbtncontent">
 									</textarea>
 								</div>
 								<button @click="chatsendmsg($event)" :id="chattargetid" type="button">发送</button>

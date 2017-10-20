@@ -28,6 +28,20 @@ body {
 .fa-mars {
 	color: #2285ff;
 }
+.hidden {
+	display: none;
+}
+.timernow {
+	width: 70px;
+	height: 30px;
+	border-radius: 5px;
+	margin: 0 auto;
+	background-color: #dadada;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	font-size: 20px;
+}
 .allalertinfo {
 	width: 570px;
 	height: 200px;

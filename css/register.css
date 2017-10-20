@@ -12,7 +12,7 @@ body {
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 600px;
+    min-height: 6rem;
 }
 .clearfix {
 	clear: both;
@@ -28,65 +28,65 @@ body {
 	
 .subbody {
 	position: relative;
-    min-height: 640px;
-	min-width: 1000px;
+    min-height: 6.4rem;
+	min-width: 10rem;
 	height: 100%;
     width: 100%;
 }
 
 header {
-	padding-top: 48px;
-	height: 136px;
+	padding-top: 0.48rem;
+	height: 1.36rem;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	padding-left: 80px;
+	padding-left: 0.8rem;
 }
 
 header img {
-	width: 80px;
+	width: 0.8rem;
 	float: left;
 }
 .headerName {
 	float: left;
 	color: #fff;
-	font-size: 32px;
-	height: 80px;
-	line-height: 80px;
-	margin-left: 24px;
+	font-size: 0.32rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	margin-left: 0.24rem;
 }
 
 .regContainer {
-	height: 480px;
-	width: 496px;
+	height: 4.8rem;
+	width: 4.96rem;
 	background-color: #f0edf1;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-top: -240px;
-	margin-left: -248px;
-	border-radius: 20px;
+	margin-top: -2.4rem;
+	margin-left: -2.48rem;
+	border-radius: 0.2rem;
 }
 
 .regContainer  article {
-	height: 72px;
+	height: 0.72rem;
 	border-bottom: 1px solid #cccccc;
 	background-color: #faf9fa;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	border-top-left-radius: 0.2rem;
+	border-top-right-radius: 0.2rem;
 }
 article div {
-	height: 72px;
-	line-height: 72px;
+	height: 0.72rem;
+	line-height: 0.72rem;
 	text-align: center;
-	font-size: 22.4px;
+	font-size: 0.224rem;
 }
 
 article .fa-times {
 	position: absolute;
-    right: 24px;
-    top: 24px;
-    font-size: 24px;
+    right: 0.24rem;
+    top: 0.24rem;
+    font-size: 0.24rem;
     color: #aeaeae;
     cursor: pointer;
 }
@@ -94,10 +94,10 @@ article .fa-times:hover {
 	color:#187bff;
 }
 .samesize {
-	width: 400px;
+	width: 4rem;
 	margin: 0 auto;
-	height: 64px;
-	border-radius: 10px;
+	height: 0.64rem;
+	border-radius: 0.1rem;
 	background-color: #fff;
 	border: 1px solid #cccccc;
 	-webkit-box-sizing: border-box;
@@ -116,15 +116,16 @@ article .fa-times:hover {
 }
 
 .firstinput input {
-	height: 64px;
+	float: left;
+	height: 0.64rem;
 	width: 80%;
-	border-radius: 10px;
+	border-radius: 0.1rem;
 	border: none;
 	outline: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 17.6px;
-	padding-left: 20px;
+	font-size: 0.176rem;
+	padding-left: 0.2rem;
 	color: #666;
 }
 .firstinput .fa-times {
@@ -135,34 +136,35 @@ article .fa-times:hover {
 	color: #53bd58;
 }
 .firstinput .fa {
-	font-size: 24px;
+	font-size: 0.24rem;
 	position: absolute;
-	right: 10px;
-	top: 20px;
+	right: 0.1rem;
+	top: 0.2rem;
 }
 
 
 .secondinput {
-	margin-top: 16px;
+	margin-top: 0.16rem;
 	position: relative;
 }
 .secondinput input {
-	width: 200px;
-	height: 64px;
-	line-height: 64px;
-	border-radius: 10px;
+	float: left;
+	width: 2rem;
+	height: 0.64rem;
+	line-height: 0.64rem;
+	border-radius: 0.1rem;
 	outline: none;
 	border: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 20px;
-	padding-left: 20px;
+	font-size: 0.2rem;
+	padding-left:0.2rem ;
 	color: #666;
-	font-size: 17.6px;
+	font-size: 0.176rem;
 }
 .secondinput img {
-	width: 104px;
-	height: 64px;
+	width: 1.04rem;
+	height: 0.64rem;
 	border-left: 2px solid #efefef;
 	border-right: 2px solid #efefef;
 	position: absolute;
@@ -170,23 +172,23 @@ article .fa-times:hover {
 	box-sizing: border-box;
 }
 .nextpic {
-	height: 64px;
-	line-height: 64px;
+	height: 0.64rem;
+	line-height: 0.64rem;
 	color: #2285ff;
 	cursor: pointer;
 	position: absolute;
 	bottom: 0;
-	font-size: 19.2px;
+	font-size: 0.192rem;
 	right: 0;
-	width: 96px;
+	width: 0.96rem;
 	text-align: center;
 }
 
 .samesize2 {
-	width: 400px;
+	width: 4rem;
 	margin: 0 auto;
-	height: 64px;
-	border-radius: 10px;
+	height: 0.64rem;
+	border-radius: 0.1rem;
 	background-color: #f0edf1;
 	
 	-webkit-box-sizing: border-box;
@@ -194,55 +196,55 @@ article .fa-times:hover {
 	overflow: hidden;
 }
 .thirdinput {
-	margin-top: 16px;
+	margin-top: 0.16rem;
 	position: relative;
 }
 .thirdinput .thirdcon {
-	border-radius: 10px;
+	border-radius: 0.1rem;
 	background-color: #fff;
-	width: 240px;
-	height: 64px;
-	line-height: 64px;
+	width: 2.4rem;
+	height: 0.64rem;
+	line-height: 0.64rem;
 	outline: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 20px;
-	padding-left: 20px;
+	font-size: 0.2rem;
+	padding-left: 0.2rem;
 	color: #666;
 	border: 1px solid #cccccc;
 	overflow: hidden;
 	position: relative;
 }
 .thirdinput button {
-	height: 64px;
+	height: 0.64rem;
 	outline: none;
 	border: none;
 	background-color: #c7c7c7;
-	border-radius: 10px;
-	width: 150px;
+	border-radius: 0.1rem;
+	width: 1.5rem;
 	border: 1px solid #cccccc;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	position: absolute;
 	right: 0;
 	color: #fff;
-	font-size: 17.6px;
+	font-size: 0.176rem;
 	bottom: 0;
 }
 
 .thirdinput input {
-	height: 64px;
+	height: 0.64rem;
 	width: 80%;
-	line-height: 64px;
+	line-height: 0.64rem;
 	outline: none;
 	border: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 17.6px;
+	font-size: 0.176rem;
 	color: #666;
 }
 .thirdcon .fa-times {
-	color: #ff6868;;
+	color: #ff6868;
 }
 
 .thirdcon .fa-check {
@@ -251,35 +253,40 @@ article .fa-times:hover {
 
 .thirdcon .fa {
 	position: absolute;
-	right: 10px;
-	top: 20px;
-	font-size: 24px;
+	right: 0.1rem;
+	top: 0.2rem;
+	font-size: 0.24rem;
 }
 
 
 .userinfo {
-	width: 400px;
+	width: 4rem;
 	margin: 0 auto;
-	margin-top: 8px;
+	margin-top: 0.08rem;
 }	
 
 .linkcon {
-	font-size: 16px;
+	float: left;
+	font-size: 0.16rem;
 	color: #acacad;
 	display: inline-block;
 }	
 .linkcon a {
-	font-size: 16px;
+	font-size: 0.16rem;
 	color: #acacad;
 }	
 .check1 {
-	height: 20px;
-	width: 20px;
+	cursor: pointer;
+	float: left;
+	height: 0.2rem;
+	width: 0.2rem;
 	display: inline-block;
-	margin-left: 4px;
+	margin-left: 0.04rem;
+	margin-right: 0.03rem;
 }
 .check1 .fa {
-	font-size: 22px;
+	float: left;
+	font-size: 0.22rem;
 	vertical-align: sub;
 }
 .check1 .fa-check-square {
@@ -287,21 +294,22 @@ article .fa-times:hover {
 }
 
 .nextstep {
-	height: 64px;
-	width: 400px;
+	height: 0.64rem;
+	width: 4rem;
 	margin:  0 auto;
 	display: block;
-	border-radius: 10px;
+	border-radius: 0.1rem;
 	outline: none;
 	background-color: #c7c7c7;
 	border: none;
-	font-size: 25.6px;
+	font-size: 0.256rem;
 	color: #fff;
-	margin-top: 20px;
+	margin-top: 0.2rem;
 }
 
 
-
+.clearfix:after {content:'.';display:block;height:0;clear:both;visibility:hidden;}
+.clearfix {*zoom:1;}
 
 
 
@@ -326,7 +334,7 @@ article .fa-times:hover {
 
 footer {
 	height: 100px;
-	width: 100%;
+	right: 0;
 	position: fixed;
 	bottom: 16px;
 	padding-right: 40px;

@@ -159,7 +159,7 @@ conn.listen({
 					//消息列表记录
 					var str = '';
 					
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -197,7 +197,7 @@ conn.listen({
 						
 						var str1 = '';
 					
-						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="mingpianspans" id="'+mingpianid+'">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'
 
@@ -206,7 +206,7 @@ conn.listen({
 						
 						var str2 ='';
 						
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="mingpianspans" id="'+mingpianid+'">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="mingpianspans" id="'+mingpianid+'">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 						
 						
 						
@@ -219,7 +219,7 @@ conn.listen({
 						
 						var str1 = '';
 					
-						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'
 
@@ -229,7 +229,7 @@ conn.listen({
 						var str2 ='';
 					
 						
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					}
 					
 					//消息内容容器
@@ -283,16 +283,45 @@ conn.listen({
 					//消息列表记录
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
 					
-					
-					
-					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					} else {
-						$('.mainleft .comlist1  #'+message.to).remove();
-						$('.mainleft .comlist1').prepend(str);
-					}
 					//消息列表记录
 					
 					
@@ -331,7 +360,7 @@ conn.listen({
 
 							var str1 = '';
 
-							str1 =  '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+							str1 =  '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 							'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="mingpianspans" id="'+mingpianid+'">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'
 
@@ -340,7 +369,7 @@ conn.listen({
 
 							var str2 ='';
 
-							str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="mingpianspans" id="'+mingpianid+'">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+							str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="mingpianspans" id="'+mingpianid+'">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -353,7 +382,7 @@ conn.listen({
 
 							var str1 = '';
 
-							str1 =  '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+							str1 =  '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 							'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="words">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'
 
@@ -363,7 +392,7 @@ conn.listen({
 							var str2 ='';
 
 
-							str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="words">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+							str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="words">'+textmessagetransfer+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 						}
 						
 						
@@ -444,7 +473,7 @@ conn.listen({
 						//生成的消息内容容器
 						
 						var str2 ='';
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+message.data+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 						
 
@@ -484,6 +513,9 @@ conn.listen({
 		message.time = getCurrentTime();
 		console.log(message);
 		var messagetype = message.type;
+		
+		//var transemoji = WebIM.utils.parseEmoji(message.data);
+		
 		
 		for(var i=0;i<message.data.length;i++  ){
 			var img = message.data[i];
@@ -529,7 +561,7 @@ conn.listen({
 				/*消息列表记录*/
 				var str = '';
 					
-				str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[表情]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+string+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 					
 					
 				if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -547,7 +579,7 @@ conn.listen({
 				/*消息内容容器*/
 					var str1 = '';
 					
-					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span  class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'
 						
@@ -557,7 +589,7 @@ conn.listen({
 					var str2 ='';
 					
 						
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -634,7 +666,60 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[表情]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+string+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+string+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[表情]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
@@ -643,7 +728,7 @@ conn.listen({
 					} else {
 						$('.mainleft .comlist1  #'+message.to).remove();
 						$('.mainleft .comlist1').prepend(str);
-					}
+					}*/
 					/*消息列表记录*/
 					
 					
@@ -659,13 +744,13 @@ conn.listen({
 						/*生成的消息内容容器*/
 						var str1 = '';
 
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 
 
 						var str2 ='';
 
 
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picwords">'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
@@ -722,7 +807,7 @@ conn.listen({
 					var str2 ='';
 					
 					
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span>'+string+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
 						
 
@@ -748,10 +833,6 @@ conn.listen({
 				
 				console.log(globalemojitrack);
 				
-				
-				/*var str4 = '';
-				
-				str4 ='<div class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span>'+string+'</span></div></div></div><div class="clearfix"><div></div></div>';*/
 				
 				
 				$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster .msgcontainer  #'+ globalemojitrack+'.msgmarginlr .wordscontent span').html(string);
@@ -813,7 +894,7 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 
 
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -831,7 +912,7 @@ conn.listen({
 					/*消息内容容器*/
 					var str1 = '';
 					
-					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+ '<img src="'+message.url+'" class="picmessagelock">' +'</span></div></div><div class="clearfix"></div></div>'
 						
@@ -841,7 +922,7 @@ conn.listen({
 					var str2 ='';
 					
 						
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -896,7 +977,52 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
@@ -905,7 +1031,7 @@ conn.listen({
 					} else {
 						$('.mainleft .comlist1  #'+message.to).remove();
 						$('.mainleft .comlist1').prepend(str);
-					}
+					}*/
 					/*消息列表记录*/
 					
 					
@@ -921,13 +1047,13 @@ conn.listen({
 						/*生成的消息内容容器*/
 						var str1 = '';
 
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 
 
 						var str2 ='';
 
 
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -992,7 +1118,7 @@ conn.listen({
 					var str2 ='';
 					
 					
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
 						
 
@@ -1082,7 +1208,7 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 
 
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -1100,7 +1226,7 @@ conn.listen({
 					/*消息内容容器*/
 					var str1 = '';
 					
-					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>' +'</span></div></div><div class="clearfix"></div></div>'
 						
@@ -1110,7 +1236,7 @@ conn.listen({
 					var str2 ='';
 					
 						
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -1180,7 +1306,63 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
@@ -1189,7 +1371,7 @@ conn.listen({
 					} else {
 						$('.mainleft .comlist1  #'+message.to).remove();
 						$('.mainleft .comlist1').prepend(str);
-					}
+					}*/
 					/*消息列表记录*/
 					
 					
@@ -1205,12 +1387,12 @@ conn.listen({
 						/*生成的消息内容容器*/
 						var str1 = '';
 
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 
 
 						var str2 ='';
 						
-						str2 = '<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 = '<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -1291,7 +1473,7 @@ conn.listen({
 					var str2 ='';
 					
 					
-					str2 = '<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 = '<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
 						
 
@@ -1409,7 +1591,7 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 
 
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -1426,7 +1608,7 @@ conn.listen({
 					/*消息内容容器*/
 					var str1 = '';
 					
-					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan">'+
 						'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
@@ -1438,7 +1620,7 @@ conn.listen({
 					var str2 ='';
 					
 						
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan ">'+
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan ">'+
 						'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
 						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
 
@@ -1507,7 +1689,63 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[地理位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					
+					
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[地理位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[地理位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[地理位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
@@ -1516,7 +1754,7 @@ conn.listen({
 					} else {
 						$('.mainleft .comlist1  #'+message.to).remove();
 						$('.mainleft .comlist1').prepend(str);
-					}
+					}*/
 					/*消息列表记录*/
 					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
@@ -1531,7 +1769,7 @@ conn.listen({
 						/*生成的消息内容容器*/
 						var str1 = '';
 
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'"  class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'"  class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+
 							'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 
@@ -1539,7 +1777,7 @@ conn.listen({
 						var str2 ='';
 
 
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
 
 
@@ -1611,7 +1849,7 @@ conn.listen({
 					var str2 ='';
 					
 					
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
 						
 
@@ -1690,7 +1928,7 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 
 
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -1708,7 +1946,7 @@ conn.listen({
 					/*消息内容容器*/
 					var str1 = '';
 					
-					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan">'+
 						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
@@ -1720,7 +1958,7 @@ conn.listen({
 					var str2 ='';
 					
 						
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
 						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
 
@@ -1780,7 +2018,62 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					
+					
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
@@ -1789,7 +2082,7 @@ conn.listen({
 					} else {
 						$('.mainleft .comlist1  #'+message.to).remove();
 						$('.mainleft .comlist1').prepend(str);
-					}
+					}*/
 					/*消息列表记录*/
 					
 					
@@ -1807,7 +2100,7 @@ conn.listen({
 						/*生成的消息内容容器*/
 						var str1 = '';
 
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 
@@ -1815,7 +2108,7 @@ conn.listen({
 						var str2 ='';
 
 
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
@@ -1882,7 +2175,7 @@ conn.listen({
 					var str2 ='';
 					
 					
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
@@ -1959,7 +2252,7 @@ conn.listen({
 					//消息列表记录
 					var str = '';
 
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 
 
 					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
@@ -1977,7 +2270,7 @@ conn.listen({
 					//消息内容容器
 					var str1 = '';
 					
-					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+
+					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan">'+
 						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
@@ -1989,7 +2282,7 @@ conn.listen({
 					var str2 ='';
 					
 						
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
 						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
 
@@ -2049,16 +2342,53 @@ conn.listen({
 					/*消息列表记录*/
 					var str = '';
 					
-					str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 					
 					
 					
-					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					} else {
-						$('.mainleft .comlist1  #'+message.to).remove();
-						$('.mainleft .comlist1').prepend(str);
-					}
+					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								$('.mainleft .comlist1  #'+message.to).remove();
+								$('.mainleft .comlist1').prepend(str);
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+					
+					
+					
 					/*消息列表记录*/
 					
 					
@@ -2076,7 +2406,7 @@ conn.listen({
 						/*生成的消息内容容器*/
 						var str1 = '';
 
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'"  class="msgmarginlr">'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'"  class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
 
@@ -2084,7 +2414,7 @@ conn.listen({
 						var str2 ='';
 
 
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
+						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 
@@ -2155,7 +2485,7 @@ conn.listen({
 					var str2 ='';
 					
 					
-					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
+					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
 					
@@ -2213,10 +2543,20 @@ conn.listen({
     onReceivedMessage: function(message){
 		console.log('收到消息送达客户端回执');
 		console.log(message);
+		
+		var bodyId = message.id;         // 需要发送已读回执的消息id
+		var msg = new WebIM.message('read', msgId);
+		msg.set({
+			id: bodyId
+			,to: message.from
+		});
+		WebIM.conn.send(msg.body);
+		
+		
 	},    //收到消息送达客户端回执
 	
     onDeliveredMessage: function(message){
-		console.log('消息送达服务器回执');
+		console.log('消息送达服务器回执，pc发送的消息已经发送到了环信！');
 		console.log(message);
 		
 		/*var bodyId = message.id;         // 需要发送已读回执的消息id
@@ -2232,7 +2572,7 @@ conn.listen({
 	},   //收到消息送达服务器回执
 	
     onReadMessage: function(message){
-		console.log('收到消息已读回执');
+		console.log('收到消息已读回执，移动端已经读取了pc上面发送的消息！');
 		console.log(message);
 		
 		/*var bodyId = message.id;         // 需要发送已读回执的消息id
@@ -2259,14 +2599,6 @@ conn.listen({
 	}        //如果用户在A群组被禁言，在A群发消息会走这个回调并且消息不会传递给群其它成员
     
 });
-
-
-
-
-
-
-
-
 
 
 var store = new Vuex.Store({
@@ -2367,6 +2699,7 @@ Vue.component('currentuser',{
 			icons2:false,
 			icons3:false,
 			avatar:'',
+			
 		}
 	},
 	
@@ -2910,15 +3243,88 @@ Vue.component('rightcomthree',{
 				
 				var str = '';
 				
+				
+				
+				
+				axios.get(globaldomain+'im/group/conf/info.json?groupId='+groupid).then(function(res){
+						var data = res.data.data;
+						console.log( data );
+						var hinder = data.hinder;
+						console.log(hinder);
+						
+						
+						
+						
+						if (hinder){
+							
+							str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+groupid).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								
+								var html = $('.mainleft .comlist1  #'+groupid).html();
+								console.log(html);
+								
+								
+								$('.mainleft .comlist1  #'+groupid).remove();
+								$('.mainleft .comlist1').prepend(str);
+								
+								$('.mainleft .comlist1  #'+groupid).html( html );
+								
+								$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
+								
+								
+								
+							}
+							
+							
+						}else {
+							
+							str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							
+							
+							if ( $('.mainleft .comlist1  #'+groupid).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
+							} else {
+								
+								var html = $('.mainleft .comlist1  #'+groupid).html();
+								console.log(html);
+								
+								$('.mainleft .comlist1  #'+groupid).remove();
+								$('.mainleft .comlist1').prepend(str);
+								
+								$('.mainleft .comlist1  #'+groupid).html( html );
+								
+								$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
+								
+							}
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					});
+				
+				
+				
+				
+				
+				
+				
+				
 			
 				
-				str = str + '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				/*str = str + '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
 				
 				
 				
 				if ( $('.mainleft .comlist1  #'+obj1.to).length < 1 ){
 					$('.mainleft .comlist1').prepend(str);
-				}
+				}*/
 				
 				console.log(this);
 				
@@ -2993,11 +3399,19 @@ Vue.component('rightcomthree',{
 				
 				var str ='';
 				
-				str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+				str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 				
 				
 				if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
 					$('.mainleft .comlist1').prepend(str);
+				}else {
+					
+					var html = $('.mainleft .comlist1  #'+obj2.id).html();
+					$('.mainleft .comlist1  #'+obj2.id).remove();
+					$('.mainleft .comlist1').prepend( str );
+					$('.mainleft .comlist1  #'+obj2.id).html( html );
+					
+					
 				}
 				
 				
@@ -4141,15 +4555,11 @@ var vm = new Vue({
 				console.log($('.sort_box3 input').prop("checked"));
 				var arrtemp = [];
 				for ( var i=0; i<length;i++ ){
-				
 					console.log($('.sort_box3 input').eq(i)[0].value);
 					arrtemp.push($('.sort_box3 input').eq(i)[0].value);
 				}
 				console.log(arrtemp);
 				vm.deletegrouparr = arrtemp;
-				
-				
-
 			} else {
 				vm.deletegrouparr =[];
 			}
@@ -4159,22 +4569,18 @@ var vm = new Vue({
 			var that = $event.currentTarget;
 			console.log(that.checked);
 			var checkstate = that.checked;
-			
 			if (checkstate){
 				var arr = [];
 				var length = vm.repeatmyfriendsarr.length;
 				for ( var i=0;i<length;i++ ){
 					arr.push($('.sort_box2 input').eq(i)[0].value);
 				}
-				console.log(arr);
 				vm.addgrouparr = arr;
-				
 			}else {
 				vm.addgrouparr = [];
 			}
 		},//添加会话成员全选
 		showemojicontainer:function(){
-			
 			vm.emojishow = !vm.emojishow;
 		},//点击弹出表情容器
 		uploadimg:function($event){
@@ -4217,6 +4623,8 @@ var vm = new Vue({
 								chatType: 'singleChat',
 								onFileUploadError: function () {      // 消息上传失败
 									console.log('onFileUploadError');
+									vm.alertinfoshow = true;
+									vm.alertinfocon = '上传文件必须小于10M！';
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -4316,6 +4724,8 @@ var vm = new Vue({
 								chatType: 'chatRoom',
 								onFileUploadError: function () {      // 消息上传失败
 									console.log('onFileUploadError');
+									vm.alertinfoshow = true;
+									vm.alertinfocon = '上传文件必须小于10M！';
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -4425,6 +4835,8 @@ var vm = new Vue({
 								chatType: 'singleChat',
 								onFileUploadError: function () {      // 消息上传失败
 									console.log('onFileUploadError');
+									vm.alertinfoshow = true;
+									vm.alertinfocon = '上传文件必须小于10M！';
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -4532,6 +4944,8 @@ var vm = new Vue({
 								chatType: 'chatRoom',
 								onFileUploadError: function () {      // 消息上传失败
 									console.log('onFileUploadError');
+									vm.alertinfoshow = true;
+									vm.alertinfocon = '上传文件必须小于10M！';
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -4632,24 +5046,18 @@ var vm = new Vue({
 			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()+200);
 		},//右下三角
 		chatuploadfile:function($event){
-			
-			
-			
 			var that = $event.currentTarget;
 			console.log(that);
 			var imgid = $(that).attr("id");
 			console.log(imgid);
 			console.log($(that).val());
-			
 			axios.get(globaldomain+'im/room/info.json?id='+imgid).then(function(res){
-		
 				var data = res.data.data;
 				console.log(data);
 				var name = data.name;
 				var genre = data.genre;
 				var groupnumber = data.count;
 				var avatar = data.avatar;
-				
 				if (data){
 					var sendchatroomfile = function () {
 						
@@ -5947,6 +6355,16 @@ var vm = new Vue({
 			$('#'+getid +'.listOnecon').remove();
 			$('#'+getid+'.msgconmaster').remove();
 			vm.popleftlists = false;
+			vm.targetid = '';
+			vm.rightoneheaderobj.name = '';
+			vm.rightoneheaderobj.groupnumber = '';
+			vm.groupnumbershow = false;
+			vm.isgroupleader = false;
+			vm.isgroupmanager = false;
+			vm.notgroupmanager = false;
+			vm.justoneman = false;
+			vm.strangeropen = false;
+			vm.strangeroff = false;
 		},//关闭消息记录
 		judgeisfriend:function($event){
 			console.log($event);
@@ -5965,9 +6383,12 @@ var vm = new Vue({
 				axios.get(globaldomain+'im/user/detail.json?id='+getid).then(function(res){
 						var data = res.data.data;
 						console.log(data);
-						var name = data.nickname;
-						var getavatar = data.avatar;
+					var isblack = data.isBlacklist;
 					
+					var name = data.nickname;
+					var getavatar = data.avatar;
+					
+					console.log(isblack);
 					console.log(name);
 					console.log(getavatar);
 					transferavatar = getavatar;
@@ -5993,13 +6414,37 @@ var vm = new Vue({
 
 					}else {
 						
-						str = str + '<div data-not="not" id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-eye"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+						//不是好友，是否加入黑名单的情况
+						
+						console.log(isblack);
+						
+						
+						if( isblack ){
+							
+							str = str + '<div data-not="not" id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-eye hidden"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+getid).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
 
+							}
+						   
+						}else {
+						   
+							str = str + '<div data-not="not" id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-eye"></i><i class="fa fa-eye-slash hidden"></i></div></div><div class="clearfix"></div></div></div>';
+							
+							if ( $('.mainleft .comlist1  #'+getid).length < 1 ){
+								$('.mainleft .comlist1').prepend(str);
 
-						if ( $('.mainleft .comlist1  #'+getid).length < 1 ){
-							$('.mainleft .comlist1').prepend(str);
+							}
 							
 						}
+						
+						
+						
+						
+
+
+						
 
 					}
 				
@@ -6022,6 +6467,222 @@ var vm = new Vue({
 			})
 			
 		},//点击判断是否为好友
+		twowaysend:function($event){
+			var that = $($event.currentTarget);
+			var sendtarget = $(that).attr('id');
+			console.log(sendtarget);
+			var sendPrivateText = function (content,targetone) {
+				var id = conn.getUniqueId();                 // 生成本地消息id
+				var msg = new WebIM.message('txt', id);      // 创建文本消息
+				msg.set({
+					msg: content,                  // 消息内容
+					to: targetone,                          // 接收消息对象（用户id）
+					roomType: false,
+					success: function (id, serverMsgId) {
+						console.log('send private text Success');
+						var transferstr = WebIM.utils.parseEmoji( content );
+						console.log( transferstr ); 
+						axios.get(globaldomain+'im/user/detail.json?id='+sendtarget).then(function(res){
+							var data =res.data.data;
+							var avatar = data.avatar;
+							var str4 = '';
+							str4 ='<div id="'+id+'" class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img class="myuserpic" src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span   class="selfwords">'+transferstr+'</span></div></div></div><div class="clearfix"><div></div></div>';
+							$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
+							globalemojitrack = id;
+							//聊天记录列表
+							$('.mainleft .comlist1  #'+sendtarget+' .listOnebottomleft').html(transferstr);
+							var sendtime = getCurrentTime();
+							$('.mainleft .comlist1  #'+sendtarget+' .listOnetopright').text(sendtime);
+							//聊天记录列表
+							function sendmessagetobottom1 (){
+								var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+								var cli = scroll1.clientHeight;
+								var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
+								var hei = main.scrollHeight;
+								$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+							};
+
+							sendmessagetobottom1();
+
+							$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').removeClass('hidden');//对话显示
+
+							console.log( $('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster') );
+
+
+
+							$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').siblings().addClass('hidden');//同胞关闭显示	
+
+
+
+
+
+
+
+						}).catch(function(err){
+							console.log(err);
+						});
+
+
+
+
+
+
+
+						vm.sendbtncontent = '';
+
+
+
+
+
+
+
+
+					},
+					fail: function(e){
+						console.log("Send private text error");
+					}
+				});
+				msg.body.chatType = 'singleChat';
+				conn.send(msg.body);
+			};
+
+
+
+
+			// 群组发送文本消息
+			var sendGroupText = function (content,targetone) {
+				var id = conn.getUniqueId();            // 生成本地消息id
+				var msg = new WebIM.message('txt', id); // 创建文本消息
+				var option = {
+					msg: content,           // 消息内容
+					to: targetone,                       // 接收消息对象(群组id)
+					roomType: false,
+					chatType: 'chatRoom',
+					success: function () {
+						console.log('send room text success');
+
+						var transferstr = WebIM.utils.parseEmoji( content );
+
+						console.log( transferstr ); 
+
+
+
+						axios.get(globaldomain+'im/group/info.json?id='+sendtarget).then(function(res){
+
+							var data = res.data.data;
+
+							console.log(data);
+							var name = data.name;
+							var genre = data.genre;
+							var groupnumber = data.count;
+							var avatar = data.avatar;
+
+
+
+
+
+							globalemojitrack = id;
+
+							console.log(globalemojitrack);
+							console.log(groupemojisrc);
+							console.log(content);
+
+
+							var str4 = '';
+
+							str4 ='<div id="'+id+'" class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img class="myuserpic" src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span   class="selfwords">'+transferstr+'</span></div></div></div><div class="clearfix"><div></div></div>';
+
+							$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
+
+
+							//聊天记录列表
+							$('.mainleft .comlist1  #'+sendtarget+' .listOnebottomleft').html(transferstr); 
+
+							var sendtime = getCurrentTime();
+
+							$('.mainleft .comlist1  #'+sendtarget+' .listOnetopright').text(sendtime);
+							//聊天记录列表
+
+
+
+							function sendmessagetobottom (){
+								var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
+								var cli = scroll1.clientHeight;
+								var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
+								var hei = main.scrollHeight;
+								$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
+							};
+							//发送消息滚到最下面
+
+							sendmessagetobottom();
+
+							$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').removeClass('hidden');//对话显示
+
+							$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').siblings().addClass('hidden');//同胞关闭显示
+
+						}).catch(function(err){
+							console.log(err);
+						});
+
+
+						vm.sendbtncontent = '';
+					},
+					fail: function () {
+						console.log('failed');
+					}
+				};
+				msg.set(option);
+				msg.setGroup('groupchat');
+				conn.send(msg.body);
+			};
+
+
+			if ( vm.sendbtncontent != ''&& sendtarget != ''){
+
+				sendPrivateText(vm.sendbtncontent,sendtarget);
+				sendGroupText(vm.sendbtncontent,sendtarget);
+
+			}
+
+			
+		},//发送消息
+		blockpeople:function($event){
+			var getid = $($event.currentTarget).attr('id');
+			console.log( getid );
+			axios.post(globaldomain+'im/blacklist/pull.json?buddyIds='+getid).then(function(res){
+				var data = res.data;
+				console.log(data);
+				vm.strangeropen = false;
+				vm.strangeroff = true;
+			}).catch(function(err){
+				console.log(err);
+			});
+			axios.post(globaldomain+'im/blacklist/find.json').then(function(res){
+				console.log(res);
+				
+			}).catch(function(err){
+				console.log(err);
+			})
+		},//拉黑陌生人
+		unblockpeople:function($event){
+			var getid = $($event.currentTarget).attr('id');
+			console.log(getid);
+			axios.post(globaldomain+'im/blacklist/kick.json?buddyId='+getid).then(function(res){
+				var data = res.data;
+				console.log(data);
+				vm.strangeropen = true;
+				vm.strangeroff = false;
+			}).catch(function(err){
+				console.log(err);
+			});
+			axios.post(globaldomain+'im/blacklist/find.json').then(function(res){
+				console.log(res);
+				
+			}).catch(function(err){
+				console.log(err);
+			})
+			
+		},//解除拉黑陌生人
 			
 		
 			
@@ -6120,7 +6781,7 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 		vm.isgroupleader= false;
 		vm.isgroupmanager = false;//管理员
 		vm.notgroupmanager = false;//不是管理员
-		vm.justoneman = true;//只是个人
+		//vm.justoneman = true;//只是个人
 		vm.shouldshow = false;
 		vm.groupidbindminus = getid;
 		
@@ -6297,9 +6958,10 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 		vm.isgroupleader= false;
 		vm.isgroupmanager = false;//管理员
 		vm.notgroupmanager = false;//不是管理员
-		vm.justoneman = true;//只是个人
+		//vm.justoneman = true;//只是个人
 		vm.shouldshow = false;
 		vm.groupidbindminus = listid;
+		
 		
 		console.log(data);
 		var name = data.name;
@@ -6396,292 +7058,6 @@ $('.mainleft .comlist1').on('click','.listOnecon',function(){
 	
 });
 //点击聊天列表
-
-
-
-
-
-
-
-//发送消息按钮点击
-
-$('.mainright .rightonesend button').on('click',function(){
-	var that = this;
-	
-	var sendtarget = $(that).attr('id');
-	
-	console.log(sendtarget);
-	
-	
-	
-	
-	
-	
-	
-	
-	var sendPrivateText = function (content,targetone) {
-		var id = conn.getUniqueId();                 // 生成本地消息id
-		var msg = new WebIM.message('txt', id);      // 创建文本消息
-		msg.set({
-			msg: content,                  // 消息内容
-			to: targetone,                          // 接收消息对象（用户id）
-			roomType: false,
-			success: function (id, serverMsgId) {
-				console.log('send private text Success');
-				
-				
-				var transferstr = WebIM.utils.parseEmoji( content );
-				
-				console.log( transferstr ); 
-				
-				
-				axios.get(globaldomain+'im/user/detail.json?id='+sendtarget).then(function(res){
-		
-					var data =res.data.data;
-
-					console.log(data);
-					
-					var avatar = data.avatar;
-					
-					var str4 = '';
-					
-						str4 ='<div id="'+id+'" class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img class="myuserpic" src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span   class="selfwords">'+transferstr+'</span></div></div></div><div class="clearfix"><div></div></div>';
-					
-
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
-					
-					console.log(sendtarget);
-					
-					
-					globalemojitrack = id;
-					
-					console.log(globalemojitrack);
-					
-					
-					//聊天记录列表
-					$('.mainleft .comlist1  #'+sendtarget+' .listOnebottomleft').html(transferstr); 
-					
-					var sendtime = getCurrentTime();
-					
-					$('.mainleft .comlist1  #'+sendtarget+' .listOnetopright').text(sendtime);
-					//聊天记录列表
-					
-					
-					function sendmessagetobottom1 (){
-						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
-						var cli = scroll1.clientHeight;
-						var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
-						var hei = main.scrollHeight;
-						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
-					};
-					
-					sendmessagetobottom1();
-					
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').removeClass('hidden');//对话显示
-					
-					console.log( $('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster') );
-					
-					
-					
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').siblings().addClass('hidden');//同胞关闭显示	
-					
-					
-
-
-
-
-
-				}).catch(function(err){
-					console.log(err);
-				});
-				
-				
-				
-				
-				
-				
-				
-				vm.sendbtncontent = '';
-				
-				
-				
-				
-				
-
-
-
-			},
-			fail: function(e){
-				console.log("Send private text error");
-			}
-		});
-		msg.body.chatType = 'singleChat';
-		conn.send(msg.body);
-	};
-	
-	
-	
-	
-	// 群组发送文本消息
-	var sendGroupText = function (content,targetone) {
-		var id = conn.getUniqueId();            // 生成本地消息id
-		var msg = new WebIM.message('txt', id); // 创建文本消息
-		var option = {
-			msg: content,           // 消息内容
-			to: targetone,                       // 接收消息对象(群组id)
-			roomType: false,
-			chatType: 'chatRoom',
-			success: function () {
-				console.log('send room text success');
-				
-				var transferstr = WebIM.utils.parseEmoji( content );
-				
-				console.log( transferstr ); 
-				
-				
-				
-				axios.get(globaldomain+'im/group/info.json?id='+sendtarget).then(function(res){
-		
-					var data = res.data.data;
-
-					console.log(data);
-					var name = data.name;
-					var genre = data.genre;
-					var groupnumber = data.count;
-					var avatar = data.avatar;
-					
-					
-					
-					
-					
-					globalemojitrack = id;
-					
-					console.log(globalemojitrack);
-
-					
-					/*'<div class="msgmarginlr">
-						<div class="rightmsg">
-							<div class="rightmaxwidth">
-								<div class="imgcontainer">
-									<img src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'">
-
-								</div>
-							
-							
-							<div class="rightcon">
-								<div class="wordscontent"><span>'+content+'</span></div>
-							</div>
-							</div>
-							<div class="clearfix"><div>
-						</div>
-						
-					</div>'*/
-					
-					
-					console.log(groupemojisrc);
-					console.log(content);
-					
-					
-					var str4 = '';
-				
-					str4 ='<div id="'+id+'" class="msgmarginlr"><div class="rightmsg"><div class="rightmaxwidth"><div class="imgcontainer"><img class="myuserpic" src="'+(ids.avatar ? vm.$refs.rightthree.picsrc+ ids.avatar : vm.$refs.rightthree.defaultpic)+'"></div><div class="rightcon"><div class="wordscontent"><span   class="selfwords">'+transferstr+'</span></div></div></div><div class="clearfix"><div></div></div>';
-
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster .msgcontainer').append(str4);
-					
-					
-				
-					
-					
-					//聊天记录列表
-					$('.mainleft .comlist1  #'+sendtarget+' .listOnebottomleft').html(transferstr); 
-					
-					var sendtime = getCurrentTime();
-					
-					$('.mainleft .comlist1  #'+sendtarget+' .listOnetopright').text(sendtime);
-					//聊天记录列表
-					
-					
-					
-					function sendmessagetobottom (){
-						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
-						var cli = scroll1.clientHeight;
-						var main = $('.mainright .rightcomOne  #'+ sendtarget +".msgconmaster" )[0];
-						var hei = main.scrollHeight;
-						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
-					};
-					//发送消息滚到最下面
-					
-					sendmessagetobottom();
-					
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').removeClass('hidden');//对话显示
-					
-					$('.mainright .rightonechatcon  #'+sendtarget+'.msgconmaster').siblings().addClass('hidden');//同胞关闭显示
-				
-
-
-
-				}).catch(function(err){
-					console.log(err);
-				});
-				
-				
-				
-				
-				vm.sendbtncontent = '';
-				
-				
-				
-				
-				
-				
-				
-				
-
-
-
-
-
-
-
-			},
-			fail: function () {
-				console.log('failed');
-			}
-		};
-		msg.set(option);
-		msg.setGroup('groupchat');
-		conn.send(msg.body);
-	};
-	
-	
-	
-	
-	
-	
-	
-	if ( vm.sendbtncontent != ''&& sendtarget != ''){
-		
-		sendPrivateText(vm.sendbtncontent,sendtarget);
-		sendGroupText(vm.sendbtncontent,sendtarget);
-		
-	}
-	
-	
-});
-
-
-
-
-
-
-
-
-
-
-
-
-//发送消息按钮点击
-
 
 
 //播放语音消息
@@ -7052,7 +7428,44 @@ $('.mainright .rightcomOne ').on('contextmenu','.selffilespan',function(event){
 	});
 //点击消息里面别人的头像
 
-//点击发送消息图标
+//点击群组免打扰图标
+$('.ultimate').on('click','.fa-bell',function(event){
+	event.stopPropagation();
+	var that = this;
+	$(that).addClass('hidden').siblings('.fa-bell-slash-o').removeClass('hidden');
+	var getid = $(that).attr('id');
+	console.log(getid);
+	
+	axios.post(globaldomain+'im/group/conf/set/hinder.json?groupId='+getid+'&hinder=1').then(function(res){
+		var data = res.data;
+		
+		console.log(data);
+	}).catch(function(err){
+		console.log(err);
+	});
+	
+})
+
+//点击群组免打扰图标
+
+//点击解除群组免打扰图标
+$('.ultimate').on('click','.fa-bell-slash-o',function(event){
+	event.stopPropagation();
+	var that = this;
+	$(that).addClass('hidden').siblings('.fa-bell').removeClass('hidden');
+	var getid = $(that).attr('id');
+	console.log(getid);
+	
+	axios.post(globaldomain+'im/group/conf/set/hinder.json?groupId='+getid+'&hinder=0').then(function(res){
+		var data = res.data;
+		
+		console.log(data);
+	}).catch(function(err){
+		console.log(err);
+	});
+	
+})
+
+//点击解除群组免打扰图标
 
 
-//点击发送消息图标

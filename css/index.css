@@ -112,6 +112,7 @@ article .fa-times:hover {
 }
 
 .firstinput input {
+	float: left;
 	height: 0.64rem;
 	width: 80%;
 	border-radius: 0.1rem;
@@ -142,6 +143,7 @@ article .fa-times:hover {
 }
 
 .secondinput input {
+	float: left;
 	height: 0.64rem;
 	width: 80%;
 	border-radius: 0.1rem;
@@ -264,7 +266,10 @@ article .fa-times:hover {
 	margin-bottom: 0.24rem;
 }
 .bot1 {
+	line-height: 0.34rem;
+	font-size: 0.22rem;
 	text-align: center;
+	
 }
 .bot1 a {
 	color: #666;
@@ -276,9 +281,9 @@ article .fa-times:hover {
 
 footer {
 	height: 1rem;
-	width: 100%;
 	position: fixed;
 	bottom: 0.16rem;
+	right: 0;
 	padding-right: 0.4rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
