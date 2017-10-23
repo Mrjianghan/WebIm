@@ -175,8 +175,9 @@ var vm = new Vue({
 					//相等
 					vm.btncolorswitch2 = true;//
 					vm.ableornot2 = false;//
-					vm.rightorwrong2 = false;
-					vm.rightorwrong1 = true;
+					
+					//vm.rightorwrong2 = false;
+					//vm.rightorwrong1 = true;
 					
 					
 					
@@ -185,8 +186,8 @@ var vm = new Vue({
 					//不等
 					vm.btncolorswitch2 = false;//禁用
 					vm.ableornot2 = true;//禁用
-					vm.rightorwrong2 = true;
-					vm.rightorwrong1 = false;
+					//vm.rightorwrong2 = true;
+					//vm.rightorwrong1 = false;
 				}
 				
 			}

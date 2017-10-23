@@ -3732,6 +3732,7 @@ var vm = new Vue({
 		judgefriendid:'',
 		strangeroff:false,
 		strangeropen:false,
+		firstshow:false,
 	},
 	
 	computed:{
@@ -6345,17 +6346,36 @@ var vm = new Vue({
 			console.log(that);
 			var getid = $(that).attr("id");
 			
+			vm.firstshow = true;
+			
+			//$('.threepiecelists .doublefirst').html();
+			
 			var innerhtml = $('#'+getid+'.listOnecon').html();
 			
 			var str = '';
+			
 			str = str + '<div id="'+getid+'" class="listOnecon">'+innerhtml+'</div>';
-			if ( $('.mainleft  .listOnecon').length == 1 ){
+			
+			$('.threepiecelists .doublefirst').html( str );
+			
+			$('.comlist1 #'+getid +'.listOnecon').remove();
+			
+			console.log( $('.threepiecelists .doublefirst') );
+			console.log( $('.threepiecelists') );
+			console.log(str);
+			
+			
+			/*if ( $('.mainleft  .listOnecon').length == 1 ){
 				vm.popleftlists = false;
 			}else {
 				$('#'+getid +'.listOnecon').remove();
 				$('.mainleft .comlist1').prepend(str);
 				vm.popleftlists = false;
-			}
+			}*/
+			
+			
+			
+			
 			
 		},//置顶聊天信息
 		killchat:function($event){
@@ -6891,6 +6911,10 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 });
 
 //点击聊天列表
+
+$('.mainleft .doublefirst').on('click',function(){
+	
+});//置定点击
 $('.mainleft .comlist1').on('click','.listOnecon',function(){
 	
 	vm.isgroupmaster = false;

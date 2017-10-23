@@ -165,12 +165,16 @@ var vm = new Vue({
 					vm.ableornot2 = false;
 					vm.rightorwrong3 = true;
 					vm.rightorwrong4 = false;
+					//vm.rightorwrong1 = false;
+					//vm.rightorwrong2 = false;
 					
 				}else {
 					vm.btncolorswitch2 = false;
 					vm.ableornot2 = true;
 					vm.rightorwrong3 = false;
 					vm.rightorwrong4 = true;
+					//vm.rightorwrong1 = false;
+					//vm.rightorwrong2 = true;
 				}
 			}
 			

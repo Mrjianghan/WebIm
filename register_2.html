@@ -31,7 +31,7 @@
 						<div v-if="errshow"><i class="fa fa-minus-circle"></i>&nbsp;<span>{{errmsg}}</span></div>
 					</div>
 					<div class="firstinput samesize">
-						<input @change="checkpsw1()" v-model="firstinputval" type="text" placeholder="请输入密码" name="psw" maxlength="20"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
+						<input @change="checkpsw1()" v-model="firstinputval" type="password" placeholder="请输入密码" name="psw" maxlength="20"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
 					</div>
 					<div class="placeholder1">
 						<div>请使用字母、数字和符号两种及以上的组合,6-20个字符</div>
