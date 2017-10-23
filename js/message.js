@@ -2811,13 +2811,14 @@ Vue.component('currentuser',{
 			obj2.id = id;
 				
 			console.log(obj2);
+			console.log(obj2.id);
 				
 			var str ='';
 				
-			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 				
 				
-			if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
+			if ( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 			}
 			
@@ -2843,11 +2844,12 @@ Vue.component('currentuser',{
 				
 			obj1.type="groupchat";
 			var str = '';
-			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 				
 				
+			console.log($('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length);
 				
-			if ( $('.mainleft .comlist1  #'+obj1.to).length < 1 ){
+			if ( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 			}
 			
@@ -2874,11 +2876,12 @@ Vue.component('currentuser',{
 				
 			obj1.type="groupchat";
 			var str = '';
-			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 				
 				
+			console.log( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length );
 				
-			if ( $('.mainleft .comlist1  #'+obj1.to).length < 1 ){
+			if ( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 			}
 			
@@ -2910,10 +2913,12 @@ Vue.component('currentuser',{
 				
 			var str ='';
 				
-			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
+			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 				
+			console.log( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length );
+			
 				
-			if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
+			if ( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 			}
 			
@@ -5044,6 +5049,7 @@ var vm = new Vue({
 		},//左下三角
 		downrightslide:function(){
 			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()+200);
+			//console.log(  $('.chatroomtrade').scrollLeft()  ) ;
 		},//右下三角
 		chatuploadfile:function($event){
 			var that = $event.currentTarget;
@@ -5306,7 +5312,9 @@ var vm = new Vue({
 			vm.twoplaceholder = false;
 			vm.chattargetid = chatroomid;
 			
+			console.log( getindex );
 			
+			vm.thischatroomindex = getindex;
 			
 			
 			
@@ -5677,9 +5685,11 @@ var vm = new Vue({
 			var privatestatus = $(that).attr("data-status");
 			var membership = $(that).attr("data-membership");
 			
+			vm.thischatroomindex1 = getindex;
 			
+			console.log( getindex );
 			
-			
+			console.log( vm.thischatroomindex1 );
 			
 			
 			vm.thischatroomindex = getindex;

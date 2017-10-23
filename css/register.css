@@ -165,8 +165,8 @@ article .fa-times:hover {
 .secondinput img {
 	width: 1.04rem;
 	height: 0.64rem;
-	border-left: 2px solid #efefef;
-	border-right: 2px solid #efefef;
+	border-left: 0.02px solid #efefef;
+	border-right: 0.02px solid #efefef;
 	position: absolute;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -319,39 +319,39 @@ article .fa-times:hover {
 
 
 .errOuter {
-	height: 40px;
-	width: 400px;
+	height: 0.4rem;
+	width: 4rem;
 	margin: 0 auto;
-	line-height: 40px;
+	line-height: 0.4rem;
 	color:#999999;
 }
 .errOuter .fa {
 	color:#f84e4e;
 }
 .errOuter>div {
-	 font-size: 16px;
+	 font-size: 0.16rem;
 }
 
 footer {
-	height: 100px;
+	height: 1rem;
 	right: 0;
 	position: fixed;
-	bottom: 16px;
-	padding-right: 40px;
+	bottom: 0.16rem;
+	padding-right: 0.4rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .footer2 {
 	text-align: right;
 	color: #fff;
-	font-size: 16px;
-	margin-top: 16px;
+	font-size: 0.16rem;
+	margin-top: 0.16rem;
 }
 .footer1 {
 	text-align: right;
 	color: #fff;
-	font-size: 16px;
-	margin-right: 7px;
+	font-size: 0.16rem;
+	margin-right: 0.07rem;
 	
 }
 footer a {
@@ -359,20 +359,20 @@ footer a {
 	color: #fff;
 }
 footer a span{
-	font-size: 20px;
+	font-size: 0.20rem;
 }
 footer .fa {
-	font-size: 40px;
+	font-size: 0.40rem;
 	vertical-align:sub;
 }
 .floatright {
     color: #fff;
     position: fixed;
-    right: 16px;
-    bottom: 16px;
+    right: 0.16rem;
+    bottom: 0.16rem;
 }
 .floatright div:first-child{
-	margin-bottom: 8px;
+	margin-bottom: 0.08rem;
 }
 .floatright div:hover {
     color: #bfe3ae;

@@ -258,6 +258,7 @@
 						<i @click="showemojicontainer" class="fa fa-smile-o"></i>
 						<i class="fa fa-picture-o"><input type="file" accept="image/gif,image/jpeg,image/png,image/bmp"></i>
 						<i class="fa fa-folder"><input type="file"></i>
+						<div class="clearfix"></div>
 					</div>
 					<div class="textcontainer">
 						<textarea>
@@ -790,10 +791,14 @@
 								<div class="clearfix"></div>
 								<div class="chatroomtrade">
 									<div @click="allclick2($event)" :class="{chatroomclick:all2}" class="alltrade">全部</div>
+									
+									
 									<template v-for="(class1,i) in chatroomclass">
 										<div @click="tradesearch($event)" :data-index="i" :class="{chatroomclick:chatroomindex2==i}" class="chatroomsame" :id="class1.id">{{ class1.name }}
 										</div>
 									</template>
+									
+									
 									<div class="clearfix"></div>
 								</div>
 								<div class="clearfix"></div>
@@ -1241,5 +1246,6 @@
         <script src="js/sort.js"></script>
         <script src="js/emoji.js"></script>
 		<script src="js/message.js"></script>
+		<!--<script src="js/rem_js.js"></script>-->
 	</body>
 </html>

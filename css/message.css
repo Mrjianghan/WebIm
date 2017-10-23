@@ -1,7 +1,26 @@
 * {
     margin: 0;
     padding: 0;
+	-webkit-text-size-adjust: none;
 }
+@media all and (min-width:1440px) {
+	html {
+		font-size: 100px;
+	}
+} 
+
+@media all and (max-width:1439px) and (min-width:1367px) {
+	html {
+		font-size: 80px;
+	}
+} 
+
+@media all and (max-width:1366px) {
+	html {
+		font-size: 60px;
+	}
+} 
+	
 html,body {
     height: 100%;
     width: 100%;
@@ -12,7 +31,7 @@ body {
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 650px;
+    min-height: 6.5rem;
 }
 .clearfix {
 	clear: both;
@@ -21,6 +40,10 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+.fa {
+	/*display: inline-block !important;*/
+	/*float: left !important;*/
 }
 .fa-venus {
 	color: #f047de;
@@ -32,66 +55,67 @@ body {
 	display: none;
 }
 .timernow {
-	width: 70px;
-	height: 30px;
-	border-radius: 5px;
+	width: 0.7rem;
+	height: 0.3rem;
+	border-radius: 0.05rem;
 	margin: 0 auto;
 	background-color: #dadada;
 	color: #fff;
 	text-align: center;
-	line-height: 30px;
-	font-size: 20px;
+	line-height: 0.3rem;
+	font-size: 0.2rem;
 }
 .allalertinfo {
-	width: 570px;
-	height: 200px;
+	width: 5.70rem;
+	height: 2rem;
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-left: -285px;
-	margin-top: -100px;
+	margin-left: -2.85rem;
+	margin-top: -1rem;
 	background-color: #fff;
 	z-index: 100;
 }	
 .allalertinfo .fa-times-circle-o {
 	color:#868686;
 	float: right;
-	margin-right: 20px;
-	font-size: 30px;
+	margin-right: 0.20rem;
+	font-size: 0.30rem;
 	cursor: pointer;
-	margin-top: 10px;
+	margin-top: 0.10rem;
 }
 .allalertinfo .fa-times-circle-o:hover {
 	color:#1a7dff;
 }
 .allalertinfo .alertcontent {
-	height: 120px;
+	height: 1.20rem;
 	width: 90%;
 	margin: 0 auto;
-	border-bottom: 1px solid #efefef;
-	margin-top: 30px;
-	line-height: 120px;
+	border-bottom: 0.01rem solid #efefef;
+	margin-top: 0.30rem;
+	line-height: 1.20rem;
 	color: #666;
+	font-size: 0.2rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .allalertinfo .bottomenter {
-	height: 50px;
+	height: 0.50rem;
 	width: 90%;
 	margin: 0 auto;
 }
 .allalertinfo .bottomenter .enterss {
-	margin-top: 10px;
+	margin-top: 0.10rem;
 	float: right;
-	height: 30px;
-	width: 100px;
-	line-height: 30px;
+	height: 0.30rem;
+	width: 1rem;
+	line-height: 0.30rem;
 	text-align: center;
 	color: #666;
-	font-size: 20px;
-	border-radius: 5px;
+	font-size: 0.20rem;
+	border-radius: 0.05rem;
 	cursor: pointer;
-	border: 1px solid #efefef;
+	border: 0.01rem solid #efefef;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	
@@ -104,10 +128,10 @@ body {
 /*全局样式*/
 #messagemaster {
 	margin: 0 auto;
-	width: calc( 100% - 520px );
-	min-height: 650px;
+	width: calc( 100% - 5.2rem );
+	min-height: 6.50rem;
 	height: 100%;
-	min-width: 1100px;
+	min-width: 11rem;
 	background-color: #fff;
 	position: relative;
 }
@@ -115,7 +139,7 @@ body {
 	z-index: -10;
 }
 .mainleft {
-	width: 420px;
+	width: 4.20rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	height: 100%;
@@ -123,49 +147,49 @@ body {
 	background-color: #e4eaf4;
 }
 .leftpoplistmanager {
-	height: 104px;
+	height: 1.04rem;
 	background-color: #fff;
-	border-radius: 10px;
-	width: 146px;
+	border-radius: 0.10rem;
+	width: 1.46rem;
 	position: absolute;
 	z-index: 2000;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 22px;
+	font-size: 0.22rem;
 	color: #333;
 	text-align: center;
 	overflow: hidden;
 }
 .leftpoplistmanager div:first-child {
-	height: 52px;
+	height: 0.52rem;
 	width: 100%;
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 0.01rem solid #f0f0f0;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .leftpoplistmanager div:last-child {
-	height: 52px;
+	height: 0.52rem;
 	width: 100%;
 }
 .leftpoplistmanager div:hover {
 	background-color: #e8e8e8;
 }
 .leftpoplistmanager div {
-	line-height: 52px;
+	line-height: 0.52rem;
 	cursor: pointer;
 }
 
 
 .mainright {
-	width: calc( 100% - 420px );
-	min-width: 680px;
+	width: calc( 100% - 4.20rem );
+	min-width: 6.80rem;
 	height: 100%;
 	float: left;
 	position: relative;
 }
 .current {
-	height: 240px;
-	width: 420px;
+	height: 2.40rem;
+	width: 4.20rem;
 	position: absolute;
 	top: 0;
 	-webkit-box-sizing: border-box;
@@ -173,36 +197,36 @@ body {
 	background-color: #e4eaf4;
 }
 .currentinner {
-	width: 360px;
-	height: 180px;
-	margin: 30px auto;
+	width: 3.60rem;
+	height: 1.80rem;
+	margin: 0.30rem auto;
 	
 }
 .firstline {
-	height: 60px;
+	height: 0.60rem;
 	width: 100%;
 	position: relative;
 }
 
 .selectoneinfo {
-	-webkit-box-shadow: 5px 5px 3px #F8F8F8;
-	box-shadow: 5px 5px 3px #F8F8F8;
+	-webkit-box-shadow: 0.05rem 0.05rem 0.03rem #F8F8F8;
+	box-shadow: 0.05rem 0.05rem 0.03rem #F8F8F8;
 	overflow: hidden;
-	height: 405px;
-	width: 270px;
-	border-radius: 10px;
+	height: 4.05rem;
+	width: 2.70rem;
+	border-radius: 0.10rem;
 	background-color: #fff;
 	position: absolute;
 	z-index: 310;
 }
 
 .selectmingpian {
-	-webkit-box-shadow: 5px 5px 3px #F8F8F8;
-	box-shadow: 5px 5px 3px #F8F8F8;
+	-webkit-box-shadow: 0.05rem 0.05rem 0.03rem #F8F8F8;
+	box-shadow: 0.05rem 0.05rem 0.03rem #F8F8F8;
 	overflow: hidden;
-	height: 415px;
-	width: 270px;
-	border-radius: 10px;
+	height: 4.15rem;
+	width: 2.70rem;
+	border-radius: 0.10rem;
 	background-color: #fff;
 	position: absolute;
 	z-index: 310;
@@ -210,45 +234,46 @@ body {
 
 .addname2 {
 	color: #999;
-	font-size: 16px;
-	margin-left: 20px;
-	margin-top: 5px;
+	font-size: 0.16rem;
+	margin-left: 0.20rem;
+	margin-top: 0.05rem;
 }
 
 /*点击具体某一用户信息框*/
 .currentinfo {
-	height: 405px;
-	width: 270px;
-	border-radius: 10px;
+	height: 4.05rem;
+	width: 2.70rem;
+	border-radius: 0.10rem;
 	background-color: #fff;
 	position: absolute;
 	z-index: 10;
 	overflow: hidden;
-	-webkit-box-shadow: 5px 5px 3px #eecefe;
-	box-shadow: 5px 5px 3px #eecefe;
+	-webkit-box-shadow: 0.05rem 0.05rem 0.03rem #eecefe;
+	box-shadow: 0.05rem 0.05rem 0.03rem #eecefe;
 }
 
 .currentpiccontainer {
-	width: 270px;
-	height: 270px;
+	width: 2.70rem;
+	height: 2.70rem;
+	display: block;
 }
 .nameandgender {
-	font-size: 22px;
+	font-size: 0.22rem;
 	color: #333;
 	position: relative;
-	margin-top: 5px;
-	margin-left: 20px;
-	width: 240px;
+	/*margin-top: 0.05rem;*/
+	margin-left: 0.20rem;
+	width: 2.40rem;
 }
 .nameandgender .fa-venus {
 	position: absolute;
-	margin-left: 5px;
+	margin-left: 0.05rem;
 	vertical-align: sub;
-	top: 4px;
+	top: 0.04rem;
 }
 .mingpianspans {
-	height: 150px;
-	width: 340px;
+	height: 1.50rem;
+	width: 3.40rem;
 	background-color: #fff;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -256,34 +281,34 @@ body {
 	cursor: pointer;
 }
 .mingup {
-	height: 100px;
+	height: 100rem;
 	width: 100%;
 	position: relative;
 }
 .mingup img {
-	height: 60px;
-	width: 60px;
-	margin-top: 20px;
-	margin-left: 20px;
+	height: 0.60rem;
+	width: 0.60rem;
+	margin-top: 0.20rem;
+	margin-left: 0.20rem;
 	position: absolute;;
 }
 .mingup .mingpianname {
-	height: 100px;
-	line-height: 100px;
+	height: 1rem;
+	line-height: 1rem;
 	position: absolute;
-	width: 200px;
-	margin-left: 100px;
-	font-size: 22px;
+	width: 2rem;
+	margin-left: 1rem;
+	font-size: 0.22rem;
 	color: #666;
 }
 .mingdown {
-	height: 50px;
+	height: 0.50rem;
 	width: 100%;
-	padding-left: 30px;
-	font-size: 18px;
+	padding-left: 0.30rem;
+	font-size: 0.18rem;
 	color: #999;
-	line-height: 50px;
-	border-top: 1px solid #efefef;
+	line-height: 0.50rem;
+	border-top: 0.01rem solid #efefef;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -300,73 +325,77 @@ body {
 }
 .cardarea {
 	color: #999;
-	font-size: 16px;
-	margin-left: 20px;
-	margin-top: 5px;
+	font-size: 0.16rem;
+	margin-left: 0.20rem;
+	margin-top: 0.05rem;
 }
 .cardsignature {
-	width: 230px;
+	width: 2.30rem;
 	margin: 0 auto;
-	margin-top: 5px;
+	margin-top: 0.05rem;
 	color: #999;
+	font-size: 0.16rem;
 }
 .nameandgender .fa-mars {
 	position: absolute;
-	margin-left: 5px;
+	margin-left: 0.05rem;
 	vertical-align: sub;
-	top: 4px;
+	top: 0.04rem;
 }
 
 /*点击具体某一用户信息框*/
 
 .firsttimeimg {
-	width: 60px;
-	display: inline-block;
-	height: 60px;
+	width: 0.60rem;
+	display: block;
+	height: 0.60rem;
+	float: left;
 }
 .currentname {
-	height: 60px;
-	width: 200px;
-	display: inline-block;
-	line-height: 60px;
-	font-size: 28px;
+	height: 0.60rem;
+	width: 2rem;
+	display: block;
+	float: left;
+	line-height: 0.60rem;
+	font-size: 0.28rem;
 	color: #333;
-	margin-left: 25px;
+	margin-left: 0.25rem;
 }
 .firstline .fa-bars {
-	font-size: 28px;
+	font-size: 0.28rem;
 	color: #b0b2b5;
 	position: absolute;
-	right: 20px;
-	top: 16px;
+	right: 0.20rem;
+	top: 0.16rem;
 	cursor: pointer;
 }
 .firstline .fa-bars:hover {
 	color: #1a7dff;
 }
 .secondline {
-	margin-top: 20px;
+	margin-top: 0.20rem;
 	width: 100%;
-	height: 40px;
+	height: 0.40rem;
 	background-color: #f8f8f8;
 	position: relative;
 }
 .secondline input {
-	height: 40px;
-	width: 320px;
-	line-height: 40px;
+	height: 0.40rem;
+	width: 3.20rem;
+	line-height: 0.40rem;
 	background: #f8f8f8;
 	border: none;
 	outline: none;
-	padding-left: 14px;
+	position: absolute;
+	padding-left: 0.14rem;
 	color: #999;
-	font-size: 22px;
+	font-size: 0.22rem;
 }
 .secondline .fa-search {
-	font-size: 22px;
+	font-size: 0.22rem;
 	position: absolute;
-	right: 10px;
-	top:9px;
+	right: 0.10rem;
+	top:0.09rem;
 	color: #b0b2b5;
 	cursor: pointer;
 }
@@ -374,20 +403,20 @@ body {
 	color: #1a7dff;
 }
 .searchslidedown {
-	min-height: 450px;
-	height: 450px;
+	min-height: 4.50rem;
+	height: 4.50rem;
 	width: 100%;
 	z-index: 20;
 	background-color: #fff;
 	position: absolute;
 	overflow-y: scroll;
-	-webkit-transform: translateY(20px);
-	transform: translateY(20px);
+	-webkit-transform: translateY(0.4rem);
+	transform: translateY(0.4rem);
 }
 .search1-enter {
 	opacity: 0;
-	-webkit-transform: translateY(-100px);
-	transform: translateY(-100px);
+	-webkit-transform: translateY(-1rem);
+	transform: translateY(-1rem);
 }
 .search1-enter-active {
 	-webkit-transition: all 0.5s;
@@ -395,13 +424,13 @@ body {
 }
 .search1-enter-to {
 	opacity: 1;
-	-webkit-transform: translateY(20px);
-	transform: translateY(20px);
+	-webkit-transform: translateY(0.20rem);
+	transform: translateY(0.20rem);
 }
 .search1-leave {
 	opacity: 1;
-	-webkit-transform: translateY(20px);
-	transform: translateY(20px);
+	-webkit-transform: translateY(0.20rem);
+	transform: translateY(0.20rem);
 }
 .search1-leave-active {
 	-webkit-transition: all 0.5s;
@@ -409,16 +438,17 @@ body {
 }
 .search1-leave-to {
 	opacity: 0;
-	-webkit-transform: translateY(-100px);
-	transform: translateY(-100px);
+	-webkit-transform: translateY(-1rem);
+	transform: translateY(-1rem);
 }
 .slidebars {
-	height: 195px;
-	width: 200px;
+	height: 1.95rem;
+	width: 2.00rem;
 	position: relative;
 	background-color: #fff;
-	left: 170px;
-	border-radius: 10px;
+	left: 1.70rem;
+	top: 0.5rem;
+	border-radius: 0.10rem;
 	z-index: 21;
 }
 .slidebars:after {
@@ -426,38 +456,57 @@ body {
 	width: 0;
 	position: absolute;
 	content: "";
-	border: 10px solid transparent;
-	right: 33px;
-	top: -20px;
+	border: 0.10rem solid transparent;
+	right: 0.33rem;
+	top: -0.20rem;
 	border-bottom-color: #fff;
 }
 .lis {
-	height: 65px;
+	height: 0.65rem;
 	width: 100%;
 	cursor: pointer;
+	position: relative;
+}
+.startchat .fa{
+	left: 0;
+} 
+
+.startchat span{
+	left: 0;
+} 
+.lis span {
+	left: 0.8rem;
+}
+.lis .fa {
+	position: absolute;
+	margin-top: 0.16rem;
 }
 .feedbackmenu {
-	border-bottom: 1px solid #e3e3e3;
-	border-top: 1px solid #e3e3e3;
+	border-bottom: 0.01rem solid #e3e3e3;
+	border-top: 0.01rem solid #e3e3e3;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .lis span {
 	color:#999;
-	line-height: 65px;
-	font-size: 18px;
+	line-height: 0.65rem;
+	font-size: 0.18rem;
 	display: inline-block;
-	letter-spacing: 3px;
-	width: 90px;
+	float: left;
+	width: 1rem;
+	text-align: center;
+	position: absolute;
+	letter-spacing: 0.03rem;
+	
 }
 .lis span:last-child {
 	text-align: center;
 	
 }
 .lis .fa {
-	font-size: 30px;
-	margin-left: 30px;
-	margin-right: 15px;
+	font-size: 0.30rem;
+	margin-left: 0.30rem;
+	margin-right: 0.15rem;
 	vertical-align: sub;
 }
 .lis:hover {
@@ -483,72 +532,72 @@ body {
 	z-index: 2000;
 }
 .feedbackpop {
-	height: 550px;
+	height: 5.50rem;
 	position: absolute;
-	width: 604px;
+	width: 6.04rem;
 	left: 50%;
 	top:50%;
-	margin-left: -302px;
-	margin-top: -275px;
+	margin-left: -3.02rem;
+	margin-top: -2.75rem;
 	background-color: #f7f7f7;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 }
 .feedhead {
-	height: 80px;
+	height: 0.80rem;
 	width: 100%;
-	line-height: 80px;
-	font-size: 26px;
+	line-height: 0.80rem;
+	font-size: 0.26rem;
 	color: #333;
 	position: relative;
 	background-color: #e4eaf4;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	border-top-left-radius: 0.20rem;
+	border-top-right-radius: 0.20rem;
 	text-align: center;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .feedhead .fa {
 	position: absolute;
-	right: 70px;
-	top: 25px;
+	right: 0.70rem;
+	top: 0.25rem;
 	color: #999;
 	cursor: pointer;
-	font-size: 30px;
+	font-size: 0.30rem;
 }
 .feedhead .fa:hover {
 	color: #2285ff;
 }
 .feedbackcore {
-	width: 524px;
-	height: 275px;
+	width: 5.24rem;
+	height: 2.75rem;
 	display: inline-block;
-	border-radius: 20px;
-	border: 1px solid #ccc;
-	margin-left: 40px;
-	margin-top: 40px;
-	padding: 20px;
+	border-radius: 0.20rem;
+	border: 0.01rem solid #ccc;
+	margin-left: 0.40rem;
+	margin-top: 0.40rem;
+	padding: 0.20rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #333;
 	outline: none;
 	font-family: "Microsoft Yahei";
 	resize: none;
 }
 .feedbackpop button {
-	width: 484px;
-	height: 60px;
-	line-height: 60px;
+	width: 4.84rem;
+	height: 0.60rem;
+	line-height: 0.60rem;
 	background-color: #2285ff;
 	color: #fff;
 	text-align: center;
 	border: none;
 	display: block;
 	margin: 0 auto;
-	margin-top: 40px;
-	font-size: 26px;
-	border-radius: 10px;
+	margin-top: 0.40rem;
+	font-size: 0.26rem;
+	border-radius: 0.10rem;
 	cursor: pointer;
 	outline: none;
 }
@@ -565,70 +614,70 @@ body {
 	z-index: 2000;
 }
 .readychatpop {
-	height: 600px;
-	width: 604px;
+	height: 6rem;
+	width: 6.04rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -302px;
-	margin-top: -300px;
+	margin-left: -3.02rem;
+	margin-top: -3rem;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 	
 }
 .readychathead {
-	height: 80px;
+	height: 0.80rem;
 	width: 100%;
-	line-height: 80px;
-	font-size: 26px;
+	line-height: 0.80rem;
+	font-size: 0.26rem;
 	color: #333;
 	position: relative;
 	background-color: #e4eaf4;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	border-top-left-radius: 0.20rem;
+	border-top-right-radius: 0.20rem;
 	text-align: center;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .readychathead .fa {
 	position: absolute;
-	right: 70px;
-	top: 25px;
+	right: 0.70rem;
+	top: 0.25rem;
 	color: #999;
 	cursor: pointer;
-	font-size: 30px;
+	font-size: 0.30rem;
 }
 .readychathead .fa:hover {
 	color: #2285ff;
 }
 .switchchat {
 	width: 100%;
-	height: 80px;
+	height: 0.80rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .switchchat .selectfriends {
-	width: 302px;
-	border-bottom: 1px solid #e5e5e5;
-	height: 80px;
+	width: 3.02rem;
+	border-bottom: 0.01rem solid #e5e5e5;
+	height: 0.80rem;
 	text-align: center;
-	line-height: 80px;
+	line-height: 0.80rem;
 	float: left;
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #666;
 	cursor: pointer;
-	border-right: 1px solid #e5e5e5;
+	border-right: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .switchchat .selectchatrooms {
-	width: 302px;
-	border-bottom: 1px solid #e5e5e5;
-	height: 80px;
+	width: 3.02rem;
+	border-bottom: 0.01rem solid #e5e5e5;
+	height: 0.80rem;
 	text-align: center;
-	line-height: 80px;
-	font-size: 24px;
+	line-height: 0.80rem;
+	font-size: 0.24rem;
 	color: #666;
 	cursor: pointer;
 	float: left;
@@ -640,32 +689,32 @@ body {
 	border-bottom-color: #1a7dff;
 }
 .switchcontainerboss {
-	height: 440px;
+	height: 4.40rem;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	
 }
 .sel1con {
-	height: 280px;
+	height: 2.80rem;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 }
 .sel2con {
-	height: 280px;
+	height: 2.80rem;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	overflow-y: scroll;
 }
 .selectallboss {
-	height: 40px;
+	height: 0.40rem;
 	width: 100%;
-	line-height: 40px;
-	border: 1px solid #e5e5e5;
+	line-height: 0.40rem;
+	border: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	position: relative;
@@ -673,56 +722,57 @@ body {
 
 .selectallboss span {
 	display: inline-block;
-	height: 40px;
+	height: 0.40rem;
 	width: auto;
 	position: absolute;
 	top: 0;
 	color: #666;
-	font-size: 20px;
+	margin-left: 1rem;
+	font-size: 0.20rem;
 	font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
 }
 .selectallcon {
-	height: 40px;
-	width: 40px;
+	height: 0.40rem;
+	width: 0.40rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	margin-left: 40px;
-	display: inline-block;
+	margin-left: 0.40rem;
+	display: block;
 	position: relative;
 }
 .selectallcon input {
-	width: 26px;
-	height: 40px;
+	width: 0.26rem;
+	height: 0.40rem;
 	position: absolute;
 	left: 0;
 	opacity: 1;
 }
 .selectallcon img {
 	margin: 0 auto;
-	margin-top: 7px;
+	margin-top: 0.07rem;
 }
 .getfriendscontainer {
-	height: 240px;
+	height: 2.40rem;
 	width: 100%;
 	overflow-y: scroll;
 }
 .beginchatbtn {
-	height: 60px;
-	width: 484px;
+	height: 0.60rem;
+	width: 4.84rem;
 	background-color: #ccc;
 	color: #fff;
 	border: none;
-	border-radius: 10px;
-	font-size: 26px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
 	text-align: center;
-	margin-left: 60px;
-	margin-top: 50px;
+	margin-left: 0.60rem;
+	margin-top: 0.50rem;
 	cursor: pointer;
 }
 .friendseveryOne {
 	width: 100%;
-	height: 90px;
-	padding-left: 40px;
+	height: 0.90rem;
+	padding-left: 0.40rem;
 	
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -730,24 +780,24 @@ body {
 }
 .selectOnly1 {
 	height: 100%;
-	width: 26px;
+	width: 0.26rem;
 	position: relative;
 }
 .selectOnly1 .under1{
 	position: absolute;
-	top: 32px;
+	top: 0.32rem;
 	opacity: 0;
 }
 .selectOnly1 .under2{
 	position: absolute;
-	top: 32px;
+	top: 0.32rem;
 	opacity: 0;
 }
 .selectOnly1 input{
 	position: absolute;
-	top: 32px;
-	width: 26px;
-	height: 26px;
+	top: 0.32rem;
+	width: 0.26rem;
+	height: 0.26rem;
 	
 	
 }
@@ -756,197 +806,204 @@ body {
 	
 }
 .friendsimg {
-	width: 70px;
-	height: 70px;
-	left: 90px;
+	width: 0.70rem;
+	height: 0.70rem;
+	left: 0.90rem;
 	position: absolute;
-	bottom: 10px;
+	bottom: 0.10rem;
 }
 .sel1con .sort_box input {
 	opacity: 1;
 }
 .startgrouprightcon {
-	height: 90px;
+	height: 0.90rem;
 	width: 100%;
 	position: relative;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	cursor: pointer;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .startrightimgcon {
-	margin-left: 60px;
-	height: 70px;
-	width: 70px;
-	padding-top: 10px;
+	margin-left: 0.60rem;
+	height: 0.70rem;
+	width: 0.70rem;
+	padding-top: 0.10rem;
 	overflow: hidden;
+	position: relative;
 }
 .startrightimgcon img {
-	width: 70px;
-	height: 70px;
+	width: 0.70rem;
+	height: 0.70rem;
+	position: absolute;
 }
 .groupnameright {
 	width: 70%;
 	position: absolute;
-	height: 90px;
-	line-height: 90px;
-	font-size: 20px;
+	height: 0.90rem;
+	line-height: 0.90rem;
+	font-size: 0.20rem;
 	color: #666;
 	top: 0;
-	left: 150px;
+	left: 1.50rem;
 }
 /*发起聊天*/
 
 /*主搜索框*/
 .serach1friendtitle {
-	height: 40px;
+	height: 0.40rem;
 	width: 100%;
-	line-height: 40px;
+	line-height: 0.40rem;
 	position: relative;
 }
 .searchfriendtitlewords {
-	font-size: 16px;
-	height: 40px;
-	line-height: 40px;
-	width: 70px;
+	font-size: 0.16rem;
+	height: 0.40rem;
+	line-height: 0.40rem;
+	width: 0.70rem;
 	color: #333;
-	padding-left: 20px;
+	padding-left: 0.20rem;
 	background-color: #fff;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 6;
 }
 .searchhr {
-	height: 20px;
-	width: 280px;
+	height: 0.20rem;
+	width: 2.80rem;
 	position: absolute;
 	top: 0;
 	right: 0;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 4;
 }
 .searchfriendcon {
-	height: 70px;
+	height: 0.70rem;
 	width: 100%;
 	position: relative;
 	cursor: pointer;
 }
 .searchfriendcon img {
-	width: 50px;
-	height: 50px;
-	margin-top: 10px;
-	margin-left: 20px;
+	width: 0.50rem;
+	height: 0.50rem;
+	margin-top: 0.10rem;
+	margin-left: 0.20rem;
+	float: left;
 }
 .searchfriendcon div {
 	width: 60%;
-	height:70px;
-	line-height: 70px;
-	font-size: 18px;
+	height:0.70rem;
+	line-height: 0.70rem;
+	font-size: 0.18rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
-	margin-left: 20px;
+	margin-left: 0.20rem;
 }
 .serach1grouptitle {
-	height: 40px;
+	height: 0.40rem;
 	width: 100%;
-	line-height: 40px;
+	line-height: 0.40rem;
 	position: relative;
 }
 .searchgrouptitlewords {
-	font-size: 16px;
-	height: 40px;
-	line-height: 40px;
-	width: 70px;
+	font-size: 0.16rem;
+	height: 0.40rem;
+	line-height: 0.40rem;
+	width: 0.70rem;
 	color: #333;
-	padding-left: 20px;
+	padding-left: 0.20rem;
 	background-color: #fff;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 5;
 }
 .searchgroupcon {
-	height: 70px;
+	height: 0.70rem;
 	width: 100%;
 	position: relative;
 	cursor: pointer;
 }
 .searchgroupcon img {
-	width: 50px;
-	height: 50px;
-	margin-top: 10px;
-	margin-left: 20px;
+	width: 0.50rem;
+	height: 0.50rem;
+	margin-top: 0.10rem;
+	margin-left: 0.20rem;
+	float: left;
 }
 .searchgroupcon div {
 	width: 60%;
-	height:70px;
-	line-height: 70px;
-	font-size: 18px;
+	height:0.70rem;
+	line-height: 0.70rem;
+	font-size: 0.18rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
-	margin-left: 20px;
+	margin-left: 0.20rem;
 }
 .unsearchgroups {
 	width: 100%;
-	padding-bottom: 30px;
+	padding-bottom: 0.30rem;
 }
 .noresult {
 	width: 100%;
-	height: 50px;
-	line-height: 50px;
+	height: 0.50rem;
+	line-height: 0.50rem;
 	text-align: center;
+	font-size: 0.3rem;
 	color: #666;
 }
 .searchresultgroups {
 	width: 100%;
 }
 .searchresultgroups .innercon {
-	height: 70px;
+	height: 0.70rem;
 	width: 100%;
 	position: relative;
 }
 .searchresultgroups .innercon img {
-	width: 50px;
-	height: 50px;
-	margin-top: 10px;
-	margin-left: 20px;
+	width: 0.50rem;
+	height: 0.50rem;
+	margin-top: 0.10rem;
+	margin-left: 0.20rem;
+	float: left;
 }
 .searchresultgroups .innercon div {
 	width: 60%;
-	height:70px;
-	line-height: 70px;
-	font-size: 18px;
+	height:0.70rem;
+	line-height: 0.70rem;
+	font-size: 0.18rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
-	margin-left: 20px;
+	margin-left: 0.20rem;
 }
 .searchresultfriends {
 	width: 100%;
 }
 .searchresultfriends .innercon {
-	height: 70px;
+	height: 0.70rem;
 	width: 100%;
 	position: relative;
 }
 .searchresultfriends .innercon img {
-	width: 50px;
-	height: 50px;
-	margin-top: 10px;
-	margin-left: 20px;
+	width: 0.50rem;
+	height: 0.50rem;
+	margin-top: 0.10rem;
+	margin-left: 0.20rem;
+	float: left;
 }
 .searchresultfriends .innercon div {
 	width: 60%;
-	height:70px;
-	line-height: 70px;
-	font-size: 18px;
+	height:0.70rem;
+	line-height: 0.70rem;
+	font-size: 0.18rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
-	margin-left: 20px;
+	margin-left: 0.20rem;
 }
 
 /*主搜索框*/
@@ -958,22 +1015,22 @@ body {
 }
 .thirdline {
 	
-	height: 40px;
-	margin-top: 30px;
-	font-size: 30px;
+	height: 0.40rem;
+	margin-top: 0.30rem;
+	font-size: 0.30rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .thirdflow {
 	width: 33.3333%;
 	float: left;
-	height: 40px;
-	line-height: 40px;
+	height: 0.40rem;
+	line-height: 0.40rem;
 	text-align: center;
 }
 .thirdflowcenter {
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	border-left: 0.01rem solid #ccc;
+	border-right: 0.01rem solid #ccc;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -990,44 +1047,44 @@ body {
 
 /*动态组件3条列表容器*/
 .threepiecelists {
-	height:calc( 100% - 240px );
-	width: 420px;
+	height:calc( 100% - 2.4rem );
+	width: 4.20rem;
 	position: absolute;
-	top: 240px;
+	top: 2.40rem;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 
 /*第三个列表*/
 .listThree_groupheader {
-	height: 50px;
-	width: 420px;
-	font-size: 20px;
+	height: 0.50rem;
+	width: 4.20rem;
+	font-size: 0.20rem;
 	color: #999;
 	background-color: #fff;
-	line-height: 50px;
-	padding-left: 30px;
+	line-height: 0.50rem;
+	padding-left: 0.30rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }	
 .listThree_groupcon {
-	height: 110px;
-	width: 420px;
+	height: 1.10rem;
+	width: 4.20rem;
 	position: relative;
 }
 .listThree_groupcon img {
-	width: 70px;
-	margin-top: 20px;
-	margin-left: 30px;
+	width: 0.70rem;
+	margin-top: 0.20rem;
+	margin-left: 0.30rem;
 }
 .listThree_groupcon .name {
-	width: 250px;
-	height: 110px;
-	line-height: 110px;
-	margin-left: 20px;
+	width: 2.50rem;
+	height: 1.10rem;
+	line-height: 1.10rem;
+	margin-left: 0.20rem;
 	display: inline-block;
 	position: absolute;
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #333;
 	top: 0;
 }
@@ -1036,34 +1093,34 @@ body {
 
 
 .sort_list1 {
-	height: 110px;
-	width: 420px;
+	height: 1.10rem;
+	width: 4.20rem;
 	position: relative;
 }
 .sort_list1 img {
-	margin-top: 20px;
-	margin-left: 30px;
-	width: 70px;
+	margin-top: 0.20rem;
+	margin-left: 0.30rem;
+	width: 0.70rem;
 }
 .num_name1 {
-	width: 250px;
-	height: 110px;
-	font-size: 24px;
+	width: 2.50rem;
+	height: 1.10rem;
+	font-size: 0.24rem;
 	color: #333;
-	line-height: 110px;
-	margin-left: 20px;
+	line-height: 1.10rem;
+	margin-left: 0.20rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
 }
 .sort_letter1 {
-	height: 50px;
-	width: 420px;
-	font-size: 20px;
+	height: 0.50rem;
+	width: 4.20rem;
+	font-size: 0.20rem;
 	color: #999;
 	background-color: #fff;
-	line-height: 50px;
-	padding-left: 30px;
+	line-height: 0.50rem;
+	padding-left: 0.30rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -1086,87 +1143,87 @@ body {
 }
 .nomessage {
 	text-align: center;
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #999;
 }
 
 .listOnecon {
-	width: 420px;
-	height: 110px;
+	width: 4.20rem;
+	height: 1.10rem;
 	position: relative;
 	
 }
 .listOnecon img {
-	width: 70px;
-	height: 70px;
-	margin-top: 20px;
-	margin-left: 20px;
+	width: 0.70rem;
+	height: 0.70rem;
+	margin-top: 0.20rem;
+	margin-left: 0.20rem;
 	
 	display: inline-block;
 }
 .listOnecon .circle {
 	position: absolute;
-	height: 18px;
-	width: 18px;
+	height: 0.18rem;
+	width: 0.18rem;
 	border-radius: 50%;
 	background-color: #ff3b30;
-	top: 10px;
-	left: 80px;
+	top: 0.10rem;
+	left: 0.80rem;
 	color: #fff;
-	font-size: 13px;
+	font-size: 0.13rem;
 	text-align: center;
-	line-height: 18px;
+	line-height: 0.18rem;
 }
 .listOnecon .transparentone {
 	position: absolute;
-	height: 18px;
-	width: 18px;
+	height: 0.18rem;
+	width: 0.18rem;
 	border-radius: 50%;
 	background-color: transparent;
-	top: 10px;
-	left: 80px;
+	top: 0.10rem;
+	left: 0.80rem;
 	color: #fff;
-	font-size: 13px;
+	font-size: 0.13rem;
 	text-align: center;
-	line-height: 18px;
+	line-height: 0.18rem;
 }
 
 .listOnedetails {
-	height: 70px;
-	width: 290px;
+	height: 0.70rem;
+	width: 2.90rem;
 	
 	display: inline-block;
-	margin-left: 18px;
+	margin-left: 0.18rem;
 }
 .listOneconleft {
-	width: 240px;
+	width: 2.40rem;
 	float: left;
 	height: 100%;
 	
 	position: relative;
 }
 .listOnetopleft {
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #333;
 	position: absolute;
 	top: 0;
 	width: 100%;
 }
 .listOnebottomleft {
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #999;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 }
 .listOnebottomleft span {
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #ff3b30;
 	
 } 
 .listOnebottomleft img {
-	width: 20px;
-	height: 20px;
+	width: 0.20rem;
+	height: 0.20rem;
 	display: inline-block;
 	margin-left: 0;
 	margin-top: 0;
@@ -1175,13 +1232,13 @@ body {
 
 
 .listOneconright {
-	width: 50px;
+	width: 0.50rem;
 	float: left;
 	height: 100%;
 	position: relative;
 }	
 .listOnetopright {
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #999;
 	position: absolute;
 	top: 0;	
@@ -1191,7 +1248,7 @@ body {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	font-size: 20px;
+	font-size: 0.20rem;
 	cursor: pointer;
 }
 
@@ -1207,30 +1264,30 @@ body {
 }
 .righttwomenu1 {
 	position: absolute;
-	height: 195px;
-	width: 200px;
-	right: 90px;
-	top: 50px;
+	height: 1.95rem;
+	width: 2.00rem;
+	right: 0.90rem;
+	top: 0.50rem;
 	background-color: #fff;
 	z-index: 300;
 }
 .righttwomenu2 {
 	position: absolute;
-	height: 130px;
-	width: 200px;
-	right: 90px;
-	top: 50px;
+	height: 1.30rem;
+	width: 2.00rem;
+	right: 0.90rem;
+	top: 0.50rem;
 	background-color: #fff;
 	z-index: 300;
 }
 .righttwolist1 {
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 }
 .righttwolists {
-	height: 65px;
+	height: 0.65rem;
 	width: 100%;
-	line-height: 65px;
-	font-size: 18px;
+	line-height: 0.65rem;
+	font-size: 0.18rem;
 	color: #999;
 	text-align: center;
 	cursor: pointer;
@@ -1239,15 +1296,15 @@ body {
 	color: #1a7dff;
 }
 .righttwolist2 {
-	border-bottom: 1px solid #e5e5e5;
-	border-top: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
+	border-top: 0.01rem solid #e5e5e5;
 }
 
 .righttwoheader .fa-cog {
-	font-size: 28px;
+	font-size: 0.28rem;
 	position: absolute;
-	right: 60px;
-	top: 41px;
+	right: 0.60rem;
+	top: 0.41rem;
 	cursor: pointer;
 	color: #9b9b9b;
 }
@@ -1256,19 +1313,19 @@ body {
 }
 .chatroomheader {
 	background-color: #fff;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 0.20rem;
+	padding-bottom: 0.20rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 100%;
-	height: 130px;
+	height: 1.30rem;
 	position: relative;
 }
 .fixcoverright {
 	position: absolute;
 	right: 0;
-	height: 100px;
-	width: 30px;
+	height: 1rem;
+	width: 0.30rem;
 	background-color: #fff;
 	z-index: 80;
 	opacity: 0;
@@ -1276,43 +1333,31 @@ body {
 .fixcoverleft {
 	position: absolute;
 	left: 0;
-	height: 100px;
-	width: 30px;
+	height: 1rem;
+	width: 0.30rem;
 	background-color: #fff;
 	z-index: 80;
 }
-.chatroomarea {
-	width: auto;
-	margin-left: 20px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	overflow-x: scroll;
-	height: 40px;
-	white-space: nowrap;
-	-ms-overflow-style: none; 
-    overflow: -moz-scrollbars-none;
-	position: relative;
-	
-}
+
 .fa1 {
 	position: absolute;
 	color: #333;
 	opacity: 0.1;
 	z-index: 100;
-	font-size: 25px;
+	font-size: 0.25rem;
 	cursor: pointer;
-	left: 5px;
-	top: 30px;
+	left: 0.05rem;
+	top: 0.30rem;
 }
 .fa2 {
 	position: absolute;
-	right: 5px;
+	right: 0.05rem;
 	color: #333;
 	opacity: 0.1;
 	z-index: 100;
-	font-size: 25px;
+	font-size: 0.25rem;
 	cursor: pointer;
-	top: 30px;
+	top: 0.30rem;
 }
 .fa1:hover {
 	opacity: 0.7; 
@@ -1326,20 +1371,20 @@ body {
 	color: #333;
 	opacity: 0.1;
 	z-index: 100;
-	font-size: 25px;
+	font-size: 0.25rem;
 	cursor: pointer;
-	left: 5px;
-	bottom: 25px;
+	left: 0.05rem;
+	bottom: 0.25rem;
 }
 .fa4 {
 	position: absolute;
-	right: 5px;
+	right: 0.05rem;
 	color: #333;
 	opacity: 0.1;
 	z-index: 100;
-	font-size: 25px;
+	font-size: 0.25rem;
 	cursor: pointer;
-	bottom: 25px;
+	bottom: 0.25rem;
 }
 .fa3:hover {
 	opacity: 0.7; 
@@ -1347,25 +1392,25 @@ body {
 .fa2:hover {
 	opacity: 0.7; 
 }
-
-
 .chatroomarea::-webkit-scrollbar { 
 	display: none;
 } 
 
 .allarea {
 	display: inline-block;
-	font-size: 20px;
+	float: left;
+	font-size: 0.20rem;
 	color: #333;
-	margin-right: 20px;
-	margin-left: 20px;
+	margin-right: 0.20rem;
+	margin-left: 0.20rem;
 }
 .alltrade {
 	display: inline-block;
-	font-size: 20px;
+	float: left;
+	font-size: 0.20rem;
 	color: #333;
-	margin-right: 20px;
-	margin-left: 20px;
+	margin-right: 0.20rem;
+	margin-left: 0.20rem;
 }	
 .alltrade:hover {
 	color: #00a0e9;
@@ -1373,15 +1418,30 @@ body {
 .allarea:hover {
 	color: #00a0e9;
 }
+
+.chatroomarea {
+	width: auto;
+	margin-left: 0.20rem;
+	margin-top: 0.10rem;
+	margin-bottom: 0.10rem;
+	overflow-x: scroll;
+	height: 0.40rem;
+	white-space: nowrap;
+	-ms-overflow-style: none; 
+    overflow: -moz-scrollbars-none;
+	position: relative;
+	
+}
+
 .chatroomtrade {
 	width: auto;
-	margin-left: 20px;
-	height: 40px;
+	margin-left: 0.20rem;
+	height: 0.40rem;
 	overflow-x: scroll;
 	white-space: nowrap;
 	-ms-overflow-style: none; 
     overflow: -moz-scrollbars-none; 
-	position: relative;
+	/*position: relative;*/
 }
 .chatroomtrade::-webkit-scrollbar { 
 	display: none;
@@ -1389,11 +1449,12 @@ body {
 .chatroomsame {
 	cursor: pointer;
 	height: auto;
-	font-size: 20px;
+	width: 0.5rem;
+	font-size: 0.20rem;
 	display: inline-block;
 	color: #333;
 	background-color: #fff;
-	margin-right: 20px;
+	margin-right: 0.20rem;
 }
 
 .chatroomtrade:hover {
@@ -1406,44 +1467,44 @@ body {
 	color: #00a0e9;
 }
 .chatroomouter {
-	height: 110px;
-	width: 420px;
+	height: 1.10rem;
+	width: 4.20rem;
 	background-color: #e4eaf4;
 	overflow: hidden;
 }
 .chatroomwrapper {
-	width: 380px;
-	height: 70px;
-	margin-top: 20px;
-	margin-left: 20px;
+	width: 3.80rem;
+	height: 0.70rem;
+	margin-top: 0.20rem;
+	margin-left: 0.20rem;
 	position: relative;
 	
 }
 .chatroomwrapper img {
-	width: 70px;
-	height: 70px;
-
+	width: 0.70rem;
+	height: 0.70rem;
+	float: left;
 	
 }
 .chatroomname {
 	position: absolute;
-	height: 70px;
-	line-height: 70px;
+	height: 0.70rem;
+	line-height: 0.70rem;
 	top: 0;
-	left: 90px;
-	font-size: 24px;
+	left: 0.90rem;
+	font-size: 0.24rem;
 	color: #333;
 	font-weight: bold;
-	width: 200px;
+	width: 2rem;
 }
 .chatroomstatus {
 	position: absolute;
-	right: 30px;
+	right: 0.30rem;
 	top: 0;
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #999;
-	height: 70px;
-	line-height: 70px;
+	height: 0.70rem;
+	line-height: 0.70rem;
 }
 .righttwoplaceholder {
 	width: 100%;
@@ -1452,25 +1513,25 @@ body {
 	overflow: hidden;
 }
 .twocenter {
-	height: 270px;
-	width: 300px;
+	height: 2.70rem;
+	width: 3.00rem;
 	margin: 0 auto;
 	margin-top: 30%;
 }
 .twocenter img {
 	display: block;
 	margin: 0 auto;
-	height: 150px;
-	width: 150px;
+	height: 1.50rem;
+	width: 1.50rem;
 }
 .twocenter div {
 	display: block;
 	margin: 0 auto;
-	font-size: 32px;
+	font-size: 0.32rem;
 	font-weight: bold;
 	color: #333;
-	width: 300px;
-	margin-top: 80px;
+	width: 3rem;
+	margin-top: 0.80rem;
 	text-align: center;
 }
 
@@ -1492,36 +1553,36 @@ body {
 .privateblock img {
 	margin: 0 auto;
 	margin-top: 20%;
-	width: 150px;
-	height: 150px;
-	margin-bottom: 50px;
+	width: 1.50rem;
+	height: 1.50rem;
+	margin-bottom: 0.50rem;
 	display: block;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 }
 .privateblock p {
 	margin: 0 auto;
 	text-align: center;
-	font-size: 32px;
+	font-size: 0.32rem;
 	color: #333;
 }
 .privateblock span {
 	
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #333;
 }
 .privateblock button {
 	margin: 0 auto;
 	background-color: #187bff;
-	height: 60px;
-	width: 300px;
+	height: 0.60rem;
+	width: 3rem;
 	border: none;
 	display: block;
 	color: #f8f8f8;
-	border-radius: 10px;
-	font-size: 26px;
-	line-height: 60px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
+	line-height: 0.60rem;
 	text-align: center;
-	margin-top: 110px;
+	margin-top: 1.10rem;
 	cursor: pointer;
 }
 
@@ -1539,22 +1600,22 @@ body {
 	z-index: 500;
 }
 .pleasemobilepop .chatroomalert {
-	height: 320px;
-	width: 480px;
+	height: 3.20rem;
+	width: 4.80rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -240px;
-	margin-top: -160px;
+	margin-left: -2.40rem;
+	margin-top: -1.60rem;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 	overflow: hidden;
 }
 .pleasemobilepop .chatroomalert .fa-times {
-	font-size: 30px;
+	font-size: 0.30rem;
 	float: right;
-	margin-right: 30px;
-	margin-top: 30px;
+	margin-right: 0.3rem;
+	margin-top: 0.30rem;
 	color: #999;
 	cursor: pointer;
 }
@@ -1564,58 +1625,58 @@ body {
 }
 .pleasemobilepop .chatroomalert .chatroompopcontent {
 	text-align: center;
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #666;
-	margin-top: 56px;
+	margin-top: 0.56rem;
 }
 .pleasemobilepop button {
 	margin: 0 auto;
 	background-color: #187bff;
-	height: 60px;
-	width: 300px;
+	height: 0.60rem;
+	width: 3rem;
 	border: none;
 	display: block;
 	color: #f8f8f8;
-	border-radius: 10px;
-	font-size: 26px;
-	line-height: 60px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
+	line-height: 0.60rem;
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 0.50rem;
 	cursor: pointer;
 }
 .changegroupcon {
-	height: 460px;
-	width:604px;
+	height: 4.60rem;
+	width:6.04rem;
 	position: relative;
 	left: 50%;
 	top: 50%;
-	margin-top: -230px;
-	margin-left: -302px;
+	margin-top: -2.30rem;
+	margin-left: -3.02rem;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 	overflow: hidden;
 	
 }
  .changegroupcon .changeheader {
 	 width: 100%;
-	 height: 80px;
+	 height: 0.80rem;
 	 background-color: #e4eaf4;
-	 border-bottom: 1px solid #e5e5e5;
+	 border-bottom: 0.01rem solid #e5e5e5;
 	 -webkit-box-sizing: border-box;
 	 box-sizing: border-box;
 	 text-align: center;
-	 line-height: 80px;
-	 font-size: 26px;
+	 line-height: 0.80rem;
+	 font-size: 0.26rem;
 	 color: #333;
 	 position: relative;
 }
 .changeheader .fa-times {
 	position: absolute;
-	font-size: 26px;
+	font-size: 0.26rem;
 	color: #999;
 	cursor: pointer;
-	top: 25px;
-	right: 30px;
+	top: 0.25rem;
+	right: 0.30rem;
 }
 .changeheader .fa-times:hover {
 	color: #00a0e9;
@@ -1623,44 +1684,45 @@ body {
 }
 .changeheader .changecontainer {
 	width: 100%;
-	height: 128px;
+	height: 1.28rem;
 	position: relative;
 }
 
 .groupnamecontainer {
-	height: 44px;
-	width: 514px;
-	margin-left: 40px;
-	margin-top: 30px;
+	height: 0.44rem;
+	width: 5.14rem;
+	margin-left: 0.40rem;
+	margin-top: 0.30rem;
 	position: relative;
 }
 .groupbroadcontainer {
-	height: 44px;
-	width: 514px;
-	margin-left: 40px;
-	margin-top: 40px;
+	height: 0.44rem;
+	width: 5.14rem;
+	margin-left: 0.40rem;
+	margin-top: 0.40rem;
 }
 .groupnamewords {
-	height: 44px;
-	font-size: 24px;
+	height: 0.44rem;
+	font-size: 0.24rem;
 	font-weight:600;
 	color: #666;
-	line-height: 44px;
+	line-height: 0.44rem;
+	position: absolute;
 }
 .groupnamecontainer input {
-	border: 1px solid #e5e5e5;
-	height: 44px;
-	width: 400px;
+	border: 0.01rem solid #e5e5e5;
+	height: 0.44rem;
+	width: 4rem;
 	margin: 0;
 	top: 0;
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #666;
 	position: absolute;
-	padding-left: 10px;
+	padding-left: 0.10rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 10px;
-	margin-left: 20px;
+	border-radius: 0.10rem;
+	margin-left: 1.1rem;
 }
 .g1 {
 	position: relative;
@@ -1668,31 +1730,31 @@ body {
 .changecontainer button {
 	margin: 0 auto;
 	background-color: #187bff;
-	height: 60px;
-	width: 484px;
+	height: 0.60rem;
+	width: 4.84rem;
 	border: none;
 	display: block;
 	color: #f8f8f8;
-	border-radius: 10px;
-	font-size: 26px;
-	line-height: 60px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
+	line-height: 0.60rem;
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 1rem;
 	cursor: pointer;
 }
 .addin2 {
-	border: 1px solid #e5e5e5;
-	height: 44px;
-	width: 400px;
+	border: 0.01rem solid #e5e5e5;
+	height: 0.44rem;
+	width: 4rem;
 	margin: 0;
 	top: 0;
-	padding-left: 10px;
+	padding-left: 0.10rem;
 	position: absolute;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 10px;
-	margin-left: 20px;
-	font-size: 20px;
+	border-radius: 0.10rem;
+	margin-left: 1.1rem;
+	font-size: 0.20rem;
 	color: #666;
 }
 
@@ -1730,37 +1792,37 @@ body {
 	margin-top: 3%;
 }
 .chatroominfopop .piccontrolpanel {
-	width: 700px;
-	height: 90px;
+	width: 7.00rem;
+	height: 0.90rem;
 	position: relative;
 	margin: 0 auto;
-	border-radius: 60px;
+	border-radius: 0.60rem;
 	background-color: #39445f;
 	margin-top: 3%;
 	
 }
 .chatroominfopop .piccontrolpanel .arrowleft {
 	position: absolute;
-	left: 110px;
-	top: 19px;
-	height: 52px;
+	left: 1.10rem;
+	top: 0.19rem;
+	height: 0.52rem;
 	cursor: pointer;
 	
 }
 .chatroominfopop .piccontrolpanel .arrowright {
 	position: absolute;
-	right: 110px;
-	top: 19px;
-	height: 52px;
+	right: 1.10rem;
+	top: 0.19rem;
+	height: 0.52rem;
 	cursor: pointer;
 }
 .chatroominfopop .piccontrolpanel .arrowdownload {
 	display: block;
-	height: 52px;
-	width: 36px;
+	height: 0.52rem;
+	width: 0.36rem;
 	position: absolute;
-	top: 19px;
-	left: 332px;
+	top: 0.19rem;
+	left: 3.32rem;
 	cursor: pointer;
 }
 
@@ -1768,22 +1830,22 @@ body {
 
 
 .chatroominfopop .chatroomalert {
-	height: 370px;
-	width: 600px;
+	height: 3.70rem;
+	width: 6.00rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -300px;
-	margin-top: -185px;
+	margin-left: -3.00rem;
+	margin-top: -1.85rem;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 	overflow: hidden;
 }
 .chatroominfopop .chatroomalert .fa-times {
-	font-size: 30px;
+	font-size: 0.30rem;
 	float: right;
-	margin-right: 30px;
-	margin-top: 30px;
+	margin-right: 0.30rem;
+	margin-top: 0.30rem;
 	color: #999;
 	cursor: pointer;
 }
@@ -1793,46 +1855,46 @@ body {
 }
 .chatroominfopop .chatroomalert .chatroompopcontent {
 	text-align: center;
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #666;
-	margin-top: 56px;
+	margin-top: 0.56rem;
 }
 .chatroominfopop button {
 	margin: 0 auto;
 	background-color: #187bff;
-	height: 60px;
-	width: 300px;
+	height: 0.60rem;
+	width: 3rem;
 	border: none;
 	display: block;
 	color: #f8f8f8;
-	border-radius: 10px;
-	font-size: 26px;
-	line-height: 60px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
+	line-height: 0.60rem;
 	text-align: center;
-	margin-top: 110px;
+	margin-top: 1.10rem;
 	cursor: pointer;
 }
 .righttwoheader {
-	height: 110px;
+	height: 1.10rem;
 	width: 100%;
-	border-bottom: 1px solid #efefef;
+	border-bottom: 0.01rem solid #efefef;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	position: relative;
 }
 .righttwotitle {
-	height: 110px;
-	line-height: 110px;
+	height: 1.10rem;
+	line-height: 1.10rem;
 	width: 40%;
 	text-align: center;
 	margin: 0 auto;
-	font-size: 28px;
+	font-size: 0.28rem;
 	color: #333;
 }
 
 .righttwochatcon {
 	position: absolute;
-	height: calc( 100% - 350px );
+	height: calc( 100% - 3.50rem );
 	width: 100%;
 }
 .chatroommessageid {
@@ -1841,20 +1903,20 @@ body {
 .righttwosend {
 	background-color: #fff;
 	width: 100%;
-	height: 246px;
-	border-bottom: 1px solid #efefef;
+	height: 2.46rem;
+	border-bottom: 0.01rem solid #efefef;
 	position: absolute;
 	bottom: 0;
 }
 .righttwosendselect {
-	padding-top: 24px;
+	padding-top: 0.24rem;
 	
-	padding-left: 60px;
+	padding-left: 0.60rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .righttwosendselect .fa {
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #808080;
 	cursor: pointer;
 }
@@ -1863,14 +1925,14 @@ body {
 }
 .righttwosendselect .fa-picture-o {
 	position: relative;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left: 0.20rem;
+	margin-right: 0.20rem;
 }
 .righttwosendselect .fa-picture-o input {
 	position: absolute;
 	left: 0;
-	height: 23px;
-	width: 23px;
+	height: 0.23rem;
+	width: 0.23rem;
 	opacity: 0;
 }
 .righttwosendselect .fa-folder {
@@ -1879,35 +1941,35 @@ body {
 .righttwosendselect .fa-folder input {
 	position: absolute;
 	left: 0;
-	height: 23px;
-	width: 23px;
+	height: 0.23rem;
+	width: 0.23rem;
 	opacity: 0;
 }
 
 .righttwosend textarea {
 	width: 90%;
-	height: 100px;
+	height: 1rem;
 	display: block;
 	margin: 0 auto;
-	margin-top: 20px;
+	margin-top: 0.20rem;
 	resize: none;
 	border: none;
-	font-size: 23px;
+	font-size: 0.23rem;
 	color: #333;
 	font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
 }
 .righttwosend button {
 	background-color: #00a0e9;
-	width: 116px;
-	line-height: 44px;
-	height: 44px;
-	font-size: 26px;
+	width: 1.16rem;
+	line-height: 0.44rem;
+	height: 0.44rem;
+	font-size: 0.26rem;
 	text-align: center;
 	border: none;
 	color: #fff;
 	position: absolute;
-	right: 60px;
-	bottom: 15px;
+	right: 0.60rem;
+	bottom: 0.15rem;
 }
 
 /*聊天室弹出窗口*/
@@ -1921,37 +1983,38 @@ body {
 }
 .rightgroupcon img {
 	margin: 0 auto;
-	margin-top: 20%;
-	width: 150px;
-	height: 150px;
-	margin-bottom: 50px;
+	margin-top: 25%;
+	width: 1.50rem;
+	height: 1.50rem;
+	margin-bottom: 0.50rem;
 	display: block;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 }
 .rightgroupcon p {
 	margin: 0 auto;
 	text-align: center;
-	font-size: 32px;
+	font-size: 0.32rem;
 	color: #333;
+	margin-bottom: 0.5rem;
 }
 .rightgroupcon span {
 	
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #333;
 }
 .rightgroupcon button {
 	margin: 0 auto;
 	background-color: #187bff;
-	height: 60px;
-	width: 300px;
+	height: 0.60rem;
+	width: 3rem;
 	border: none;
 	display: block;
 	color: #f8f8f8;
-	border-radius: 10px;
-	font-size: 26px;
-	line-height: 60px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
+	line-height: 0.60rem;
 	text-align: center;
-	margin-top: 110px;
+	margin-top: 1..10rem;
 	cursor: pointer;
 }
 .rightfriendcon {
@@ -1962,50 +2025,50 @@ body {
 .rightfriendcon button {
 	margin: 0 auto;
 	background-color: #187bff;
-	height: 60px;
-	width: 300px;
+	height: 0.60rem;
+	width: 3.00rem;
 	border: none;
 	display: block;
 	color: #f8f8f8;
-	border-radius: 10px;
-	font-size: 26px;
-	line-height: 60px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
+	line-height: 0.60rem;
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 0.50rem;
 	cursor: pointer;
 }
 .rightfriendcon img {
 	margin: 0 auto;
 	margin-top: 15%;
-	width: 150px;
-	height: 150px;
-	margin-bottom: 50px;
+	width: 1.50rem;
+	height: 1.50rem;
+	margin-bottom: 0.50rem;
 	display: block;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 }
 .rightfriendcon .name {
 	margin: 0 auto;
 	text-align: center;
-	font-size: 32px;
+	font-size: 0.32rem;
 	color: #333;
 }
 .rightfriendcon .sign {
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #666;
 	text-align: center;
-	margin-top: 20px;
+	margin-top: 0.20rem;
 }
 .rightfriendcon .addon {
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #666;
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 0.50rem;
 }
 .rightfriendcon .area {
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #666;
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 0.10rem;
 }
 
 
@@ -2016,7 +2079,7 @@ body {
 /*右边聊天室*/
 
 .placeholder2 {
-	margin-top: 300px;
+	margin-top: 3rem;
 }
 .placeholder2 .imgcon {
 	
@@ -2025,9 +2088,9 @@ body {
 }
 .placeholder2 .name {
 	text-align: center;
-	margin-top: 80px;
+	margin-top: 0.80rem;
 	color: #333;
-	font-size: 32px;
+	font-size: 0.0.32rem;
 }
 
 
@@ -2050,14 +2113,14 @@ body {
 	height: 100%;
 }
 .rightcomOne .editmsgclear{
-	height: 52px;
-	width: 146px;
+	height: 0.52rem;
+	width: 1.46rem;
 	position: absolute;
-	line-height: 52px;
-	font-size: 22px;
+	line-height: 0.52rem;
+	font-size: 0.22rem;
 	text-align: center;
 	background-color: #fff;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	cursor: pointer;
 	z-index: 1500;
 }
@@ -2068,24 +2131,24 @@ body {
 	height: 100%;
 }
 .rightcomOne .editmsgthree {
-	height: 156px;
-	width: 146px;
+	height: 1.56rem;
+	width: 1.46rem;
 	background-color: #fff;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 	position: absolute;
 	z-index: 1500;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	text-align: center;
-	font-size: 22px;
+	font-size: 0.22rem;
 	color: #333;
 	overflow: hidden;
 }
 .rightcomOne .editmsgthree2 {
-	height: 104px;
-	width: 146px;
+	height: 1.04rem;
+	width: 1.46rem;
 	background-color: #fff;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 	position: absolute;
 	z-index: 1500;
 	-webkit-box-sizing: border-box;
@@ -2094,13 +2157,13 @@ body {
 	overflow: hidden;
 }
 .rightcomOne .editmsgthree3 {
-	height: 52px;
-	width: 146px;
+	height: 0.52rem;
+	width: 1.46rem;
 	text-align: center;
-	font-size: 22px;
+	font-size: 0.22rem;
 	color: #333;
 	background-color: #fff;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 	position: absolute;
 	z-index: 1500;
 	-webkit-box-sizing: border-box;
@@ -2109,11 +2172,11 @@ body {
 	overflow: hidden;
 }
 .rightcomOne .popthree {
-	height: 52px;
+	height: 0.52rem;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	line-height: 52px;
+	line-height: 0.52rem;
 	cursor: pointer;
 	
 }
@@ -2121,26 +2184,26 @@ body {
 	background-color: #e8e8e8;
 }
 .rightcomOne .popthreemiddle {
-	border-bottom: 1px solid #f0f0f0;
-	border-top: 1px solid #f0f0f0;
+	border-bottom: 0.01rem solid #f0f0f0;
+	border-top: 0.01rem solid #f0f0f0;
 }
 
 .slidemembersmenu {
 	width: 100%;
 	background-color: #fff;
-	border-bottom: 1px solid #efefef;
-	padding-top: 50px;
+	border-bottom: 0.01rem solid #efefef;
+	padding-top: 0.50rem;
 	margin: 0 auto;
 	z-index: 110;
 	position: absolute;
-	height: 300px;
+	height: 3rem;
 	overflow-y: scroll;
 }
 .slidemembersmenu .fa-times {
 	position: absolute;
-	right: 20px;
-	top: 20px;
-	font-size: 25px;
+	right: 0.20rem;
+	top: 0.20rem;
+	font-size: 0.25rem;
 	color: #717171;
 	cursor: pointer;
 }
@@ -2149,80 +2212,81 @@ body {
 }
 .addcontain {
 	float: left;
-	height: 70px;
-	margin-right: 40px;
-	width: 70px;
+	height: 0.70rem;
+	margin-right: 0.40rem;
+	width: 0.70rem;
 	position: relative;
 	cursor: pointer;
-	margin-bottom: 10px;
+	margin-bottom: 0.10rem;
 	
 }
 /*.addcontain {
 	display: inline-block;
-	height: 70px;
-	margin-right: 40px;
-	width: 70px;
+	height: 70rem;
+	margin-right: 40rem;
+	width: 70rem;
 	position: relative;
 	cursor: pointer;
 	
 }*/
 .addcontain img {
-	height: 70px;
-	width: 70px;
+	height: 0.70rem;
+	width: 0.70rem;
 	display: block;
 	position: absolute;
 	
 }
 .reducecontain img {
-	height: 70px;
-	width: 70px;
+	height: 0.70rem;
+	width: 0.70rem;
 	display: block;
 	position: absolute;
 }
 .reducecontain {
 	float: left;
-	height: 70px;
-	width: 70px;
+	height: 0.70rem;
+	width: 0.70rem;
 	cursor: pointer;
 	position: relative;
 }
 /*.reducecontain {
 	display: inline-block;
-	height: 70px;
-	width: 70px;
+	height: 70rem;
+	width: 70rem;
 	cursor: pointer;
 	position: relative;
 }*/
 .pluscontainer {
 	display: inline;
 	position: absolute;
-	height: 110px;
+	height: 1.10rem;
 	
 }
 .everypeoplecon2 {
-	width: 70px;
-	height: 110px;
+	width: 0.70rem;
+	height: 1.10rem;
 	float: left;
-	margin-right: 40px;
+	margin-right: 0.40rem;
 	position: relative;
 }
 /*.everypeoplecon2 {
-	width: 70px;
-	height: 110px;
+	width: 70rem;
+	height: 110rem;
 	display: inline-block;
-	margin-right: 40px;
+	margin-right: 40rem;
 	position: relative;
 }*/
 .everypeoplecon2 img{
-	width: 70px;
-	height: 70px;
+	width: 0.70rem;
+	height: 0.70rem;
+	float: left;
 }
 .everypeoplecon2 .namecon2 {
-	width: 70px;
-	height: 40px;
+	width: 0.70rem;
+	height: 0.40rem;
 	color: #999;
-	font-size: 16px;
-	line-height: 40px;
+	font-size: 0.16rem;
+	line-height: 0.40rem;
 	text-align: center;
 }
 
@@ -2236,7 +2300,7 @@ body {
 .membermenucontainer {
 	width: 90%;
 	margin: 0 auto;
-	max-height: 300px;
+	max-height: 3rem;
 	position: relative;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -2244,7 +2308,7 @@ body {
 
 .rightonechatcon {
 	position: absolute;
-	height: calc( 100% - 350px );
+	height: calc( 100% - 3.50rem );
 	width: 100%;
 }
 .manywindowcon {
@@ -2252,51 +2316,51 @@ body {
 	width: 100%;
 }
 .rightoneheader {
-	height: 110px;
+	height: 1.10rem;
 	width: 100%;
-	border-bottom: 1px solid #efefef;
+	border-bottom: 0.01rem solid #efefef;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	position: relative;
 }
 .rightonetitle {
-	height: 110px;
-	line-height: 110px;
+	height: 1.10rem;
+	line-height: 1.10rem;
 	width: 40%;
 	text-align: center;
 	margin: 0 auto;
-	font-size: 28px;
+	font-size: 0.28rem;
 	color: #333;
 }
 .rightoneheader .fa-cog {
-	font-size: 28px;
+	font-size: 0.28rem;
 	position: absolute;
-	right: 60px;
-	top: 41px;
+	right: 0.60rem;
+	top: 0.41rem;
 	cursor: pointer;
 	color: #9b9b9b;
 }
 .rightoneheader .fa-plus {
-	font-size: 28px;
+	font-size: 0.28rem;
 	position: absolute;
-	right: 60px;
-	top: 41px;
+	right: 0.60rem;
+	top: 0.41rem;
 	cursor: pointer;
 	color: #9b9b9b;
 }
 .rightoneheader .fa-eye {
-	font-size: 28px;
+	font-size: 0.28rem;
 	position: absolute;
-	right: 60px;
-	top: 41px;
+	right: 0.60rem;
+	top: 0.41rem;
 	cursor: pointer;
 	color: #9b9b9b;
 }
 .rightoneheader .fa-eye-slash {
-	font-size: 28px;
+	font-size: 0.28rem;
 	position: absolute;
-	right: 60px;
-	top: 41px;
+	right: 0.60rem;
+	top: 0.41rem;
 	cursor: pointer;
 	color: #9b9b9b;
 }
@@ -2315,18 +2379,18 @@ body {
 }
 .rightonemenu {
 	position: absolute;
-	height: 195px;
-	width: 200px;
-	right: 90px;
-	top: 50px;
+	height: 1.95rem;
+	width: 2.00rem;
+	right: 0.90rem;
+	top: 0.50rem;
 	background-color: #fff;
 	z-index: 300;
 }
 .rightonelists {
-	height: 65px;
+	height: 0.65rem;
 	width: 100%;
-	line-height: 65px;
-	font-size: 18px;
+	line-height: 0.65rem;
+	font-size: 0.18rem;
 	color: #999;
 	text-align: center;
 	cursor: pointer;
@@ -2335,57 +2399,59 @@ body {
 	color: #1a7dff;
 }
 .rightonelist2 {
-	border-bottom: 1px solid #e5e5e5;
-	border-top: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
+	border-top: 0.01rem solid #e5e5e5;
 }
 .rightonesend {
 	background-color: #fff;
 	width: 100%;
-	height: 246px;
-	border-bottom: 1px solid #efefef;
+	height: 2.46rem;
+	border-bottom: 0.01rem solid #efefef;
 	position: absolute;
 	bottom: 0;
 	
 }
 .emojicontainer {
-	width: 224px;
-	height: 160px;
+	width: 2.24rem;
+	height: 1.60rem;
 	position: absolute;
-	top: -140px;
+	top: -1.40rem;
 	background-color: #00a0e9;
-	border-radius: 10px;
+	border-radius: 0.10rem;
 }
 .emojiwrap {
-	width: 32px;
-	height: 32px;
+	width: 0.32rem;
+	height: 0.32rem;
 	float: left;
 	cursor: pointer;
 }
 .rightonesendselect {
-	padding-top: 24px;
+	padding-top: 0.24rem;
 	
-	padding-left: 60px;
+	padding-left: 0.60rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	height: 0.5rem;
 }
 .rightonesendselect .fa {
-	font-size: 24px;
+	font-size: 0.24rem;
 	color: #808080;
 	cursor: pointer;
+	float: left;
 }
 .rightonesendselect .fa:hover {
 	color: #1a7dff;
 }
 .rightonesendselect .fa-picture-o {
 	position: relative;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left: 0.20rem;
+	margin-right: 0.20rem;
 }
 .rightonesendselect .fa-picture-o input {
 	position: absolute;
 	left: 0;
-	height: 23px;
-	width: 23px;
+	height: 0.23rem;
+	width: 0.23rem;
 	opacity: 0;
 }
 .rightonesendselect .fa-folder {
@@ -2394,35 +2460,35 @@ body {
 .rightonesendselect .fa-folder input {
 	position: absolute;
 	left: 0;
-	height: 23px;
-	width: 23px;
+	height: 0.23rem;
+	width: 0.23rem;
 	opacity: 0;
 }
 
 .rightonesend textarea {
 	width: 90%;
-	height: 100px;
+	height: 1rem;
 	display: block;
 	margin: 0 auto;
-	margin-top: 20px;
+	margin-top: 0.20rem;
 	resize: none;
 	border: none;
-	font-size: 23px;
+	font-size: 0.23rem;
 	color: #333;
 	font-family: 'Helvetica Neue','Helvetica','Hiragino Sans GB','Microsoft YaHei','Arial',sans-serif;
 }
 .rightonesend button {
 	background-color: #00a0e9;
-	width: 116px;
-	line-height: 44px;
-	height: 44px;
-	font-size: 26px;
+	width: 1.16rem;
+	line-height: 0.44rem;
+	height: 0.44rem;
+	font-size: 0.26rem;
 	text-align: center;
 	border: none;
 	color: #fff;
 	position: absolute;
-	right: 60px;
-	bottom: 15px;
+	right: 0.60rem;
+	bottom: 0.15rem;
 }
 .groupid {
 	
@@ -2440,13 +2506,13 @@ body {
 .msgcontainer {
 	width: 100%;
 	height: auto;
-	margin-bottom: 20px;
+	margin-bottom: 0.20rem;
 }
 .msgmarginlr {
 	width: 90%;
 	margin:  0 auto;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 0.10rem;
+	padding-bottom: 0.10rem;
 	height: auto;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -2458,37 +2524,39 @@ body {
 }
 .msgmarginlr .leftmsg  .rightcon {
 	float: left;
-	margin-left: 20px;
+	margin-left: 0.20rem;
 	max-width: 80%;
 }
 .msgmarginlr .leftmsg  .name {
-	font-size: 22px;
+	font-size: 0.22rem;
 	color: #999;
-	padding-left: 10px;
-	margin-bottom: 10px;
+	padding-left: 0.10rem;
+	margin-bottom: 0.10rem;
 }
 .msgmarginlr  .leftmsg   .imgcontainer {
-	width: 60px;
-	height: 80px;
+	width: 0.60rem;
+	height: 0.80rem;
 	float: left;
 	
 }
 .msgmarginlr .leftmsg   .imgcontainer img {
-	height: 60px;
-	width: 60px;
-	border-radius: 5px;
+	height: 0.60rem;
+	width: 0.60rem;
+	border-radius: 0.05rem;
+	float: left;
 }
 .msgmarginlr .leftmsg .wordscontent span{
 	background-color: #fff;
-	padding: 15px;
-	font-size: 22px;
+	padding: 0.15rem;
+	font-size: 0.22rem;
 	color: #333;
 	display: inline-block;
-	padding-left: 20px;
-	padding-right: 20px;
+	float: left;
+	padding-left: 0.20rem;
+	padding-right: 0.20rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent span:after{
@@ -2496,10 +2564,10 @@ body {
 	position: absolute;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-right-color: #fff;
-	left: -20px;
-	top: 20px;
+	left: -0.20rem;
+	top: 0.20rem;
 }
 
 .msgmarginlr .rightmsg {
@@ -2511,40 +2579,42 @@ body {
 }
 .msgmarginlr .rightmsg  .rightcon {
 	float: right;
-	margin-left: 20px;
+	margin-left: 0.20rem;
 	max-width: 80%;
 }
 .msgmarginlr .rightmsg  .name {
-	font-size: 22px;
+	font-size: 0.22rem;
 	color: #999;
-	padding-left: 10px;
-	margin-bottom: 10px;
+	padding-left: 0.10rem;
+	margin-bottom: 0.10rem;
 }
 .msgmarginlr .rightmsg .imgcontainer {
-	width: 60px;
-	height: 80px;
+	width: 0.60rem;
+	height: 0.80rem;
 	float: right;
 	
 }
 .msgmarginlr .rightmsg .imgcontainer img {
-	height: 60px;
-	width: 60px;
-	border-radius: 5px;
+	height: 0.60rem;
+	width: 0.60rem;
+	border-radius: 0.05rem;
+	float: left;
 }
 .msgmarginlr .rightmsg  .wordscontent {
-	margin-right: 20px;
+	margin-right: 0.20rem;
 }
 .msgmarginlr .rightmsg  .wordscontent span{
 	background-color: #00a0e9;
-	padding: 15px;
-	font-size: 22px;
+	padding: 0.15rem;
+	font-size: 0.22rem;
 	color: #fff;
 	display: inline-block;
-	padding-left: 20px;
-	padding-right: 20px;
+	float: left;
+	padding-left: 0.20rem;
+	padding-right: 0.20rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .rightmsg  .wordscontent span:after{
@@ -2552,10 +2622,10 @@ body {
 	position: absolute;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-left-color: #00a0e9;
-	right: -20px;
-	top: 20px;
+	right: -0.20rem;
+	top: 0.20rem;
 }
 
 /*右边聊天界面*/
@@ -2572,78 +2642,78 @@ body {
 	z-index: 500;
 }
 .addmyfriendscore {
-	height: 600px;
-	width: 604px;
+	height: 6.00rem;
+	width: 6.04rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -302px;
-	margin-top: -300px;
+	margin-left: -3.02rem;
+	margin-top: -3.00rem;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 	overflow: hidden;
 }
 .addmyfriends .bottombtn {
-	height: 60px;
-	width: 484px;
+	height: 0.60rem;
+	width: 4.84rem;
 	background-color: #ccc;
 	color: #fff;
 	border: none;
-	border-radius: 10px;
-	font-size: 26px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
 	text-align: center;
-	margin-left: 60px;
-	margin-top: 50px;
+	margin-left: 0.60rem;
+	margin-top: 0.50rem;
 	cursor: pointer;
 	position: absolute;
 	left: 0;
-	bottom: 50px;
+	bottom: 0.50rem;
 }
 .addmyfriendscore .reusecontainer2 {
-	height: 360px;
+	height: 3.60rem;
 	width: 100%;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	overflow: hidden;
 }
 .addsort3 {
 	width: 100%;
-	height: 320px;
+	height: 3.20rem;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 .sort_list2 {
-	height: 90px;
-	width: 604px;
+	height: 0.90rem;
+	width: 6.04rem;
 	position: relative;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .sort_list2 img {
-	margin-top: 10px;
+	margin-top: 0.10rem;
 	margin-left: 0;
-	width: 70px;
+	width: 0.70rem;
 }
 .num_name2 {
-	width: 250px;
-	height: 90px;
-	font-size: 24px;
+	width: 2.50rem;
+	height: 0.90rem;
+	font-size: 0.24rem;
 	color: #333;
-	line-height: 90px;
-	margin-left: 140px;
+	line-height: 0.90rem;
+	margin-left: 1.40rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
 }
 .sort_letter2 {
-	height: 50px;
-	width: 604px;
-	font-size: 20px;
+	height: 0.50rem;
+	width: 6.04rem;
+	font-size: 0.20rem;
 	color: #999;
 	background-color: #fff;
-	line-height: 50px;
-	padding-left: 45px;
-	border-bottom: 1px solid #e5e5e5;
+	line-height: 0.50rem;
+	padding-left: 0.45rem;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -2661,119 +2731,119 @@ body {
 	z-index: 500;
 }
 .removegroupmember2core {
-	height: 600px;
-	width: 604px;
+	height: 6.00rem;
+	width: 6.04rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -302px;
-	margin-top: -300px;
+	margin-left: -3.02rem;
+	margin-top: -3.00rem;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 0.20rem;
 }
 .removegroupmember2core .bottombtn {
-	height: 60px;
-	width: 484px;
+	height: 0.60rem;
+	width: 4.84rem;
 	background-color: #ccc;
 	color: #fff;
 	border: none;
-	border-radius: 10px;
-	font-size: 26px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
 	text-align: center;
-	margin-left: 60px;
-	margin-top: 50px;
+	margin-left: 0.60rem;
+	margin-top: 0.50rem;
 	cursor: pointer;
 	position: absolute;
-	bottom: 50px;
+	bottom: 0.50rem;
 
 }
 .removegroupmember2core .reusecontainer3 {
-	height: 360px;
+	height: 3.60rem;
 	width: 100%;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	
 }
 .addsort4 {
 	width: 100%;
-	height: 320px;
+	height: 3.20rem;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 .sort_list3 {
-	height: 90px;
-	width: 604px;
+	height: 0.90rem;
+	width: 6.04rem;
 	position: relative;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .sort_list3 img {
-	margin-top: 10px;
+	margin-top: 0.10rem;
 	margin-left: 0;
-	width: 70px;
+	width: 0.70rem;
 }
 .num_name3 {
-	width: 250px;
-	height: 90px;
-	font-size: 24px;
+	width: 2.50rem;
+	height: 0.90rem;
+	font-size: 0.24rem;
 	color: #333;
-	line-height: 90px;
-	margin-left: 140px;
+	line-height: 0.90rem;
+	margin-left: 1.40rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
 }
 .sort_letter3 {
-	height: 50px;
-	width: 604px;
-	font-size: 20px;
+	height: 0.50rem;
+	width: 6.04rem;
+	font-size: 0.20rem;
 	color: #999;
 	background-color: #fff;
-	line-height: 50px;
-	padding-left: 45px;
-	border-bottom: 1px solid #e5e5e5;
+	line-height: 0.50rem;
+	padding-left: 0.45rem;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .addsort5 {
 	width: 100%;
-	height: 320px;
+	height: 3.20rem;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 .sort_list4 {
-	height: 90px;
-	width: 604px;
+	height: 0.90rem;
+	width: 6.04rem;
 	position: relative;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .sort_list4 img {
-	margin-top: 10px;
+	margin-top: 0.10rem;
 	margin-left: 0;
-	width: 70px;
+	width: 0.70rem;
 }
 .num_name4 {
-	width: 250px;
-	height: 90px;
-	font-size: 24px;
+	width: 2.50rem;
+	height: 0.90rem;
+	font-size: 0.24rem;
 	color: #333;
-	line-height: 90px;
-	margin-left: 140px;
+	line-height: 0.90rem;
+	margin-left: 1.40rem;
 	display: inline-block;
 	position: absolute;
 	top: 0;
 }
 .sort_letter4 {
-	height: 50px;
-	width: 604px;
-	font-size: 20px;
+	height: 0.50rem;
+	width: 6.04rem;
+	font-size: 0.20rem;
 	color: #999;
 	background-color: #fff;
-	line-height: 50px;
-	padding-left: 45px;
-	border-bottom: 1px solid #e5e5e5;
+	line-height: 0.50rem;
+	padding-left: 0.45rem;
+	border-bottom: 0.01rem solid #e5e5e5;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -2782,61 +2852,61 @@ body {
 
 /*接收图片消息*/
 .picmessagelock {
-	width: 250px;
+	width: 2.50rem;
 	cursor: pointer;
 }
 .msgmarginlr .leftmsg .wordscontent .picspan{
 	background-color: #fff;
-	padding: 2px !important;
-	border: 1px solid #efefef;
-	font-size: 22px;
+	padding: 0.02rem !important;
+	border: 0.01rem solid #efefef;
+	font-size: 0.22rem;
 	color: #fff;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent .picspan:after{
 	content: "";
 	position: absolute;
-	border: 1px solid #efefef;
+	border: 0.01rem solid #efefef;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-right-color: #fff;
-	left: -20px;
-	top: 20px;
+	left: -0.20rem;
+	top: 0.20rem;
 }
 /*接收图片消息*/
 
 /*发送图片消息*/
 
 .picmessagelock {
-	width: 250px;
+	width: 2.50rem;
 }
 .msgmarginlr .rightmsg .wordscontent .selfpicspan{
 	background-color: #00a0e9;
-	padding: 2px !important;
-	border: 1px solid #efefef;
-	font-size: 22px;
+	padding: 0.02rem !important;
+	border: 0.01rem solid #efefef;
+	font-size: 0.22rem;
 	color: #fff;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .rightmsg .wordscontent .selfpicspan:after{
 	content: "";
 	position: absolute;
-	border: 1px solid #efefef;
+	border: 0.01rem solid #efefef;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-left-color: #00a0e9;
-	right: -20px;
-	top: 20px;
+	right: -0.20rem;
+	top: 0.20rem;
 }
 
 
@@ -2847,16 +2917,16 @@ body {
 
 .msgmarginlr .leftmsg .wordscontent .audiospan{
 	background-color: #fff;
-	padding: 2px !important;
-	font-size: 22px;
-	height: 56px;
-	width: 200px;
-	border: 1px solid #efefef;
+	padding: 0.02rem !important;
+	font-size: 0.22rem;
+	height: 0.56rem;
+	width: 2rem;
+	border: 0.01rem solid #efefef;
 	color: #fff;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 	cursor: pointer;
 }
@@ -2864,7 +2934,7 @@ body {
 
 .msgmarginlr .leftmsg .wordscontent .length {
 	position: absolute;
-	left: 220px;
+	left: 2.20rem;
 	color: #999;
 	bottom: 0;
 }
@@ -2873,8 +2943,8 @@ body {
 	width: 0;
 	height: 0;
 	border-radius: 50%;
-	border: 10px solid #ff3b30;
-	left: 220px;
+	border: 0.10rem solid #ff3b30;
+	left: 2.20rem;
 	color: #999;
 	top: 0;
 }
@@ -2886,8 +2956,8 @@ body {
 	
 }
 .msgmarginlr .leftmsg .wordscontent .audiospan .fa-volume-up{
-	left: 20px;
-	top: 17px;
+	left: 0.20rem;
+	top: 0.17rem;
 	position: absolute;
 	color: #999;
 }
@@ -2896,10 +2966,10 @@ body {
 	position: absolute;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-right-color: #fff;
-	left: -20px;
-	top: 20px;
+	left: -0.20rem;
+	top: 0.20rem;
 }
 
 /*接收语音消息*/
@@ -2907,23 +2977,23 @@ body {
 /*接收位置消息*/
 .msgmarginlr .leftmsg .wordscontent .locationspan{
 	background-color: #fff;
-	padding: 2px !important;
-	border: 1px solid #efefef;
-	font-size: 22px;
+	padding: 0.02rem !important;
+	border: 0.01rem solid #efefef;
+	font-size: 0.22rem;
 	color: #fff;
-	height: 300px;
-	width: 400px;
+	height: 3.00rem;
+	width: 4.00rem;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent .locationspan a{
 	position: absolute;
 	text-decoration: none;
-	height: 300px;
-	width: 400px;
+	height: 3.00rem;
+	width: 4.00rem;
 	display: inline-block;
 }
 .msgmarginlr .leftmsg .wordscontent .locationspan .mapimg{
@@ -2934,28 +3004,28 @@ body {
 .msgmarginlr .leftmsg .wordscontent .locationspan:after{
 	content: "";
 	position: absolute;
-	border: 1px solid #efefef;
+	border: 0.01rem solid #efefef;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-right-color: #fff;
-	left: -20px;
-	top: 20px;
+	left: -0.20rem;
+	top: 0.20rem;
 }
 
 
 .msgmarginlr .leftmsg .wordscontent .locationspan .mapaddr {
 	background-color: rgba(89,89,89,0.7);
 	color: #fff;
-	height: 45px;
-	line-height: 45px;
+	height: 0.45rem;
+	line-height: 0.45rem;
 	text-align: center;
-	width: 400px;
+	width: 4.00rem;
 	position: absolute;
 	bottom: 0;
 }
 .bottombtn1con {
-	height: 160px;
+	height: 1.60rem;
 	width: 100%;
 	text-align: center;
 	background-color: #fff;
@@ -2963,19 +3033,19 @@ body {
 	position: relative;
 }
 .bottombtn1con .bottombtn1 {
-	height: 60px;
-	width: 484px;
+	height: 0.60rem;
+	width: 4.84rem;
 	background-color: #ccc;
 	color: #fff;
 	border: none;
-	border-radius: 10px;
-	font-size: 26px;
+	border-radius: 0.10rem;
+	font-size: 0.26rem;
 	text-align: center;
-	margin-left: 60px;
-	margin-top: 50px;
+	margin-left: 0.60rem;
+	margin-top: 0.50rem;
 	cursor: pointer;
 	position: absolute;
-	bottom: 50px;
+	bottom: 0.50rem;
 	
 }	
 
@@ -2985,57 +3055,57 @@ body {
 
 /*.msgmarginlr .leftmsg .wordscontent .filespan{
 	background-color: #fff;
-	padding: 2px !important;
-	border: 1px solid #efefef;
-	font-size: 22px;
+	padding: 2rem !important;
+	border: 1rem solid #efefef;
+	font-size: 22rem;
 	color: #fff;
-	height: 150px;
-	width: 400px;
+	height: 150rem;
+	width: 400rem;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 5rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan:after{
 	content: "";
 	position: absolute;
-	border: 1px solid #efefef;
+	border: 1rem solid #efefef;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 10rem solid transparent;
 	border-right-color: #fff;
-	left: -20px;
-	top: 20px;
+	left: -20rem;
+	top: 20rem;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft {
 	height: 100%;
 	float: left;
-	width: 255px;
+	width: 255rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconright {
 	
 	float: left;
-	width: 135px;
-	padding-top: 13px;
+	width: 135rem;
+	padding-top: 13rem;
 	overflow: hidden;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filename{
-	font-size: 20px;
+	font-size: 20rem;
 	color: #333;
 	position: absolute;
-	top: 10px;
-	left: 20px;
+	top: 10rem;
+	left: 20rem;
 } 
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload{
-	font-size: 20px;
+	font-size: 20rem;
 	color: #333;
-	border-left: 2px solid #333;
+	border-left: 2rem solid #333;
 	position: absolute;
-	bottom: 10px;
-	left: 20px;
-	padding-left: 10px;
+	bottom: 10rem;
+	left: 20rem;
+	padding-left: 10rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 } 
@@ -3050,57 +3120,57 @@ body {
 
 .msgmarginlr .leftmsg .wordscontent .filespan{
 	background-color: #fff;
-	padding: 2px !important;
-	border: 1px solid #efefef;
-	font-size: 22px;
+	padding: 0.02rem !important;
+	border: 0.01rem solid #efefef;
+	font-size: 0.22rem;
 	color: #fff;
-	height: 150px;
-	width: 400px;
+	height: 1.50rem;
+	width: 4.00rem;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan:after{
 	content: "";
 	position: absolute;
-	border: 1px solid #efefef;
+	border: 0.01rem solid #efefef;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-right-color: #fff;
-	left: -20px;
-	top: 20px;
+	left: -0.20rem;
+	top: 0.20rem;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft {
 	height: 100%;
 	float: left;
-	width: 255px;
+	width: 2.55rem;
 	position: relative;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconright {
 	
 	float: left;
-	width: 135px;
-	padding-top: 13px;
+	width: 1.35rem;
+	padding-top: 0.13rem;
 	overflow: hidden;
 }
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filename{
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #333;
 	position: absolute;
-	top: 10px;
-	left: 20px;
+	top: 0.10rem;
+	left: 0.20rem;
 } 
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload{
-	font-size: 20px;
+	font-size: 0.0.20rem;
 	color: #333;
-	border-left: 2px solid #333;
+	border-left: 0.02rem solid #333;
 	position: absolute;
-	bottom: 10px;
-	left: 20px;
-	padding-left: 10px;
+	bottom: 0.10rem;
+	left: 0.20rem;
+	padding-left: 0.10rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 } 
@@ -3116,60 +3186,60 @@ body {
 
 .msgmarginlr .rightmsg .wordscontent .selffilespan{
 	background-color: #00a0e9;
-	padding: 2px !important;
-	border: 1px solid #efefef;
-	font-size: 22px;
+	padding: 0.02rem !important;
+	border: 0.01rem solid #efefef;
+	font-size: 0.22rem;
 	color: #fff;
-	height: 150px;
-	width: 400px;
+	height: 1.50rem;
+	width: 4.00rem;
 	display: inline-block;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	position: relative;
 }
 .msgmarginlr .rightmsg .filefix {
-	margin-right: 40px;
+	margin-right: 0.40rem;
 }
 .msgmarginlr .rightmsg .wordscontent .selffilespan:after{
 	content: "";
 	position: absolute;
-	border: 1px solid #efefef;
+	border: 0.01rem solid #efefef;
 	height: 0;
 	width: 0;
-	border: 10px solid transparent;
+	border: 0.10rem solid transparent;
 	border-left-color: #00a0e9;
-	right: -20px;
-	top: 20px;
+	right: -0.20rem;
+	top: 0.20rem;
 }
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconleft {
 	height: 100%;
 	float: left;
-	width: 255px;
+	width: 2.55rem;
 	position: relative;
 }
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconright {
 	
 	float: left;
-	width: 135px;
-	padding-top: 13px;
+	width: 1.35rem;
+	padding-top: 0.13rem;
 	overflow: hidden;
 }
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconleft .filename{
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #fff;
 	position: absolute;
-	top: 10px;
-	left: 20px;
+	top: 0.10rem;
+	left: 0.20rem;
 } 
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconleft .filedownload{
-	font-size: 20px;
+	font-size: 0.20rem;
 	color: #333;
-	border-left: 2px solid #fff;
+	border-left: 0.02rem solid #fff;
 	position: absolute;
-	bottom: 10px;
-	left: 20px;
-	padding-left: 10px;
+	bottom: 0.10rem;
+	left: 0.20rem;
+	padding-left: 0.10rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 } 
@@ -3180,13 +3250,13 @@ body {
 /*发送文件消息*/
 
 .currentmsginfo {
-	height: 405px;
-	width: 270px;
-	border-radius: 10px;
+	height: 4.05rem;
+	width: 2.70rem;
+	border-radius: 0.10rem;
 	background-color: #fff;
 	position: absolute;
 	z-index: 10;
 	overflow: hidden;
-	-webkit-box-shadow: 5px 5px 3px #e5e5e5;
-	box-shadow: 5px 5px 3px #e5e5e5;
+	-webkit-box-shadow: 0.05rem 0.05rem 0.03rem #e5e5e5;
+	box-shadow: 0.05rem 0.05rem 0.03rem #e5e5e5;
 }

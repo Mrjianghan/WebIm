@@ -12,7 +12,7 @@ body {
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 600px;
+    min-height: 6rem;
 }
 .clearfix {
 	clear: both;
@@ -25,65 +25,65 @@ body {
 	
 .subbody {
 	position: relative;
-    min-height: 640px;
-	min-width: 1000px;
+    min-height: 6.4rem;
+	min-width: 10rem;
 	height: 100%;
     width: 100%;
 }
 
 header {
-	padding-top: 48px;
-	height: 136px;
+	padding-top: 0.48rem;
+	height: 1.36rem;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	padding-left: 80px;
+	padding-left: 0.8rem;
 }
 
 header img {
-	width: 80px;
+	width: 0.8rem;
 	float: left;
 }
 .headerName {
 	float: left;
 	color: #fff;
-	font-size: 32px;
-	height: 80px;
-	line-height: 80px;
-	margin-left: 24px;
+	font-size: 0.32rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	margin-left: 0.24rem;
 }
 
 .setNick {
-	height: 480px;
-	width: 496px;
+	height: 4.8rem;
+	width: 4.96rem;
 	background-color: #f0edf1;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-top: -240px;
-	margin-left: -248px;
-	border-radius: 20px;
+	margin-top: -2.4rem;
+	margin-left: -2.48rem;
+	border-radius: 0.2rem;
 }
 
 .setNick  article {
-	height: 72px;
-	border-bottom: 1px solid #cccccc;
+	height: 0.72rem;
+	border-bottom: 0.01rem solid #cccccc;
 	background-color: #faf9fa;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	border-top-left-radius: 0.2rem;
+	border-top-right-radius: 0.2rem;
 }
 article div {
-	height: 72px;
-	line-height: 72px;
+	height: 0.72rem;
+	line-height: 0.72rem;
 	text-align: center;
-	font-size: 22.4px;
+	font-size: 0.224rem;
 }
 
 article .fa-times {
 	position: absolute;
-    right: 24px;
-    top: 24px;
-    font-size: 24px;
+    right: 0.24rem;
+    top: 0.24rem;
+    font-size: 0.24rem;
     color: #aeaeae;
     cursor: pointer;
 }
@@ -91,12 +91,12 @@ article .fa-times:hover {
 	color:#187bff;
 }
 .samesize {
-	width: 400px;
+	width: 4rem;
 	margin: 0 auto;
-	height: 64px;
-	border-radius: 10px;
+	height: 0.64rem;
+	border-radius: 0.1rem;
 	background-color: #fff;
-	border: 1px solid #cccccc;
+	border: 0.01rem solid #cccccc;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	overflow: hidden;
@@ -112,15 +112,16 @@ article .fa-times:hover {
 }
 
 .firstinput input {
-	height: 64px;
+	height: 0.64rem;
 	width: 80%;
-	border-radius: 10px;
+	position: absolute;
+	border-radius: 0.1rem;
 	border: none;
 	outline: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 17.6px;
-	padding-left: 20px;
+	font-size: 0.176rem;
+	padding-left: 0.2rem;
 	color: #666;
 }
 .firstinput .fa-times {
@@ -131,25 +132,26 @@ article .fa-times:hover {
 	color: #53bd58;
 }
 .firstinput .fa {
-	font-size: 24px;
+	font-size: 0.24rem;
 	position: absolute;
-	right: 10px;
-	top: 20px;
+	right: 0.10rem;
+	top: 0.20rem;
 }
 .secondinput {
 	position: relative;
 }
 
 .secondinput input {
-	height: 64px;
+	height: 0.64rem;
 	width: 80%;
-	border-radius: 10px;
+	position: absolute;
+	border-radius: 0.10rem;
 	border: none;
 	outline: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-size: 17.6px;
-	padding-left: 20px;
+	font-size: 0.176rem;
+	padding-left: 0.20rem;
 	color: #666;
 }
 .secondinput .fa-times {
@@ -160,76 +162,76 @@ article .fa-times:hover {
 	color: #53bd58;
 }
 .secondinput .fa {
-	font-size: 24px;
+	font-size: 0.24rem;
 	position: absolute;
-	right: 10px;
-	top: 20px;
+	right: 0.1rem;
+	top: 0.2rem;
 }
 
 .nextstep {
-	height: 64px;
-	width: 400px;
+	height: 0.64rem;
+	width: 4rem;
 	margin:  0 auto;
 	display: block;
-	border-radius: 10px;
+	border-radius: 0.1rem;
 	outline: none;
 	background-color: #c7c7c7;
 	border: none;
-	font-size: 25.6px;
+	font-size: 0.256rem;
 	color: #fff;
-	margin-top: 48px;
+	margin-top: 0.48rem;
 }
 
 
 
 .placeholder1 {
-	height: 56px;
-	width: 400px;
+	height: 0.56rem;
+	width: 4rem;
 	margin: 0 auto;
 	color: #666;
 }
 
 .placeholder1 div {
-	margin-left: 10px;
-	margin-top: 5px;
-	font-size: 16px;
+	margin-left: 0.10rem;
+	margin-top: 0.05rem;
+	font-size: 0.16rem;
 }
 
 
 .errOuter {
-	height: 48px;
-	width: 400px;
+	height: 0.48rem;
+	width: 4rem;
 	margin: 0 auto;
-	line-height: 40px;
+	line-height: 0.40rem;
 	color:#999999;
 }
 .errOuter .fa {
 	color:#f84e4e;
 }
 .errOuter>div {
-	 font-size: 16px;
+	 font-size: 0.16rem;
 }
 
 footer {
-	height: 100px;
+	height: 1rem;
 	width: 100%;
 	position: fixed;
-	bottom: 16px;
-	padding-right: 40px;
+	bottom: 0.16rem;
+	padding-right: 0.40rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .footer2 {
 	text-align: right;
 	color: #fff;
-	font-size: 16px;
-	margin-top: 16px;
+	font-size: 0.16rem;
+	margin-top: 0.16rem;
 }
 .footer1 {
 	text-align: right;
 	color: #fff;
-	font-size: 16px;
-	margin-right: 7px;
+	font-size: 0.16rem;
+	margin-right: 0.07rem;
 	
 }
 footer a {
@@ -237,20 +239,20 @@ footer a {
 	color: #fff;
 }
 footer a span{
-	font-size: 20px;
+	font-size: 0.2rem;
 }
 footer .fa {
-	font-size: 40px;
+	font-size: 0.4rem;
 	vertical-align:sub;
 }
 .floatright {
     color: #fff;
     position: fixed;
-    right: 16px;
-    bottom: 16px;
+    right: 0.16rem;
+    bottom: 0.16rem;
 }
 .floatright div:first-child{
-	margin-bottom: 8px;
+	margin-bottom: 0.08rem;
 }
 .floatright div:hover {
     color: #bfe3ae;

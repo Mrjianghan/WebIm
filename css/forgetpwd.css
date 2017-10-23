@@ -1,7 +1,10 @@
 * {
     margin: 0;
     padding: 0;
+	-webkit-text-size-adjust: none !important;
+	
 }
+
 html,body {
     height: 100%;
     width: 100%;
@@ -13,6 +16,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 6rem;
+	
 }
 .clearfix:after {content:'.';display:block;height:0;clear:both;visibility:hidden;}
 .clearfix {*zoom:1;}
@@ -289,7 +293,6 @@ article .fa-times:hover {
 .check1 .fa-check-square {
 	color: #2285ff;
 }
-
 .nextstep {
 	height: 0.64rem;
 	width: 4rem;
@@ -303,15 +306,6 @@ article .fa-times:hover {
 	color: #fff;
 	margin-top: 0.2rem;
 }
-
-
-
-
-
-
-
-
-
 
 
 .errOuter {
