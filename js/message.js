@@ -4,45 +4,27 @@ var myfriends;//全局变量我的所有好友
 var mygroups;//全局变量我的所有群组
 var globaldomain = 'http://api.zhongxiangim.com/';
 var globalimg = 'http://assets.zhongxiangim.com/zxupl';
-
-
-
 var templatearr=[];//全局数组
 var templatearr1=[];//全局数组
 var templatearr2=[];//全局数组
-
 var globalmsgarr=[];//消息数组
 var globaltextmsgarrcopy1=[];//文本消息数组
 var globaltextmsgarrbridge=[];//文本消息数组
 var globaltextmsgarrcopy2=[];//文本消息数组
-
 var unreadlength=[];//未读消息数
 var tempcreategroup = '';
 var allmessagecontainer=[];//所有消息容器
 var allmsgreverse = [];
-
 var globalemojitrack='';//全局emoji表情消息的id
 var groupemojisrc='';//全局群组emoji消息的路径
-
 var chatemojitrack='';//全局emoji表情消息的id
 var chatemojisrc='';//全局聊天室emoji消息的路径
-
-
 var globalarea='';
 var globaltrade = '';
-
 var globalcurrentchatroom1 = '';//点击当前聊天室的id
 var globalcurrentchatroom2 = '';//搜索结果点击当前聊天室的id
-
 var globalpicindex='';
 var globalpicturelength = '';
-
-
-
-
-
-
-
 
 function getCurrentTime(){
 	var globaltime = new Date();
@@ -50,10 +32,6 @@ function getCurrentTime(){
 	var now = getglobaltime.slice(0,5);
 	return now;
 };//获取当前时间
-
-
-
-
 
 var conn = new WebIM.connection({
     isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
@@ -66,76 +44,45 @@ var conn = new WebIM.connection({
     apiUrl:WebIM.config.apiURL,
 });
 
-
-
 if ( localStorage.currentuser ){
 	var nothing = localStorage.currentuser;
-	ids = JSON.parse( nothing );//登陆必备*/
-	console.log(ids);
+	ids = JSON.parse( nothing );//登陆必备
 }else {
 	window.location.href = "index.html";
 }
-
-
-
-
 conn.listen({
     onOpened: function ( message ) {         
         console.log("%c [opened] 连接已成功建立", "color: green");
     },   //连接成功回调
-	
     onClosed: function ( message ) {
 		console.log(message);
 		console.log("onClosed");
 		localStorage.clear();
+		window.location.href="index.html";
 	},         //连接关闭回调
-	
     onOnline: function () {
 		console.log('本机网络连接成功');
-	},                  //本机网络连接成功
-	
+	},        //本机网络连接成功
     onOffline: function () {
 		console.log('本机网络掉线');
 		window.location.href="index.html";
 		localStorage.clear();
 	},                 //本机网络掉线
-	
     onError: function ( message ) {
 		console.log(message);
 		console.log('失败回调');
-		//window.location.href="index.html";
+		window.location.href="index.html";
 		localStorage.clear();
 	},          //失败回调
-	
-	
-	
-			
 	onTextMessage: function ( message ) {
-		
-		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		WebIM.conn.send(msg.body);
-		//对方收到已送达回执的回调函数是onReadMessage*/
-		
-		
 		vm.nomessage = false;
 		console.log('文本消息');
-		
 		message.time = getCurrentTime();
-		
 		console.log(message);
 		var type = message.type;
-		
 		switch ( type ) {
 			case 'chat':
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -143,40 +90,53 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-					
 					var data = res.data.data;
 					console.log(data);
 					var name = data.nickname;
 					var avatar = data.avatar;
 					var msgfrom = message.from;
-					
 					message.name = name;
 					message.avatar = avatar;
-					
-					console.log(message);
-					
-					
 					//消息列表记录
 					var str = '';
-					
 					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+message.data+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 					
-					
-					if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
+					if ( $('.mainleft  #'+message.from).length < 1 ){
 						$('.mainleft .comlist1').prepend(str);
 						
 					} else {
-						$('.mainleft .comlist1  #'+message.from).remove();
-						$('.mainleft .comlist1').prepend(str);
+						
+						
+						
+						console.log($('.mainleft .doublefirst #'+message.from+'.listOnecon').html() );
+						
+						
+						if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
+							//有置顶
+							$('.mainleft .doublefirst').html( str );
+							
+							
+						}else {
+							//没有置顶
+							$('.mainleft .comlist1  #'+message.from).remove();
+							$('.mainleft .comlist1').prepend(str);
+							
+						}
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						
 					}
 					
 					//消息列表记录
-					
-					
-					
-					
-					console.log(message.ext.mingpian);
 					
 					var textmessagetransfer = '';
 					
@@ -2543,49 +2503,15 @@ conn.listen({
     onReceivedMessage: function(message){
 		console.log('收到消息送达客户端回执');
 		console.log(message);
-		
-		var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		WebIM.conn.send(msg.body);
-		
-		
 	},    //收到消息送达客户端回执
 	
     onDeliveredMessage: function(message){
 		console.log('消息送达服务器回执，pc发送的消息已经发送到了环信！');
 		console.log(message);
 		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		WebIM.conn.send(msg.body);
-		//对方收到已送达回执的回调函数是onReadMessage*/
-		
-		
 	},   //收到消息送达服务器回执
 	
     onReadMessage: function(message){
-		console.log('收到消息已读回执，移动端已经读取了pc上面发送的消息！');
-		console.log(message);
-		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		WebIM.conn.send(msg.body);
-		//对方收到已送达回执的回调函数是onReadMessage*/
-		
-		
-		
 	},        //收到消息已读回执
 	
     onCreateGroup: function(message){
@@ -2600,7 +2526,6 @@ conn.listen({
     
 });
 
-
 var store = new Vuex.Store({
 	state:{
 		user:ids,
@@ -2609,20 +2534,11 @@ var store = new Vuex.Store({
 		showgroupsright:true,
 		right3groupid:'',
 		right3friendid:'',
-		message:[
-			
-		],
-		chat:[
-			
-		],
-		groupchat:[
-			
-		],
-		chatroom:[
-			
-		],
+		message:[],
+		chat:[],
+		groupchat:[],
+		chatroom:[],
 		mainchatselectall:false,
-		
 	},
 	mutations:{
 		showfriends:function(state){
@@ -2668,9 +2584,6 @@ var store = new Vuex.Store({
 			return state.mainchatselectall;
 		},
 	},
-	actions:{
-		
-	},
 });
 
 Vue.component('currentuser',{
@@ -2699,17 +2612,13 @@ Vue.component('currentuser',{
 			icons2:false,
 			icons3:false,
 			avatar:'',
-			
+			groupsarrOne1:[],
 		}
 	},
-	
 	created:function(){
-		
 	},
 	computed:Vuex.mapGetters({
 		friendsarrOne:'friendsarrOne',
-		groupsarrOne:'groupsarrOne',
-		
 	}),
 	methods:{
 		popcurrent:function($event){
@@ -2722,11 +2631,31 @@ Vue.component('currentuser',{
 		},//显示当前用户卡片
 		mainsearch:function() {
 			this.searchshow = true;
+			
+			axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
+				var data = res.data.data.content;
+					
+				vm.$refs.current.groupsarrOne1 = data;
+					
+					
+				console.log(vm.$refs.current.groupsarrOne1);
+					
+				console.log(data);
+			}).catch(function(err){
+				console.log(err);
+			}); 
+			
+			
 			if ( this.mainsearchval =='' ){
 				
 				this.serachingornot = true;
 				vm.$refs.current.tempfriendsarrcon = [];
 				vm.$refs.current.tempgroupsarrcon = [];
+				//vm.groupsarrOne1 = 
+				
+				
+				
+					
 				
 			} else {
 				this.serachingornot = false;
@@ -2816,11 +2745,21 @@ Vue.component('currentuser',{
 			var str ='';
 				
 			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
+			
 				
-				
-			if ( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length < 1 ){
+			if ( $('.mainleft  #'+obj2.id+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
+			}else {
+				//有置顶
+				console.log($('.mainleft .doublefirst  #'+obj2.id+'.listOnecon').html() );
+				
+				
+				
+				
+				
+				//没置顶
 			}
+			
 			
 			
 			
@@ -2849,8 +2788,12 @@ Vue.component('currentuser',{
 				
 			console.log($('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length);
 				
-			if ( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length < 1 ){
+			if ( $('.mainleft   #'+obj1.to+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
+			}else {
+				//是否置顶
+				
+				
 			}
 			
 			
@@ -2881,8 +2824,10 @@ Vue.component('currentuser',{
 				
 			console.log( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length );
 				
-			if ( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length < 1 ){
+			if ( $('.mainleft   #'+obj1.to+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
+			}else {
+				
 			}
 			
 			
@@ -2918,8 +2863,10 @@ Vue.component('currentuser',{
 			console.log( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length );
 			
 				
-			if ( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length < 1 ){
+			if ( $('.mainleft   #'+obj2.id+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
+			}else {
+				
 			}
 			
 			
@@ -2928,7 +2875,7 @@ Vue.component('currentuser',{
 		},//关键字搜索好友触发
 		
 		startchat:function(){
-			
+			tempcreategroup = '';
 			vm.readychatshow = true;
 			
 			vm.slebossswicth = true;
@@ -3005,6 +2952,7 @@ Vue.component('currentuser',{
 			vm.mainrightone = false;
 			vm.mainrighttwo = true;
 			
+			
 			vm.specialthree = false;
 			//聊天室获取
 			
@@ -3063,15 +3011,18 @@ Vue.component('currentuser',{
 			this.icons1 = false;
 			this.icons2 = false;
 			this.icons3 = true;
-			//vm.currentView = 'comlistcomThree';
-			//vm.currentView1 = 'rightcomThree';
 			
-			
+			axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
+				var data = res.data.data.content;
+				vm.groupsarrOne1 = data;
+				console.log(data);
+			}).catch(function(err){
+				console.log(err);
+			})
 			var listimer1 = setTimeout(function(){
 				initials1();
 				clearTimeout('listimer1');
 			},90);
-			
 			vm.showleft1 = false;
 			vm.showleft2 = false;
 			vm.showleft3 = true;
@@ -3264,11 +3215,11 @@ Vue.component('rightcomthree',{
 							
 							str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
 							
-							if ( $('.mainleft .comlist1  #'+groupid).length < 1 ){
+							if ( $('.mainleft   #'+groupid).length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
 							} else {
 								
-								var html = $('.mainleft .comlist1  #'+groupid).html();
+								/*var html = $('.mainleft .comlist1  #'+groupid).html();
 								console.log(html);
 								
 								
@@ -3277,7 +3228,37 @@ Vue.component('rightcomthree',{
 								
 								$('.mainleft .comlist1  #'+groupid).html( html );
 								
-								$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
+								$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );*/
+								
+								
+								
+								//不在置顶框
+								console.log( $('.mainleft .doublefirst  #'+groupid+'.listOnecon') );
+								console.log($('.mainleft .doublefirst  #'+groupid+'.listOnecon').html());
+								
+								if ( $('.mainleft .doublefirst  #'+groupid+'.listOnecon').html()=='' ){
+									
+									var html = $('.mainleft .comlist1  #'+groupid).html();
+									console.log(html);
+
+									$('.mainleft .comlist1  #'+groupid).remove();
+									$('.mainleft .comlist1').prepend(str);
+
+									$('.mainleft .comlist1  #'+groupid).html( html );
+
+									$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
+									
+									
+								}else {
+									
+								}
+								
+								
+								//在置顶框
+								
+								
+								
+								
 								
 								
 								
@@ -3290,19 +3271,35 @@ Vue.component('rightcomthree',{
 							
 							
 							
-							if ( $('.mainleft .comlist1  #'+groupid).length < 1 ){
+							if ( $('.mainleft   #'+groupid).length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
 							} else {
 								
-								var html = $('.mainleft .comlist1  #'+groupid).html();
-								console.log(html);
+								//不在置顶框
+								console.log( $('.mainleft .doublefirst  #'+groupid+'.listOnecon') );
+								console.log($('.mainleft .doublefirst  #'+groupid+'.listOnecon').html());
 								
-								$('.mainleft .comlist1  #'+groupid).remove();
-								$('.mainleft .comlist1').prepend(str);
+								if ( $('.mainleft .doublefirst  #'+groupid+'.listOnecon').html()=='' ){
+									
+									var html = $('.mainleft .comlist1  #'+groupid).html();
+									console.log(html);
+
+									$('.mainleft .comlist1  #'+groupid).remove();
+									$('.mainleft .comlist1').prepend(str);
+
+									$('.mainleft .comlist1  #'+groupid).html( html );
+
+									$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
+									
+									
+								}else {
+									
+								}
 								
-								$('.mainleft .comlist1  #'+groupid).html( html );
 								
-								$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
+								//在置顶框
+								
+								
 								
 							}
 							
@@ -3353,24 +3350,14 @@ Vue.component('rightcomthree',{
 				vm.$refs.current.icons1 = true;
 				vm.$refs.current.icons2 = false;
 				vm.$refs.current.icons3 = false;
-				
 				vm.specialthree = false;
 				vm.mainrightone = true;
-				
 				vm.showleft1 = true;
 				vm.showleft2 = false;
 				vm.showleft3 = false;
 				
-				
-				
 				/*页面跳转*/
 				
-				
-				
-				//console.log(data);
-				//console.log(avatar);
-				//console.log(name);
-				//console.log(id);
 				
 			}).catch(function(err){
 				console.log(err);
@@ -3407,14 +3394,28 @@ Vue.component('rightcomthree',{
 				str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 				
 				
-				if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
+				if ( $('.mainleft   #'+obj2.id).length < 1 ){
 					$('.mainleft .comlist1').prepend(str);
 				}else {
 					
-					var html = $('.mainleft .comlist1  #'+obj2.id).html();
-					$('.mainleft .comlist1  #'+obj2.id).remove();
-					$('.mainleft .comlist1').prepend( str );
-					$('.mainleft .comlist1  #'+obj2.id).html( html );
+					
+					console.log($('.mainleft .doublefirst  #'+obj2.id+'.listOnecon').html());
+					
+					
+					
+					if ( $('.mainleft .doublefirst  #'+obj2.id+'.listOnecon').html() ){
+						//被置顶
+					}else {
+						//没有置顶
+						var html = $('.mainleft .comlist1  #'+obj2.id).html();
+						$('.mainleft .comlist1  #'+obj2.id).remove();
+						$('.mainleft .comlist1').prepend( str );
+						$('.mainleft .comlist1  #'+obj2.id).html( html );
+					}
+					
+					
+					
+					
 					
 					
 				}
@@ -3681,6 +3682,9 @@ var vm = new Vue({
 		topthree5:'',
 		retweetshow:false,
 		popleftlists:false,
+		popleftlists1:false,
+		popleft11:'',
+		poptop11:'',
 		popleft1:'',
 		poptop1:'',
 		
@@ -3733,6 +3737,8 @@ var vm = new Vue({
 		strangeroff:false,
 		strangeropen:false,
 		firstshow:false,
+		groupsarrOne1:[],
+		showall1:false,
 	},
 	
 	computed:{
@@ -3792,12 +3798,11 @@ var vm = new Vue({
 		},//关闭警告框
 		clearsearch:function(){
 			
-			this.$refs.current._data.searchshow = false;
+			vm.$refs.current._data.searchshow = false;
 			vm.$refs.current.tempfriendsarrcon = [];
 			vm.$refs.current.tempgroupsarrcon = [];
 			vm.isgroupmaster = false;
 			vm.allusershow = false;
-			vm.emojishow = false;
 			vm.clearscreenshow = false;
 			vm.msgthreeshow = false;
 			vm.msgthreeshow2 = false;
@@ -3808,6 +3813,7 @@ var vm = new Vue({
 			vm.popleftlists = false;
 			vm.mingpianshow = false;
 			vm.isgroupmanagermenu1 = false;
+			vm.popleftlists1 = false;
 		},//关闭搜索框
 		selectcurrentinput:function($event){
 			console.log($event);
@@ -4162,6 +4168,56 @@ var vm = new Vue({
 							axios.post(globaldomain+'im/group/member/join.json?groupId='+groupid+'&memberIds='+transferstr).then(function(res){
 								console.log(res.data);
 								
+								
+								axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
+									var data = res.data.data;
+									console.log(data);
+									
+									var getavatar = data.avatar;
+									var getname = data.name;
+									var groupid = data.id;//群组特别标识
+									
+									var str = '';
+									
+									str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( getavatar ? vm.$refs.rightthree.picsrc+getavatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+getname+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell "></i></div></div><div class="clearfix"></div></div></div>';
+									
+									vm.nomessage = false;
+									$('.mainleft .comlist1').prepend( str );
+									
+									
+									
+									
+									/*页面跳转*/
+									vm.$refs.current.icons1 = true;
+									vm.$refs.current.icons2 = false;
+									vm.$refs.current.icons3 = false;
+									vm.specialthree = false;
+									vm.mainrightone = true;
+									vm.showleft1 = true;
+									vm.showleft2 = false;
+									vm.showleft3 = false;
+
+									/*页面跳转*/ 
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+								}).catch(function(err){
+									console.log(err);
+								})
+								
+								
+								
+								
+								
+								
 							}).catch(function(err){
 								console.log(err);
 							});
@@ -4192,8 +4248,33 @@ var vm = new Vue({
 									vm.sel1 = true;
 									vm.sel2 = false;
 									vm.alertinfoshow = true;
+									
+									/*页面跳转*/
+									vm.$refs.current.icons1 = true;
+									vm.$refs.current.icons2 = false;
+									vm.$refs.current.icons3 = false;
+									vm.specialthree = false;
+									vm.mainrightone = true;
+									vm.showleft1 = true;
+									vm.showleft2 = false;
+									vm.showleft3 = false;
+
+									/*页面跳转*/ 
 									//关闭发起聊天界面
 								}else {
+									
+									
+									/*页面跳转*/
+									vm.$refs.current.icons1 = true;
+									vm.$refs.current.icons2 = false;
+									vm.$refs.current.icons3 = false;
+									vm.specialthree = false;
+									vm.mainrightone = true;
+									vm.showleft1 = true;
+									vm.showleft2 = false;
+									vm.showleft3 = false;
+
+									/*页面跳转*/ 
 
 								}
 
@@ -4230,80 +4311,148 @@ var vm = new Vue({
 				var friendid = vm.selectmaingrouparr[0];
 				console.log(friendid);
 				
-				axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
-					var data = res.data.data;
-					console.log(data);
-
-
-					var name = data.nickname;
-					var avatar = data.avatar;
-					var id = data.id;//好友个人标识
-					var obj2 = {};
-
-					obj2.name = name;
-					obj2.avatar = avatar;
-
-					obj2.type="chat";
-					obj2.id = id;
-
-					console.log(obj2);
-
-					var str ='';
-
-					str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
-
-
-					if ( $('.mainleft .comlist1  #'+obj2.id).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					}
-
-
-
-
-
-
-
-
-					/*页面跳转*/
-					vm.$refs.current.icons1 = true;
-					vm.$refs.current.icons2 = false;
-					vm.$refs.current.icons3 = false;
-
-					vm.specialthree = false;
-					vm.mainrightone = true;
-
-					vm.showleft1 = true;
-					vm.showleft2 = false;
-					vm.showleft3 = false;
-
-					/*页面跳转*/
+				var members = tempcreategroup;
+				console.log(typeof (members));
 				
 				
-					vm.readychatshow = false;
-					vm.slebossswicth = false;
-					vm.slebossswicth1 = false;
-					vm.sel1 = true;
-					vm.sel2 = false;
+				if( members != '' ){
+				   //选中群组
+					
+					axios.post(globaldomain+'im/group/create.json?name=自动生成&descr=自行添加&maxUsers=500&openable=1&joinConfirm=1&inviteConfirm=1&allowInvites=1').then(function(res){
+						
+						var code = res.data.code;
+						console.log(res.data);
 
-					//关闭发起聊天界面
+						if ( code == 2000 ){
+							var groupid = res.data.data;
+							console.log(groupid);
+							
+							axios.post(globaldomain+'im/group/apply/pull.json?groupId='+groupid+'&groupIds='+members+'&descr=pc端').then(function(res){
+								console.log(res.data);
+								var success = res.data.success;
+								console.log(success);
+								if ( success ) {
+									vm.readychatshow = false;
+									vm.slebossswicth = false;
+									vm.slebossswicth1 = false;
+									vm.sel1 = true;
+									vm.sel2 = false;
+									vm.alertinfoshow = true;
+									
+									
+									
+									
+
+									//页面跳转
+									vm.$refs.current.icons1 = true;
+									vm.$refs.current.icons2 = false;
+									vm.$refs.current.icons3 = false;
+									vm.specialthree = false;
+									vm.mainrightone = true;
+									vm.showleft1 = true;
+									vm.showleft2 = false;
+									vm.showleft3 = false;
+
+									//页面跳转
+									//关闭发起聊天界面
+								}else {
+									
+									
+									//页面跳转
+									vm.$refs.current.icons1 = true;
+									vm.$refs.current.icons2 = false;
+									vm.$refs.current.icons3 = false;
+									vm.specialthree = false;
+									vm.mainrightone = true;
+									vm.showleft1 = true;
+									vm.showleft2 = false;
+									vm.showleft3 = false;
+
+									//页面跳转
+
+								}
+
+
+
+							}).catch(function(err){
+								console.log(err);
+							})
+							
+							
+							
+						}
+						
+						
+					}).catch(function(err){
+						console.log(err);
+					})
+					
+					
+					
+					
+					
+				}else {
+				   //未选
+					axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
+						var data = res.data.data;
+						console.log(data);
+						var name = data.nickname;
+						var avatar = data.avatar;
+						var id = data.id;//好友个人标识
+						var obj2 = {};
+						obj2.name = name;
+						obj2.avatar = avatar;
+						obj2.type="chat";
+						obj2.id = id;
+						console.log(obj2);
+						var str ='';
+						str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
+						if ( $('.mainleft   #'+obj2.id).length < 1 ){
+							$('.mainleft .comlist1').prepend(str);
+						}else {
+							
+							
+							
+						}
+
+						//页面跳转
+						vm.$refs.current.icons1 = true;
+						vm.$refs.current.icons2 = false;
+						vm.$refs.current.icons3 = false;
+						vm.specialthree = false;
+						vm.mainrightone = true;
+						vm.showleft1 = true;
+						vm.showleft2 = false;
+						vm.showleft3 = false;
+						//页面跳转
+						vm.readychatshow = false;
+						vm.slebossswicth = false;
+						vm.slebossswicth1 = false;
+						vm.sel1 = true;
+						vm.sel2 = false;
+						//关闭发起聊天界面
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					}).catch(function(err){
+							console.log(err);	
+					});
+				}
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			}).catch(function(err){
-				console.log(err);	
-			});
-			};
+			}
 			
 		},//确定创建群聊
 		offuserlist2:function(){
@@ -4843,6 +4992,7 @@ var vm = new Vue({
 									console.log('onFileUploadError');
 									vm.alertinfoshow = true;
 									vm.alertinfocon = '上传文件必须小于10M！';
+									$(that).val('');
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -5094,6 +5244,9 @@ var vm = new Vue({
 								chatType: 'chatRoom',
 								onFileUploadError: function () {      // 消息上传失败
 									console.log('onFileUploadError');
+									vm.alertinfoshow = true;
+									vm.alertinfocon = '上传文件必须小于10M！'; 
+									$(that).val('');
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -5186,6 +5339,9 @@ var vm = new Vue({
 								chatType: 'chatRoom',
 								onFileUploadError: function () {      // 消息上传失败
 									console.log('onFileUploadError');
+									vm.alertinfoshow = true;
+									vm.alertinfocon = '上传文件必须小于10M！'; 
+									$(that).val('');
 								},
 								onFileUploadComplete: function () {   // 消息上传成功
 									console.log('onFileUploadComplete');
@@ -6061,6 +6217,7 @@ var vm = new Vue({
 		ischatmastermenu:function(){
 			vm.showchatcontrol1 = !vm.showchatcontrol1;
 			
+			
 		},//聊天室身份为超级管理员
 		ischatmanagermenu:function(){
 			vm.showchatcontrol2 = !vm.showchatcontrol2;
@@ -6345,33 +6502,22 @@ var vm = new Vue({
 			var that = $event.currentTarget;
 			console.log(that);
 			var getid = $(that).attr("id");
-			
 			vm.firstshow = true;
-			
-			//$('.threepiecelists .doublefirst').html();
-			
-			var innerhtml = $('#'+getid+'.listOnecon').html();
-			
+			var innerhtml = $('.comlist1 #'+getid+'.listOnecon').html();
 			var str = '';
-			
 			str = str + '<div id="'+getid+'" class="listOnecon">'+innerhtml+'</div>';
-			
-			$('.threepiecelists .doublefirst').html( str );
-			
-			$('.comlist1 #'+getid +'.listOnecon').remove();
-			
-			console.log( $('.threepiecelists .doublefirst') );
-			console.log( $('.threepiecelists') );
-			console.log(str);
-			
-			
-			/*if ( $('.mainleft  .listOnecon').length == 1 ){
-				vm.popleftlists = false;
+			//$('.threepiecelists .doublefirst').html( str );
+			//$('.comlist1 #'+getid +'.listOnecon').remove();
+			console.log( $('.threepiecelists .doublefirst').html() );
+			if ( $('.threepiecelists .doublefirst').html() ){
+				var gettopcontent = $('.threepiecelists .doublefirst').html();
+				$('.threepiecelists .comlist1').prepend( gettopcontent );
+				$('.threepiecelists .doublefirst').html(str);
+				$('.comlist1 #'+getid +'.listOnecon').remove();
 			}else {
-				$('#'+getid +'.listOnecon').remove();
-				$('.mainleft .comlist1').prepend(str);
-				vm.popleftlists = false;
-			}*/
+				$('.threepiecelists .doublefirst').html( str );
+				$('.comlist1 #'+getid +'.listOnecon').remove();
+			}
 			
 			
 			
@@ -6395,6 +6541,7 @@ var vm = new Vue({
 			vm.justoneman = false;
 			vm.strangeropen = false;
 			vm.strangeroff = false;
+			vm.popleftlists1 = false;
 		},//关闭消息记录
 		judgeisfriend:function($event){
 			console.log($event);
@@ -6423,32 +6570,17 @@ var vm = new Vue({
 					console.log(getavatar);
 					transferavatar = getavatar;
 					transfername = name;
-					
-					
-					
 					if (isfriend){
-					
 						console.log( transferavatar );
-
 						console.log( transfername );
-
-
 						str = str + '<div id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
-
-
 						if ( $('.mainleft .comlist1  #'+getid).length < 1 ){
 							$('.mainleft .comlist1').prepend(str);
 							
 						}
-
-
 					}else {
-						
 						//不是好友，是否加入黑名单的情况
-						
 						console.log(isblack);
-						
-						
 						if( isblack ){
 							
 							str = str + '<div data-not="not" id="'+getid+'" class="listOnecon"><img src="'+( transferavatar ? vm.$refs.rightthree.picsrc+transferavatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+transfername+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"><i class="fa fa-eye hidden"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
@@ -6755,6 +6887,9 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 	
 	vm.isgroupmaster = false;
 	vm.isgroupmanagermenu1 = false;
+	vm.popleftlists1 = false;
+	
+	$('.mainleft .doublefirst .listOnecon').removeClass( 'backgroundcolor' );
 	
 	$(that).addClass('backgroundcolor').siblings().removeClass('backgroundcolor');
 	
@@ -6912,21 +7047,387 @@ $('.mainleft .comlist1').on('contextmenu','.listOnecon',function(event){
 
 //点击聊天列表
 
-$('.mainleft .doublefirst').on('click',function(){
+
+
+$('.mainleft .doublefirst').on('contextmenu','.listOnecon',function(event){
+	var that = this;
+	console.log(that);
+	var listid = $(that).attr('id');
+	console.log(listid);
+	vm.popleftlists1 = true;
+	vm.popleftlists = false;
 	
-});//置定点击
+	vm.managechatlistmenuid = listid;
+	
+	console.log(event.offsetX);
+	console.log(event.offsetY);
+	
+	event.preventDefault();
+	vm.popleft11 = event.offsetX+100 +'px';
+	vm.poptop11 = event.offsetY+300 +'px';
+	
+	vm.isgroupmaster = false;
+	vm.isgroupmanagermenu1 = false;
+	
+	
+	$(that).addClass('backgroundcolor');
+	
+	
+	$('.mainleft .comlist1 .listOnecon').removeClass('backgroundcolor');
+	
+	$(that).find( '.circle' ).removeClass('circle').addClass('transparentone');
+	
+	$('.mainright .rightonechatcon   #'+listid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
+	
+	var str1 = '';
+	
+	str1 = str1 + '<div id="'+listid+'" class="msgconmaster hidden">'+'<div class="msgcontainer"></div>'+'</div>';	
+	
+	
+	if ( $('.mainright .rightonechatcon  #'+listid+'.msgconmaster').length < 1 ){
+		$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+	} else {
+	}
+	
+	axios.get(globaldomain+'im/user/detail.json?id='+listid).then(function(res){
+		vm.groupnumbershow = false;
+		var data =res.data.data;
+		console.log(data);
+		var name = data.nickname;
+		vm.rightoneheaderobj.name = name;
+		vm.targetid = listid;
+		
+		
+		if ( $(that).attr('data-not') ){
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = false;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = true;
+			
+		} else {
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = true;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = false;
+			
+		} 
+		
+		
+		
+		
+	}).catch(function(err){
+		console.log(err);
+	});//是否为好友，获取用户详细信息
+	
+	
+	
+	
+	axios.get(globaldomain+'im/group/info.json?id='+listid).then(function(res){
+		
+		var data = res.data.data;
+		
+		vm.isgroupleader= false;
+		vm.isgroupmanager = false;//管理员
+		vm.notgroupmanager = false;//不是管理员
+		//vm.justoneman = true;//只是个人
+		vm.shouldshow = false;
+		vm.groupidbindminus = listid;
+		
+		
+		console.log(data);
+		var name = data.name;
+		var genre = data.genre;
+		var groupnumber = data.count;
+		
+		vm.rightoneheaderobj.name = name;
+		vm.rightoneheaderobj.groupnumber = groupnumber;
+		vm.targetid = listid;
+		
+		vm.groupnumbershow = true;
+		
+		
+		//vm.slidegenre
+		
+		
+		axios.get(globaldomain+'im/group/member/genre.json?groupId='+listid+'&memberId='+ids.id).then(function(res){
+			console.log(res.data);
+			var level = res.data.data;
+			console.log(level);
+			
+			console.log(  typeof(level));
+			switch (level) {
+				case '10':
+					console.log(10);
+					vm.isgroupleader= true;
+					vm.isgroupmanager = false;//管理员
+					vm.notgroupmanager = false;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
+					break;
+				case '20':
+					vm.isgroupleader= false;
+					vm.isgroupmanager = true;//管理员
+					vm.notgroupmanager = false;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
+					break;
+				case '30':
+					vm.isgroupleader= false;
+					vm.isgroupmanager = false;//管理员
+					vm.notgroupmanager = true;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = false;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
+					break;
+			}
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+	
+		
+		
+		axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+listid).then(function(res){
+			console.log(res);
+			var arrgg = res.data.data.content;
+			console.log(arrgg);
+			vm.slidechagearr = arrgg;
+			 
+			
+			
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}).catch(function(err){
+		console.log(err);
+	});//是否为群组，获取群组详细信息
+	
+	
+	
+	
+});//置顶右点击
+
+$('.mainleft .doublefirst').on('click','.listOnecon',function(){
+	vm.isgroupmaster = false;
+	vm.isgroupmanagermenu1 = false;
+	console.log(this);
+	var that = this;
+	var listid = $(that).attr('id');
+	console.log(listid);
+	
+	$(that).addClass('backgroundcolor');
+	
+	$('.mainleft .comlist1 .listOnecon').removeClass('backgroundcolor');
+	
+	$(that).find( '.circle' ).removeClass('circle').addClass('transparentone');
+	
+	$('.mainright .rightonechatcon   #'+listid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
+	
+	var str1 = '';
+	
+	str1 = str1 + '<div id="'+listid+'" class="msgconmaster hidden">'+'<div class="msgcontainer"></div>'+'</div>';	
+	
+	
+	if ( $('.mainright .rightonechatcon  #'+listid+'.msgconmaster').length < 1 ){
+		$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+	} else {
+	}
+	
+	axios.get(globaldomain+'im/user/detail.json?id='+listid).then(function(res){
+		vm.groupnumbershow = false;
+		var data =res.data.data;
+		console.log(data);
+		var name = data.nickname;
+		vm.rightoneheaderobj.name = name;
+		vm.targetid = listid;
+		
+		
+		if ( $(that).attr('data-not') ){
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = false;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = true;
+			
+		} else {
+			vm.isgroupleader= false;
+			vm.isgroupmanager = false;//管理员
+			vm.notgroupmanager = false;//不是管理员
+			vm.justoneman = true;//只是个人
+			vm.shouldshow = false;
+			vm.strangeroff = false;
+			vm.strangeropen = false;
+			
+		} 
+		
+		
+		
+		
+	}).catch(function(err){
+		console.log(err);
+	});//是否为好友，获取用户详细信息
+	
+	
+	
+	
+	axios.get(globaldomain+'im/group/info.json?id='+listid).then(function(res){
+		
+		var data = res.data.data;
+		
+		vm.isgroupleader= false;
+		vm.isgroupmanager = false;//管理员
+		vm.notgroupmanager = false;//不是管理员
+		//vm.justoneman = true;//只是个人
+		vm.shouldshow = false;
+		vm.groupidbindminus = listid;
+		
+		
+		console.log(data);
+		var name = data.name;
+		var genre = data.genre;
+		var groupnumber = data.count;
+		
+		vm.rightoneheaderobj.name = name;
+		vm.rightoneheaderobj.groupnumber = groupnumber;
+		vm.targetid = listid;
+		
+		vm.groupnumbershow = true;
+		
+		
+		//vm.slidegenre
+		
+		
+		axios.get(globaldomain+'im/group/member/genre.json?groupId='+listid+'&memberId='+ids.id).then(function(res){
+			console.log(res.data);
+			var level = res.data.data;
+			console.log(level);
+			
+			console.log(  typeof(level));
+			switch (level) {
+				case '10':
+					console.log(10);
+					vm.isgroupleader= true;
+					vm.isgroupmanager = false;//管理员
+					vm.notgroupmanager = false;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
+					break;
+				case '20':
+					vm.isgroupleader= false;
+					vm.isgroupmanager = true;//管理员
+					vm.notgroupmanager = false;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = true;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
+					break;
+				case '30':
+					vm.isgroupleader= false;
+					vm.isgroupmanager = false;//管理员
+					vm.notgroupmanager = true;//不是管理员
+					vm.justoneman = false;//只是个人
+					vm.shouldshow = false;
+					vm.strangeroff = false;
+					vm.strangeropen = false;
+					break;
+			}
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+	
+		
+		
+		axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+listid).then(function(res){
+			console.log(res);
+			var arrgg = res.data.data.content;
+			console.log(arrgg);
+			vm.slidechagearr = arrgg;
+			 
+			
+			
+			
+			
+			
+		}).catch(function(err){
+			console.log(err);
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}).catch(function(err){
+		console.log(err);
+	});//是否为群组，获取群组详细信息
+	
+	
+	
+	
+});//置顶左点击
+
+
+
 $('.mainleft .comlist1').on('click','.listOnecon',function(){
 	
 	vm.isgroupmaster = false;
 	vm.isgroupmanagermenu1 = false;
-	//vm.slidechagearr
-	
 	console.log(this);
 	var that = this;
 	var listid = $(that).attr('id');
 	console.log(listid);
 	
 	$(that).addClass('backgroundcolor').siblings().removeClass('backgroundcolor');
+	
+	
+	$('.mainleft .doublefirst .listOnecon').removeClass( 'backgroundcolor' );
+	
+	
 	
 	console.log($(that).find( '.circle' ));
 	
@@ -7501,5 +8002,3 @@ $('.ultimate').on('click','.fa-bell-slash-o',function(event){
 })
 
 //点击解除群组免打扰图标
-
-

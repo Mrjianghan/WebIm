@@ -84,7 +84,7 @@
 									</div>
 									
 									<div class="unsearchgroups">
-										<template v-for="(groupsarr,i) in groupsarrOne">
+										<template v-for="(groupsarr,i) in groupsarrOne1">
 											<div>
 												
 												<div :id="groupsarr.id" :data-nick="groupsarr.name" :data-avatar="groupsarr.avatar" class="searchgroupcon" @click="searchgrouptalking($event)">
@@ -688,6 +688,10 @@
 					<div :id="managechatlistmenuid" @click="killchat($event)">关闭聊天</div>
 				</div>
 				
+				<div v-show="popleftlists1" :style="{left:popleft11,top:poptop11}" class="leftpoplistmanager1">
+					<div :id="managechatlistmenuid" @click="killchat($event)">关闭聊天</div>
+				</div>
+				
 				
 				<currentuser ref="current"></currentuser>
 				<div class="threepiecelists scrollbar-macosx">
@@ -699,7 +703,6 @@
 						
 						<div class="comlistouter1">
 							<div v-show="firstshow" class="doublefirst">
-								
 							</div>
 							<div class="comlist1">
 							</div>
@@ -782,7 +785,10 @@
 								<div class="chatroomarea">
 									
 									
-									<div @click="allclick1($event)" :class="{chatroomclick:all1}" class="allarea">全部</div>
+									<div  @click="allclick1($event)" :class="{chatroomclick:all1}" class="allarea">全部</div>
+									<div class="fixhole1">
+									</div>
+									
 
 									<template v-for="(area1,i) in chatroomarea">
 										<div @click="areasearch($event)" :data-index="i" :class="{chatroomclick:chatroomindex1==i}" class="chatroomsame" :id="area1.id">{{ area1.name }}
@@ -793,7 +799,7 @@
 								</div>
 								<div class="clearfix"></div>
 								<div class="chatroomtrade">
-									<div @click="allclick2($event)" :class="{chatroomclick:all2}" class="alltrade">全部</div>
+									<div  @click="allclick2($event)" :class="{chatroomclick:all2}" class="alltrade">全部</div>
 									
 									
 									<template v-for="(class1,i) in chatroomclass">
@@ -856,7 +862,7 @@
 						<div class="listThree_groupheader">群组</div>
 				
 						<div>
-							<template v-for="(group,index) in groupsarrOne">
+							<template v-for="(group,index) in groupsarrOne1">
 								<div class="con">
 
 									<div :data-index="index" :data-name="group.name" :id="group.id" @click="changelistcolor1($event)" :class="{backgroundcolor:indexstrange == index}" class="listThree_groupcon">

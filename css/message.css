@@ -160,6 +160,22 @@ body {
 	text-align: center;
 	overflow: hidden;
 }
+.leftpoplistmanager1 {
+	height: 0.52rem;
+	background-color: #fff;
+	border-radius: 0.10rem;
+	width: 1.46rem;
+	line-height: 0.52rem;
+	cursor: pointer;
+	position: absolute;
+	z-index: 2000;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: 0.22rem;
+	color: #333;
+	text-align: center;
+	overflow: hidden;
+}
 .leftpoplistmanager div:first-child {
 	height: 0.52rem;
 	width: 100%;
@@ -1396,22 +1412,65 @@ body {
 	display: none;
 } 
 
-.allarea {
-	display: inline-block;
-	float: left;
+/*.allarea {
+	display: table-cell;
 	font-size: 0.20rem;
 	color: #333;
 	margin-right: 0.20rem;
-	margin-left: 0.20rem;
+	padding-right: 0.2rem;
+	padding-left: 0.2rem;
+	cursor: pointer;
 }
 .alltrade {
-	display: inline-block;
-	float: left;
+	display: table-cell;
 	font-size: 0.20rem;
 	color: #333;
 	margin-right: 0.20rem;
-	margin-left: 0.20rem;
+	padding-right: 0.2rem;
+	padding-left: 0.2rem;
+	cursor: pointer;
+}	*/
+
+
+
+
+.allarea {
+	display: block;
+	font-size: 0.20rem;
+	color: #333;
+	position: absolute;
+	cursor: pointer;
+	left: 0;
+	z-index: 90;
+}
+.alltrade {
+	display: block;
+	font-size: 0.20rem;
+	position: absolute;
+	color: #333;
+	left: 0;
+	cursor: pointer;
+	z-index: 90;
 }	
+
+.chatroomsame {
+	cursor: pointer;
+	width: 0.5rem;
+	font-size: 0.20rem;
+	display: table-cell;
+	color: #333;
+	padding-left: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
 .alltrade:hover {
 	color: #00a0e9;
 }
@@ -1430,32 +1489,50 @@ body {
 	-ms-overflow-style: none; 
     overflow: -moz-scrollbars-none;
 	position: relative;
-	
-}
-
-.chatroomtrade {
-	width: auto;
+	/*width: auto;
 	margin-left: 0.20rem;
 	height: 0.40rem;
 	overflow-x: scroll;
 	white-space: nowrap;
 	-ms-overflow-style: none; 
-    overflow: -moz-scrollbars-none; 
-	/*position: relative;*/
+    overflow: -moz-scrollbars-none;*/
+}
+
+.chatroomtrade {
+	/*width: auto;
+	margin-left: 0.20rem;
+	height: 0.40rem;
+	overflow-x: scroll;
+	white-space: nowrap;
+	-ms-overflow-style: none; 
+    overflow: -moz-scrollbars-none;*/
+	width: auto;
+	margin-left: 0.20rem;
+	margin-top: 0.10rem;
+	margin-bottom: 0.10rem;
+	overflow-x: scroll;
+	height: 0.40rem;
+	white-space: nowrap;
+	-ms-overflow-style: none; 
+    overflow: -moz-scrollbars-none;
+	position: relative;
+	
 }
 .chatroomtrade::-webkit-scrollbar { 
 	display: none;
 } 
-.chatroomsame {
+/*.chatroomsame {
 	cursor: pointer;
 	height: auto;
 	width: 0.5rem;
 	font-size: 0.20rem;
-	display: inline-block;
+	display: table-cell;
 	color: #333;
 	background-color: #fff;
 	margin-right: 0.20rem;
-}
+	padding-left: 0.2rem;
+	padding-right: 0.2rem;
+}*/
 
 .chatroomtrade:hover {
 	color: #00a0e9;
@@ -2416,12 +2493,17 @@ body {
 	height: 1.60rem;
 	position: absolute;
 	top: -1.40rem;
-	background-color: #00a0e9;
+	background-color: #97E2FF;
 	border-radius: 0.10rem;
 }
 .emojiwrap {
 	width: 0.32rem;
 	height: 0.32rem;
+	float: left;
+	cursor: pointer;
+}
+.emojiwrap img {
+	display: block;
 	float: left;
 	cursor: pointer;
 }

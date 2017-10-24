@@ -35,7 +35,7 @@
 						<div>请使用字母、数字和符号两种及以上的组合,6-20个字符</div>
 					</div>
 					<div class="secondinput samesize">
-						<input @change="checkpsw2()" v-model="secondinputval"  placeholder="请再次输入密码" type="password" name="psw2" maxlength="20"><i @click="clearinput2" v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
+						<input @keyup.enter="nextstepfinal" @change="checkpsw2()" v-model="secondinputval"  placeholder="请再次输入密码" type="password" name="psw2" maxlength="20"><i @click="clearinput2" v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
 					</div>
 					
 				</div>
