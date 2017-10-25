@@ -246,6 +246,11 @@ article .fa-times:hover {
 	margin: 0 auto;
 	line-height: 0.4rem;
 	color:#999999;
+	
+}
+
+.errOuter>div {
+	font-size: 0.16rem;
 }
 .twodimention {
 	height: 2rem;

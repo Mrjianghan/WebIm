@@ -321,6 +321,85 @@
 		<div id="messagemaster" class="ultimate" @click="clearsearch(),clearslidebars(),clearcurrentinfo()">
 			
 			
+			<div v-if="chataddmyfriendshow" class="addmyfriends">
+				<div class="addmyfriendscore ">
+					<div class="feedhead">
+						<div>添加会话成员</div><i @click="chataddmyfriendshow = false" class="fa fa-times"></i>
+					</div>
+					
+					<div class="reusecontainer2">
+						<!--<div></div>搜索占位-->
+						<div class="selectallboss">
+							<div  class="selectallcon">
+								<input @click="chataddallcheck($event)" ref="chataddselall" type="checkbox"  >
+							</div>
+							<span>全选</span>
+						</div>
+						<div class="addsort8">
+							<div class="sort_box8">
+								<template v-for="(arr,i) in chatrepeatmyfriendsarr">
+									
+									<div id=""  class="sort_list8">
+										<div class="friendseveryOne" :id="arr.id">
+											<div class="selectOnly1">
+												<input :data-index="i" @click="chataddmanyinput($event)" :value="arr.id" v-model="chataddgrouparr" type="checkbox">
+											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="num_name8 shenglue">{{arr.nickname}} </div>
+										</div>
+									</div>
+									
+								</template>
+							</div>
+						</div>
+						
+					</div>
+					
+					
+					<div class="bottombtn1con">
+						<button :id="chattargetid" :disabled="chataddgrouparr.length == 0" :class="{btncolorswitch: chataddgrouparr.length != 0}" @click="addpeoplefromfriends1($event)" class="bottombtn">确定({{chataddgrouparr.length}})</button>
+					</div>
+				</div>
+			</div><!--聊天室添加-->
+			
+			<div v-if="chatremovemembershow" class="removegroupmember2">
+				<div class="removegroupmember2core ">
+					<div class="feedhead">
+						<div>删除会话成员</div><i @click="chatremovemembershow = false" class="fa fa-times"></i>
+					</div>
+					
+					<div class="reusecontainer3">
+						<!--<div></div>搜索占位-->
+						<div class="selectallboss">
+							<div class="selectallcon">
+								<input ref="chatdelselall"  @click="chatdeleteallcheck($event)"  type="checkbox" >
+							</div>
+							<span>全选</span>
+						</div>
+						<div class="addsort9">
+							<div class="sort_box9">
+								<template v-for="(arr,i) in chatrepeatmyfriendsarr">
+									
+									<div id=""  class="sort_list9">
+										<div class="friendseveryOne" :id="arr.id">
+											<div class="selectOnly1">
+												<input :data-index="i" @click="chatdelmanyinput($event)" :value="arr.id" v-model="chatdeletegrouparr" type="checkbox">
+											</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="num_name9 shenglue">{{arr.nickname}} </div>
+										</div>
+									</div>
+									
+								</template>
+							</div>
+						</div>
+					</div>
+					
+					<div>
+						<button :id="chattargetid" @click="deletepeoplefromgroup1($event)" :disabled="chatdeletegrouparr.length == 0" :class="{btncolorswitch: chatdeletegrouparr.length != 0}" class="bottombtn" type="button">确定({{chatdeletegrouparr.length}})</button>
+					</div>
+				</div>
+			</div><!--聊天室移除-->
+			
+			
 			
 			
 			<div v-if="retweetshow" class="chatroominfopop">
@@ -625,7 +704,7 @@
 												<div class="selectOnly1">
 													<input :data-index="index" @click="selectcurrentinput($event)" :value="arr.id" v-model="selectmaingrouparr" type="checkbox">
 												</div><img class="friendsimg" :src=" arr.avatar ? picsrc+arr.avatar : defaultpic">
-												<div class="num_name">{{arr.nickname}} </div>
+												<div class="num_name shenglue">{{arr.nickname}} </div>
 											</div>
 										</div>
 										
@@ -881,7 +960,7 @@
 							<template v-for="(friend,i) in friendsarrOne">
 									<div :data-index="i" :data-name="friend.nickname" :id="friend.id" class="sort_list1" :class="{backgroundcolor:indexstrange2 == -1-i}" @click="changelistcolor2($event)" :id="friend.nickname">
 										<img :src="friend.avatar ? picsrc+friend.avatar : defaultpic">
-										<div class="num_name1">{{friend.nickname}}
+										<div class="num_name1 shenglue">{{friend.nickname}}
 										</div>
 									</div>
 							</template>	
@@ -1003,6 +1082,10 @@
 							
 							
 						</div>
+						
+						
+						
+						
 						
 						
 						<div v-if="onlyonelistmenushow" class=" animated bounceInDown slidemembersmenu">
@@ -1137,21 +1220,77 @@
 						
 						<div v-if="publicchatnow" class="publicchat">
 							<div class="righttwoheader">
-								<div class="righttwotitle"> {{ chatroomtitlename }} </div>
+								<div class="righttwotitle"> {{ chatroomtitlename }}<span v-if="chatroomnumershow">({{ chatcounter }})</span> </div>
 								<i v-show="ischatmaster" @click.stop="ischatmastermenu" class="fa fa-cog"></i>
 								<i v-show="ischatmanager" @click.stop="ischatmanagermenu" class="fa fa-cog"></i>
 								
 								<div v-if="showchatcontrol1" class="righttwomenu1">
-									<div class="righttwolist1 righttwolists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
-									<div class="righttwolist2 righttwolists"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改聊天室信息</div>
-									<div class="righttwolist3 righttwolists"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
+									<div :id="chattargetid" class="righttwolist1 righttwolists" @click="controlchatroommember($event)"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
+									<div :id="chattargetid" class="righttwolist2 righttwolists" @click="controlchatroominfo($event)"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;修改聊天室信息</div>
+									<div class="righttwolist3 righttwolists" @click="pleasegotomoblie"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
 								</div>
 								
 								<div v-if="showchatcontrol2" class="righttwomenu2">
-									<div class="righttwolist1 righttwolists"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
-									<div class="righttwolist3 righttwolists"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
+									<div :id="chattargetid" class="righttwolist11 righttwolists" @click="controlchatroommember($event)"><i class="fa fa-users"></i>&nbsp;&nbsp;管理聊天室成员</div>
+									<div class="righttwolist3 righttwolists" @click="pleasegotomoblie($event)"><i class="fa fa-lock"></i>&nbsp;&nbsp;聊天室禁言</div>
 								</div>
 							</div>
+							
+							
+							<div v-if="onlyonelistmenushow1" class=" animated bounceInDown slidemembersmenu">
+								<i class="fa fa-times" @click="onlyonelistmenushow1 = false"></i>
+
+								<div class="membermenucontainer">
+
+									<div>
+									</div>
+
+									<template v-for="(arr,i) in slidechatarr">
+										<div @click.stop="showtheoneinfos($event)"  class="everypeoplecon2" :id="arr.id">
+											<img :src="arr.avatar ? picsrc+arr.avatar : defaultpic">
+											<div class="namecon2 shenglue">
+												{{ arr.nickname }}
+											</div>
+										</div>
+									</template>
+
+
+									<div :id="chattargetid" @click="chataddconpop($event)" class="addcontain">
+										<img src="imgs/added.png">
+									</div>
+
+									<div :id="chattargetid" @click="chatreduceconpop1($event)" v-if="chatshouldshow"  class="reducecontain">
+											<img src="imgs/reduced.png">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+
+							</div>
+
+							<div v-if="changegroupinfoshow1" class="pleasemobilepop">
+								<div class="changegroupcon ">
+									<div class="changeheader">修改聊天室信息
+										<i @click="changegroupinfoshow1 = false" class="fa fa-times"></i>
+										<div class="clearfix"></div>
+									</div>
+
+									<div class="changecontainer">
+										<div class="groupnamecontainer">
+											<span class="chatroomnamewords">聊天室名称</span>
+											<input disabled type="text" v-model="chatroomnamea">
+										</div>
+										<div class="groupbroadcontainer g1">
+											<span class="chatroomnamewords">聊天室公告</span>
+											<input class="addin2" type="text" v-model="chatroombroada">
+										</div>
+										<button @click="changechatinfo($event)" :id="chattargetid">确定
+										</button>
+									</div>
+
+								</div>
+							</div><!--修改聊天室信息-->
+							
+							
 							
 							<div class="righttwochatcon">
 								
