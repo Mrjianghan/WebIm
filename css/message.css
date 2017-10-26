@@ -1358,7 +1358,7 @@ body {
 .fa1 {
 	position: absolute;
 	color: #333;
-	opacity: 0.1;
+	opacity: 0.7; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -1369,23 +1369,18 @@ body {
 	position: absolute;
 	right: 0.05rem;
 	color: #333;
-	opacity: 0.1;
+	opacity: 0.7; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
 	top: 0.30rem;
 }
-.fa1:hover {
-	opacity: 0.7; 
-}
-.fa4:hover {
-	opacity: 0.7; 
-}
+
 
 .fa3 {
 	position: absolute;
 	color: #333;
-	opacity: 0.1;
+	opacity: 0.7; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -1396,7 +1391,7 @@ body {
 	position: absolute;
 	right: 0.05rem;
 	color: #333;
-	opacity: 0.1;
+	opacity: 0.7; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -2287,7 +2282,7 @@ body {
 	z-index: 110;
 	position: absolute;
 	height: 3rem;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 .slidemembersmenu .fa-times {
 	position: absolute;
@@ -2519,6 +2514,10 @@ body {
 	display: block;
 	float: left;
 	cursor: pointer;
+	height: 0.32rem;
+	width: 0.32rem;
+	margin: 0;
+	padding: 0;
 }
 .rightonesendselect {
 	padding-top: 0.24rem;
@@ -2949,6 +2948,7 @@ body {
 .picmessagelock {
 	width: 2.50rem;
 	cursor: pointer;
+	display: block;
 }
 .msgmarginlr .leftmsg .wordscontent .picspan{
 	background-color: #fff;
@@ -2976,10 +2976,6 @@ body {
 /*接收图片消息*/
 
 /*发送图片消息*/
-
-.picmessagelock {
-	width: 2.50rem;
-}
 .msgmarginlr .rightmsg .wordscontent .selfpicspan{
 	background-color: #00a0e9;
 	padding: 0.02rem !important;
@@ -3093,7 +3089,8 @@ body {
 }
 .msgmarginlr .leftmsg .wordscontent .locationspan .mapimg{
 	position: absolute;
-	
+	height: 3.00rem;
+	width: 4.00rem;
 }
 
 .msgmarginlr .leftmsg .wordscontent .locationspan:after{
@@ -3251,6 +3248,13 @@ body {
 	padding-top: 0.13rem;
 	overflow: hidden;
 }
+
+.msgmarginlr .leftmsg .wordscontent .filespan .fileconright img {
+	width: 1.2rem;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filename{
 	font-size: 0.20rem;
 	color: #333;
@@ -3314,11 +3318,17 @@ body {
 	position: relative;
 }
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconright {
-	
 	float: left;
 	width: 1.35rem;
 	padding-top: 0.13rem;
 	overflow: hidden;
+}
+.msgmarginlr .rightmsg .wordscontent .selffilespan .fileconright img {
+	margin: 0;
+	padding: 0;
+	display: block;
+	width: 1.2rem;
+	
 }
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconleft .filename{
 	font-size: 0.20rem;

@@ -35,7 +35,7 @@ var Emoji = { //首先加载emoji表情
         '[(k)]': 'ee_32.png',
         '[(F)]': 'ee_33.png',
         '[(W)]': 'ee_34.png',
-        '[(D)]': 'ee_35.png'
+        '[(D)]': 'ee_35.png',
     }
 };
 
