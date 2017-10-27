@@ -136,9 +136,14 @@ var vm = new Vue({
 			vm.headswitch1 = true;
 			vm.headswitch2 = false;
 			clearInterval(timerlonger);
+			
+			isIE();
 		},
 		//标题切换1清理扫码计时器
 		switch8:function(){
+			
+			isIE();
+			
 			vm.switchheader = false;
 			vm.headswitch2 = true;
 			vm.headswitch1 = false;

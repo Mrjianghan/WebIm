@@ -15,6 +15,7 @@
 		<script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
         <script src="Config_JS/websdk-1.4.12.js"></script>
+		<script src="js/jquery-1.12.4.min.js"></script>
     </head>
     <body>
         <div class="subbody" id="subBody">
@@ -23,7 +24,6 @@
 				<div class="headerName">惠众通享</div>
 				<div class="clearfix"></div>
 			</header>
-			
 			<div class="setNick">
 				<article><div @click="switch6()" class="head1" :class="{headeractive:headswitch1}">账户登录</div><div @click="switch8()" :class="{headeractive:headswitch2}" class="head2">扫码登录</div></article>
 				
@@ -49,12 +49,7 @@
 						<div class="placeholder3">
 							<a class="aouter1" href="register.html">还没有账号&nbsp;?&nbsp;立即注册&nbsp;&raquo;</a>
 						</div>
-					
 					</div>
-
-					
-					
-					
 				</div><!--tab1-->
 				<div v-else class="tab2">
 					<div class="twodimention">
@@ -63,10 +58,7 @@
 					<div class="please">请使用众享手机版扫描二维码登录</div>
 					<div class="bot1"><a href="register.html">立即注册</a></div>
 				</div>
-				
-					
 			</div>
-			
 			<footer>
 				<div class="footer1">
 					<i class="fa fa-apple"></i>&nbsp;&nbsp;&nbsp;<a target="_blank" href="https://itunes.apple.com/cn/app/%E6%83%A0%E4%BC%97%E9%80%9A%E4%BA%AB/id1286613936?mt=8"><span>iPhone版下载</span></a>
@@ -77,11 +69,28 @@
 				</div>
 				<div class="clearfix"></div>
 			</footer>
-         
         </div>
-        
-        <script src="js/jquery-1.12.4.min.js"></script>
+		<script>
+			function isIE(){
+				if (window.navigator.userAgent.indexOf("MSIE")> -1) {
+					console.log( window.navigator.userAgent );
+					alert('建议更换谷歌，火狐等非IE内核浏览器访问！');
+					$('body').css({display:'none'});
+				}else{
+					if (window.navigator.userAgent.indexOf("rv:11")> -1){
+						alert('建议更换谷歌，火狐等非IE内核浏览器访问！');
+						$('body').css({display:'none'});
+						console.log( window.navigator.userAgent );
+					}else {
+						
+					}
+				}
+			};
+			
+			isIE();
+		</script>
         <script src="js/index.js"></script>
 		<script src="js/rem_js.js"></script>
+		
     </body>
 </html>
