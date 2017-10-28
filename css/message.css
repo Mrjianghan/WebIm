@@ -297,7 +297,7 @@ body {
 	cursor: pointer;
 }
 .mingup {
-	height: 100rem;
+	height: 1rem;
 	width: 100%;
 	position: relative;
 }
@@ -1358,7 +1358,7 @@ body {
 .fa1 {
 	position: absolute;
 	color: #333;
-	opacity: 0.5; 
+	opacity: 0.0; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -1369,7 +1369,7 @@ body {
 	position: absolute;
 	right: 0.09rem;
 	color: #333;
-	opacity: 0.3; 
+	opacity: 0.5; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -1380,7 +1380,7 @@ body {
 .fa3 {
 	position: absolute;
 	color: #333;
-	opacity: 0.5; 
+	opacity: 0.0; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -1391,7 +1391,7 @@ body {
 	position: absolute;
 	right: 0.09rem;
 	color: #333;
-	opacity: 0.3; 
+	opacity: 0.5; 
 	z-index: 100;
 	font-size: 0.25rem;
 	cursor: pointer;
@@ -3268,6 +3268,9 @@ body {
 	position: absolute;
 	top: 0.10rem;
 	left: 0.20rem;
+	height: 0.78rem;
+	width: 2.35rem;
+	overflow: hidden;
 } 
 .msgmarginlr .leftmsg .wordscontent .filespan .fileconleft .filedownload{
 	font-size: 0.0.20rem;
@@ -3343,6 +3346,9 @@ body {
 	position: absolute;
 	top: 0.10rem;
 	left: 0.20rem;
+	height: 0.78rem;
+	width: 2.35rem;
+	overflow: hidden; 
 } 
 .msgmarginlr .rightmsg .wordscontent .selffilespan .fileconleft .filedownload{
 	font-size: 0.20rem;
