@@ -159,6 +159,7 @@ article .fa-times:hover {
 select {
 	float: left;
 	height: 0.64rem;
+	line-height: 0.64rem;
 	width: 3.9rem;
 	border: none;
 	outline: none;

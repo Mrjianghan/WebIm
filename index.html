@@ -10,14 +10,16 @@
 		<link rel="icon shotcut" href="imgs/linklogo.png">
 		<script src="./js/axios.js"></script>
         <!-- HTML5 element -->
-        <script src="Config_JS/browser-polyfill.min.js"></script>
+        <!--<script src="Config_JS/browser-polyfill.min.js"></script>-->
 		<script src="js/vue.js"></script>
 		<script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
         <script src="Config_JS/websdk-1.4.12.js"></script>
 		<script src="js/jquery-1.12.4.min.js"></script>
+		
     </head>
     <body>
+		
         <div class="subbody" id="subBody">
             <header>
 				<img src="imgs/index-logo.png">
@@ -25,8 +27,8 @@
 				<div class="clearfix"></div>
 			</header>
 			<div class="setNick">
-				<article><div @click="switch6()" class="head1" :class="{headeractive:headswitch1}">账户登录</div><div @click="switch8()" :class="{headeractive:headswitch2}" class="head2">扫码登录</div></article>
-				
+				<article><div @click="switch6()" class="head1" :class="{headeractive:headswitch1}">账户登录</div><div @click="switch8()" :class="{headeractive:headswitch2}" class="head2">扫码登录</div>
+				</article>
 				<div v-if="switchheader" class="tab1">
 					
 					<div class="inputContainer">
@@ -69,7 +71,17 @@
 				</div>
 				<div class="clearfix"></div>
 			</footer>
-        </div>
+		</div>
+		<!--[if IE]>
+		<style type="text/css">
+		body {
+			display: none;
+		}
+		</style>
+		<script>
+		alert('建议更换谷歌，火狐等非IE内核浏览器访问！');
+		</script>
+		<![endif]-->
 		<script>
 			function isIE(){
 				if (window.navigator.userAgent.indexOf("MSIE")> -1) {

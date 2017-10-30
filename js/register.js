@@ -2,6 +2,7 @@ axios.defaults.withCredentials = true;
 
 var globaldomain = 'http://api.zhongxiangim.com/';
 
+
 var vm = new Vue({
 	el:'#subBody',
 	data:{
@@ -25,29 +26,21 @@ var vm = new Vue({
 		ableornot2:true,
 	},
 	created:function(){
+		var what = Math.random();
 		axios.get(globaldomain+'token.json').then(function(res){
+			vm.validatecode = globaldomain+'/captcha/build?'+Math.random();
+			//获取验证码
 		}).catch(function(err){
 			console.log(err);
 		});
 		//获取token
-		axios.get(globaldomain+'/captcha/build').then(function(res){
-			vm.validatecode = globaldomain+'/captcha/build';
-		}).catch(function(err){
-			console.log(err);
-		});
-		//获取验证码
+		
 	},
 	methods:{
 		nextpic:function(){
-			axios.get(globaldomain+'/captcha/build').then(function(res){
-				vm.validatecode = '';
-				var timer1 = setTimeout(function(){
-					vm.validatecode = globaldomain+'/captcha/build';
-				},10);
-				vm.secondinputval = '';
-			}).catch(function(err){
-				console.log(err);
-			})
+			console.log('click');
+			vm.validatecode = '';
+			vm.validatecode = globaldomain+'/captcha/build?'+Math.random();
 		},
 		//切换验证码
 		sendphonevalidate:function(){
@@ -115,7 +108,7 @@ var vm = new Vue({
 			
 		},
 		//发送手机验证码
-		useragreeinfo(){
+		useragreeinfo:function(){
 			vm.rightorwrong5 = !vm.rightorwrong5;
 			if ( vm.rightorwrong5 == false ){
 				if ( ( vm.firstinputval != '' )&&( vm.secondinputval != '' )&&( vm.thirdinputval != '' ) ){
@@ -150,7 +143,6 @@ var vm = new Vue({
 		},
 		//清空手机号
 		checkvalidate:function(){
-			
 			axios.get(globaldomain+'captcha/validate.json?captcha='+vm.secondinputval).then(function(res){
 				var data1 = res.data.data;
 				//console.log(res.data);
@@ -232,16 +224,8 @@ var vm = new Vue({
 		},
 		//检查短信
 		
-		
-		
-		
-		
-		
-		
-		
 	}
 		
 });
-
 
 

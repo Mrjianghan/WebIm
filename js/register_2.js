@@ -205,15 +205,6 @@ var vm = new Vue({
 			vm.secondinputval = '';
 		},
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 		
 });

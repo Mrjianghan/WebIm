@@ -74,7 +74,7 @@ conn.listen({
     onError: function ( message ) {
 		console.log(message);
 		console.log('失败回调');
-		window.location.href="index.html";
+		//window.location.href="index.html";
 		localStorage.clear();
 	},          //失败回调
 	onTextMessage: function ( message ) {
@@ -171,28 +171,6 @@ conn.listen({
 						}
 
 						//消息内容容器
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-
-
-
-
-
-
 
 					}else {
 						//非即焚
@@ -5133,12 +5111,17 @@ var vm = new Vue({
 			var transstring = middle.join(",");
 			console.log(transstring);
 			axios.post(globaldomain+'im/group/member/kick.json?groupId='+id+'&memberIds='+transstring).then(function(res){
-				
+				vm.friendlistmenushow = false;
+				vm.onlyonelistmenushow =false;
 				var data = res.data;
 				console.log(data);
+				vm.friendlistmenushow = false;
+				console.log( vm.friendlistmenushow );
+				
 				var success = data.success;
 				if (success){
 					vm.removemembershow = false;
+					vm.friendlistmenushow = false;
 					vm.deletegrouparr = [];
 				}else {
 					vm.deletegrouparr = [];
@@ -5291,7 +5274,9 @@ var vm = new Vue({
 			});
 			
 		},//点击发起聊天的选择群聊
+		
 		getemojisrc:function($event){
+			vm.emojishow = true;
 			var that = $event.currentTarget;
 			//console.log(that);
 			groupemojisrc = $(that).attr("src");
@@ -5395,6 +5380,7 @@ var vm = new Vue({
 				
 					var code = res.data.code;
 					console.log(res.data);
+					vm.onlyonelistmenushow = false;
 
 					if ( code == 2000 ){
 						var groupid = res.data.data;
@@ -5432,6 +5418,16 @@ var vm = new Vue({
 									vm.nomessage = false;
 									$('.mainleft .comlist1').prepend( str );
 									
+									var str1 = '<div id="'+groupid+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
+									
+									$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
+									$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
+									
+									vm.targetid = groupid;
+									
+									
+									
+									
 									
 									
 									
@@ -5459,7 +5455,98 @@ var vm = new Vue({
 									
 								}).catch(function(err){
 									console.log(err);
-								})
+								});
+								
+								
+								axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
+									console.log(res);
+									var data = res.data.data;
+									var avatar = data.avatar;
+									var name = data.name;
+									var id = data.id;//群组特别标识
+									console.log(data);
+									vm.isgroupleader= false;
+									vm.isgroupmanager = false;//管理员
+									vm.notgroupmanager = false;//不是管理员
+									//vm.justoneman = true;//只是个人
+									vm.shouldshow = false;
+									vm.groupidbindminus = groupid;
+
+									//var name = data.name;
+									var genre = data.genre;
+									var groupnumber = data.count;
+
+									vm.rightoneheaderobj.name = name;
+									vm.rightoneheaderobj.groupnumber = groupnumber;
+									vm.targetid = groupid;
+
+									vm.groupnumbershow = true;
+									
+									
+									axios.get(globaldomain+'im/group/member/genre.json?groupId='+groupid+'&memberId='+ids.id).then(function(res){
+										console.log(res.data);
+										var level = res.data.data;
+										console.log(level);
+
+										console.log(  typeof(level));
+										switch (level) {
+											case '10':
+											console.log(10);
+											vm.isgroupleader= true;
+											vm.isgroupmanager = false;//管理员
+											vm.notgroupmanager = false;//不是管理员
+											vm.justoneman = false;//只是个人
+											vm.shouldshow = true;
+											vm.strangeroff = false;
+											vm.strangeropen = false;
+											break;
+											case '20':
+											vm.isgroupleader= false;
+											vm.isgroupmanager = true;//管理员
+											vm.notgroupmanager = false;//不是管理员
+											vm.justoneman = false;//只是个人
+											vm.shouldshow = true;
+											vm.strangeroff = false;
+											vm.strangeropen = false;
+											break;
+											case '30':
+											vm.isgroupleader= false;
+											vm.isgroupmanager = false;//管理员
+											vm.notgroupmanager = true;//不是管理员
+											vm.justoneman = false;//只是个人
+											vm.shouldshow = false;
+											vm.strangeroff = false;
+											vm.strangeropen = false;
+											break;
+										}
+
+									}).catch(function(err){
+										console.log(err);
+									});
+									
+									
+									axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+groupid).then(function(res){
+										console.log(res);
+										var arrgg = res.data.data.content;
+										console.log(arrgg);
+										vm.slidechagearr = arrgg;
+
+									}).catch(function(err){
+										console.log(err);
+									});
+									
+									
+									
+									
+								}).catch(function(err){
+									console.log(err);
+								});
+
+
+
+
+
+
 								
 								
 								
@@ -5550,11 +5637,7 @@ var vm = new Vue({
 				
 			} else {
 				
-				
-				
-				
 				vm.nomessage = false;
-				
 				console.log(vm.selectmaingrouparr);
 				var friendid = vm.selectmaingrouparr[0];
 				console.log(friendid);
@@ -5579,6 +5662,7 @@ var vm = new Vue({
 								console.log(res.data);
 								var success = res.data.success;
 								console.log(success);
+								vm.onlyonelistmenushow = false;
 								if ( success ) {
 									vm.readychatshow = false;
 									vm.slebossswicth = false;
@@ -5642,6 +5726,7 @@ var vm = new Vue({
 				}else {
 				   //未选
 					axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
+						vm.onlyonelistmenushow = false;
 						var data = res.data.data;
 						console.log(data);
 						var name = data.nickname;
@@ -5655,7 +5740,7 @@ var vm = new Vue({
 						console.log(obj2);
 						var str ='';
 						str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-						if ( $('.mainleft   #'+obj2.id).length < 1 ){
+						if ( $('.mainleft   #'+obj2.id+'.listOnecon').length < 1 ){
 							$('.mainleft .comlist1').prepend(str);
 						}else {
 							
@@ -6072,7 +6157,8 @@ var vm = new Vue({
 		addconpop:function(){
 			vm.addmyfriendshow = true;
 			vm.removemembershow = false;
-			
+			vm.friendlistmenushow =false;
+			vm.onlyonelistmenushow =false;
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				
 				var data = res.data.data;
@@ -6096,8 +6182,8 @@ var vm = new Vue({
 		addconpop1:function(){
 			vm.createmyfriendshow = true;
 			vm.removemembershow = false;
-			
-			
+			vm.friendlistmenushow  =false;
+			vm.onlyonelistmenushow =false;
 			
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				
@@ -6191,7 +6277,8 @@ var vm = new Vue({
 				console.log(res);
 				var data = res.data.data.content;
 				console.log(data);
-				
+				vm.friendlistmenushow =false;
+				vm.onlyonelistmenushow = false;
 				vm.repeatmyfriendsarr = data;
 				console.log( vm.repeatmyfriendsarr );
 				
@@ -7983,7 +8070,7 @@ var vm = new Vue({
 			
 		},////搜索结果的聊天列表被点击
 		getemojisrc1:function($event){
-			
+			vm.emojishow = true;
 			var that = $event.currentTarget;
 			//console.log(that);
 			groupemojisrc = $(that).attr("src");

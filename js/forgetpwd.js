@@ -22,36 +22,25 @@ var vm = new Vue({
 		thirdinputval:'',
 		btncolorswitch2:false,
 		ableornot2:true,
-		
 	},
 	created:function(){
 		axios.get(globaldomain+'token.json').then(function(res){
+			vm.validatecode = globaldomain+'/captcha/build?'+Math.random();
+			//获取验证码
 		}).catch(function(err){
 			console.log(err);
 		});
 		//获取token
-		axios.get(globaldomain+'/captcha/build').then(function(res){
-			vm.validatecode = globaldomain+'/captcha/build';
-		}).catch(function(err){
-			console.log(err);
-		});
-		//获取验证码
+		
+		
 	},
 	methods:{
 		nextpic:function(){
-			axios.get(globaldomain+'/captcha/build').then(function(res){
-				vm.validatecode = '';
-				var timer1 = setTimeout(function(){
-					vm.validatecode = globaldomain+'/captcha/build';
-				},10);
-				vm.secondinputval = '';
-			}).catch(function(err){
-				console.log(err);
-			})
+			vm.validatecode = '';
+			vm.validatecode = globaldomain+'/captcha/build?'+Math.random();
 		},
 		//切换验证码
 		sendphonevalidate:function(){
-			
 			axios.post(globaldomain+'im/sms/captcha/repwd.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
 				var code = res.data.code;
 				console.log(code);
@@ -110,14 +99,12 @@ var vm = new Vue({
 					window.clearInterval(timer2);
 				}
 			},1000);
-			
 		},
-		//发送重置密码手机验证码
-		useragreeinfo(){
+		useragreeinfo:function(){
+			//发送重置密码手机验证码
 			vm.rightorwrong5 = !vm.rightorwrong5;
 			if ( vm.rightorwrong5 == false ){
 				if ( ( vm.rightorwrong1 )&&( vm.secondinputval != '' )&&( vm.thirdinputval.length == 6  ) ){
-					
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
 				}
@@ -223,13 +210,6 @@ var vm = new Vue({
 			}
 			
 		},//验证手机验证码
-		
-		
-		
-		
-		/**/
-		
-		
 		
 	},//methods	
 });

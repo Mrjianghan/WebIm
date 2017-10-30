@@ -8,9 +8,9 @@
         <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/register.css">
 		<link rel="icon shotcut" href="imgs/linklogo.png">
-		<script src="./js/axios.js"></script>
+		<script src="js/axios.js"></script>
         <!-- HTML5 element -->
-        <script src="Config_JS/browser-polyfill.min.js"></script>
+        <!--<script src="Config_JS/browser-polyfill.min.js"></script>-->
 		<script src="js/vue.js"></script>
     </head>
     <body>
@@ -31,7 +31,7 @@
 						<input @change="checkphone()" v-model="firstinputval" type="text" placeholder="请输入手机号码" name="phonenumber"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
 					</div>
 					<div class="secondinput samesize">
-						<input @change="checkvalidate()" type="text" v-model="secondinputval" placeholder="请输入图片验证码" name="piccheck"><img :src="validatecode"><div @click="nextpic()" class="nextpic">换一张</div>
+						<input @change="checkvalidate()" type="text" v-model="secondinputval" placeholder="请输入图片验证码" name="piccheck"><img :src="validatecode"><div  class="nextpic" @click="nextpic()">换一张</div><!--@click="nextpic()"-->
 					</div>
 					<div class="thirdinput samesize2">
 						<div class="thirdcon">
