@@ -45,8 +45,6 @@ var conn = new WebIM.connection({
     apiUrl:WebIM.config.apiURL,
 });
 
-console.log(WebIM);
-
 if ( localStorage.currentuser ){
 	var nothing = localStorage.currentuser;
 	ids = JSON.parse( nothing );//登陆必备
@@ -3429,7 +3427,6 @@ conn.listen({
 		console.log('创建群组成功回执');
 		console.log(message);
 	},        //创建群组成功回执（需调用createGroupNew）
-	
     onMutedMessage: function(message){
 		console.log('用户在A群组被禁言');
 		console.log(message);
@@ -3495,8 +3492,7 @@ var store = new Vuex.Store({
 			return state.mainchatselectall;
 		},
 	},
-});   
-
+});  
 Vue.component('currentuser',{
 	template:'#current',
 	data:function(){
@@ -5008,6 +5004,7 @@ var vm = new Vue({
 		}).catch(function(err){
 			console.log(err);
 		});//获取加入的群组
+		$('#messagemaster').css({display:'block'});
 		
 	},
 	
@@ -5019,7 +5016,6 @@ var vm = new Vue({
 			vm.alertinfoshow = false;
 		},//关闭警告框
 		clearsearch:function(){
-			
 			vm.$refs.current._data.searchshow = false;
 			vm.$refs.current.tempfriendsarrcon = [];
 			vm.$refs.current.tempgroupsarrcon = [];
@@ -5043,16 +5039,10 @@ var vm = new Vue({
 		},//关闭搜索框
 		selectcurrentinput:function($event){
 			console.log($event);
-			
 			console.log($event.currentTarget);
 			var selectnow  = $event.currentTarget;
-			
 			console.log($(selectnow));
-			
-			
 			if ( $(selectnow).is(':checked') ){
-				
-				
 				
 			} else {
 				
@@ -10138,7 +10128,6 @@ $('.ultimate').on('click','.fa-bell-slash-o',function(event){
 	
 	axios.post(globaldomain+'im/group/conf/set/hinder.json?groupId='+getid+'&hinder=0').then(function(res){
 		var data = res.data;
-		
 		console.log(data);
 	}).catch(function(err){
 		console.log(err);

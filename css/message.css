@@ -134,6 +134,7 @@ body {
 	min-width: 11rem;
 	background-color: #fff;
 	position: relative;
+	display: none;
 }
 .login {
 	z-index: -10;
