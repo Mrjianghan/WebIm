@@ -2,6 +2,24 @@
     margin: 0;
     padding: 0;
 }
+@media all and (min-width:1440px) {
+	html {
+		font-size: 100px;
+	}
+} 
+
+@media all and (max-width:1439px) and (min-width:1367px) {
+	html {
+		font-size: 80px;
+	}
+} 
+
+@media all and (max-width:1366px) {
+	html {
+		font-size: 60px;
+	}
+} 
+
 html,body {
     height: 100%;
     width: 100%;
