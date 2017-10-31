@@ -9,8 +9,6 @@
         <link rel="stylesheet" href="css/register.css">
 		<link rel="icon shotcut" href="imgs/linklogo.png">
 		<script src="js/axios.js"></script>
-        <!-- HTML5 element -->
-        <!--<script src="Config_JS/browser-polyfill.min.js"></script>-->
 		<script src="js/vue.js"></script>
     </head>
     <body>
@@ -20,7 +18,6 @@
 				<div class="headerName">惠众通享</div>
 				<div class="clearfix"></div>
 			</header>
-			
 			<div class="regContainer">
 				<article><div>注册</div><a href="index.html"><i class="fa fa-times"></i></a></article>
 				<div class="inputContainer">
@@ -40,7 +37,6 @@
 						<button type="button" :class="{ btnable : btncolorswitch }" @click="sendphonevalidate" :disabled="ableornot1"><span v-text="btntext"></span><span v-show="countshow">(&nbsp;{{ countnumber }}&nbsp;</span><span v-show="countshow">s&nbsp;)</span></button>
 					</div>
 				</div>
-				
 				<div class="userinfo">
 					<div @click="useragreeinfo" class="check1">
 						<i v-if="rightorwrong5" class="fa fa-square-o"></i>
@@ -48,13 +44,10 @@
 					</div>
 					<div class="linkcon">阅读并同意<a target="_blank" href="http://assets.zhongxiangim.com/zxapi/cms/html/protocol.html">《众享用户注册协议》</a><a href="http://assets.zhongxiangim.com/zxapi/cms/html/policy.html" target="_blank">&nbsp;《隐私政策》</a></div>
 				</div>
-				
 				<button @click="nextstepfinal" type="button" class="nextstep" :class="{btnable1:btncolorswitch2}" :disabled="ableornot2">
 					下一步
 				</button>
-					
 			</div>
-			
 			<footer>
 				<div class="footer1">
 					<i class="fa fa-apple"></i>&nbsp;&nbsp;&nbsp;<a href="https://itunes.apple.com/cn/app/%E6%83%A0%E4%BC%97%E9%80%9A%E4%BA%AB/id1286613936?mt=8" target="_blank"><span>iPhone版下载</span></a>
@@ -65,10 +58,8 @@
 				</div>
 				<div class="clearfix"></div>
 			</footer>
-         
         </div>
         <script src="js/jquery-1.12.4.min.js"></script>
         <script src="js/register.js"></script>
-		<!--<script src="js/rem_js.js"></script>-->
     </body>
 </html>

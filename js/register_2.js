@@ -32,16 +32,13 @@ var vm = new Vue({
 		}).catch(function(err){
 			console.log(err);
 		});
-		//获取token
 		if ( localStorage['huanxinreg'] ){
 			globallocal = JSON.parse( localStorage['huanxinreg'] );
-			console.log(globallocal);
 		}
 	},
 	methods:{
 		nextstepfinal:function(){
 			axios.post(globaldomain+'im/user/register.json?loginName='+globallocal.loginName+'&captcha='+globallocal.captcha+'&smscode='+globallocal.smscode+'&nickname='+globallocal.nickname+'&sex='+globallocal.sex+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
-				console.log(res.data.code);
 				var code = res.data.code;
 				switch(code){
 					case 2000 :
@@ -49,12 +46,10 @@ var vm = new Vue({
 						vm.errmsg = '信息保存成功';
 						axios.post(globaldomain+'signin.json?username='+globallocal.loginName+'&password='+vm.firstinputval).then(function(res1){
 							var code = res1.data.code;
-							console.log(res1.data);
 							switch (code){
 								case 2000 :
 									vm.errshow = true;
 									vm.errmsg = '登录成功';
-									
 									axios.get(globaldomain+'im/user/info.json').then(function(res3){
 										console.log(res3.data);
 										var code = res3.data.code;
@@ -70,15 +65,9 @@ var vm = new Vue({
 												return false;
 												break;
 										}
-										
-										
-										
-							
 									}).catch(function(err3){
 										console.log(err3);
 									});
-									
-									
 									return false;
 									break;
 								case 4000 :
@@ -92,7 +81,6 @@ var vm = new Vue({
 									return false;
 									break;	
 							}
-							
 						}).catch(function( err1 ){
 							console.log(err1);
 						});
@@ -133,81 +121,52 @@ var vm = new Vue({
 						return false;
 						break;
 				}
-				
 			}).catch(function(errs){
 				console.log(errs);
 			})
-			
-			//errshow:false,
-			//errmsg:'',
-			
 		},
-		//点击下一步
 		checkpsw1:function(){
 			var reg1 = /^([a-zA-Z0-9`~!@#$%^&*()_+<>?:"{},.\/;'[\]·]{6,20})$/img;
 			var t1 = vm.firstinputval.match(reg1);
-			
 			if ( t1 == null ){
-				//密码非法状态
 				vm.rightorwrong2 = true;
 				vm.rightorwrong1 = false;
-				vm.btncolorswitch2 = false;//不启用
-				vm.ableornot2 = true;//不启用
-				
-				
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
 			} else {
-				//密码合法状态
 				vm.rightorwrong1 = true;
 				vm.rightorwrong2 = false;
-				
 				if ( vm.firstinputval == vm.secondinputval ) {
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
 					vm.rightorwrong3 = true;
 					vm.rightorwrong4 = false;
-					//vm.rightorwrong1 = false;
-					//vm.rightorwrong2 = false;
-					
 				}else {
 					vm.btncolorswitch2 = false;
 					vm.ableornot2 = true;
 					vm.rightorwrong3 = false;
 					vm.rightorwrong4 = true;
-					//vm.rightorwrong1 = false;
-					//vm.rightorwrong2 = true;
 				}
 			}
-			
 		},
-		//检查密码
 		checkpsw2:function(){
 			if ( vm.firstinputval == vm.secondinputval ){
-				
 				vm.rightorwrong4 = false;
 				vm.rightorwrong3 = true;
-				vm.btncolorswitch2 = true;//启用
-				vm.ableornot2 = false;//启用
-				
+				vm.btncolorswitch2 = true;
+				vm.ableornot2 = false;
 			}else {
 				vm.rightorwrong3 = false;
 				vm.rightorwrong4 = true;
-				vm.btncolorswitch2 = false;//不启用
-				vm.ableornot2 = true;//不启用
-				
+				vm.btncolorswitch2 = false;
+				vm.ableornot2 = true;
 			}
-			
 		},
-		//检查密码
 		clearinput1:function(){
 			vm.firstinputval = '';
 		},
 		clearinput2:function(){
 			vm.secondinputval = '';
 		},
-		
 	}
-		
 });
-
-
-

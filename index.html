@@ -9,17 +9,13 @@
         <link rel="stylesheet" href="css/index.css">
 		<link rel="icon shotcut" href="imgs/linklogo.png">
 		<script src="./js/axios.js"></script>
-        <!-- HTML5 element -->
-        <!--<script src="Config_JS/browser-polyfill.min.js"></script>-->
 		<script src="js/vue.js"></script>
 		<script src="Config_JS/webim.config.js"></script>
         <script src="Config_JS/strophe-1.2.8.min.js"></script>
         <script src="Config_JS/websdk-1.4.12.js"></script>
 		<script src="js/jquery-1.12.4.min.js"></script>
-		
     </head>
     <body>
-		
         <div class="subbody" id="subBody">
             <header>
 				<img src="imgs/index-logo.png">
@@ -30,7 +26,6 @@
 				<article><div @click="switch6()" class="head1" :class="{headeractive:headswitch1}">账户登录</div><div @click="switch8()" :class="{headeractive:headswitch2}" class="head2">扫码登录</div>
 				</article>
 				<div v-if="switchheader" class="tab1">
-					
 					<div class="inputContainer">
 						<div class="errOuter">
 							<div v-show="errorshow"><i class="fa fa-minus-circle"></i>&nbsp;&nbsp;{{ errormessage }}</div>
@@ -38,7 +33,6 @@
 						<div class="firstinput samesize">
 							<input @change="checkphone()" v-model="firstinputval" type="text" placeholder="请输入手机号" name="psw" maxlength="20"><i @click="clearinput1" v-if="rightorwrong2" class="fa fa-times"></i><i v-if="rightorwrong1" class="fa fa-check"></i>
 						</div>
-
 						<div class="secondinput samesize">
 							<input @keyup.enter="nextstepfinal" @input="checkpsw2()" v-model="secondinputval" type="password" placeholder="请输入密码" name="psw2" maxlength="20"><i @click="clearinput2" v-if="rightorwrong4" class="fa fa-times"></i><i v-if="rightorwrong3" class="fa fa-check"></i>
 						</div>
@@ -52,7 +46,7 @@
 							<a class="aouter1" href="register.html">还没有账号&nbsp;?&nbsp;立即注册&nbsp;&raquo;</a>
 						</div>
 					</div>
-				</div><!--tab1-->
+				</div>
 				<div v-else class="tab2">
 					<div class="twodimention">
 						<img :src="get2dimention">
@@ -93,15 +87,11 @@
 						alert('建议更换最新版的谷歌，火狐，欧朋等非IE内核浏览器访问！');
 						$('body').css({display:'none'});
 					}else {
-						
 					}
 				}
 			};
-			
 			isIE();
 		</script>
         <script src="js/index.js"></script>
-		<!--<script src="js/rem_js.js"></script>-->
-		
     </body>
 </html>

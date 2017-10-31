@@ -1,8 +1,5 @@
 axios.defaults.withCredentials = true;
-
 var globaldomain = 'http://api.zhongxiangim.com/';
-
-
 var vm = new Vue({
 	el:'#subBody',
 	data:{
@@ -29,23 +26,17 @@ var vm = new Vue({
 		var what = Math.random();
 		axios.get(globaldomain+'token.json').then(function(res){
 			vm.validatecode = globaldomain+'/captcha/build?'+Math.random();
-			//获取验证码
 		}).catch(function(err){
 			console.log(err);
 		});
-		//获取token
-		
 	},
 	methods:{
 		nextpic:function(){
-			console.log('click');
 			vm.validatecode = '';
 			vm.validatecode = globaldomain+'/captcha/build?'+Math.random();
 		},
-		//切换验证码
 		sendphonevalidate:function(){
 			axios.post(globaldomain+'im/sms/captcha/reg.json?mobile='+vm.firstinputval+'&captcha='+vm.secondinputval).then(function(res){
-				console.log(res);
 				var code = res.data.code;
 				switch (code){
 					case 2000 :
@@ -84,9 +75,6 @@ var vm = new Vue({
 						return false;
 						break;	
 				}
-				
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
@@ -105,14 +93,11 @@ var vm = new Vue({
 					window.clearInterval(timer2);
 				}
 			},1000);
-			
 		},
-		//发送手机验证码
 		useragreeinfo:function(){
 			vm.rightorwrong5 = !vm.rightorwrong5;
 			if ( vm.rightorwrong5 == false ){
 				if ( ( vm.firstinputval != '' )&&( vm.secondinputval != '' )&&( vm.thirdinputval != '' ) ){
-					
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
 				}
@@ -121,7 +106,6 @@ var vm = new Vue({
 				vm.ableornot2 = true;
 			}
 		},
-		//协议切换
 		checkphone:function(){
 			var input1 = vm.firstinputval;
 			if ( !(/^1[0-9]{10}$/.test( input1 )) ){
@@ -137,42 +121,28 @@ var vm = new Vue({
 				vm.rightorwrong2 = false;
 			}
 		},
-		//检查手机号码正确与否
 		clearinput1:function(){
 			vm.firstinputval = '';
 		},
-		//清空手机号
 		checkvalidate:function(){
 			axios.get(globaldomain+'captcha/validate.json?captcha='+vm.secondinputval).then(function(res){
 				var data1 = res.data.data;
-				//console.log(res.data);
 				if ( (data1)&&(vm.rightorwrong1)   ) {
-					console.log('验证');
-					console.log(data1);
 					vm.ableornot1 = false;
 					vm.btncolorswitch = true;
 				} else {
 					vm.ableornot1 = true;
 					vm.btncolorswitch = false;
-					console.log('错误');
 				}
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
-			
 		},
-		//启用发送手机短信
 		nextstepfinal:function(){
 			axios.get(globaldomain+'im/sms/captcha/validate.json?mobile='+vm.firstinputval+'&captcha='+vm.thirdinputval).then(function(res){
-				console.log(res.data.code);
-				console.log(res.data);
 				var code = res.data.code;
 				switch( code ){
 					case 2000 :
-						console.log('ok');
 						var jsonobj = {
 							'loginName':vm.firstinputval,
 							'captcha':vm.secondinputval,
@@ -180,10 +150,8 @@ var vm = new Vue({
 						};
 						var storage = JSON.stringify(jsonobj);
 						localStorage['huanxinreg'] = storage;
-						console.log( localStorage['huanxinreg'] );
 						window.location.href="register_1.html";
 						break;
-						
 					case 4000 :
 						vm.errormessage = '短信验证码错误';
 						vm.errorshow = true;
@@ -195,25 +163,14 @@ var vm = new Vue({
 						return false;
 						break;
 				}
-				
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			})
-			
-			
-			
 		},
-		//点击下一步
 		checksms:function(){
-			//console.log( vm.thirdinputval.length );
-			
 			if ( vm.thirdinputval.length==6 ){
 				vm.rightorwrong3 = true;
 				vm.rightorwrong4 = false;
-				//vm.btncolorswitch2 = false;
-				//vm.ableornot2 = true;
 			}else {
 				vm.rightorwrong3 = false;
 				vm.btncolorswitch2 = false;
@@ -222,10 +179,7 @@ var vm = new Vue({
 				vm.rightorwrong4 = true;
 			}
 		},
-		//检查短信
-		
 	}
-		
 });
 
 

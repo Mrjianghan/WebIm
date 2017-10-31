@@ -17,35 +17,21 @@ var vm = new Vue({
 		}).catch(function(err){
 			console.log(err);
 		});
-		//获取token
-		console.log(localStorage['huanxinreg']);
-		
 		if ( localStorage['huanxinreg'] ){
-			
 			globallocal = JSON.parse( localStorage['huanxinreg'] );
-		
-			console.log(globallocal);
-			
 		}
-		
 	},
 	methods:{
-		
 		nextstepfinal:function(){
-			console.log(globallocal);
 			globallocal.nickname = vm.firstinputval;
 			globallocal.sex = vm.secondinputval;
-			console.log(globallocal);
 			localStorage['huanxinreg'] = JSON.stringify( globallocal );
-			console.log( localStorage['huanxinreg'] );
 			window.location.href = "register_2.html";
 		},
-		//点击下一步
 		checknick:function(){
 			var reg1 = /^([\u4e00-\u9fa5a-zA-Z]{1})([a-zA-Z\u4e00-\u9fa50-9]{3,19})$/igm;
 			var t1 = vm.firstinputval.match(reg1);
 			var flag = vm.secondinputval;
-			console.log(t1);
 			if ( t1 == null ){
 				vm.rightorwrong2 = true;
 				vm.rightorwrong1 = false;
@@ -56,7 +42,6 @@ var vm = new Vue({
 				vm.rightorwrong1 = true;
 				vm.rightorwrong2 = false;
 				if ( ( flag != 3 )&&( t1 != null ) ){
-					//注意性别
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
 				} else {
@@ -65,33 +50,20 @@ var vm = new Vue({
 				}
 			}
 		},
-		//检查昵称
 		clearinput1:function(){
 			vm.firstinputval = '';
 		},
-		//清理昵称
 		select:function(){
 			var flag = vm.secondinputval;
 			var reg1 = /^([\u4e00-\u9fa5a-zA-Z]{1})([a-zA-Z\u4e00-\u9fa50-9]{3,19})$/igm;
 			var t1 = vm.firstinputval.match(reg1);
-			
 			if ( ( flag != 3 )&&( t1 != null ) ){
-				//注意性别
-				console.log(t1);
 				vm.btncolorswitch2 = true;
 				vm.ableornot2 = false;
-				
 			} else {
 				vm.btncolorswitch2 = false;
 				vm.ableornot2 = true;
-				console.log(t1);
-				
 			}
 		},
-		//性别选择
 	}
-		
 });
-
-
-

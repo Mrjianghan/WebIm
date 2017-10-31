@@ -1,9 +1,7 @@
 axios.defaults.withCredentials = true;
-var currentid;//当前用户登录密码
-var timerlonger;//全局计时器
+var currentid;
+var timerlonger;
 var globaldomain = 'http://api.zhongxiangim.com/';
-
-
 var vm = new Vue({
 	el:'#subBody',
 	data:{
@@ -28,25 +26,17 @@ var vm = new Vue({
 		}).catch(function(err){
 			console.log(err);
 		});
-		//获取token
 	},
 	methods:{
-		
 		nextstepfinal:function(){
-			
 			axios.post(globaldomain+'signin.json?username='+vm.firstinputval+'&password='+vm.secondinputval).then(function(res){
-				console.log(res);
 				var code = res.data.code;
 				switch (code){
 					case 2000 :
-						console.log(2000);
 						axios.get(globaldomain+'im/user/info.json').then(function(res){
-							
 							var code = res.data.code;
 							var data = res.data.data;
-							console.log(code);
-							console.log(data);
-							currentid = data.id;//考虑全局变量
+							currentid = data.id;
 								switch(code){
 									case 2000:
 										data.psw = vm.secondinputval; 
@@ -58,12 +48,9 @@ var vm = new Vue({
 										return false;
 										break;
 								}
-							
 						}).catch(function(err){
 							console.log(err);
 						})
-						
-						
 						break;
 					case 4000 :
 						vm.errorshow = true,
@@ -76,19 +63,15 @@ var vm = new Vue({
 						return false;
 						break;
 				}
-				
 			}).catch(function(err){
 				console.log(err);
 			})
-			
 		},
-		//点击下一步
 		checkphone:function(){
 			var input1 = vm.firstinputval;
 			if ( !(/^1[0-9]{10}$/.test( input1 )) ){
 				vm.rightorwrong2 = true;
 				vm.rightorwrong1 = false;
-				
 				if ( (vm.secondinputval != '')&&( vm.rightorwrong1 ) ) {
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
@@ -97,11 +80,9 @@ var vm = new Vue({
 					vm.ableornot2 = true;
 				}
 				return false;
-				
 			} else {
 				vm.rightorwrong1 = true;
 				vm.rightorwrong2 = false;
-				
 				if ( (vm.secondinputval != '')&&( vm.rightorwrong1 == true ) ) {
 					vm.btncolorswitch2 = true;
 					vm.ableornot2 = false;
@@ -109,12 +90,9 @@ var vm = new Vue({
 					vm.btncolorswitch2 = false;
 					vm.ableornot2 = true;
 				}
-				
 			}
 		},
-		//检查手机号码正确与否
 		checkpsw2:function(){
-			
 			if ( (vm.secondinputval != '')&&( vm.rightorwrong1 == true ) ) {
 				vm.btncolorswitch2 = true;
 				vm.ableornot2 = false;
@@ -122,9 +100,7 @@ var vm = new Vue({
 				vm.btncolorswitch2 = false;
 				vm.ableornot2 = true;
 			}
-			
 		},
-		//检查密码
 		clearinput1:function(){
 			vm.firstinputval = '';
 		},
@@ -136,14 +112,10 @@ var vm = new Vue({
 			vm.headswitch1 = true;
 			vm.headswitch2 = false;
 			clearInterval(timerlonger);
-			
 			isIE();
 		},
-		//标题切换1清理扫码计时器
 		switch8:function(){
-			
 			isIE();
-			
 			vm.switchheader = false;
 			vm.headswitch2 = true;
 			vm.headswitch1 = false;
@@ -152,59 +124,29 @@ var vm = new Vue({
 					var code = res.data.code;
 					var data = res.data.data;
 					var path = res.data.data.path;
-				console.log(res);
-				console.log(path);
-				console.log( globaldomain );
-				
 					vm.get2dimention = 'http://assets.zhongxiangim.com/zxupl/'+path;
 					var idbridge = res.data.data.id;
 					var trans = JSON.parse(idbridge);
-					
 					id2d = trans.id;
-					console.log(trans);
-					console.log(id2d);
-				
-				
-				
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-				
 			timerlonger = window.setInterval(function(){
-				console.log(timerlonger);
 				axios.post(globaldomain+'login.json?qrcode='+id2d).then(function(res){
-					console.log(res.data);
-					console.log(res.data.token);
 					var psw = res.data.token;
 					var code = res.data.code;
 					switch (code){
 						case 2000 :
-							//window.location.href = "message.html";
 							clearTimeout(timerlonger);
-							
 							axios.get(globaldomain+'im/user/info.json').then(function(res){
-								console.log(res);
-								console.log(res.data.data);
 								var data = res.data.data;
 								data.psw = psw;
-								console.log( data );
 								var usermaster = JSON.stringify(data);
 								localStorage["currentuser"] = usermaster;
 								window.location.href="message.html";
-								
-								
-								
 							}).catch(function(err){
 								console.log(err);
 							})
-							
-							
-							
-							
-							
-							
 							break;
 						case 4000 :
 							return false;
@@ -213,17 +155,7 @@ var vm = new Vue({
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-			
-					
-					
-				
 			},2000);
-			
 		},
-		//标题切换2加上扫码计时器
-		
 	}
-		
 });
-

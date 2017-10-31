@@ -7,13 +7,11 @@
 		font-size: 100px;
 	}
 } 
-
 @media all and (max-width:1439px) and (min-width:1367px) {
 	html {
 		font-size: 80px;
 	}
 } 
-
 @media all and (max-width:1366px) {
 	html {
 		font-size: 60px;
@@ -31,16 +29,12 @@ body {
     background-size: cover;
     min-height: 6rem;
 }
-
 .clearfix:after {content:'.';display:block;height:0;clear:both;visibility:hidden;}
 .clearfix {*zoom:1;}
-
 .btnable {
 	background-color: #2285ff !important;
 	cursor: pointer;
 }
-
-	
 .subbody {
 	position: relative;
     min-height: 6.4rem;
@@ -48,7 +42,6 @@ body {
 	height: 100%;
     width: 100%;
 }
-
 header {
 	padding-top: 0.48rem;
 	height: 1.36rem;
@@ -57,7 +50,6 @@ header {
 	box-sizing: border-box;
 	padding-left: 0.8rem;
 }
-
 header img {
 	width: 0.8rem;
 	float: left;
@@ -70,7 +62,6 @@ header img {
 	line-height: 0.8rem;
 	margin-left: 0.24rem;
 }
-
 .setNick {
 	height: 4.8rem;
 	width: 4.96rem;
@@ -82,7 +73,6 @@ header img {
 	margin-left: -2.48rem;
 	border-radius: 0.2rem;
 }
-
 .setNick  article {
 	height: 0.72rem;
 	border-bottom: 1px solid #cccccc;
@@ -96,7 +86,6 @@ article div {
 	text-align: center;
 	font-size: 0.224rem;
 }
-
 article .fa-times {
 	position: absolute;
     right: 0.24rem;
@@ -119,16 +108,11 @@ article .fa-times:hover {
 	box-sizing: border-box;
 	overflow: hidden;
 }
-
 .inputContainer {
-	
 }
-
-
 .firstinput {
 	position: relative;
 }
-
 .firstinput input {
 	float: left;
 	height: 0.64rem;
@@ -144,7 +128,6 @@ article .fa-times:hover {
 }
 .firstinput .fa-times {
 	color: #ff6868;
-	
 }
 .firstinput .fa-check {
 	color: #53bd58;
@@ -171,8 +154,6 @@ article .fa-times:hover {
 	color: #fff;
 	margin-top: 0.48rem;
 }
-
-
 select {
 	float: left;
 	height: 0.64rem;
@@ -193,7 +174,6 @@ select {
 select::-ms-expand {
 	display: none;
 }
-
 .fa-caret-down {
 	font-size: 0.34rem;
 	position: absolute;
@@ -201,21 +181,17 @@ select::-ms-expand {
 	top: 0.16rem;
 	color: #c7c7c7;
 }
-
 .placeholder1 {
 	height: 0.56rem;
 	width: 4rem;
 	margin: 0 auto;
 	color: #666;
 }
-
 .placeholder1 div {
 	margin-left: 0.1rem;
 	margin-top:0.05rem;
 	font-size: 0.16rem;
 }
-
-
 .errOuter {
 	height: 0.48rem;
 	width: 4rem;
@@ -229,7 +205,6 @@ select::-ms-expand {
 .errOuter>div {
 	 font-size: 0.16rem;
 }
-
 footer {
 	height: 1rem;
 	right: 0;
@@ -250,7 +225,6 @@ footer {
 	color: #fff;
 	font-size: 0.16rem;
 	margin-right: 0.07rem;
-	
 }
 footer a {
 	text-decoration: none;
@@ -282,5 +256,3 @@ footer .fa {
 a:hover {
 	color:#187bff;
 }
-
-

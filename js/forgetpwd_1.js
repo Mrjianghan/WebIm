@@ -2,10 +2,7 @@ axios.defaults.withCredentials = true;
 var globaldomain = 'http://api.zhongxiangim.com/';
 if ( localStorage['forgetpsw'] ){
 	var getvalue = JSON.parse( localStorage['forgetpsw'] );
-	console.log(getvalue);
-	
 } else {
-	
 }
 var vm = new Vue({
 	el:'#subBody',
@@ -27,25 +24,18 @@ var vm = new Vue({
 		}).catch(function(err){
 			console.log(err);
 		});
-		//获取token
 	},
 	methods:{
-		
 		nextstepfinal:function(){
 			var loginName = getvalue.loginName;
 			var captcha = getvalue.captcha;
 			var smscode = getvalue.smscode;
-					
 			axios.post(globaldomain+'im/user/reset/passwd.json?loginName='+loginName+'&captcha='+captcha+'&smscode='+smscode+'&passwd='+vm.firstinputval+'&repasswd='+vm.secondinputval).then(function(res){
-				var code = res.data.code;		
-				console.log(code);
+				var code = res.data.code;
 				switch(code) {
 					case 2000:
 						vm.errshow = true;
 						vm.errmsg = '修改成功';
-						
-						
-						
 						axios.post(globaldomain+'signin.json?username='+loginName+'&password='+vm.firstinputval).then(function(res1){
 							var code = res1.data.code;
 							console.log(res1.data);
@@ -53,9 +43,7 @@ var vm = new Vue({
 								case 2000 :
 									vm.errshow = true;
 									vm.errmsg = '登录成功';
-									
 									axios.get(globaldomain+'im/user/info.json').then(function(res3){
-										console.log(res3.data);
 										var code = res3.data.code;
 										var data = res3.data.data;
 										switch(code){
@@ -69,15 +57,9 @@ var vm = new Vue({
 												return false;
 												break;
 										}
-										
-										
-										
-							
 									}).catch(function(err3){
 										console.log(err3);
 									});
-									
-									
 									return false;
 									break;
 								case 4000 :
@@ -91,19 +73,10 @@ var vm = new Vue({
 									return false;
 									break;	
 							}
-							
 						}).catch(function( err1 ){
 							console.log(err1);
 						});
-							
-							
-							
-							
 						break;
-						
-						
-						
-						
 					case 4000:
 						vm.errshow = true;
 						vm.errmsg = '用户不存在';
@@ -149,20 +122,14 @@ var vm = new Vue({
 						vm.errmsg = '重置环信用户密码失败';
 						return false;
 						break;
-						
-				}
-						
-						
-						
+				}		
 			}).catch(function(err){
 				console.log(err);
 			})
 		},
-		//点击下一步
 		checkpsw1:function(){
 			var reg1 = /^([a-zA-Z0-9`~!@#$%^&*()_+<>?:"{},.\/;'[\]·]{6,20})$/img;
 			var t1 = vm.firstinputval.match(reg1);
-			console.log(t1);
 			if ( t1 == null ){
 				vm.rightorwrong2 = true;
 				vm.rightorwrong1 = false;
@@ -170,47 +137,26 @@ var vm = new Vue({
 				vm.ableornot2 = true;//禁用
 				return false;
 			} else {
-				//如果匹配到正确格式密码的时候
 				if ( vm.firstinputval == vm.secondinputval ){
-					//相等
-					vm.btncolorswitch2 = true;//
-					vm.ableornot2 = false;//
-					
-					//vm.rightorwrong2 = false;
-					//vm.rightorwrong1 = true;
-					
-					
-					
-					
+					vm.btncolorswitch2 = true;
+					vm.ableornot2 = false;
 				}else {
-					//不等
-					vm.btncolorswitch2 = false;//禁用
-					vm.ableornot2 = true;//禁用
-					//vm.rightorwrong2 = true;
-					//vm.rightorwrong1 = false;
+					vm.btncolorswitch2 = false;
+					vm.ableornot2 = true;
 				}
-				
 			}
-			
 		},
-		//检查密码
 		checkpsw2:function(){
 			if ( vm.firstinputval == vm.secondinputval ){
-				console.log( vm.secondinputval );
 				if ( vm.secondinputval == '' ){
-					vm.btncolorswitch2 = false;//禁用
-					vm.ableornot2 = true;//禁用
+					vm.btncolorswitch2 = false;
+					vm.ableornot2 = true;
 				} else {
-					
-					vm.btncolorswitch2 = true;//
-					vm.ableornot2 = false;//
+					vm.btncolorswitch2 = true;
+					vm.ableornot2 = false;
 					vm.rightorwrong4 = false;
 					vm.rightorwrong3 = true;
 				}
-				
-				
-				
-				
 			}else {
 				vm.rightorwrong3 = false;
 				vm.rightorwrong4 = true;
@@ -218,28 +164,12 @@ var vm = new Vue({
 				vm.ableornot2 = true;
 				return false;
 			}
-			
 		},
-		//检查密码
 		clearinput1:function(){
 			vm.firstinputval = '';
 		},
 		clearinput2:function(){
 			vm.secondinputval = '';
 		},
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-		
 });
-
-
-

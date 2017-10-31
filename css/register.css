@@ -7,13 +7,11 @@
 		font-size: 100px;
 	}
 } 
-
 @media all and (max-width:1439px) and (min-width:1367px) {
 	html {
 		font-size: 80px;
 	}
 } 
-
 @media all and (max-width:1366px) {
 	html {
 		font-size: 60px;
@@ -42,7 +40,6 @@ body {
 	background-color: #2285ff !important;
 	cursor: pointer;
 }
-	
 .subbody {
 	position: relative;
     min-height: 6.4rem;
@@ -50,7 +47,6 @@ body {
 	height: 100%;
     width: 100%;
 }
-
 header {
 	padding-top: 0.48rem;
 	height: 1.36rem;
@@ -59,7 +55,6 @@ header {
 	box-sizing: border-box;
 	padding-left: 0.8rem;
 }
-
 header img {
 	width: 0.8rem;
 	float: left;
@@ -72,7 +67,6 @@ header img {
 	line-height: 0.8rem;
 	margin-left: 0.24rem;
 }
-
 .regContainer {
 	height: 4.8rem;
 	width: 4.96rem;
@@ -84,7 +78,6 @@ header img {
 	margin-left: -2.48rem;
 	border-radius: 0.2rem;
 }
-
 .regContainer  article {
 	height: 0.72rem;
 	border-bottom: 1px solid #cccccc;
@@ -98,7 +91,6 @@ article div {
 	text-align: center;
 	font-size: 0.224rem;
 }
-
 article .fa-times {
 	position: absolute;
     right: 0.24rem;
@@ -121,17 +113,11 @@ article .fa-times:hover {
 	box-sizing: border-box;
 	overflow: hidden;
 }
-
 .inputContainer {
-	
 }
-
-
-
 .firstinput {
 	position: relative;
 }
-
 .firstinput input {
 	float: left;
 	height: 0.64rem;
@@ -147,7 +133,6 @@ article .fa-times:hover {
 }
 .firstinput .fa-times {
 	color: #ff6868;
-	
 }
 .firstinput .fa-check {
 	color: #53bd58;
@@ -158,8 +143,6 @@ article .fa-times:hover {
 	right: 0.1rem;
 	top: 0.2rem;
 }
-
-
 .secondinput {
 	margin-top: 0.16rem;
 	position: relative;
@@ -200,14 +183,12 @@ article .fa-times:hover {
 	width: 0.96rem;
 	text-align: center;
 }
-
 .samesize2 {
 	width: 4rem;
 	margin: 0 auto;
 	height: 0.64rem;
 	border-radius: 0.1rem;
 	background-color: #f0edf1;
-	
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	overflow: hidden;
@@ -248,7 +229,6 @@ article .fa-times:hover {
 	font-size: 0.176rem;
 	bottom: 0;
 }
-
 .thirdinput input {
 	height: 0.64rem;
 	width: 80%;
@@ -263,25 +243,20 @@ article .fa-times:hover {
 .thirdcon .fa-times {
 	color: #ff6868;
 }
-
 .thirdcon .fa-check {
 	color: #53bd58;
 }
-
 .thirdcon .fa {
 	position: absolute;
 	right: 0.1rem;
 	top: 0.2rem;
 	font-size: 0.24rem;
 }
-
-
 .userinfo {
 	width: 4rem;
 	margin: 0 auto;
 	margin-top: 0.08rem;
-}	
-
+}
 .linkcon {
 	float: left;
 	font-size: 0.16rem;
@@ -309,7 +284,6 @@ article .fa-times:hover {
 .check1 .fa-check-square {
 	color: #2285ff;
 }
-
 .nextstep {
 	height: 0.64rem;
 	width: 4rem;
@@ -323,18 +297,8 @@ article .fa-times:hover {
 	color: #fff;
 	margin-top: 0.2rem;
 }
-
-
 .clearfix:after {content:'.';display:block;height:0;clear:both;visibility:hidden;}
 .clearfix {*zoom:1;}
-
-
-
-
-
-
-
-
 .errOuter {
 	height: 0.4rem;
 	width: 4rem;
@@ -348,7 +312,6 @@ article .fa-times:hover {
 .errOuter>div {
 	 font-size: 0.16rem;
 }
-
 footer {
 	height: 1rem;
 	right: 0;
@@ -369,7 +332,6 @@ footer {
 	color: #fff;
 	font-size: 0.16rem;
 	margin-right: 0.07rem;
-	
 }
 footer a {
 	text-decoration: none;

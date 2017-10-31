@@ -1,11 +1,8 @@
 
-
-
-function initials() { //公众号排序
-    console.log('内部侦测');
+function initials() { 
     var SortList = $(".sort_list");
     var SortBox = $(".sort_box");
-    SortList.sort(asc_sort).appendTo('.sort_box'); //按首字母排序
+    SortList.sort(asc_sort).appendTo('.sort_box'); 
     function asc_sort(a, b) {
         return makePy($(b).find('.num_name').text().charAt(0))[0].toUpperCase() < makePy($(a).find('.num_name').text().charAt(0))[0].toUpperCase() ? 1 : -1;
     }
@@ -115,8 +112,7 @@ function initials() { //公众号排序
 
 
 
-function initials1() { //公众号排序
-    console.log('内部侦测1');
+function initials1() { 
     var SortList = $(".sort_list1");
     var SortBox = $(".sort_box1");
     SortList.sort(asc_sort).appendTo('.sort_box1'); //按首字母排序
@@ -228,8 +224,7 @@ function initials1() { //公众号排序
 };
 
 
-function initials2() { //公众号排序
-    console.log('内部侦测2');
+function initials2() { 
     var SortList = $(".sort_list2");
     var SortBox = $(".sort_box2");
     SortList.sort(asc_sort).appendTo('.sort_box2'); //按首字母排序
@@ -343,8 +338,7 @@ function initials2() { //公众号排序
 
 
 
-function initials3() { //公众号排序
-    console.log('内部侦测3');
+function initials3() { 
     var SortList = $(".sort_list3");
     var SortBox = $(".sort_box3");
     SortList.sort(asc_sort).appendTo('.sort_box3'); //按首字母排序
@@ -455,8 +449,7 @@ function initials3() { //公众号排序
     };
 };
 
-function initials4() { //公众号排序
-    console.log('内部侦测4');
+function initials4() { 
     var SortList = $(".sort_list4");
     var SortBox = $(".sort_box4");
     SortList.sort(asc_sort).appendTo('.sort_box4'); //按首字母排序
@@ -568,8 +561,7 @@ function initials4() { //公众号排序
 };
 
 
-function initials8() { //公众号排序
-    console.log('内部侦测8');
+function initials8() { 
     var SortList = $(".sort_list8");
     var SortBox = $(".sort_box8");
     SortList.sort(asc_sort).appendTo('.sort_box8'); //按首字母排序
@@ -680,8 +672,7 @@ function initials8() { //公众号排序
     };
 };
 
-function initials9() { //公众号排序
-    console.log('内部侦测9');
+function initials9() { 
     var SortList = $(".sort_list9");
     var SortBox = $(".sort_box9");
     SortList.sort(asc_sort).appendTo('.sort_box9'); //按首字母排序
