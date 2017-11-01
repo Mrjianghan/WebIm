@@ -1325,7 +1325,7 @@ body {
 }
 .fixcoverright1 {
 	position: absolute;
-	right: 0;
+	/*right: 0.05rem;*/
 	height: 0.5rem;
 	width: 0.30rem;
 	background-color: #fff;
@@ -1334,13 +1334,13 @@ body {
 }
 .fixcoverright2 {
 	position: absolute;
-	right: 0;
+	/*right: 0.05rem;*/
 	top: 0.8rem;
 	height: 0.5rem;
 	width: 0.30rem;
 	background-color: #fff;
 	z-index: 80;
-	/*opacity: 0;*/
+/*	opacity: 0;*/
 }
 .fixcoverleft {
 	position: absolute;
@@ -1350,7 +1350,6 @@ body {
 	background-color: #fff;
 	z-index: 80;
 }
-
 .fa1 {
 	position: absolute;
 	color: #333;
@@ -1434,8 +1433,9 @@ body {
 	font-size: 0.20rem;
 	display: table-cell;
 	color: #333;
-	padding-left: 0.4rem;
-	padding-right: 0.2rem;
+	padding-left: 0.5rem;
+	/*padding-right: 0.2rem;
+	padding-right: 0.1rem;*/
 }
 
 .alltrade:hover {
@@ -1447,6 +1447,8 @@ body {
 
 .chatroomarea {
 	width: auto;
+	width: 3.5rem;
+	width: 3.6rem;
 	margin-left: 0.20rem;
 	margin-top: 0.10rem;
 	margin-bottom: 0.10rem;
@@ -1456,13 +1458,6 @@ body {
 	-ms-overflow-style: none; 
     overflow: -moz-scrollbars-none;
 	position: relative;
-	/*width: auto;
-	margin-left: 0.20rem;
-	height: 0.40rem;
-	overflow-x: scroll;
-	white-space: nowrap;
-	-ms-overflow-style: none; 
-    overflow: -moz-scrollbars-none;*/
 }
 
 .chatroomtrade {
@@ -1474,6 +1469,7 @@ body {
 	-ms-overflow-style: none; 
     overflow: -moz-scrollbars-none;*/
 	width: auto;
+	width: 3.6rem;
 	margin-left: 0.20rem;
 	margin-top: 0.10rem;
 	margin-bottom: 0.10rem;

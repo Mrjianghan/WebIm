@@ -3755,22 +3755,22 @@ var vm = new Vue({
 			});
 		},//上传文件
 		upleftslide:function(){
-			$('.chatroomarea').scrollLeft($('.chatroomarea').scrollLeft()-200);
+			$('.chatroomarea').scrollLeft($('.chatroomarea').scrollLeft()-150);
 			var sl = $('.chatroomarea').scrollLeft();
 			var sw = $('.chatroomarea')[0].scrollWidth;
 			var cw = $('.chatroomarea')[0].clientWidth;
 			if ( sl == 0 ){
 				$('.mainleft .fa2').css({opacity:0.5});
 				$('.mainleft .fa1').css({opacity:0});
-				$('.fixcoverright1').css({opacity:1});
+				//$('.fixcoverright1').css({opacity:1});
 			}else{
 				$('.mainleft .fa2').css({opacity:0.5});
 				$('.mainleft .fa1').css({opacity:0.5});
-				$('.fixcoverright1').css({opacity:1});
+				//$('.fixcoverright1').css({opacity:1});
 			}
 		},//上左三角
 		uprightslide:function(){
-			$('.chatroomarea').scrollLeft($('.chatroomarea').scrollLeft()+ 200);
+			$('.chatroomarea').scrollLeft($('.chatroomarea').scrollLeft()+ 100);
 			var sl = $('.chatroomarea').scrollLeft();
 			var sw = $('.chatroomarea')[0].scrollWidth;
 			var cw = $('.chatroomarea')[0].clientWidth;
@@ -3778,31 +3778,31 @@ var vm = new Vue({
 				//滑至最右
 				$('.mainleft .fa2').css({opacity:0});
 				$('.mainleft .fa1').css({opacity:0.5});
-				$('.fixcoverright1').css({opacity:0});
+				//$('.fixcoverright1').css({opacity:0});
 			}else {
 				//滑动后
 				$('.mainleft .fa2').css({opacity:0.5});
 				$('.mainleft .fa1').css({opacity:0.5});
-				$('.fixcoverright1').css({opacity:1});
+				//$('.fixcoverright1').css({opacity:1});
 			}
 		},//上右三角
 		downleftslide:function(){
-			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()-200);
+			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()-150);
 			var sl = $('.chatroomtrade').scrollLeft();
 			var sw = $('.chatroomtrade')[0].scrollWidth;
 			var cw = $('.chatroomtrade')[0].clientWidth;
 			if ( sl == 0 ){
 				$('.mainleft .fa4').css({opacity:0.5});
 				$('.mainleft .fa3').css({opacity:0});
-				$('.fixcoverright2').css({opacity:1});
+				//$('.fixcoverright2').css({opacity:1});
 			}else{
 				$('.mainleft .fa4').css({opacity:0.5});
 				$('.mainleft .fa3').css({opacity:0.5});
-				$('.fixcoverright2').css({opacity:1});
+				//$('.fixcoverright2').css({opacity:1});
 			}
 		},//左下三角
 		downrightslide:function(){
-			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()+200);
+			$('.chatroomtrade').scrollLeft($('.chatroomtrade').scrollLeft()+100);
 			var sl = $('.chatroomtrade').scrollLeft();
 			var sw = $('.chatroomtrade')[0].scrollWidth;
 			var cw = $('.chatroomtrade')[0].clientWidth;
@@ -3810,12 +3810,12 @@ var vm = new Vue({
 				//滑至最右
 				$('.mainleft .fa4').css({opacity:0});
 				$('.mainleft .fa3').css({opacity:0.5});
-				$('.fixcoverright2').css({opacity:0});
+				//$('.fixcoverright2').css({opacity:0});
 			}else {
 				//滑动后
 				$('.mainleft .fa4').css({opacity:0.5});
 				$('.mainleft .fa3').css({opacity:0.5});
-				$('.fixcoverright2').css({opacity:1});
+				//$('.fixcoverright2').css({opacity:1});
 			}
 		},//右下三角
 		chatuploadfile:function($event){
@@ -4905,20 +4905,14 @@ var vm = new Vue({
 			if ( vm.sendbtncontent != ''&& sendtarget != ''){
 				axios.get(globaldomain+'im/group/info.json?id='+sendtarget).then(function(res){
 					var data = res.data.data;
+					console.log(data);
 					if(data){
 						sendGroupText(vm.sendbtncontent,sendtarget);
 					}
 				}).catch(function(err){
 					console.log(err);
 				});
-				axios.post(globaldomain+'im/buddy/info.json?buddyId='+sendtarget).then(function(res){
-					var data = res.data.data;
-					if(data){
-						sendPrivateText(vm.sendbtncontent,sendtarget);
-					}
-				}).catch(function(err){
-					console.log(err);
-				});
+				sendPrivateText(vm.sendbtncontent,sendtarget);
 			}
 		},//发送消息
 		blockpeople:function($event){
