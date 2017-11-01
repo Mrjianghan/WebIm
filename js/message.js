@@ -512,28 +512,14 @@ conn.listen({
 		}
 	},   //收到表情消息
     onPictureMessage: function ( message ) {
-		
-		
 		vm.pictureviewarr=[];
-		
-		
 		vm.nomessage = false;
-		console.log('图片消息');
 		message.time = getCurrentTime();
-		console.log(message);
 		var msgtype = message.type;
 		var fire = message.ext.fire_flag;
-		
 		switch( msgtype ){
 			case 'chat':
-				
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-					console.log(res);
-					
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -541,12 +527,8 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-				
 					var data = res.data.data;
-					console.log(data);
 					var name = data.nickname;
-					
-					
 					var remark = data.remark;
 						console.log(remark);
 					if ( remark ){
@@ -554,241 +536,83 @@ conn.listen({
 					}else {
 						name = name;
 					}
-					
 					var avatar = data.avatar;
 					var msgfrom = message.from;
-					
 					message.name = name;
 					message.avatar = avatar;
-					
-					console.log(message);
-					console.log(message.url);
-					console.log(fire);
-					
-					
-					
-					
 					if (fire){
-						//即焚
-						
-						console.log('即焚');
-						
-						
 						/*消息列表记录*/
 						var str = '';
-
 						str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[请到移动端查看]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-
 						if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 									$('.mainleft .comlist1').prepend(str);
 						} else {
 							if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
-								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 							}else {
-								//没有置顶
 								$('.mainleft .comlist1  #'+message.from).remove();
 								$('.mainleft .comlist1').prepend(str);
 							}
 						}
-
-
-
 						/*消息列表记录*/
-						
-						
 						/*消息内容容器*/
-						
-						
-						
-						
 						var str1 = '';
-
 						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+'[请到移动端查看]'+'</span></div></div><div class="clearfix"></div></div>'
 
 						+'</div></div></div>';
-
-
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+'[请到移动端查看]'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-						
-						
-						
-						/*var str1 = '';
-
-						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
-
-						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+ '[请到移动端查看]' +'</span></div></div><div class="clearfix"></div></div>'
-
-						+'</div></div></div>';
-
-
-						var str2 ='';
-
-
-						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+'[请到移动端查看]'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-						*/
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 							messagetobottom();
-
 						} else {
 							$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 							messagetobottom();
 						}
-
 						/*消息内容容器*/
-						
-
-
-
-
-
-
 					}else {
-						//非即焚
-						console.log('非即焚');
 						/*消息列表记录*/
 						var str = '';
-
 						str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-
 						if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 									$('.mainleft .comlist1').prepend(str);
 						} else {
 							if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 							}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.from).remove();
 								$('.mainleft .comlist1').prepend(str);
 							}
 						}
-
-
-
 						/*消息列表记录*/
-						
 						/*消息内容容器*/
 						var str1 = '';
-
 						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+ '<img src="'+message.url+'" class="picmessagelock">' +'</span></div></div><div class="clearfix"></div></div>'
 
 						+'</div></div></div>';
-
-
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 							messagetobottom();
-
 						} else {
 							$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 							messagetobottom();
 						}
-
 						/*消息内容容器*/
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
 					}
-				
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					/*消息列表记录*/
-					/*var str = '';
-
-					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-					/*if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-
-					} else {
-						$('.mainleft .comlist1  #'+message.from).remove();
-						$('.mainleft .comlist1').prepend(str);
-
-					}*/
-					
-					
-					/*if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-					} else {
-						if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
-							//有置顶
-							$('.mainleft .doublefirst').html( str );
-
-						}else {
-							//没有置顶
-							$('.mainleft .comlist1  #'+message.from).remove();
-							$('.mainleft .comlist1').prepend(str);
-						}
-					}
-					
-					
-
-					/*消息列表记录*/
-					
-					
-					
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				})
-				
 				break;
 			case 'groupchat':
-			
-				
 				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -796,188 +620,83 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-					
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var name = data.name;
 					var genre =data.genre;
 					var msgfrom = message.from;//群组内部发送消息的人
-					
 					message.avatar = avatar;
 					message.name = name;
 					message.genre = genre;
-					
-					console.log(message);
-					
-					
 					/*消息列表记录*/
 					var str = '';
-					
-					
 					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
 						var data = res.data.data;
-						console.log( data );
 						var hinder = data.hinder;
-						console.log(hinder);
-						
-						
-						
-						
 						if (hinder){
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}else {
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
-					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[图片]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
-					
-					
-					
-					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					} else {
-						$('.mainleft .comlist1  #'+message.to).remove();
-						$('.mainleft .comlist1').prepend(str);
-					}*/
-					/*消息列表记录*/
-					
-					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-						
 						//获取群组聊天里发送人的详细信息
 						var data = res.data.data;
-						console.log(data);
 						var avatar = data.avatar;
 						var nickname = data.nickname;
-						
 						var remark = data.remark;
-						
 						if ( remark ){
 							nickname = remark;
 						}else{
 							nickname = nickname;
 						}
-						
-						
 						/*生成的消息内容容器*/
 						var str1 = '';
-
-						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
-
-
+						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-
 							messagetobottom();
-
 						} else {
-
 							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
-
 							messagetobottom();
-
-
 						}
-
 						/*生成的消息内容容器*/
-						
-					
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
-				
-				
 				break;
 			case 'chatroom':
-				
-				console.log(message);
-				
 				function messagetobottom (){
 					var scroll1 = $('.mainright .rightTwo .scroll-wrapper.manywindowcon')[0];
 					var cli = scroll1.clientHeight;
@@ -985,89 +704,37 @@ conn.listen({
 					var hei = main.scrollHeight;
 					$('.mainright .rightTwo .scroll-content.manywindowcon').scrollTop( hei-cli );
 				};
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
 					//获取群组聊天里发送人的详细信息
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var nickname = data.nickname;
-						
-						
 					//生成的消息内容容器
-						
 					var str2 ='';
-					
-					
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span  class="picspan">'+'<img src="'+message.url+'" class="picmessagelock">'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-					
-						
-
 					$('.mainright .rightTwo .righttwochatcon  .chatroommessageid  .msgcontainer').append( str2 );
-
 					messagetobottom();
-						
 					//生成的消息内容容器
-						
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
 			break;
 		}
-		
-		
-		
 	}, //收到图片消息
-    
     onAudioMessage: function ( message ) {
-		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		Demo.conn.send(msg.body);
-		对方收到已送达回执的回调函数是onReadMessage*/
-		
 		vm.nomessage = false;
-		console.log('音频消息');
 		message.time = getCurrentTime();
-		console.log(message);
-		
 		var options = { url: message.url };
-    
 		options.onFileDownloadComplete = function ( response ) { 
 			  //音频下载成功，需要将response转换成blob，使用objectURL作为audio标签的src即可播放。
 			var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
-			console.log(objectURL);
-			console.log(response);
-			
-			console.log(conn);
 			var size = response.size;
-			console.log(size);
-			
 			var sizestr= String(size);
-			
-			console.log(sizestr);
 			var finalsize = sizestr.substring(0,1);
-			
-			
-			console.log(finalsize);
-			
 			var msgtype = message.type;
-		
 		switch( msgtype ){
 			case 'chat':
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-					console.log(res);
-					
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -1075,124 +742,57 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-				
 					var data = res.data.data;
-					console.log(data);
 					var name = data.nickname;
-					
 					var remark = data.remark;
-						console.log(remark);
 					if ( remark ){
 						name = remark;
 					}else {
 						name = name;
 					}
-					
 					var avatar = data.avatar;
 					var msgfrom = message.from;
-					
 					message.name = name;
 					message.avatar = avatar;
-					
-					console.log(message);
-					
-					
 					/*消息列表记录*/
 					var str = '';
-
 					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-					/*if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-
-					} else {
-						$('.mainleft .comlist1  #'+message.from).remove();
-						$('.mainleft .comlist1').prepend(str);
-
-					}*/
-					
 					if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 					} else {
-
-
 						if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 						}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.from).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 					}
-					
-					
-
 					/*消息列表记录*/
-					
-					
 					/*消息内容容器*/
 					var str1 = '';
-					
 					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>' +'</span></div></div><div class="clearfix"></div></div>'
 						
 					+'</div></div></div>';
-					
-					
 					var str2 ='';
-					
-						
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
-
 					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 						messagetobottom();
-
 					} else {
 						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 						messagetobottom();
 					}
-					
 					/*消息内容容器*/
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				})
-				
-				
-				
 				break;
 			case 'groupchat':
-				
 				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -1200,213 +800,83 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-					
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var name = data.name;
 					var genre =data.genre;
 					var msgfrom = message.from;//群组内部发送消息的人
-					
 					message.avatar = avatar;
 					message.name = name;
 					message.genre = genre;
-					
-					console.log(message);
-					
-					
 					/*消息列表记录*/
 					var str = '';
-					
-					
-					
-					
 					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
 						var data = res.data.data;
-						console.log( data );
 						var hinder = data.hinder;
-						console.log(hinder);
-						
-						
-						
-						
 						if (hinder){
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}else {
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[语音]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
-					
-					
-					
-					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					} else {
-						$('.mainleft .comlist1  #'+message.to).remove();
-						$('.mainleft .comlist1').prepend(str);
-					}*/
-					/*消息列表记录*/
-					
-					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-						
 						//获取群组聊天里发送人的详细信息
 						var data = res.data.data;
-						console.log(data);
 						var avatar = data.avatar;
 						var nickname = data.nickname;
-						
 						var remark = data.remark;
-						
 						if ( remark ){
 							nickname = remark;
 						}else{
 							nickname = nickname;
 						}
-						
-						
 						/*生成的消息内容容器*/
 						var str1 = '';
-
 						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
-
-
 						var str2 ='';
-						
 						str2 = '<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-
 							messagetobottom();
-
 						} else {
-
 							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
-
 							messagetobottom();
-
-
 						}
-
 						/*生成的消息内容容器*/
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-					
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
 				break;
 			case 'chatroom':
-				
-				console.log(message);
-				
 				function messagetobottom (){
 					var scroll1 = $('.mainright .rightTwo .scroll-wrapper.manywindowcon')[0];
 					var cli = scroll1.clientHeight;
@@ -1414,117 +884,39 @@ conn.listen({
 					var hei = main.scrollHeight;
 					$('.mainright .rightTwo .scroll-content.manywindowcon').scrollTop( hei-cli );
 				};
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
 					//获取群组聊天里发送人的详细信息
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var nickname = data.nickname;
-						
-						
 					//生成的消息内容容器
-						
 					var str2 ='';
-					
-					
 					str2 = '<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="audiospan ">'+'<i class="length">'+finalsize+'"</i>'+'<i class="redspot"></i>'+'<audio  src="'+objectURL+'" ></audio>'+'<i class="fa fa-volume-up"></i>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-					
-						
-
 					$('.mainright .rightTwo .righttwochatcon  .chatroommessageid  .msgcontainer').append( str2 );
-
 					messagetobottom();
-						
 					//生成的消息内容容器
-						
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
-				
 				break;
 		}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		};  
-
+		}; 
 			options.onFileDownloadError = function () {
 			  //音频下载失败 
 			};  
-
 			//通知服务器将音频转为mp3
 			options.headers = { 
 			  'Accept': 'audio/mp3'
 			};
-
 			WebIM.utils.download.call(conn, options);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	},   //收到音频消息
-	
     onLocationMessage: function ( message ) {
-		
-		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		Demo.conn.send(msg.body);
-		对方收到已送达回执的回调函数是onReadMessage*/
-		
 		vm.nomessage = false;
-		console.log('位置消息');
 		message.time = getCurrentTime();
-		
-		
 		var msgtype = message.type;
 		switch( msgtype ){
 			case 'chat':
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-					console.log(res);
-					
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -1532,67 +924,36 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-				
 					var data = res.data.data;
-					console.log(data);
 					var name = data.nickname;
-					
 					var remark = data.remark;
-						console.log(remark);
 					if ( remark ){
 						name = remark;
 					}else {
 						name = name;
 					}
-					
 					var avatar = data.avatar;
 					var msgfrom = message.from;
-					
 					message.name = name;
 					message.avatar = avatar;
-					
-					console.log(message);
-					
-					
 					/*消息列表记录*/
 					var str = '';
-
 					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-					/*if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-
-					} else {
-						$('.mainleft .comlist1  #'+message.from).remove();
-						$('.mainleft .comlist1').prepend(str);
-
-					}*/
-					
-					
 					if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 					} else {
-
-
 						if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 						}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.from).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 					}
-
 					/*消息列表记录*/
-					
 					/*消息内容容器*/
 					var str1 = '';
-					
 					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan">'+
@@ -1600,55 +961,24 @@ conn.listen({
 						+'</span></div></div><div class="clearfix"><div></div>'
 						
 					+'</div></div></div>';
-					
-					
 					var str2 ='';
-					
-						
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="locationspan ">'+
 						'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
 						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
-
-
-
-
-
 					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 						messagetobottom();
-
 					} else {
 						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 						messagetobottom();
 					}
-					
 					/*消息内容容器*/
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				})
-				
-				
-				
 				break;
 			case 'groupchat':
-				
 				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -1656,208 +986,85 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-					
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var name = data.name;
 					var genre =data.genre;
 					var msgfrom = message.from;//群组内部发送消息的人
-					
 					message.avatar = avatar;
 					message.name = name;
 					message.genre = genre;
-					
-					console.log(message);
-					
-					
 					/*消息列表记录*/
 					var str = '';
-					
-					
-					
-					
-					
 					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
 						var data = res.data.data;
-						console.log( data );
 						var hinder = data.hinder;
-						console.log(hinder);
-						
-						
-						
-						
 						if (hinder){
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 										//有置顶
 										$('.mainleft .doublefirst').html( str );
-
 								}else {
 										//没有置顶
 										$('.mainleft .comlist1  #'+message.to).remove();
 										$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}else {
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 										//有置顶
 										$('.mainleft .doublefirst').html( str );
-
 								}else {
 										//没有置顶
 										$('.mainleft .comlist1  #'+message.to).remove();
 										$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[地理位置]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
-					
-					
-					
-					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					} else {
-						$('.mainleft .comlist1  #'+message.to).remove();
-						$('.mainleft .comlist1').prepend(str);
-					}*/
-					/*消息列表记录*/
-					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-						
 						//获取群组聊天里发送人的详细信息
 						var data = res.data.data;
-						console.log(data);
 						var avatar = data.avatar;
 						var nickname = data.nickname;
-						
 						var remark = data.remark;
-						
 						if ( remark ){
 							nickname = remark;
 						}else{
 							nickname = nickname;
 						}
-						
-						
 						/*生成的消息内容容器*/
 						var str1 = '';
-
 						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'"  class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+
 							'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'
-							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
-
-
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-
 							messagetobottom();
-
 						} else {
-
 							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
-
 							messagetobottom();
-
-
 						}
-
 						/*生成的消息内容容器*/
-						
-						
-						
-						
-						
-						
-					
 					}).catch(function(err){
 						console.log(err);
 					})
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
 				break;
 			case 'chatroom':
-				
-				
-				console.log(message);
-				
 				function messagetobottom (){
 					var scroll1 = $('.mainright .rightTwo .scroll-wrapper.manywindowcon')[0];
 					var cli = scroll1.clientHeight;
@@ -1865,76 +1072,30 @@ conn.listen({
 					var hei = main.scrollHeight;
 					$('.mainright .rightTwo .scroll-content.manywindowcon').scrollTop( hei-cli );
 				};
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
 					//获取群组聊天里发送人的详细信息
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var nickname = data.nickname;
-						
-						
 					//生成的消息内容容器
-						
 					var str2 ='';
-					
-					
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="locationspan">'+'<a href="map.html?v1='+message.lng+'&v2='+message.lat+'" target="_blank"><img class="mapimg" src="http://api.map.baidu.com/staticimage/v2?ak=HIpuFBetnp1KKYrfcleBipO6x31IeI63&mcode=666666&center='+message.lng+','+message.lat+'&width=400&height=300&zoom=16">'+'<div class="mapaddr">'+message.addr+'</div></a>'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-					
-						
-
 					$('.mainright .rightTwo .righttwochatcon  .chatroommessageid  .msgcontainer').append( str2 );
-
 					messagetobottom();
-						
 					//生成的消息内容容器
-						
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				break;
-		
 		}
-		
-		
-		
-		
-	},//收到位置消息
-	
+	},
     onFileMessage: function ( message ) {
-		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		Demo.conn.send(msg.body);
-		对方收到已送达回执的回调函数是onReadMessage*/
-		
 		vm.nomessage = false;
-		console.log('文件消息');
 		message.time = getCurrentTime();
-		console.log(message);
-		
 		var msgtype = message.type;
-		
 		switch( msgtype ){
 			case 'chat':
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -1942,71 +1103,36 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-				
 					var data = res.data.data;
-					console.log(data);
 					var name = data.nickname;
-					
 					var remark = data.remark;
-						console.log(remark);
 					if ( remark ){
 						name = remark;
 					}else {
 						name = name;
 					}
-					
 					var avatar = data.avatar;
 					var msgfrom = message.from;
-					
 					message.name = name;
 					message.avatar = avatar;
-					
-					console.log(message);
-					console.log(message.url);
-					console.log(message.filename);
-					
-					
 					/*消息列表记录*/
 					var str = '';
-
 					str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-					/*if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-
-					} else {
-						$('.mainleft .comlist1  #'+message.from).remove();
-						$('.mainleft .comlist1').prepend(str);
-
-					}*/
-					
-					
-					
 					if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 						$('.mainleft .comlist1').prepend(str);
-
 					} else {
-
-
 						if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
 						//有置顶
 						$('.mainleft .doublefirst').html( str );
-
 						}else {
 						//没有置顶
 						$('.mainleft .comlist1  #'+message.from).remove();
 						$('.mainleft .comlist1').prepend(str);
 						}
-
 					}
-
 					/*消息列表记录*/
-					
-					
 					/*消息内容容器*/
 					var str1 = '';
-					
 					str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 						
 					'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan">'+
@@ -2014,47 +1140,24 @@ conn.listen({
 						+'</span></div></div><div class="clearfix"><div></div>'
 						
 					+'</div></div></div>';
-					
-					
 					var str2 ='';
-					
-						
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
 						'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 						+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
-
-
-
-
-
 					if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 						$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 						messagetobottom();
-
 					} else {
 						$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 						messagetobottom();
 					}
-					
 					/*消息内容容器*/
-					
-					
-					
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				})
-					
 				break;
 			case 'groupchat':
-				
-				
 				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -2062,201 +1165,87 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-					
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var name = data.name;
 					var genre =data.genre;
 					var msgfrom = message.from;//群组内部发送消息的人
-					
 					message.avatar = avatar;
 					message.name = name;
 					message.genre = genre;
-					
-					console.log(message);
-					
 					/*消息列表记录*/
 					var str = '';
-					
-					
-					
 					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
 						var data = res.data.data;
-						console.log( data );
 						var hinder = data.hinder;
-						console.log(hinder);
-						
-						
-						
-						
 						if (hinder){
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}else {
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					/*str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[文件]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o"></i><i class="fa fa-eye-slash"></i></div></div><div class="clearfix"></div></div></div>';
-					
-					
-					
-					if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-						$('.mainleft .comlist1').prepend(str);
-					} else {
-						$('.mainleft .comlist1  #'+message.to).remove();
-						$('.mainleft .comlist1').prepend(str);
-					}*/
-					/*消息列表记录*/
-					
-					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-						
 						//获取群组聊天里发送人的详细信息
 						var data = res.data.data;
-						console.log(data);
 						var avatar = data.avatar;
 						var nickname = data.nickname;
-						
 						var remark = data.remark;
-						
 						if ( remark ){
 							nickname = remark;
 						}else{
 							nickname = nickname;
 						}
-						
-						
 						/*生成的消息内容容器*/
 						var str1 = '';
-
 						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
-							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
-
-
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-
 							messagetobottom();
-
 						} else {
-
 							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
-
 							messagetobottom();
-
-
 						}
-
 						/*生成的消息内容容器*/
-						
-						
-					
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-				
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
 				break;
 			case 'chatroom':
-				
-				console.log(message);
-				
 				function messagetobottom (){
 					var scroll1 = $('.mainright .rightTwo .scroll-wrapper.manywindowcon')[0];
 					var cli = scroll1.clientHeight;
@@ -2264,81 +1253,33 @@ conn.listen({
 					var hei = main.scrollHeight;
 					$('.mainright .rightTwo .scroll-content.manywindowcon').scrollTop( hei-cli );
 				};
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
 					//获取群组聊天里发送人的详细信息
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var nickname = data.nickname;
-						
-						
 					//生成的消息内容容器
-						
 					var str2 ='';
-					
-					
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-					
-						
-
 					$('.mainright .rightTwo .righttwochatcon  .chatroommessageid  .msgcontainer').append( str2 );
-
 					messagetobottom();
-						
 					//生成的消息内容容器
-						
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
-				
-				
-				
 				break;
-		
-		
-		
 		}
-		
-		
 	},    //收到文件消息
-	
     onVideoMessage: function (message) {
-		
-		/*var bodyId = message.id;         // 需要发送已读回执的消息id
-		var msg = new WebIM.message('read', msgId);
-		msg.set({
-			id: bodyId
-			,to: message.from
-		});
-		WebIM.conn.send(msg.body);
-		//对方收到已送达回执的回调函数是onReadMessage*/
-		
 		vm.nomessage = false;
-		console.log('视频消息');
 		message.time = getCurrentTime();
-		console.log(message);
 		var msgtype = message.type;
-		
 		var fire = message.ext.fire_flag;
-				
-		
 		switch( msgtype ){
 			case 'chat':
-				
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -2346,146 +1287,71 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-				
 					var data = res.data.data;
-					console.log(data);
 					var name = data.nickname;
-					
 					var remark = data.remark;
-						console.log(remark);
 					if ( remark ){
 						name = remark;
 					}else {
 						name = name;
 					}
-					
 					var avatar = data.avatar;
 					var msgfrom = message.from;
-					
 					message.name = name;
 					message.avatar = avatar;
-					
-					console.log(message);
-					console.log(message.url);
-					console.log(message.filename);
-					
-					
-					
-					
 					if (fire){
 						//即焚
-						
 						//消息列表记录
 						var str = '';
-
 						str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[请到移动端查看]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-						/*if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
-							$('.mainleft .comlist1').prepend(str);
-
-						} else {
-							$('.mainleft .comlist1  #'+message.from).remove();
-							$('.mainleft .comlist1').prepend(str);
-
-						}*/
-
-
 						if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 							$('.mainleft .comlist1').prepend(str);
-
 						} else {
-
-
 							if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
 							//有置顶
 							$('.mainleft .doublefirst').html( str );
-
 							}else {
 							//没有置顶
 							$('.mainleft .comlist1  #'+message.from).remove();
 							$('.mainleft .comlist1').prepend(str);
 							}
-
 						}
-
 						//消息列表记录
-						
-						
 						var str1 = '';
-
 						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+'[请到移动端查看]'+'</span></div></div><div class="clearfix"></div></div>'
 
 						+'</div></div></div>';
-
-
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="words">'+'[请到移动端查看]'+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-						
-
-						
-						
 						if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 							messagetobottom();
-
 						} else {
 							$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 							messagetobottom();
 						}
-						
-
-
-
 					}else {
 						//非即焚
-						
-						
 						//消息列表记录
 						var str = '';
-
 						str = str + '<div id="'+message.from+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-
-
-						/*if ( $('.mainleft .comlist1  #'+message.from).length < 1 ){
-							$('.mainleft .comlist1').prepend(str);
-
-						} else {
-							$('.mainleft .comlist1  #'+message.from).remove();
-							$('.mainleft .comlist1').prepend(str);
-
-						}*/
-
-
 						if ( $('.mainleft   #'+message.from+'.listOnecon').length < 1 ){
 							$('.mainleft .comlist1').prepend(str);
-
 						} else {
-
-
 							if ( $('.mainleft .doublefirst #'+message.from+'.listOnecon').html() ){
 							//有置顶
 							$('.mainleft .doublefirst').html( str );
-
 							}else {
 							//没有置顶
 							$('.mainleft .comlist1  #'+message.from).remove();
 							$('.mainleft .comlist1').prepend(str);
 							}
-
 						}
-
 						//消息列表记录
-						
-						
 						//消息内容容器
 						var str1 = '';
-
 						str1 =  '<div id="'+message.from+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+
 
 						'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan">'+
@@ -2493,79 +1359,25 @@ conn.listen({
 							+'</span></div></div><div class="clearfix"><div></div>'
 
 						+'</div></div></div>';
-
-
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(message.avatar ? vm.$refs.rightthree.picsrc+ message.avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+message.name+'</div><div class="wordscontent"><span class="filespan ">'+
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'">下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"><div></div>'+'</div>';
-
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.from+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
 							messagetobottom();
-
 						} else {
 							$('.mainright .rightonechatcon  #'+message.from+'.msgconmaster  .msgcontainer').append( str2 );
 							messagetobottom();
 						}
-
 						//消息内容容器
-
-						
-						
-						
-						
-						
-						
-						
 					}
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				}).catch(function(err){
 					console.log(err);
 				})
-					
 				break;
 			case 'groupchat':
-				
-				
-				
 				axios.get(globaldomain+'im/group/info.json?id='+message.to).then(function(res){
-					console.log(res);
-					
 					function messagetobottom (){
 						var scroll1 = $('.mainright .rightcomOne .scroll-wrapper.manywindowcon')[0];
 						var cli = scroll1.clientHeight;
@@ -2573,188 +1385,88 @@ conn.listen({
 						var hei = main.scrollHeight;
 						$('.mainright .rightcomOne .scroll-content.manywindowcon').scrollTop( hei-cli );
 					};
-					
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var name = data.name;
 					var genre =data.genre;
 					var msgfrom = message.from;//群组内部发送消息的人
-					
 					message.avatar = avatar;
 					message.name = name;
 					message.genre = genre;
-					
-					console.log(message);
-					
 					/*消息列表记录*/
 					var str = '';
-					
-					
-					
-					
 					axios.get(globaldomain+'im/group/conf/info.json?groupId='+message.to).then(function(res){
 						var data = res.data.data;
-						console.log( data );
 						var hinder = data.hinder;
-						console.log(hinder);
-						
-						
-						
-						
 						if (hinder){
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}else {
-							
 							str = str + '<div id="'+message.to+'" class="listOnecon"><img src="'+( message.avatar ? vm.$refs.rightthree.picsrc+message.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="circle"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+message.name+'</div><div class="listOnebottomleft shenglue">'+'[视频]'+'</div></div><div class="listOneconright"><div class="listOnetopright">'+message.time+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+message.to+'"></i><i id="'+message.to+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
-							
-							
-							
-							/*if ( $('.mainleft .comlist1  #'+message.to).length < 1 ){
-								$('.mainleft .comlist1').prepend(str);
-							} else {
-								$('.mainleft .comlist1  #'+message.to).remove();
-								$('.mainleft .comlist1').prepend(str);
-							}*/
-							
-							
 							if ( $('.mainleft   #'+message.to+'.listOnecon').length < 1 ){
 								$('.mainleft .comlist1').prepend(str);
-
 							} else {
-
-
 								if ( $('.mainleft .doublefirst #'+message.to+'.listOnecon').html() ){
 								//有置顶
 								$('.mainleft .doublefirst').html( str );
-
 								}else {
 								//没有置顶
 								$('.mainleft .comlist1  #'+message.to).remove();
 								$('.mainleft .comlist1').prepend(str);
 								}
-
 							}
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-					
-					
 					/*消息列表记录*/
-					
-					
 					axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
-						
 						//获取群组聊天里发送人的详细信息
 						var data = res.data.data;
-						console.log(data);
 						var avatar = data.avatar;
 						var nickname = data.nickname;
 						var remark = data.remark;
-						
 						if ( remark ){
 							nickname = remark;
 						}else{
 							nickname = nickname;
 						}
-						
-						
-						
-						
 						/*生成的消息内容容器*/
 						var str1 = '';
-
 						str1 = str1 + '<div id="'+message.to+'" class="msgconmaster hidden"><div class="msgcontainer"><div id="'+message.id+'"  class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
-							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';	
-
-
+							+'</span></div></div><div class="clearfix"></div></div>'+'</div></div></div>';
 						var str2 ='';
-
-
 						str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-
-
-
-
-
-
-
 						if ( $('.mainright .rightonechatcon  #'+message.to+'.msgconmaster').length < 1 ){
-
 							$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-
 							messagetobottom();
-
 						} else {
-
 							$('.mainright .rightonechatcon  #'+message.to+'.msgconmaster  .msgcontainer').append( str2 );
-
 							messagetobottom();
-
-
 						}
-
 						/*生成的消息内容容器*/
-						
-						
-						
-						
-						
-					
 					}).catch(function(err){
 						console.log(err);
 					});
-					
-				
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
 				break;
 			case 'chatroom':
-				
-				console.log(message);
-				
 				function messagetobottom (){
 					var scroll1 = $('.mainright .rightTwo .scroll-wrapper.manywindowcon')[0];
 					var cli = scroll1.clientHeight;
@@ -2762,46 +1474,24 @@ conn.listen({
 					var hei = main.scrollHeight;
 					$('.mainright .rightTwo .scroll-content.manywindowcon').scrollTop( hei-cli );
 				};
-				
-				
-				
 				axios.get(globaldomain+'im/user/detail.json?id='+message.from).then(function(res){
 					//获取群组聊天里发送人的详细信息
 					var data = res.data.data;
-					console.log(data);
 					var avatar = data.avatar;
 					var nickname = data.nickname;
-						
-						
 					//生成的消息内容容器
-						
 					var str2 ='';
-					
-					
 					str2 ='<div id="'+message.id+'" class="msgmarginlr">'+'<div class="timernow">'+message.time+'</div>'+'<div  class="leftmsg"><div class="imgcontainer"><img id="'+message.from+'" src="'+(avatar ? vm.$refs.rightthree.picsrc+ avatar : vm.$refs.rightthree.defaultpic)+'" class="headpic"></div><div class="rightcon"><div class="name">'+nickname+'</div><div class="wordscontent"><span class="filespan">'+ 
 							'<div class="fileconleft"><div class="filename">'+message.filename+'</div><div class="filedownload"><a href="'+message.url+'" target=_blank>下载</a></div></div><div class="fileconright"><img src="imgs/document.png"></div><div class="clearfix"></div>'
 							+'</span></div></div><div class="clearfix"></div></div>'+'</div>';
-					
-						
-
 					$('.mainright .rightTwo .righttwochatcon  .chatroommessageid  .msgcontainer').append( str2 );
-
 					messagetobottom();
-						
 					//生成的消息内容容器
-						
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
 				break;
-		
-		
-		
 		}
-        
         var option = {
             url: message.url,
             headers: {
@@ -2809,7 +1499,6 @@ conn.listen({
             },
             onFileDownloadComplete: function (response) {
                 var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
-                
             },
             onFileDownloadError: function () {
                 console.log('File down load error.')
@@ -2817,39 +1506,25 @@ conn.listen({
         };
         WebIM.utils.download.call(conn, option);
     },   //收到视频消息
-	
 	onPresence: function ( message ) {
-		console.log('处理“广播”或“发布-订阅”消息');
-		console.log(message);
-		
 	},       //处理“广播”或“发布-订阅”消息，如联系人订阅请求、处理群组、聊天室被踢解散等消息
 	
-	onBlacklistUpdate: function (list) {       
-        console.log('黑名单变动');
+	onBlacklistUpdate: function (list) { 
     },// 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
 	//黑名单变动
 	
     onReceivedMessage: function(message){
-		console.log('收到消息送达客户端回执');
-		console.log(message);
 	},    //收到消息送达客户端回执
 	
     onDeliveredMessage: function(message){
-		console.log('消息送达服务器回执，pc发送的消息已经发送到了环信！');
-		console.log(message);
-		
 	},   //收到消息送达服务器回执
 	
     onReadMessage: function(message){
 	},        //收到消息已读回执
 	
     onCreateGroup: function(message){
-		console.log('创建群组成功回执');
-		console.log(message);
 	},        //创建群组成功回执（需调用createGroupNew）
     onMutedMessage: function(message){
-		console.log('用户在A群组被禁言');
-		console.log(message);
 	}        //如果用户在A群组被禁言，在A群发消息会走这个回调并且消息不会传递给群其它成员
     
 });
@@ -2953,140 +1628,71 @@ Vue.component('currentuser',{
 			this.showslidebars = false;
 			this.top1 = $event.y+"px";
 			this.left1 = $event.x -300 +"px";
-			
-			
 		},//显示当前用户卡片
 		mainsearch:function() {
 			this.searchshow = true;
-			
 			axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
 				var data = res.data.data.content;
-					
 				vm.$refs.current.groupsarrOne1 = data;
-					
-					
-				console.log(vm.$refs.current.groupsarrOne1);
-					
-				console.log(data);
 			}).catch(function(err){
 				console.log(err);
 			}); 
-			
-			
 			if ( this.mainsearchval =='' ){
-				
 				this.serachingornot = true;
 				vm.$refs.current.tempfriendsarrcon = [];
 				vm.$refs.current.tempgroupsarrcon = [];
-				//vm.groupsarrOne1 = 
-				
-				
-				
-					
-				
 			} else {
 				this.serachingornot = false;
-				
-				console.log(this.mainsearchval);
 				var keywords = this.mainsearchval;
-				console.log( keywords );
 				axios.post(globaldomain +'im/buddy/query.json?key='+keywords).then(function(res){
-					
 					var content = res.data.data;
 					var length = res.data.data.length;
-					
-					console.log(content);
-					
 					if ( length>0 ){
 						vm.$refs.current.tempfriendsarrcon.push(content);
-						
-						console.log(vm.$refs.current.tempfriendsarrcon);
-						
-						console.log('好友有结果');
-						
 						vm.$refs.current.haveresult = true;
-						
 					} else {
-						
 						console.log('好友无结果');
-						
 					}
 				}).catch(function(err){
-					
 					console.log(err);
-					
 				});//获取关键字好友
-				
 				axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000&name='+keywords).then(function(res){
 					var data = res.data.data;
 					var content = res.data.data.content;
-					console.log(content);
-					
 					var length = res.data.data.content.length;
 					if ( length>0 ){
 						vm.$refs.current.tempgroupsarrcon.push(content);
-						
-						console.log(vm.$refs.current.tempgroupsarrcon);
-						
-						console.log('群组有结果');
-						
 						vm.$refs.current.haveresult = true;
-						
 					} else {
 						console.log('群组无结果');
 					}
-					
 				}).catch(function(err){
-					//console.log(err);
+					console.log(err);
 				});//获取关键字的群组
-				
-				
 			}
-			
-			
 		},//主搜索
 		nosearchfriendtalking:function($event){
-			
 			vm.nomessage = false;
-			
-			console.log($event.currentTarget);
 			var that = $event.currentTarget;
 			var id = $(that).attr("id");
 			var avatar = $(that).attr("data-avatar");
 			var nick = $(that).attr("data-nick");
 			var remark = $(that).attr("data-remark");
-			
-			
-			
 			var obj2={};
 			obj2.remark = remark;
-			
 			var friendid = id;
-			
-			
 			axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
 				var data = res.data.data;
-				console.log(data);
-				
-				
-				
 				vm.groupnumbershow = false;
 				var data =res.data.data;
-				console.log(data);
 				var name = data.nickname;
-				
 				if ( obj2.remark ){
 					name = obj2.remark;
 				}else {
 					name = name;
 				}
-				
-				
-				
 				vm.rightoneheaderobj.name = name;
 				vm.targetid = friendid;
-
-
 				vm.isgroupleader= false;
 				vm.isgroupmanager = false;//管理员
 				vm.notgroupmanager = false;//不是管理员
@@ -3094,172 +1700,85 @@ Vue.component('currentuser',{
 				vm.shouldshow = false;
 				vm.strangeroff = false;
 				vm.strangeron = false;
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			obj2.name = nick;
 			obj2.avatar = avatar;
-				
 			obj2.type="chat";
 			obj2.id = id;
-				
-			console.log(obj2);
-			console.log(obj2.id);
-			
-			
-			
 			if ( obj2.remark ){
 				obj2.name = obj2.remark;
 			}else {
 				obj2.name = obj2.name;
 			}
-			
-			
-				
 			var str ='';
-			
 			var str1 = '<div id="'+obj2.id+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
-			
-			
-			
-			
-			
-				
 			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-			
-				
 			if ( $('.mainleft  #'+obj2.id+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 				$('.mainright .rightonechatcon .manywindowcon.scroll-content').append(str1); 
 				$('#'+obj2.id+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 			}else {
 				//有置顶
-				console.log($('.mainleft .doublefirst  #'+obj2.id+'.listOnecon').html() );
-				
-				$('#'+obj2.id+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-				
-				
-				
+				$('#'+obj2.id+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
 				//没置顶
 			}
-			
-			
-			
-			
 		},//没有关键字点击搜索结果中好友列表触发
 		nosearchgrouptalking:function($event){
-			
 			vm.nomessage = false;
-			
 			var that = $event.currentTarget;
 			var name = $(that).attr('data-nick');
 			var avatar = $(that).attr('data-avatar');
 			var id = $(that).attr('id');
 			var groupid = id;
-			console.log(id);
-			
-			
-			
-			
-			
-			
 			var obj1 ={};
 			obj1.avatar = avatar;
 			obj1.name = name;
 			obj1.to = id;
-				
-			
-			
 			var str1 = '<div id="'+obj1.to+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
-
 			$('#'+obj1.to+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-				
 			obj1.type="groupchat";
 			var str = '';
 			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-				
-				
-			console.log($('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length);
-				
 			if ( $('.mainleft   #'+obj1.to+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 				$('.mainright .rightonechatcon .manywindowcon.scroll-content').append(str1); 
-				
 				$('#'+obj1.to+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 			}else {
 				//是否置顶
 				$('#'+obj1.to+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-				
 			}
-			
-			
-		
 		},//没有关键字点击搜索结果中群组列表触发
 		searchgrouptalking:function($event){
-			
 			vm.nomessage = false;
-			
 			var that = $event.currentTarget;
-			
 			var name = $(that).attr('data-nick');
 			var avatar = $(that).attr('data-avatar');
 			var id = $(that).attr('id');
-			
 			var groupid = id;
-			
-			
-			
 			axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
 				var data = res.data.data;
 				var avatar = data.avatar;
 				var name = data.name;
 				var id = data.id;//群组特别标识
-				console.log(data);
-
-
 				vm.isgroupleader= false;
 				vm.isgroupmanager = false;//管理员
 				vm.notgroupmanager = false;//不是管理员
 						//vm.justoneman = true;//只是个人
 				vm.shouldshow = false;
 				vm.groupidbindminus = groupid;
-
 					//var name = data.name;
 				var genre = data.genre;
 				var groupnumber = data.count;
-
 				vm.rightoneheaderobj.name = name;
 				vm.rightoneheaderobj.groupnumber = groupnumber;
 				vm.targetid = groupid;
-
 				vm.groupnumbershow = true;
-
-
 				axios.get(globaldomain+'im/group/member/genre.json?groupId='+groupid+'&memberId='+ids.id).then(function(res){
-					console.log(res.data);
 					var level = res.data.data;
-					console.log(level);
-
-					console.log(  typeof(level));
 					switch (level) {
 						case '10':
-							console.log(10);
 							vm.isgroupleader= true;
 							vm.isgroupmanager = false;//管理员
 							vm.notgroupmanager = false;//不是管理员
@@ -3287,102 +1806,56 @@ Vue.component('currentuser',{
 							vm.strangeropen = false;
 							break;
 					}
-
-
-
 				}).catch(function(err){
 					console.log(err);
 				});
-
-
-
-
 				axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+groupid).then(function(res){
-					console.log(res);
 					var arrgg = res.data.data.content;
-					console.log(arrgg);
 					vm.slidechagearr = arrgg;
-
-
-
-
-
-
 				}).catch(function(err){
 					console.log(err);
 				});
-
-
-
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			console.log(id);
-			
 			var obj1 ={};
 			obj1.avatar = avatar;
 			obj1.name = name;
 			obj1.to = id;
-			
 			var str1 = '<div id="'+obj1.to+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
-				
 			obj1.type="groupchat";
 			var str = '';
 			str = '<div id="'+obj1.to+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-				
-				
-			console.log( $('.mainleft .comlist1  #'+obj1.to+'.listOnecon').length );
-				
 			if ( $('.mainleft   #'+obj1.to+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 				$('.mainright .rightonechatcon .manywindowcon.scroll-content').append(str1);
-				
-				
 				$('#'+obj1.to+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 			}else {
 				$('#'+obj1.to+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 			}
-			
-			
-			
-			
 		},//关键字搜索群组触发
 		searchfriendtalking:function($event){
-			
 			vm.nomessage = false;
-			
-			console.log($event.currentTarget);
 			var that = $event.currentTarget;
 			var id = $(that).attr("id");
 			var avatar = $(that).attr("data-avatar");
 			var nick = $(that).attr("data-nick");
 			var remark = $(that).attr("data-remark");
-			
 			var obj2={};
 			var friendid = id;
 			obj2.remark = remark;
-			
 			axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
 				var data = res.data.data;
-				console.log(data);
 				vm.groupnumbershow = false;
 				var data =res.data.data;
-				console.log(data);
-				
-				
 				var name = data.nickname;
-				
 				if ( obj2.remark ){
 					name = obj2.remark;
 				}else {
 					name = name;
 				}
-				
-				
 				vm.rightoneheaderobj.name = name;
 				vm.targetid = friendid;
-
 				vm.isgroupleader= false;
 				vm.isgroupmanager = false;//管理员
 				vm.notgroupmanager = false;//不是管理员
@@ -3390,40 +1863,22 @@ Vue.component('currentuser',{
 				vm.shouldshow = false;
 				vm.strangeroff = false;
 				vm.strangeron = false;
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
-			
 			obj2.name = nick;
 			obj2.avatar = avatar;
-				
 			obj2.type="chat";
 			obj2.id = id;
-				
-			console.log(obj2);
-			
-			
 			if ( obj2.remark ){
 				obj2.name = obj2.remark;
 			}else {
 				obj2.name = obj2.name;
 			}
-				
 			var str ='';
-			
 			var str1 = '<div id="'+obj2.id+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
-			
-			
-			$('#'+obj2.id+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-				
+			$('#'+obj2.id+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
 			str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-				
-			console.log( $('.mainleft .comlist1  #'+obj2.id+'.listOnecon').length );
-			
-				
 			if ( $('.mainleft   #'+obj2.id+'.listOnecon').length < 1 ){
 				$('.mainleft .comlist1').prepend(str);
 				$('.mainright .rightonechatcon .manywindowcon.scroll-content').append(str1);
@@ -3431,52 +1886,31 @@ Vue.component('currentuser',{
 			}else {
 				$('#'+obj2.id+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 			}
-			
-			
-			
-			
 		},//关键字搜索好友触发
 		startchat:function(){
 			tempcreategroup = '';
 			vm.readychatshow = true;
-			
 			vm.slebossswicth = true;
-			
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				var friendsarr = res.data.data;
-				
 				myfriends = friendsarr;
-				
 				vm.$store.commit('showfriends');
-				
 				var timer1 = setTimeout(function(){
-					
 					initials();
 					clearTimeout(timer1);
 				},20);//显示滚动条
-				console.log(myfriends);
-				
 				vm.mainstartgroupchatarr = myfriends;
-				
-				
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
 		},//发起聊天弹框初始化
 		feedbackpop:function(){
-			console.log(this);
 			var thiscom = this.$parent;
-			console.log(thiscom);
 			thiscom.feedbackshow = true;
 		},//发起反馈
 		exit:function(){
 			conn.close();
-			//http://47.95.6.203:8183/signout.json
 			axios.get(globaldomain+'signout.json').then(function(res){
-				console.log(res);
 				window.location.href="index.html";
 			}).catch(function(err){
 				console.log(err);
@@ -3498,8 +1932,6 @@ Vue.component('currentuser',{
 			vm.mainrightone = true;
 			vm.mainrighttwo = false;
 			vm.specialthree = false;
-			
-			
 		},//改变icon1 颜色
 		addbluecolor2:function(){
 			this.icons1 = false;
@@ -3512,76 +1944,37 @@ Vue.component('currentuser',{
 			vm.showleft3 = false;
 			vm.mainrightone = false;
 			vm.mainrighttwo = true;
-			
-			
 			vm.specialthree = false;
 			//聊天室获取
-			
-			
-			
-			
 			axios.post(globaldomain+'im/room/area/find.json').then(function(res){
 				//聊天室地区数组
 				var data = res.data.data;
-				console.log(data);
-				
-				
-				
 				vm.chatroomarea = data;
-				 
-				
-				
-				
-				//chatroomarea:[],
-				//chatroomclass:[],
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
 			axios.post(globaldomain+'im/room/trade/find.json').then(function(res){
 				//聊天室行业数组
 				var data = res.data.data;
-				
 				vm.chatroomclass = data;
-				console.log(data);
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
 			axios.post(globaldomain+'im/room/all.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
-				
 				var data = res.data.data;
-				
 				var content = data.content;
-				
-				
 				vm.chatroominfo = content;
-				
-				console.log(vm.chatroominfo);
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
 		},//改变icon2 颜色
 		addbluecolor3:function(){
 			this.icons1 = false;
 			this.icons2 = false;
 			this.icons3 = true;
-			
-			
-			console.log(vm.friendsarrOne);
-			
 			axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
 				var data = res.data.data.content;
 				vm.groupsarrOne1 = data;
-				console.log(data);
 			}).catch(function(err){
 				console.log(err);
 			})
@@ -3599,9 +1992,6 @@ Vue.component('currentuser',{
 		
 	}
 })
-
-
-
 Vue.component('rightcomthree',{
 	template:'#rightcomThree',
 	data:function(){
@@ -3623,9 +2013,7 @@ Vue.component('rightcomthree',{
 			showgroupsright:true,
 			showgroupsright1:false,
 			showowner:false,
-			
 		}
-		
 	},
 	computed:{
 		right3groupid:function(){
@@ -3634,7 +2022,6 @@ Vue.component('rightcomthree',{
 		right3friendid:function(){
 			return this.$parent.$store.getters.right3friendid;
 		},
-		
 	},
 	watch:{
 		right3groupid:function(){
@@ -3644,16 +2031,10 @@ Vue.component('rightcomthree',{
 				var name = data.name;
 				var id = data.id;
 				var level = data.genre;
-				
 				vm.$children[1].name = name;
 				vm.$children[1].level = level;
 				vm.$children[1].id = id;
 				vm.$children[1].avatar = avatar;
-				
-				console.log(data);
-				
-				
-				
 				var pageNum = 1,
 					pageSize = 5000;
 					var options = {
@@ -3661,40 +2042,20 @@ Vue.component('rightcomthree',{
 						pageSize: pageSize,
 						groupId: id,
 						success: function (resp) {
-							console.log(resp);
-							console.log(resp.data);
 							var arr = resp.data;
-							console.log(arr);
-							
 							var getlast = _.find(arr,'owner');
-							
 							var owner = getlast.owner;
-							
-							console.log(owner);
 							if ( owner == ids.id ) {
 								vm.$refs.rightthree.showowner= true;
 							} else {
 								vm.$refs.rightthree.showowner= false;
 							}
-							
-							
 						},
 						error: function(e){
 							console.log(e);
 						}
 					};
 				conn.listGroupMember(options);
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
@@ -3702,7 +2063,6 @@ Vue.component('rightcomthree',{
 		right3friendid:function(){
 			axios.get(globaldomain+'im/user/detail.json?id='+this.right3friendid).then(function(res){
 				var data = res.data.data;
-				console.log(data);
 				var idf = data.id;
 				var namef = data.nickname;
 				var gender = data.sex;
@@ -3715,63 +2075,44 @@ Vue.component('rightcomthree',{
 				var remark = data.remark;
 				var areaId = data.areaId;
 				var avatar1 = data.avatar;
-				
 				vm.$children[1].idf = idf;
 				vm.$children[1].namef = namef;
 				vm.$children[1].signature = signature;
 				vm.$children[1].remark = remark;
 				vm.$children[1].areaId = areaId;
 				vm.$children[1].avatar1 = avatar1;
-				
 			}).catch(function(err){
 				console.log(err);
 			})
 		},
-		
-		
 	},
 	methods:{
 		addchatlistg:function($event){
-			
 			var groupid = $event.currentTarget.getAttribute('id');
-			console.log(vm.chathistoryarr1);
-			console.log(groupid);
 			vm.nomessage = false;
 			vm.targetid = groupid;
-			
 			axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
 				var data = res.data.data;
 				var avatar = data.avatar;
 				var name = data.name;
 				var id = data.id;//群组特别标识
-				console.log(data);
 				vm.isgroupleader= false;
 				vm.isgroupmanager = false;//管理员
 				vm.notgroupmanager = false;//不是管理员
 						//vm.justoneman = true;//只是个人
 				vm.shouldshow = false;
 				vm.groupidbindminus = groupid;
-
 					//var name = data.name;
 				var genre = data.genre;
 				var groupnumber = data.count;
-
 				vm.rightoneheaderobj.name = name;
 				vm.rightoneheaderobj.groupnumber = groupnumber;
 				vm.targetid = groupid;
-
 				vm.groupnumbershow = true;
-				
-				
 				axios.get(globaldomain+'im/group/member/genre.json?groupId='+groupid+'&memberId='+ids.id).then(function(res){
-					console.log(res.data);
 					var level = res.data.data;
-					console.log(level);
-
-					console.log(  typeof(level));
 					switch (level) {
 						case '10':
-							console.log(10);
 							vm.isgroupleader= true;
 							vm.isgroupmanager = false;//管理员
 							vm.notgroupmanager = false;//不是管理员
@@ -3799,181 +2140,74 @@ Vue.component('rightcomthree',{
 							vm.strangeropen = false;
 							break;
 					}
-
-
-
 				}).catch(function(err){
 					console.log(err);
 				});
-				
-				
-				
-				
 				axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+groupid).then(function(res){
-					console.log(res);
 					var arrgg = res.data.data.content;
-					console.log(arrgg);
 					vm.slidechagearr = arrgg;
-
-
-
-
-
-
 				}).catch(function(err){
 					console.log(err);
 				});
-		
-			
-				
 				var obj1 ={};
 				obj1.avatar = avatar;
 				obj1.name = name;
 				obj1.to = id;
-				
 				obj1.type="groupchat";
-				
-				console.log(obj1);
-				
 				var str = '';
-
 				var str1 = '<div id="'+groupid+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
-				
-				
 				$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-				
 				axios.get(globaldomain+'im/group/conf/info.json?groupId='+groupid).then(function(res){
 						var data = res.data.data;
-						console.log( data );
 						var hinder = data.hinder;
-						console.log(hinder);
 						if (hinder){
 							//被屏蔽
 							str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell hidden"></i></div></div><div class="clearfix"></div></div></div>';
-							
 							$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-							
 							if ( $('.mainleft .comlistouter1  #'+groupid+'.listOnecon').length < 1 ){
 								//会话列表中不存在
 								$('.mainleft .comlist1').prepend(str);
-								
-								$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-								
-								$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-								
-								console.log($('.mainleft .comlistouter1  #'+groupid+'.listOnecon').length);
-								
-								
-								
+								$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
 							} else {
 								//会话列表存在
-								
-								
-								
-								
-								
-								//不在置顶框
-								
-								
-								
-								$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-								console.log( $('.mainleft .doublefirst  #'+groupid+'.listOnecon') );
-								console.log($('.mainleft .doublefirst  #'+groupid+'.listOnecon').html());
-								
 								if ( $('.mainleft .doublefirst  #'+groupid+'.listOnecon').html()=='' ){
 									//置顶中不存在
-									
-									
 									var html = $('.mainleft .comlist1  #'+groupid).html();
-									
-									console.log(html);
-									
 									$('.mainleft .comlist1  #'+groupid).remove();
 									$('.mainleft .comlist1').prepend( str );
-									$('.mainleft .comlist1  #'+groupid).html( html );
-
-									$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
+									$('.mainleft .comlist1  #'+groupid).html( html );$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 									$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
-									
 								}else {
 									//置顶中存在
-									$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-									
-									
 								}
-								
-								
 								//在置顶框
-								
-								
-								
-								
-								
-								
-								
 							}
-							
-							
 						}else {
 							//未屏蔽
 							str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( obj1.avatar ? vm.$refs.rightthree.picsrc+obj1.avatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj1.name+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell"></i></div></div><div class="clearfix"></div></div></div>';
-							
 							$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-							
 							if ( $('.mainleft .comlistouter1  #'+groupid+'.listOnecon').length < 1 ){
 								//列表中不存在
 								$('.mainleft .comlist1').prepend(str);
 								$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-								
-								console.log($('.mainleft .comlistouter1  #'+groupid+'.listOnecon').length);
-								
 							} else {
 								//列表中存在
-								
-								console.log( $('.mainleft .doublefirst  #'+groupid+'.listOnecon') );
-								console.log($('.mainleft .doublefirst  #'+groupid+'.listOnecon').html());
-								
 								if ( $('.mainleft .doublefirst  #'+groupid+'.listOnecon').html()=='' ){
 									//不在置顶框
-									
-									
 									var html = $('.mainleft .comlist1  #'+groupid).html();
-									
-									console.log(html);
-									
 									$('.mainleft .comlist1  #'+groupid).remove();
 									$('.mainleft .comlist1').prepend( str );
-									$('.mainleft .comlist1  #'+groupid).html( html );
-
-									$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
+									$('.mainleft .comlist1  #'+groupid).html( html );$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 									$('.mainleft .comlist1  #'+groupid).addClass( 'backgroundcolor' );
-									
-									
-									
 								}else {
-									//在置顶框
-									
 									$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-									
 								}
-								
-								
 								//在置顶框
-								
-								
-								
 							}
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					});
-				
-			
-				
 				/*页面跳转*/
 				vm.$refs.current.icons1 = true;
 				vm.$refs.current.icons2 = false;
@@ -3983,31 +2217,18 @@ Vue.component('rightcomthree',{
 				vm.showleft1 = true;
 				vm.showleft2 = false;
 				vm.showleft3 = false;
-				
 				/*页面跳转*/
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
-			
 		},//发起群组聊天按钮
 		addchatlistf:function($event){
-			
-			console.log(vm.chathistoryarr1);
 			var friendid = $event.currentTarget.getAttribute('id');
 			vm.nomessage = false;
 			axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
 				vm.groupnumbershow = false;
 				var data =res.data.data;
-				console.log(data);
-				
-				
 				vm.targetid = friendid;
-
-
 				vm.isgroupleader= false;
 				vm.isgroupmanager = false;//管理员
 				vm.notgroupmanager = false;//不是管理员
@@ -4015,25 +2236,15 @@ Vue.component('rightcomthree',{
 				vm.shouldshow = false;
 				vm.strangeroff = false;
 				vm.strangeron = false;
-
-				
 				var name = data.nickname;
 				var avatar = data.avatar;
 				var id = data.id;//好友个人标识
 				var obj2 = {};
-				
-				
-				
 				obj2.remark = data.remark;
 				obj2.name = name;
 				obj2.avatar = avatar;
-				
 				obj2.type="chat";
 				obj2.id = id;
-				
-				console.log(obj2);
-				
-				
 				if (obj2.remark){
 					obj2.name = obj2.remark;
 					name = obj2.remark;
@@ -4042,59 +2253,29 @@ Vue.component('rightcomthree',{
 					name = name;
 				}
 				vm.rightoneheaderobj.name = name;
-				
-				
-				console.log( friendid );
-				console.log(obj2.id);
-				
 				var str1 = '<div id="'+friendid+'" class="msgconmaster"><div class="msgcontainer"></div></div>';
-				
-				
-				
-				
-				console.log( str1 );
-				
 				var str ='';
-				
 				str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
-				
-				
 				if ( $('.mainleft   #'+friendid+'.listOnecon').length < 1 ){
 					//消息记录里面没
 					$('.mainleft .comlist1').prepend(str);
-					
 					$('.mainright .rightonechatcon .manywindowcon.scroll-content').append(str1);
-					
 					$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-					
-					
 				}else {
-					
 					//消息记录有
-					
 					$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-					
-					
 					if ( $('.mainleft .doublefirst  #'+obj2.id+'.listOnecon').html() ){
 						//被置顶
-						
 						$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
-						
-						
-						
 					}else {
 						//没有置顶
 						var html = $('.mainleft .comlist1  #'+obj2.id).html();
 						$('.mainleft .comlist1  #'+obj2.id).remove();
 						$('.mainleft .comlist1').prepend( str );
 						$('.mainleft .comlist1  #'+obj2.id).html( html );
-						
 						$('#'+friendid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden'); 
 					}
-					
 				}
-				
-				
 				/*页面跳转*/
 				vm.$refs.current.icons1 = true;
 				vm.$refs.current.icons2 = false;
@@ -4108,16 +2289,9 @@ Vue.component('rightcomthree',{
 			}).catch(function(err){
 				console.log(err);
 			})
-			
-			
-			
 		},//发起好友聊天按钮
 	}
-	
 });
-
-
-	
 var vm = new Vue({
 	el:"#messagemaster",
 	store:store,
@@ -4167,7 +2341,6 @@ var vm = new Vue({
 		justoneman:false,//只是个人
 		shouldshow:false,
 		isgroupmanagermenu1:false,
-		
 		defaulthide:false,
 		switchbindid:'',
 		messagearr:[],
@@ -4183,19 +2356,14 @@ var vm = new Vue({
 		selectmaingrouparr:[],
 		selectall:[],
 		selectallstate1:false,
-		
 		bridgeindex2:'',
-		
 		alertinfoshow:false,
 		alertinfocon:'请到移动端进行相关操作',
-		
 		slidechagearr:[],//下拉列表好友基群组容器
-		
 		onlyonelistmenushow:false,
 		onlyonelistmenushow1:false,
 		addmyfriendshow:false,
 		removemembershow:false,
-		
 		repeatmyfriendsarr:[],
 		groupidbindminus:'',
 		deletegrouparr:[],
@@ -4262,32 +2430,24 @@ var vm = new Vue({
 		thischatroomindex1:'str',
 		chatroomindex1:'str',
 		chatroomindex2:'str',
-		
 		chatroomprivatename:'',
 		chatroomprivateid:'',
 		chatroomprivateavatar:'',
 		chatroompopshow:false,
 		chatroompopwindowinfo:'',
-		//chatroomstatus:'',
 		chatroomtitlename:'',
 		ischatmaster:false,
 		ischatmanager:false,
 		showchatcontrol1:false,
 		showchatcontrol2:false,
-		
 		all1:true,
 		all2:true,
-		
-		
 		chattargetid:'',
 		chattextcontent:'',
 		chatbtncontent:'',
-		
 		poppicviewer:false,
 		piccurrentviewsrc:'',
 		pictureviewarr:[],
-		
-		
 		rightclickthreeshow:false,
 		leftthree1:'',
 		topthree1:'',
@@ -4302,7 +2462,6 @@ var vm = new Vue({
 		topthree3:'',
 		leftthree4:'',
 		topthree4:'',
-		
 		getmsgid:'',
 		msgthreeshow4:false,
 		leftthree5:'',
@@ -4314,7 +2473,6 @@ var vm = new Vue({
 		poptop11:'',
 		popleft1:'',
 		poptop1:'',
-		
 		managechatlistmenuid:'',
 		messageusershow:false,
 		msgtop1:'',
@@ -4325,7 +2483,6 @@ var vm = new Vue({
 		myareaId:'',
 		mysignature:'',
 		mycurrentImg:'',
-		
 		msgusershow:false,
 		msgtop2:'',
 		msgleft2:'',
@@ -4336,7 +2493,6 @@ var vm = new Vue({
 		msgaddonname:'',
 		msgareaIds:'',
 		msgsignatures:'',
-		
 		mingpianshow:false,
 		msgtop3:'',
 		msgleft3:'',
@@ -4348,18 +2504,15 @@ var vm = new Vue({
 		mingpianisboys:'',
 		mingpianisgirls:'',
 		mingpiannames:'',
-		
 		friendlistmenushow:false,
 		addavatar:'',
 		addnickname:'',
 		createmyfriendshow:false,
-		
 		pleasemobileshow:false,
 		changegroupinfoshow:false,
 		changegroupinfoshow1:false,
 		groupnamea:'',
 		groupbroada:'',
-		
 		judgefriendid:'',
 		strangeroff:false,
 		strangeropen:false,
@@ -4379,7 +2532,6 @@ var vm = new Vue({
 		chataddgrouparr:[],
 		targetid1:'',
 	},
-	
 	computed:{
 		friendsarrOne:function(){
 			return vm.$store.getters.friendsarrOne;
@@ -4402,7 +2554,6 @@ var vm = new Vue({
 		getselectallstate:function(){
 			return vm.$store.getters.getselectallstate;
 		}
-		
 	},
 	created:function(){
 		var options = { 
@@ -4425,9 +2576,7 @@ var vm = new Vue({
 			console.log(err);
 		});//获取加入的群组
 		$('#messagemaster').css({display:'block'});
-		
 	},
-	
 	methods:{
 		exitalert:function(){
 			vm.alertinfoshow = false;
@@ -4458,76 +2607,41 @@ var vm = new Vue({
 			vm.emojishow1 = false;
 		},//关闭搜索框
 		selectcurrentinput:function($event){
-			console.log($event);
-			console.log($event.currentTarget);
 			var selectnow  = $event.currentTarget;
-			console.log($(selectnow));
 			if ( $(selectnow).is(':checked') ){
-				
 			} else {
-				
-				
-				console.log($('.selectallcon input').prop('checked'));
-				
 				$('.selectallcon input').attr("checked",false);
-				
-				
-				
-				
 			}
-			
-			
-			
-			
-			
-			
 		},//选择主搜索好友列表*/
 		pleasegotomoblie:function(){
 			vm.chatroompopshow = true;
 			vm.chatroompopwindowinfo = '禁言操作请到移动端执行!';
-			
-			
 		},//提示到移动端操作
 		delmanyinput:function($event){
 			var that = $event.currentTarget;
-			console.log(that.checked);
-			console.log(vm.$refs.delselall);
-			
 			var checkstate = that.checked;
 			if ( checkstate ){
-				
 			}else {
 				vm.$refs.delselall.checked = false; 
 			}
-			
-			
 		},//删除会话成员里面的单个input
 		addmanyinput:function($event){
 			var that = $event.currentTarget;
-			console.log(vm.$refs);
 			var checkstate = that.checked;
 			if (checkstate){
-				
 			}else {
 				vm.$refs.addselall.checked = false;
 			}
 		},//添加会话成员的单个input
 		deletepeoplefromgroup:function($event){
 			var id = $event.currentTarget.id;
-			console.log(id);
-			console.log(vm.deletegrouparr);
 			var middle = vm.deletegrouparr;
-			
 			var transstring = middle.join(",");
-			console.log(transstring);
 			axios.post(globaldomain+'im/group/member/kick.json?groupId='+id+'&memberIds='+transstring).then(function(res){
 				vm.friendlistmenushow = false;
 				vm.onlyonelistmenushow =false;
 				var data = res.data;
-				console.log(data);
 				vm.friendlistmenushow = false;
-				console.log( vm.friendlistmenushow );
-				
 				var success = data.success;
 				if (success){
 					vm.removemembershow = false;
@@ -4541,17 +2655,11 @@ var vm = new Vue({
 			})
 		},//删除会话成员确定按钮
 		addpeoplefromfriends:function($event){
-			console.log($event);
 			var that = $event.currentTarget;
-			console.log(that.id);
 			var id = that.id;
 			var arrtostring = vm.addgrouparr.join(",");
-			
-			//vm.addgrouparr = ;
-			console.log(arrtostring);
 			axios.post(globaldomain+'im/group/member/join.json?groupId='+id+'&memberIds='+arrtostring).then(function(res){
 				var data = res.data;
-				console.log(data);
 				var success = data.success;
 				if (success){
 					vm.addmyfriendshow = false;
@@ -4559,28 +2667,16 @@ var vm = new Vue({
 				}else {
 					vm.addgrouparr = [];
 				}
-				
 			}).catch(function(err){
 				console.log(err);
 			})
-			
 		},//添加会话成员确定按钮
 		grouprightsel1:function($event){
 			var that = $event.currentTarget;
 			var index =  $(that).attr('data-index');
 			var id = $(that).attr('id');
-			
-			console.log(id);
-			
 			vm.bridgeindex2 = index;
-			console.log(vm.bridgeindex2);
-			
 			tempcreategroup = id;//选定的群组
-			
-			
-			console.log( tempcreategroup );
-			
-			
 		},//发起聊天群组被点击
 		clearslidebars:function(){
 			this.$children[0].showslidebars = false;
@@ -4590,13 +2686,10 @@ var vm = new Vue({
 		},//关闭用户卡片
 		exitfeedback:function(){
 			this.feedbackshow = false;
-			
 		},//关闭反馈框
 		sendfeedback:function(){
 			axios.post(globaldomain+'im/feedback/append.json?content='+vm.feedbacktext+'&name='+ids.nickname+'&contact='+ids.loginName).then(function(res){
-				console.log(res.data);
 				var code = res.data.code;
-				console.log(code);
 				switch (code) {
 					case 2000:
 						vm.feedbackshow = false;
@@ -4607,7 +2700,6 @@ var vm = new Vue({
 						return false;
 						break;
 				}
-				
 			}).catch(function(err){
 				console.log(err);
 			});
@@ -4623,136 +2715,64 @@ var vm = new Vue({
 			vm.sel1 = true;
 			vm.sel2 = false;
 			vm.slebossswicth = true;
-			
 			vm.slebossswicth1 = false;
-			
-			
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				var friendsarr = res.data.data;
-				
 				myfriends = friendsarr;
-				
 				vm.$store.commit('showfriends');
-				
 				var str1 ='';
-				
-				console.log(friendsarr);
-				
-				
-				
-				//vm.mainstartgroupchatarr
-				
-			
 				var timer1 = setTimeout(function(){
-					
 					initials();
 					clearTimeout(timer1);
 				},20);//显示滚动条
-				
-				//initials();
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
-			
 		},//点击发起聊天的选择好友
 		sel2action:function(){
 			vm.sel1 = false;
 			vm.sel2 = true;
 			vm.slebossswicth = false;
 			vm.slebossswicth1 = true;
-			
 			axios.post(globaldomain+'im/group/find.json?sPageNoTR=1&sPageSizeTR=5000').then(function(res){
 				var groupsarr = res.data.data.content;
-				
-				
-				
-				
-				
-				//console.log(data);
 				mygroups = groupsarr;
-				console.log(mygroups);
-				
 				vm.$store.commit('showgroups');
-				
-				console.log(vm.$store.state.usergroups);
 			}).catch(function(err){
 				console.log(err);
 			});
-			
 		},//点击发起聊天的选择群聊
-		
 		getemojisrc:function($event){
 			vm.emojishow = true;
 			var that = $event.currentTarget;
-			//console.log(that);
 			groupemojisrc = $(that).attr("src");
-			console.log(groupemojisrc);
-			
-			console.log($(that).attr("src"));
-			console.log($(that).attr("id"));
 			var emojitrack = $(that).attr("id");
-			
-			
-			
-			
-			
-			//console.log(vm.sendtextcontent);暂时为空
-			console.log(vm.sendbtncontent);
 			vm.sendbtncontent = vm.sendbtncontent + emojitrack;
-			
-			
-			
-			//vm.sendbtncontent = ;
-			//vm.sendtextcontent = ;
-			
-			
-			
 		},//点击emoji表情，抓取路径
 		selectbossornot:function($event){
-			console.log(vm.selectmaingrouparr);
 			var that = $event.currentTarget;
 			var subinput = $('.transreadychat .sort_box input');
-			console.log( subinput );
 			if ( $(that).find('input').prop('checked') ) {
 				subinput.prop("checked", true);
-				console.log(vm.selectall);
-				console.log(vm.selectmaingrouparr);
 				var temparr1 = [];
 				for (var i = 0; i < subinput.length; i++){
-					console.log(i);
-					console.log(subinput.eq(i)[0].value );
 					temparr1.push(subinput.eq(i)[0].value);
 				}
-				console.log(temparr1);
 				vm.selectmaingrouparr = temparr1;
 			} else {
 				$('.transreadychat .sort_box input').prop("checked", false);
 				vm.selectmaingrouparr=[];
 			}
-			
 		},//发起聊天全部选择或取消
 		showtheoneinfos:function($event){
 			vm.allusershow = true;
 			var that = $event.currentTarget;
-			
 			var id = that.id;
-			console.log(that.id);
-			
 			vm.judgefriendid = id;
-			
 			vm.left2 = $event.clientX-200 +"px";
 			vm.top2 = $event.clientY +"px";
-			console.log(vm.left2);
-			console.log(vm.top2);
-			
 			axios.get(globaldomain+'im/user/detail.json?id='+id).then(function(res){
-				
 				var data = res.data.data;
-				console.log(data);
 				var areaId = data.areaId;
 				var avatar = data.avatar;
 				var isBuddy = data.isBuddy;
@@ -4760,7 +2780,6 @@ var vm = new Vue({
 				var remark = data.remark;
 				var sex = data.sex;
 				var signature = data.signature;
-				
 				vm.areaIds = areaId;
 				vm.signatures = signature;
 				vm.addonname = remark;
@@ -4773,74 +2792,35 @@ var vm = new Vue({
 					vm.isboys = false;
 				}
 				vm.selectavatar2 = avatar;
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
-			
 		},//显示出当前用户信息卡片
 		creategroupOne:function(){
-			
 			if (vm.selectmaingrouparr.length > 1 ){
-				
 				axios.post(globaldomain+'im/group/create.json?name=群聊&descr=自行添加&maxUsers=500&openable=1&joinConfirm=1&inviteConfirm=1&allowInvites=1').then(function(res){
-				
 					var code = res.data.code;
-					console.log(res.data);
 					vm.onlyonelistmenushow = false;
-
 					if ( code == 2000 ){
 						var groupid = res.data.data;
-						console.log(groupid);
 						var members = tempcreategroup;
-						console.log(typeof (members));
-
-
-						console.log(members);
 						if ( members == "" ) {
 							//没有选择群的话，将好友向群里面拉入
-							
-							console.log(vm.selectmaingrouparr);
 							var bri = vm.selectmaingrouparr;
 							var transferstr = bri.join(",");
-							console.log(transferstr);
-							console.log( groupid );
-							
 							axios.post(globaldomain+'im/group/member/join.json?groupId='+groupid+'&memberIds='+transferstr).then(function(res){
-								console.log(res.data);
-								
-								
 								axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
 									var data = res.data.data;
-									console.log(data);
-									
 									var getavatar = data.avatar;
 									var getname = data.name;
 									var groupid = data.id;//群组特别标识
-									
 									var str = '';
-									
 									str = str + '<div id="'+groupid+'" class="listOnecon"><img src="'+( getavatar ? vm.$refs.rightthree.picsrc+getavatar : vm.$refs.rightthree.defaultpic)+'"><div  class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+getname+'</div><div class="listOnebottomleft shenglue">'+''+'</div></div><div class="listOneconright"><div class="listOnetopright">'+''+'</div><div class="listOnebottomright"><i class="fa fa-bell-slash-o hidden" id="'+groupid+'"></i><i id="'+groupid+'" class="fa fa-bell "></i></div></div><div class="clearfix"></div></div></div>';
-									
 									vm.nomessage = false;
 									$('.mainleft .comlist1').prepend( str );
-									
 									var str1 = '<div id="'+groupid+'" class="msgconmaster hidden"><div class="msgcontainer"></div></div>';
-									
-									$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);
-									$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
-									
+									$('.mainright .rightonechatcon   .manywindowcon.scroll-content').append(str1);$('#'+groupid+'.msgconmaster').removeClass('hidden').siblings().addClass('hidden');
 									vm.targetid = groupid;
-									
-									
-									
-									
-									
-									
-									
 									/*页面跳转*/
 									vm.$refs.current.icons1 = true;
 									vm.$refs.current.icons2 = false;
@@ -4850,58 +2830,32 @@ var vm = new Vue({
 									vm.showleft1 = true;
 									vm.showleft2 = false;
 									vm.showleft3 = false;
-
 									/*页面跳转*/ 
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 								}).catch(function(err){
 									console.log(err);
 								});
-								
-								
 								axios.get(globaldomain+'im/group/info.json?id='+groupid).then(function(res){
-									console.log(res);
 									var data = res.data.data;
 									var avatar = data.avatar;
 									var name = data.name;
 									var id = data.id;//群组特别标识
-									console.log(data);
 									vm.isgroupleader= false;
 									vm.isgroupmanager = false;//管理员
 									vm.notgroupmanager = false;//不是管理员
 									//vm.justoneman = true;//只是个人
 									vm.shouldshow = false;
 									vm.groupidbindminus = groupid;
-
 									//var name = data.name;
 									var genre = data.genre;
 									var groupnumber = data.count;
-
 									vm.rightoneheaderobj.name = name;
 									vm.rightoneheaderobj.groupnumber = groupnumber;
 									vm.targetid = groupid;
-
 									vm.groupnumbershow = true;
-									
-									
 									axios.get(globaldomain+'im/group/member/genre.json?groupId='+groupid+'&memberId='+ids.id).then(function(res){
-										console.log(res.data);
 										var level = res.data.data;
-										console.log(level);
-
-										console.log(  typeof(level));
 										switch (level) {
 											case '10':
-											console.log(10);
 											vm.isgroupleader= true;
 											vm.isgroupmanager = false;//管理员
 											vm.notgroupmanager = false;//不是管理员
@@ -4929,63 +2883,30 @@ var vm = new Vue({
 											vm.strangeropen = false;
 											break;
 										}
-
 									}).catch(function(err){
 										console.log(err);
 									});
-									
-									
 									axios.get(globaldomain+'im/group/member/all.json?sPageNoTR=1&sPageSizeTR=5000&groupId='+groupid).then(function(res){
-										console.log(res);
 										var arrgg = res.data.data.content;
-										console.log(arrgg);
 										vm.slidechagearr = arrgg;
-
 									}).catch(function(err){
 										console.log(err);
 									});
-									
-									
-									
-									
 								}).catch(function(err){
 									console.log(err);
 								});
-
-
-
-
-
-
-								
-								
-								
-								
-								
-								
 							}).catch(function(err){
 								console.log(err);
 							});
-							
-							
-
 							vm.readychatshow = false;
 							vm.slebossswicth = false;
 							vm.slebossswicth1 = false;
 							vm.sel1 = true;
 							vm.sel2 = false;
 							//关闭发起聊天界面
-
-							console.log('没群组，直接关闭界面');
-
 						}else {
-
-
-
 							axios.post(globaldomain+'im/group/apply/pull.json?groupId='+groupid+'&groupIds='+members+'&descr=pc端').then(function(res){
-								console.log(res.data);
 								var success = res.data.success;
-								console.log(success);
 								if ( success ) {
 									vm.readychatshow = false;
 									vm.slebossswicth = false;
@@ -4993,7 +2914,6 @@ var vm = new Vue({
 									vm.sel1 = true;
 									vm.sel2 = false;
 									vm.alertinfoshow = true;
-									
 									/*页面跳转*/
 									vm.$refs.current.icons1 = true;
 									vm.$refs.current.icons2 = false;
@@ -5003,12 +2923,9 @@ var vm = new Vue({
 									vm.showleft1 = true;
 									vm.showleft2 = false;
 									vm.showleft3 = false;
-
 									/*页面跳转*/ 
 									//关闭发起聊天界面
 								}else {
-									
-									
 									/*页面跳转*/
 									vm.$refs.current.icons1 = true;
 									vm.$refs.current.icons2 = false;
@@ -5018,60 +2935,28 @@ var vm = new Vue({
 									vm.showleft1 = true;
 									vm.showleft2 = false;
 									vm.showleft3 = false;
-
 									/*页面跳转*/ 
-
 								}
-
-
-
 							}).catch(function(err){
 								console.log(err);
 							})
-
-
 						}
-
-
-
-
-
-
 					}
-
-
 				}).catch(function(err){
 					console.log(err);
-
 				});
-				
 			} else {
-				
 				vm.nomessage = false;
-				console.log(vm.selectmaingrouparr);
 				var friendid = vm.selectmaingrouparr[0];
-				console.log(friendid);
-				
 				var members = tempcreategroup;
-				console.log(typeof (members));
-				
-				
 				if( members != '' ){
 				   //选中群组
-					
 					axios.post(globaldomain+'im/group/create.json?name=群聊&descr=自行添加&maxUsers=500&openable=1&joinConfirm=1&inviteConfirm=1&allowInvites=1').then(function(res){
-						
 						var code = res.data.code;
-						console.log(res.data);
-
 						if ( code == 2000 ){
 							var groupid = res.data.data;
-							console.log(groupid);
-							
 							axios.post(globaldomain+'im/group/apply/pull.json?groupId='+groupid+'&groupIds='+members+'&descr=pc端').then(function(res){
-								console.log(res.data);
 								var success = res.data.success;
-								console.log(success);
 								vm.onlyonelistmenushow = false;
 								if ( success ) {
 									vm.readychatshow = false;
@@ -5080,11 +2965,6 @@ var vm = new Vue({
 									vm.sel1 = true;
 									vm.sel2 = false;
 									vm.alertinfoshow = true;
-									
-									
-									
-									
-
 									//页面跳转
 									vm.$refs.current.icons1 = true;
 									vm.$refs.current.icons2 = false;
@@ -5094,12 +2974,9 @@ var vm = new Vue({
 									vm.showleft1 = true;
 									vm.showleft2 = false;
 									vm.showleft3 = false;
-
 									//页面跳转
 									//关闭发起聊天界面
 								}else {
-									
-									
 									//页面跳转
 									vm.$refs.current.icons1 = true;
 									vm.$refs.current.icons2 = false;
@@ -5109,36 +2986,20 @@ var vm = new Vue({
 									vm.showleft1 = true;
 									vm.showleft2 = false;
 									vm.showleft3 = false;
-
 									//页面跳转
-
 								}
-
-
-
 							}).catch(function(err){
 								console.log(err);
 							})
-							
-							
-							
 						}
-						
-						
 					}).catch(function(err){
 						console.log(err);
 					})
-					
-					
-					
-					
-					
 				}else {
 				   //未选
 					axios.get(globaldomain+'im/user/detail.json?id='+friendid).then(function(res){
 						vm.onlyonelistmenushow = false;
 						var data = res.data.data;
-						console.log(data);
 						var name = data.nickname;
 						var avatar = data.avatar;
 						var id = data.id;//好友个人标识
@@ -5147,17 +3008,12 @@ var vm = new Vue({
 						obj2.avatar = avatar;
 						obj2.type="chat";
 						obj2.id = id;
-						console.log(obj2);
 						var str ='';
 						str = str + '<div id="'+obj2.id+'" class="listOnecon"><img src="'+( obj2.avatar ? vm.$refs.rightthree.picsrc+obj2.avatar : vm.$refs.rightthree.defaultpic)+'"><div class="transparentone"></div><div class="listOnedetails"><div class="listOneconleft"><div class="listOnetopleft shenglue">'+obj2.name+'</div><div class="listOnebottomleft shenglue"></div></div><div class="listOneconright"><div class="listOnetopright"></div><div class="listOnebottomright"></div></div><div class="clearfix"></div></div></div>';
 						if ( $('.mainleft   #'+obj2.id+'.listOnecon').length < 1 ){
 							$('.mainleft .comlist1').prepend(str);
 						}else {
-							
-							
-							
 						}
-
 						//页面跳转
 						vm.$refs.current.icons1 = true;
 						vm.$refs.current.icons2 = false;
@@ -5174,133 +3030,71 @@ var vm = new Vue({
 						vm.sel1 = true;
 						vm.sel2 = false;
 						//关闭发起聊天界面
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					}).catch(function(err){
 							console.log(err);	
 					});
 				}
-				
-				
-				
 			}
-			
 		},//确定创建群聊
 		offuserlist2:function(){
 			vm.onlyonelistmenushow = false;
 		},//关闭群组成员列表
 		changelistcolor1:function($event){
-			//console.log(vm);
-			//console.log(vm.$children[1]);
-			//console.log($event.currentTarget);
 			var indexinner = $event.currentTarget.getAttribute('data-index');
 			this.indexstrange = indexinner;
-			//console.log(this.indexstrange);
 			this.indexstrange2 = indexinner;
 			var idnumber = $event.currentTarget.getAttribute('id');
-			//console.log(vm.$children[1]);
-			
 			vm.$children[1].showgroupsright = true;
 			vm.$store.commit('rightgroupbtn',idnumber);
 			vm.$children[1].showgroupsright1 = false;
-			
-			
-			
-			
 		},//点击群组列表
 		controlchatroommember:function($event){
 			vm.onlyonelistmenushow1 = true;
-			
 			var that = $event.currentTarget;
 			var getid = $(that).attr('id');
-			
 			axios.get(globaldomain+'im/room/member/is/owner.json?roomId='+getid+'&memberId='+ids.id).then(function(res){
 				var data = res.data.data;
-				console.log(data);
 				if (data){
 					//是超级管理
-					
 					vm.chatshouldshow = true;
 				}
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
 			axios.get(globaldomain+'im/room/member/is/admin.json?roomId='+getid+'&memberId='+ids.id).then(function(res){
 				var data = res.data.data;
-				console.log(data);
 				if (data){
 					//是普通管理
 					vm.chatshouldshow = false;
-					
 				}
-				
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
 			axios.get(globaldomain+'im/room/member/all.json?sPageNoTR=1&sPageSizeTR=10000&roomId='+getid).then(function(res){
 				var data = res.data.data.content;
-				console.log(data);
 				vm.slidechatarr = data;
 			}).catch(function(err){
 				console.log(err);
 			})
-			
-			
-			
-			
-			//vm.slidechatarr = '';
-			
-			
 		},//管理聊天室人员
 		chatdeleteallcheck:function($event){
 			var that = $event.currentTarget;
-			
-			console.log(that.checked);
-			console.log(vm.removeselectallarr);
 			var checkstate = that.checked;
-			
 			if ( checkstate ){
-				
-				console.log( $('.sort_box9 input') );
-				
 				var length = vm.chatrepeatmyfriendsarr.length;
 				console.log($('.sort_box9 input').prop("checked"));
 				var arrtemp = [];
-				
 				for ( var i=0; i<length;i++ ){
-					//console.log($('.sort_box9 input').eq(i)[0].value);
 					arrtemp.push($('.sort_box9 input').eq(i)[0].value);
 				}
-				console.log(arrtemp);
 				vm.chatdeletegrouparr = arrtemp;
 			} else {
 				vm.chatdeletegrouparr =[];
 			}
-			
 		},//聊天室删除会话成员的全选
 		chataddallcheck:function($event){
-			
 			var that = $event.currentTarget;
-			console.log(that.checked);
 			var checkstate = that.checked;
-			
 			if (checkstate){
 				var arr = [];
 				var length = vm.chatrepeatmyfriendsarr.length;
@@ -5315,70 +3109,43 @@ var vm = new Vue({
 		deletepeoplefromgroup1:function($event){
 			var that = $event.currentTarget;
 			var getid = $(that).attr('id');
-			
 			var trans = vm.chatdeletegrouparr;
 			var dot = trans.join(',');
-			console.log(dot);
-			
 			axios.post(globaldomain+'im/room/member/kick.json?roomId='+getid+'&memberIds='+dot).then(function(res){
-				console.log(res);
 				vm.chatremovemembershow = false;
 				
 			}).catch(function(err){
 				console.log(err);
 			})
-			
-			
-			
 		},//删除聊天室成员按钮
 		chataddconpop:function($event){
 			vm.chataddmyfriendshow = true;
 			vm.chatrepeatmyfriendsarr = [];
 			var that = $event.currentTarget;
-			
 			var getid = $(that).attr('id');
-			
-			
 			axios.post(globaldomain+'im/buddy/find.json').then(function(res){
 				var data = res.data.data;
-				console.log(data);
 				vm.chatrepeatmyfriendsarr = data;
 				var timer89 = setTimeout(function(){
-					
 					initials8();
 					clearTimeout(timer89);
 				},400);
-				
 			}).catch(function(err){
 				console.log(err);
 			});
-			
-			
-			
-			
-			
-			
 		},//聊天室加号
 		chatdelmanyinput:function($event){
 			var that = $event.currentTarget;
-			console.log(that.checked);
-			console.log(vm.$refs.delselall);
-			
 			var checkstate = that.checked;
 			if ( checkstate ){
-				
 			}else {
 				vm.$refs.chatdelselall.checked = false; 
 			}
-			
-			
 		},//聊天室删除会话成员里面的单个input
 		chataddmanyinput:function($event){
 			var that = $event.currentTarget;
-			console.log(vm.$refs);
 			var checkstate = that.checked;
 			if (checkstate){
-				
 			}else {
 				vm.$refs.chataddselall.checked = false;
 			}
@@ -5541,7 +3308,6 @@ var vm = new Vue({
 			});
 		},//单人加号图标
 		createnewgroup6:function(){
-			console.log(vm.addgrouparr);
 			var getid = $('.addmyfriends .feedhead div').attr('id');
 			if (vm.addgrouparr.length > 1 ){
 				axios.post(globaldomain+'im/group/create.json?name=群聊&descr=自行添加&maxUsers=500&openable=1&joinConfirm=1&inviteConfirm=1&allowInvites=1').then(function(res){
@@ -5996,9 +3762,11 @@ var vm = new Vue({
 			if ( sl == 0 ){
 				$('.mainleft .fa2').css({opacity:0.5});
 				$('.mainleft .fa1').css({opacity:0});
+				$('.fixcoverright1').css({opacity:1});
 			}else{
-				$('.mainleft .fa2').css({opacity:0});
+				$('.mainleft .fa2').css({opacity:0.5});
 				$('.mainleft .fa1').css({opacity:0.5});
+				$('.fixcoverright1').css({opacity:1});
 			}
 		},//上左三角
 		uprightslide:function(){
@@ -6010,10 +3778,12 @@ var vm = new Vue({
 				//滑至最右
 				$('.mainleft .fa2').css({opacity:0});
 				$('.mainleft .fa1').css({opacity:0.5});
+				$('.fixcoverright1').css({opacity:0});
 			}else {
 				//滑动后
 				$('.mainleft .fa2').css({opacity:0.5});
 				$('.mainleft .fa1').css({opacity:0.5});
+				$('.fixcoverright1').css({opacity:1});
 			}
 		},//上右三角
 		downleftslide:function(){
@@ -6024,9 +3794,11 @@ var vm = new Vue({
 			if ( sl == 0 ){
 				$('.mainleft .fa4').css({opacity:0.5});
 				$('.mainleft .fa3').css({opacity:0});
+				$('.fixcoverright2').css({opacity:1});
 			}else{
-				$('.mainleft .fa4').css({opacity:0});
+				$('.mainleft .fa4').css({opacity:0.5});
 				$('.mainleft .fa3').css({opacity:0.5});
+				$('.fixcoverright2').css({opacity:1});
 			}
 		},//左下三角
 		downrightslide:function(){
@@ -6038,10 +3810,12 @@ var vm = new Vue({
 				//滑至最右
 				$('.mainleft .fa4').css({opacity:0});
 				$('.mainleft .fa3').css({opacity:0.5});
+				$('.fixcoverright2').css({opacity:0});
 			}else {
 				//滑动后
 				$('.mainleft .fa4').css({opacity:0.5});
 				$('.mainleft .fa3').css({opacity:0.5});
+				$('.fixcoverright2').css({opacity:1});
 			}
 		},//右下三角
 		chatuploadfile:function($event){
